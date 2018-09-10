@@ -9,6 +9,7 @@ RAILS is open source software under the Apache License, Version 2.0 details are 
 https://github.com/djbristow/RAILS/blob/master/Apache%20License%2C%20Version%202.0
 
 ## System Design
+![System Design](https://github.com/djbristow/RAILS/blob/master/sysdesign.png)
 The initial components of the design are:
 * RFID Sensor - a micro-controller programmed to read an RFID reader and publish the value is a Message Queuing Telemetry Transport (MQTT) client - ther are two directories on for a simulator (rfidsim) and the other for the TI Tiva C microcontroller (microcontroller)
 * MQTT Broker - the MQTT broker, the heart of any publish/subscribe protocol, is responsible for receiving messages, filtering them, posting to designated topics and sending messages to clients subscribing to topics (no source code as this component is a docker image available at https://hub.docker.com/_/eclipse-mosquitto/ )
@@ -18,3 +19,4 @@ The initial components of the design are:
 * MRIM - Model Railroad Inventory Manager
 * MRFM - Model Railroad File Manager
 * ISUB - IoT Subscriber
+
