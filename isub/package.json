@@ -1,0 +1,16 @@
+{
+  "name": "app.js",
+  "version": "1.0.0",
+  "description": "A app to get RFIDs from a Node-RED app and pair to a RS number",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Bristow",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mqtt": "^2.17.0",
+    "socket.io": "^2.1.1"
+  }
+}
