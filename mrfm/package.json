@@ -1,0 +1,19 @@
+{
+  "name": "mrfm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-form-post": "^1.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
