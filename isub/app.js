@@ -1,5 +1,5 @@
 const mqtt = require('mqtt'),
-      client = mqtt.connect('mqtt://127.0.0.1:1883'),
+      client = mqtt.connect('mqtt://' + process.env.MQTT_PORT_1883_TCP_ADDR + ':' + process.env.MQTT_PORT_1883_TCP_PORT),
       express = require('express'),
       app = express(),
       server = require('http').createServer(app),
