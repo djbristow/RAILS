@@ -10,10 +10,12 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "ajv": "^6.5.4",
     "axios": "^0.18.0",
-    "buefy": "^0.6.6",
+    "buefy": "^0.6.7",
     "socket.io-client": "^2.1.1",
-    "vue": "^2.5.2",
+    "style-loader": "^0.23.0",
+    "vue": "^2.5.13",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
