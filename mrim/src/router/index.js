@@ -17,7 +17,8 @@ import NewCo from '@/components/NewCo'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
+  base: __dirname,
   routes: [
     {
       path: '/',

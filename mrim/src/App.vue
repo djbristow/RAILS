@@ -12,40 +12,73 @@
     </div>
     <div id="mainNav" class="navbar-menu" :class="{'is-active': navIsActive}">
       <div class="navbar-start">
-        <a class="navbar-item" href="/">Home</a>
+        <div class="navbar-item"><router-link to="/">Home
+        </router-link></div>
         <div class="navbar-item has-dropdown is-hoverable">
           <strong>Rollingstock</strong>
           <div id="moreDropdown" class="navbar-dropdown">
-            <a class="navbar-item" href="/Rslist">List</a>
+            <div class="navbar-item">
+              <router-link to="/Rslist">  
+                List
+              </router-link>
+            </div>
             <hr class="navbar-divider">
-            <a class="navbar-item" href="/RS/new">New</a>
+            <div class="navbar-item">
+              <router-link to="/RS/new">  
+                New
+              </router-link>
+            </div>
           </div>
         </div>
         &nbsp;&nbsp;&nbsp;
         <div class="navbar-item has-dropdown is-hoverable">
           <strong>Images</strong>
           <div id="moreDropdown" class="navbar-dropdown">
-            <a class="navbar-item" href="/Imglist">List</a>
+            <div class="navbar-item">
+              <router-link to="/Imglist">  
+                List
+              </router-link>
+            </div>
             <hr class="navbar-divider">
-            <a class="navbar-item" href="/Img/new">New</a>
+            <div class="navbar-item">
+              <router-link to="/Img/new">  
+                New
+              </router-link>
+            </div>
           </div>
         </div>
         &nbsp;&nbsp;&nbsp;
         <div class="navbar-item has-dropdown is-hoverable">
           <strong>AAR Codes</strong>
           <div id="moreDropdown" class="navbar-dropdown">
-            <a class="navbar-item" href="/Aarlist">List</a>
+            <div class="navbar-item">
+              <router-link to="/Aarlist">
+                List
+              </router-link>
+            </div>
             <hr class="navbar-divider">
-            <a class="navbar-item" href="/Aar/new">New</a>
+            <div class="navbar-item">
+              <router-link to="/Aar/new">       
+                New
+              </router-link>
+            </div>
           </div>
         </div>
         &nbsp;&nbsp;&nbsp;
         <div class="navbar-item has-dropdown is-hoverable">
           <strong>Companies</strong>
           <div id="moreDropdown" class="navbar-dropdown">
-            <a class="navbar-item" href="/Colist">List</a>
+            <div class="navbar-item">
+              <router-link to="/Colist">
+                List
+              </router-link>
+            </div>
             <hr class="navbar-divider">
-            <a class="navbar-item" href="/Co/new">New</a>
+            <div class="navbar-item" >
+              <router-link to="/Co/new">
+                New
+              </router-link>
+            </div>
           </div>
         </div>
       </div>

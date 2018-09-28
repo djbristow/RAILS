@@ -175,7 +175,7 @@ export default {
       console.log(n)
       if (n > 0){
          isImage = true;
-         imageURL = "./static/" + response.data.imageID;
+         imageURL = "./static/img/" + response.data.imageID;
          console.log(imageURL);
       } else {
          isImage = false;
