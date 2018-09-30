@@ -3,7 +3,7 @@
   <div class="center">
     <p class="title is-5">Rollingstock Inventory</p>
   </div>
-  <b-table :data="rollingstocks" :paginated="isPaginated" :per-page="perPage" :current-page.sync="currentPage" :default-sort-direction="defaultSortDirection" :striped="isStriped" :narrowed="isNarrowed" default-sort="roadName">
+  <b-table :data="rollingstocks" :paginated="isPaginated" :per-page="perPage" :current-page.sync="currentPage" :default-sort-direction="defaultSortDirection" :striped="isStriped" default-sort="roadName">
     <template slot-scope="props">
           <b-table-column field="roadName" label="Road Name" width="100" sortable>
           {{ props.row.roadName }}
@@ -11,8 +11,11 @@
           <b-table-column field="roadNumber" label="Road Number" width="150">
           {{ props.row.roadNumber }}
          </b-table-column>
-         <b-table-column field="aarCode" label="AAR" width="80" sortable>
+         <b-table-column field="aarCode" label="AAR" width="60" sortable>
           {{ props.row.aarCode }}
+         </b-table-column>
+         <b-table-column field="description" label="Description" width="100">
+           {{props.row.description}}
          </b-table-column>
          <b-table-column field="color" label="Color" width="150" sortable>
           {{ props.row.color }}
@@ -45,6 +48,7 @@ const ModalForm = {
       bltDate: String,
       capacity: String,
       color: String,
+      description: String,
       homeLocation: String,
       imageID: String,
       inSvcDate: String,
@@ -91,6 +95,7 @@ const ModalForm = {
           <div class="content">
            Color: {{color}} <br>
            AAR Code: {{aarCode}} <br>
+           Description: {{description}} <br>
            Builder: {{bldr}} <br>
            Built Date: {{bltDate}} <br>
            Number Built: {{numberBlt}} <br>
@@ -171,8 +176,8 @@ export default {
       var isImage = false;
       var imageURL = null;
       n = response.data.imageID.length;
-      console.log(response.data.imageID)
-      console.log(n)
+      //console.log(response.data.imageID)
+      //console.log(n)
       if (n > 0){
          isImage = true;
          imageURL = "./static/img/" + response.data.imageID;
@@ -180,7 +185,7 @@ export default {
       } else {
          isImage = false;
       }
-      console.log(this.formatDate(response.data.bltDate))
+      //console.log(this.formatDate(response.data.bltDate))
       this.$modal.open({
         parent: this,
         props: {
@@ -189,6 +194,7 @@ export default {
            bltDate: this.formatDate(response.data.bltDate),
            capacity: response.data.capacity,
            color: response.data.color,
+           description: response.data.description,
            homeLocation: response.data.homeLocation,
            imageID: response.data.imageID,
            inSvcDate: this.formatDate(response.data.inSvcDate),
@@ -222,7 +228,7 @@ export default {
 section {
   display: block;
   margin: auto;
-  width: 500px;
+  width: 1000px;
   padding: 10px;
 }
 .center {

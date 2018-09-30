@@ -11,6 +11,7 @@
              Road Number*: <input type="text" name="roadNumber" v-model="roadNumber"><br>
              Color: <input type="text" name="color" v-model="color"><br>
              AAR Code*: <input type="text" name="aarCode" v-model="aarCode"><br>
+             Description: <input type="text" name="description" v-model="description"><br>
              Builder: <input type="text" width="20" name="bldr" v-model="bldr"><br>
              Built Date: <input type="date" name="bltDate" v-model="bltDate"><br>
              Number Built: <input type="text" name="numberBlt" v-model="numberBlt"><br>
@@ -54,6 +55,7 @@ export default {
       roadNumber: '',
       color: '',
       aarCode: '',
+      description: '',
       numberBlt: '',
       inSvcDate: '',
       insideLength: '',
@@ -87,6 +89,7 @@ export default {
         this.roadNumber = response.data.roadNumber,
         this.color = response.data.color,
         this.aarCode = response.data.aarCode,
+        this.description = response.data.description,
         this.numberBlt = response.data.numberBlt,
         this.inSvcDate = response.data.inSvcDate,
         this.insideLength = response.data.insideLength,
@@ -114,6 +117,7 @@ export default {
         roadNumber: this.roadNumber,
         color: this.color,
         aarCode: this.aarCode,
+        description: this.description,
         numberBlt: this.numberBlt,
         inSvcDate: this.inSvcDate,
         insideLength: this.insideLength,

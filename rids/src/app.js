@@ -236,7 +236,7 @@ app.delete('/co/:id', (req, res) => {
 
 // The following CRUD functions handle data in the rollingstocks collection
 app.get('/rslist', (req, res) => {
-     Rollingstock.find({}, 'roadName roadNumber color aarCode', function(error, rollingstocks) {
+     Rollingstock.find({}, 'roadName roadNumber color aarCode description', function(error, rollingstocks) {
           if (error) {
                console.error(error);
           }
@@ -276,6 +276,7 @@ app.post('/add_rs', (req, res) => {
      var roadNumber = req.body.roadNumber;
      var color = req.body.color;
      var aarCode = req.body.aarCode;
+     var description = req.body.description;
      var numberBlt = req.body.numberBlt;
      var inSvcDate = req.body.inSvcDate;
      var insideLength = req.body.insideLength;
@@ -300,6 +301,7 @@ app.post('/add_rs', (req, res) => {
           roadNumber: roadNumber,
           color: color,
           aarCode: aarCode,
+          description: description,
           numberBlt: numberBlt,
           inSvcDate: inSvcDate,
           insideLength: insideLength,
@@ -337,6 +339,7 @@ app.put('/rs/:id', (req, res) => {
           rs.roadNumber = req.body.roadNumber;
           rs.color = req.body.color;
           rs.aarCode = req.body.aarCode;
+          rs.description = req.body.description;
           rs.numberBlt = req.body.numberBlt;
           rs.inSvcDate = req.body.inSvcDate;
           rs.insideLength = req.body.insideLength;

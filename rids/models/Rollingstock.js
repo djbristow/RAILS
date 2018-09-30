@@ -22,6 +22,9 @@ var RollingstockSchema = new Schema({
         minlength: 2,
         trim: true
     },
+    description: {
+        type: String
+    },
     numberBlt: {
         type: String
     },
