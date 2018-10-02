@@ -1,39 +1,45 @@
 <template>
 <div class="home">
   <img src="../assets/kjc.png">
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-     labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-     nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-     esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-     in culpa qui officia deserunt mollit anim id est laborum</p>
-  <h2>Essential Links</h2>
-  <ul>
-    <li>
-      <a href="https://vuejs.org" target="_blank">
-          Vue.js
-        </a>
-    </li>
-    <li>
-      <a href="https://buefy.github.io" target="_blank">
-          Buefy
-        </a>
-    </li>
-    <li>
-      <a href="https://medium.com/@anaida07/mevn-stack-application-part-1-3a27b61dcae0" target="_blank">
-          Mongo, Express, Vue and Node (MEVN) example
-        </a>
-    </li>
-</ul>
+  <h4>v1.1.0</h4>
+  <p>Number of Rolling Stock {{rollingstocksize}}</p>
+  <p>Number of Images {{imagesize}}</p>
+  <p>Number of Companies {{companysize}}</p>
+  <p>Number of AAR codes {{aarsize}}</p>
+
 </div>
 </template>
 
 <script>
+import RsService from '@/services/RsService'
 export default {
-  name: 'Home'
+  name: 'Home',
+  data() {
+    return {
+      rollingstocksize: 0,
+      imagesize: 0,
+      companysize: 0,
+      aarsize:0,
+   }
+  },
+  mounted() {
+    this.getSizes()
+  },
+  methods: {
+    async getSizes() {
+      const respRs = await RsService.fetchRslist();
+      this.rollingstocksize = respRs.data.rollingstocks.length;
+      const respImg = await RsService.fetchImglist();
+      this.imagesize = respImg.data.images.length;
+      const respCo = await RsService.fetchColist();
+      this.companysize = respCo.data.industries.length;
+      const respAar = await RsService.fetchAarlist();
+      this.aarsize = respAar.data.aarCodes.length;
+    }
+  }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .home {
   margin: auto;
@@ -42,6 +48,6 @@ export default {
   text-align: center;
 }
 p {
-  text-align: justify;
+  text-align: center;
 }
 </style>
