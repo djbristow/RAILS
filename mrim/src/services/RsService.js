@@ -4,6 +4,9 @@ export default {
   fetchRslist() {
     return Api().get('rslist')
   },
+  fetchAllRslist() {
+    return Api().get('rslistall')
+  },
   addRs(params) {
     return Api().post('add_rs', params)
   },

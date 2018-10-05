@@ -31,47 +31,47 @@
 </section>
 </template>
 <script>
-import RsService from '@/services/RsService'
+import RsService from "@/services/RsService";
 export default {
-   name: 'aarlist',
-   data() {
-   return {
+  name: "aarlist",
+  data() {
+    return {
       aarCodes: [],
       isPaginated: true,
       isPaginationSimple: false,
       isNarrowed: true,
       isStriped: true,
-      defaultSortDirection: 'asc',
+      defaultSortDirection: "asc",
       currentPage: 1,
       perPage: 10
-   }
-   },
-   mounted() {
-   this.getAarlist()
-   },
-   methods: {
-   async getAarlist() {
-      const response = await RsService.fetchAarlist()
-      this.aarCodes = response.data.aarCodes
-   },
-   async deleteAar(id) {
-      await RsService.deleteAar(id)
-      this.getAarlist()
+    };
+  },
+  mounted() {
+    this.getAarlist();
+  },
+  methods: {
+    async getAarlist() {
+      const response = await RsService.fetchAarlist();
+      this.aarCodes = response.data.aarCodes;
+    },
+    async deleteAar(id) {
+      await RsService.deleteAar(id);
+      this.getAarlist();
       this.$router.push({
-        name: 'Aarlist'
-      })
-   }
-   }
-   }
-   </script>
+        name: "Aarlist"
+      });
+    }
+  }
+};
+</script>
    <style scoped>
-   section {
-   display: block;
-   margin: auto;
-   width: 1000px;
-   padding: 10px;
-   }
-   .center {
-   text-align: center;
-   }
-   </style>
+section {
+  display: block;
+  margin: auto;
+  width: 1000px;
+  padding: 10px;
+}
+.center {
+  text-align: center;
+}
+</style>

@@ -12,8 +12,16 @@
     </div>
     <div id="mainNav" class="navbar-menu" :class="{'is-active': navIsActive}">
       <div class="navbar-start">
-        <div class="navbar-item"><router-link to="/">Home
-        </router-link></div>
+        <div class="navbar-item">
+          <router-link to="/">
+            Home
+          </router-link>
+        </div>
+        <div class="navbar-item" >
+          <router-link to="/Admix">
+            Admin
+          </router-link>
+        </div>
         <div class="navbar-item has-dropdown is-hoverable">
           <strong>Rollingstock</strong>
           <div id="moreDropdown" class="navbar-dropdown">
@@ -96,18 +104,18 @@
 
 <script>
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
       navIsActive: false
-    }
+    };
   },
   methods: {
     toggleMenu: function() {
-      this.navIsActive = !this.navIsActive
+      this.navIsActive = !this.navIsActive;
     }
   }
-}
+};
 </script>
 
 <style scoped>
