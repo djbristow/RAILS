@@ -101,14 +101,14 @@ const ModalForm = {
    async cardModal(id) {
       var n = 0;
       const response = await RsService.getImgById(id);
-      var imageURL = "./static/" + response.data.fileName;
-      console.log(imageURL)
+      var imageURL = "./static/img/" + response.data.fileName;
       this.$modal.open({
         parent: this,
         props: {
            fileName: response.data.fileName,
            title: response.data.title,
            id: response.data._id,
+           notes: response.data.notes,
            imageURL: imageURL
         },
         component: ModalForm,
