@@ -331,7 +331,72 @@ export default {
               });
             }
           } else {
-            console.log("updating");
+            var i = 1;
+            console.log(collection.length);
+            for (i; i < collection.length - 1; i++) {
+              this.documents = collection[i].split('"');
+              rsDoc = this.documents[0].split(",");
+              const rsId = await RsService.getRsRoad(rsDoc[0] + "-" + rsDoc[1]);
+              console.log(i + "  " + rsId.data._id);
+              if (rsId.data._id === undefined) {
+                console.log("we be adding this as a new document");
+                await RsService.addRs({
+                  roadName: rsDoc[0],
+                  roadNumber: rsDoc[1],
+                  color: rsDoc[2],
+                  aarCode: rsDoc[3],
+                  description: rsDoc[4],
+                  bldr: rsDoc[5],
+                  bltDate: rsDoc[6],
+                  numberBlt: rsDoc[7],
+                  inSvcDate: rsDoc[8],
+                  insideLength: rsDoc[9],
+                  insideHeight: rsDoc[10],
+                  insideWidth: rsDoc[11],
+                  capacity: rsDoc[12],
+                  ltWeight: rsDoc[13],
+                  loadLimit: rsDoc[14],
+                  lastMaintDate: rsDoc[15],
+                  locationNow: rsDoc[16],
+                  homeLocation: rsDoc[17],
+                  rsStatus: rsDoc[18],
+                  imageID: rsDoc[19],
+                  modelWeight: rsDoc[20],
+                  modelLength: rsDoc[21],
+                  rfid: rsDoc[22],
+                  notes: this.documents[1]
+                });
+              } else {
+                await RsService.updateRs({
+                  id: rsId.data._id,
+                  roadName: rsDoc[0],
+                  roadNumber: rsDoc[1],
+                  color: rsDoc[2],
+                  aarCode: rsDoc[3],
+                  description: rsDoc[4],
+                  bldr: rsDoc[5],
+                  bltDate: rsDoc[6],
+                  numberBlt: rsDoc[7],
+                  inSvcDate: rsDoc[8],
+                  insideLength: rsDoc[9],
+                  insideHeight: rsDoc[10],
+                  insideWidth: rsDoc[11],
+                  capacity: rsDoc[12],
+                  ltWeight: rsDoc[13],
+                  loadLimit: rsDoc[14],
+                  lastMaintDate: rsDoc[15],
+                  locationNow: rsDoc[16],
+                  homeLocation: rsDoc[17],
+                  rsStatus: rsDoc[18],
+                  imageID: rsDoc[19],
+                  modelWeight: rsDoc[20],
+                  modelLength: rsDoc[21],
+                  rfid: rsDoc[22],
+                  notes: this.documents[1]
+                });
+                console.log("we be updating existing document");
+              }
+            }
           }
           console.log("loading file....Rolling Stock");
           break;

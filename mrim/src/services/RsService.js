@@ -22,6 +22,9 @@ export default {
   deleteRs(id) {
     return Api().delete('rs/' + id)
   },
+  getRsRoad(params) {
+    return Api().get('rs_road/' + params)
+  },
   fetchImglist() {
     return Api().get('imglist')
   },
