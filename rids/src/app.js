@@ -88,7 +88,7 @@ app.put('/aar/:id', (req, res) => {
 })
 app.delete('/aar/:id', (req, res) => {
   var db = req.db;
-  AarCode.remove({
+  AarCode.deleteOne({
     _id: req.params.id
   }, function (err, post) {
     if (err)
@@ -120,6 +120,16 @@ app.get('/img/:id', (req, res) => {
     }
     res.send(post)
   })
+})
+app.get('/img_file/:id', (req, res) => {
+  var db = req.db;
+  Image.findOne({fileName: req.params.id }, '_id', function (error, post) {
+    if (error) {
+      console.error(error);
+    }
+    res.send(post)
+  }
+  )
 })
 app.put('/img/:id', (req, res) => {
   var db = req.db;
@@ -159,7 +169,7 @@ app.post('/add_img', (req, res) => {
 })
 app.delete('/img/:id', (req, res) => {
   var db = req.db;
-  Image.remove({
+  Image.deleteOne({
     _id: req.params.id
   }, function (err, post) {
     if (err)
@@ -233,7 +243,7 @@ app.put('/co/:id', (req, res) => {
 })
 app.delete('/co/:id', (req, res) => {
   var db = req.db;
-  Industry.remove({
+  Industry.deleteOne({
     _id: req.params.id
   }, function (err, post) {
     if (err)
@@ -405,7 +415,7 @@ app.get('/rs_road/:id', (req, res) => {
 })
 app.delete('/rs/:id', (req, res) => {
   var db = req.db;
-  Rollingstock.remove({
+  Rollingstock.deleteOne({
     _id: req.params.id
   }, function (err, post) {
     if (err)

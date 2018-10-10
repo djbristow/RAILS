@@ -34,6 +34,9 @@ export default {
   getImgById(id) {
     return Api().get('img/' + id)
   },
+  getImgByFile(fileName) {
+    return Api().get('img_file/' + fileName)
+  },
   deleteImg(id) {
     return Api().delete('img/' + id)
   },

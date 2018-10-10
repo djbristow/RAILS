@@ -308,7 +308,28 @@ export default {
               });
             }
           } else {
-            console.log(this.fileContent);
+            var i = 1;
+            for (i; i < collection.length - 1; i++) {
+              this.documents = collection[i].split('"');
+              imgDoc = this.documents[0].split(",");
+              console.log(i + " " + imgDoc[1]);
+              const imgId = await RsService.getImgByFile(imgDoc[1]);
+              if (imgId.data._id === undefined) {
+                console.log("we be adding this as a new document");
+                await RsService.addImg({
+                  title: imgDoc[0],
+                  fileName: imgDoc[1],
+                  notes: this.documents[1]
+                });
+              } else {
+                await RsService.updateImg({
+                  id: imgId.data._id,
+                  title: imgDoc[0],
+                  fileName: imgDoc[1],
+                  notes: this.documents[1]
+                });
+              }
+            }
           }
           console.log("loading file....Images");
           break;
