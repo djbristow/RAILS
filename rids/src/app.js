@@ -123,7 +123,7 @@ app.get('/img/:id', (req, res) => {
 })
 app.get('/img_file/:id', (req, res) => {
   var db = req.db;
-  Image.findOne({fileName: req.params.id }, '_id', function (error, post) {
+  Image.findOne({ fileName: req.params.id }, '_id', function (error, post) {
     if (error) {
       console.error(error);
     }
@@ -201,6 +201,16 @@ app.get('/co/:id', (req, res) => {
     }
     res.send(post)
   })
+})
+app.get('/co_name/:id', (req, res) => {
+  var db = req.db;
+  Industry.findOne({ shortName: req.params.id }, '_id', function (error, post) {
+    if (error) {
+      console.error(error);
+    }
+    res.send(post)
+  }
+  )
 })
 app.post('/add_co', (req, res) => {
   var db = req.db;

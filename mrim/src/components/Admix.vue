@@ -286,10 +286,31 @@ export default {
               });
             }
           } else {
-            console.log("updating");
-            console.log(this.fileContent);
+            var i = 1;
+            for (i; i < collection.length - 1; i++) {
+              this.documents = collection[i].split('"');
+              coDoc = this.documents[0].split(",");
+              console.log(i + " " + coDoc[0]);
+              const coId = await RsService.getCoByName(coDoc[0]);
+              if (coId.data._id === undefined) {
+                console.log("we be adding this as a new document");
+                await RsService.addCo({
+                  shortName: coDoc[0],
+                  longName: coDoc[1],
+                  industryType: coDoc[2],
+                  industryLocation: this.documents[1]
+                });
+              } else {
+                await RsService.updateCo({
+                  id: coId.data._id,
+                  shortName: coDoc[0],
+                  longName: coDoc[1],
+                  industryType: coDoc[2],
+                  industryLocation: this.documents[1]
+                });
+              }
+            }
           }
-          console.log("loading file....Companies");
           break;
         }
         case "Images": {

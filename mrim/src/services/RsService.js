@@ -70,6 +70,9 @@ export default {
   getCo(params) {
     return Api().get('co/' + params.id)
   },
+  getCoByName(name) {
+    return Api().get('co_name/' + name)
+  },
   deleteCo(id) {
     return Api().delete('co/' + id)
   },
