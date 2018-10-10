@@ -49,6 +49,9 @@ export default {
   getAar(params) {
     return Api().get('aar/' + params.id)
   },
+  getAarByCode(code) {
+    return Api().get('aar_code/' + code)
+  },
   deleteAar(id) {
     return Api().delete('aar/' + id)
   },

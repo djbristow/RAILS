@@ -50,7 +50,6 @@ export default {
             this.data = JSON.stringify(this.documents);
           } else {
             this.data = "AAR Code,RS Type,Description\n";
-            console.log("aarcode to expoet");
             this.fileName = "aarCodes.csv";
             var i;
             for (i = 0; i < this.documents.length; i++) {
@@ -245,8 +244,28 @@ export default {
               });
             }
           } else {
-            console.log("updating");
-            console.log(this.fileContent);
+            var i = 1;
+            for (i; i < collection.length - 1; i++) {
+              this.documents = collection[i].split('"');
+              aarDoc = this.documents[0].split(",");
+              console.log(i + " " + aarDoc[0]);
+              const aarId = await RsService.getAarByCode(aarDoc[0]);
+              if (aarId.data._id === undefined) {
+                console.log("we be adding this as a new document");
+                await RsService.addAar({
+                  aarCode: aarDoc[0],
+                  rollingstockType: aarDoc[1],
+                  description: this.documents[1]
+                });
+              } else {
+                await RsService.updateAar({
+                  id: aarId.data._id,
+                  aarCode: aarDoc[0],
+                  rollingstockType: aarDoc[1],
+                  description: this.documents[1]
+                });
+              }
+            }
           }
           break;
         }
@@ -337,7 +356,6 @@ export default {
               this.documents = collection[i].split('"');
               rsDoc = this.documents[0].split(",");
               const rsId = await RsService.getRsRoad(rsDoc[0] + "-" + rsDoc[1]);
-              console.log(i + "  " + rsId.data._id);
               if (rsId.data._id === undefined) {
                 console.log("we be adding this as a new document");
                 await RsService.addRs({
