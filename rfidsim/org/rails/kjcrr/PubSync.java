@@ -1,4 +1,9 @@
 /*
+This application creates an MQTT message to simulate the reading of an RFID tag
+The application requires three input paramaters: the sensor, the RFID tag and the
+IP of the MQTT Broker
+The output sent to the MQTT broker looks like:
+{"epochTime":"1542782170","sensor":"rfidRdr01","rfid":"0000000730"}
 
 Copyright 2018 David J Bristow
 
@@ -14,7 +19,7 @@ Copyright 2018 David J Bristow
    See the License for the specific language governing permissions and
    limitations under the License.
  */
- 
+
 package org.rails.kjcrr;
 
 import org.eclipse.paho.client.mqttv3.*;
@@ -22,13 +27,12 @@ import org.eclipse.paho.client.mqttv3.*;
 public class PubSync {
 
 	public static void main(String[] args) {
-		String clientId = null;
-		//{"mac":"4ceb42bd6951","sensor":"rfid01","rfid":"a12345677a"}
-
-		String msg = "{\"mac\":\"" + args[0] + "\",\"sensor\":\"" + args[1] + "\",\"rfid\":\"" + args[2] + "\"}";
+		String clientId = "dbristow" ;
+		//{"epochTime":"1542782170","sensor":"rfidRdr01","rfid":"0000000730"}
+		long epoch = System.currentTimeMillis()/1000;
+		String msg = "{\"epochTime\":\"" + epoch + "\",\"sensor\":\"" + args[0] + "\",\"rfid\":\"" + args[1] + "\"}";
 		try {
-			clientId = args[0];
-			MqttClient client = new MqttClient("tcp://"+args[3]+":1883" , clientId);
+			MqttClient client = new MqttClient("tcp://"+args[2]+":1883" , clientId);
 			MqttTopic topic = client.getTopic("sensors/rfid");
 			System.out.println(msg);
 			MqttMessage message = new MqttMessage(msg.getBytes());
