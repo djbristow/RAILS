@@ -31,8 +31,8 @@ WiFiClient espWiFiClient; // change name when multiple readers are in the networ
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "192.168.0.7", 3600, 60000);
 SoftwareSerial RFID(13, -1); // RX and TX
-const char* ssid = "CenturyLink3021"; // Credentials to connects to WiFi router
-const char* password = "rda34348b7e4ed";
+const char* ssid = "CenturyLink"; // Credentials to connects to WiFi router
+const char* password = "xxxxxxxxxxxx";
 IPAddress mqtt_server(192, 168, 0, 200); // MQTT broker IP address
 int mqttPort = 1883;
 char mqttMsg[800]; //buffer used to publish messages via mqtt
