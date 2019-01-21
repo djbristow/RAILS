@@ -1,16 +1,20 @@
 <template>
-<section>
-  <div class="center">
-    <p class="title is-5">Admin Import Export</p>
-  </div>
-    File to export:
+  <section>
+    <div class="center">
+      <p class="title is-5">Admin Import Export</p>
+    </div>File to export:
     <v-select v-model="fileType" :options="selected"></v-select>
     <v-select v-model="fileFormat" :options="options"></v-select>
-    <a href="#" @click="saveFile()"><b-icon icon="content-save" size="is-medium"/></a><br>
+    <a href="#" @click="saveFile()">
+      <b-icon icon="content-save" size="is-medium"/>
+    </a>
+    <br>
     <input type="file" id="file" ref="file" v-on:change="handleFileUpload()">
     <v-select v-model="fileRead" :options="selected"></v-select>
     <v-select v-model="action" :options="actions"></v-select>
-    <a href="#" @click="loadFile()"><b-icon icon="upload" size="is-medium"/></a>
+    <a href="#" @click="loadFile()">
+      <b-icon icon="upload" size="is-medium"/>
+    </a>
   </section>
 </template>
 <script>
@@ -213,6 +217,7 @@ export default {
       this.fileType = null;
     },
     async loadFile() {
+      console.log("trying to import data");
       const getFileContent = inputFile => {
         const reader = new FileReader();
         return new Promise((resolve, reject) => {
@@ -468,6 +473,7 @@ export default {
     },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
+      console.log("got file name to load");
     }
   }
 };
