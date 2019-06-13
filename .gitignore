@@ -3,3 +3,5 @@
 ./isub/node_modules
 ./mrfm/node_modules
 ./rsrm/node_modules
+./rsrm/.vscode/
+./rsrm/dist
