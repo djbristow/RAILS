@@ -1,16 +1,16 @@
-import Api from '@/services/Api'
+import Api from './Api'
 
 export default {
-  updateRs(params) {
+  updateRs (params) {
     return Api().put('rs/' + params.id, params)
   },
-  getRsRfid(rfid) {
+  getRsRfid (rfid) {
     return Api().get('rs_rfid/' + rfid)
   },
-  getRs(params) {
+  getRs (params) {
     return Api().get('rs/' + params.id)
   },
-  getRsRoad(params) {
+  getRsRoad (params) {
     return Api().get('rs_road/' + params)
   }
 }
