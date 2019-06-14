@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:lts-alpine
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
 COPY package.json /usr/djb 
