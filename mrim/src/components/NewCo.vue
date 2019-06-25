@@ -1,26 +1,49 @@
 <template>
-<section>
-   <div class="center">
-  <p class="title is-5">Add Company</p>
-  </div>
-  <br>
-  <div class="form">
-   <div class="content">
-      Short Name: <input type="text" name="shortName" v-model="shortName"><br>
-      Long Name: <input type="text" name="longName" v-model="longName"><br>
-      Type: <input type="text" name="industryType" v-model="industryType"><br>
-      Location: <input type="text" name="industryLocation" v-model="industryLocation"><br>
-      <button class="button is-primary" @click="addCo">Add Company</button>
+  <section>
+    <div class="center">
+      <p class="title is-5">
+        Add Company
+      </p>
     </div>
-  </div>
-</section>
+    <br>
+    <div class="form">
+      <div class="content">
+        Short Name: <input
+          v-model="shortName"
+          type="text"
+          name="shortName"
+        ><br>
+        Long Name: <input
+          v-model="longName"
+          type="text"
+          name="longName"
+        ><br>
+        Type: <input
+          v-model="industryType"
+          type="text"
+          name="industryType"
+        ><br>
+        Location: <input
+          v-model="industryLocation"
+          type="text"
+          name="industryLocation"
+        ><br>
+        <button
+          class="button is-primary"
+          @click="addCo"
+        >
+          Add Company
+        </button>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
-import RsService from '@/services/RsService'
+import RsService from '../services/RsService'
 export default {
   name: 'NewCo',
-  data() {
+  data () {
     return {
       shortName: '',
       longName: '',
@@ -29,7 +52,7 @@ export default {
     }
   },
   methods: {
-    async addCo() {
+    async addCo () {
       await RsService.addCo({
         shortName: this.shortName,
         longName: this.longName,

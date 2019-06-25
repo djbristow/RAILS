@@ -1,44 +1,63 @@
 <template>
-   <section>
-      <div class="center">
-     <p class="title is-5">Update Image</p>
-     </div>
-     <br>
-     <div class="form">
-        <div class="content">
-             AAR Code: <input type="text" name="aarCode" v-model="aarCode"><br>
-             RS Type: <input type="text" name="rollingstockType" v-model="rollingstockType"><br>
-             Description: <input type="text" name="description" v-model="description"><br>
-         <button class="button is-primary" @click="updateAar">Update AAR Code</button>
-       </div>
-     </div>
-   </section>
+  <section>
+    <div class="center">
+      <p class="title is-5">
+        Update Image
+      </p>
+    </div>
+    <br>
+    <div class="form">
+      <div class="content">
+        AAR Code: <input
+          v-model="aarCode"
+          type="text"
+          name="aarCode"
+        ><br>
+        RS Type: <input
+          v-model="rollingstockType"
+          type="text"
+          name="rollingstockType"
+        ><br>
+        Description: <input
+          v-model="description"
+          type="text"
+          name="description"
+        ><br>
+        <button
+          class="button is-primary"
+          @click="updateAar"
+        >
+          Update AAR Code
+        </button>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
-import RsService from '@/services/RsService'
+import RsService from '../services/RsService'
 export default {
   name: 'EditAar',
-  data() {
+  data () {
     return {
       aarCode: '',
       rollingstockType: '',
       description: ''
     }
   },
-  mounted() {
+  mounted () {
     this.getAar()
   },
   methods: {
-    async getAar() {
+    async getAar () {
       const response = await RsService.getAar({
         id: this.$route.params.id
       })
-        this.aarCode = response.data.aarCode,
-        this.rollingstockType = response.data.rollingstockType,
-        this.description = response.data.description
+      this.aarCode = response.data.aarCode
+      this.rollingstockType = response.data.rollingstockType
+      this.description = response.data.description
     },
-    async updateAar() {
+    async updateAar () {
       await RsService.updateAar({
         id: this.$route.params.id,
         aarCode: this.aarCode,

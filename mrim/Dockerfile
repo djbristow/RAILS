@@ -1,14 +1,10 @@
-FROM node:alpine
+FROM node:lts-alpine
 RUN npm install -g http-server
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
 COPY package*.json /usr/djb 
 RUN npm install
-RUN npm audit fix
 COPY . /usr/djb
-RUN npm run build
-RUN rm -R src
-RUN rm -R config
-RUN rm -R build
+RUN npm run prod
 EXPOSE 8080
 CMD [ "http-server", "/usr/djb/dist" ]

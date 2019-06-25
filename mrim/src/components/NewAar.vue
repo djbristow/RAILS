@@ -1,25 +1,44 @@
 <template>
-<section>
-   <div class="center">
-  <p class="title is-5">Add AAR Code</p>
-  </div>
-  <br>
-  <div class="form">
-   <div class="content">
-      AAR Code: <input type="text" name="aarCode" v-model="aarCode"><br>
-      RS Type: <input type="text" name="rollingstockType" v-model="rollingstockType"><br>
-      Description: <input type="text" name="description" v-model="description"><br>
-      <button class="button is-primary" @click="addAar">Add AAR Code</button>
+  <section>
+    <div class="center">
+      <p class="title is-5">
+        Add AAR Code
+      </p>
     </div>
-  </div>
-</section>
+    <br>
+    <div class="form">
+      <div class="content">
+        AAR Code: <input
+          v-model="aarCode"
+          type="text"
+          name="aarCode"
+        ><br>
+        RS Type: <input
+          v-model="rollingstockType"
+          type="text"
+          name="rollingstockType"
+        ><br>
+        Description: <input
+          v-model="description"
+          type="text"
+          name="description"
+        ><br>
+        <button
+          class="button is-primary"
+          @click="addAar"
+        >
+          Add AAR Code
+        </button>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
-import RsService from '@/services/RsService'
+import RsService from '../services/RsService'
 export default {
   name: 'NewAar',
-  data() {
+  data () {
     return {
       aarCode: '',
       rollingstockType: '',
@@ -27,7 +46,7 @@ export default {
     }
   },
   methods: {
-    async addAar() {
+    async addAar () {
       console.log(this.aarCode)
       await RsService.addAar({
         aarCode: this.aarCode,

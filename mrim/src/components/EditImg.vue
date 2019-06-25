@@ -1,46 +1,65 @@
 <template>
-   <section>
+  <section>
+    <div class="center">
+      <p class="title is-5">
+        Update Image
+      </p>
+    </div>
+    <br>
+    <div class="form">
+      <div class="content">
+        Title: <input
+          v-model="title"
+          type="text"
+          name="title"
+        ><br>
+        Filename: <input
+          v-model="fileName"
+          type="text"
+          name="fileName"
+        ><br>
+      </div>
       <div class="center">
-     <p class="title is-5">Update Image</p>
-     </div>
-     <br>
-     <div class="form">
-        <div class="content">
-             Title: <input type="text" name="title" v-model="title"><br>
-             Filename: <input type="text" name="fileName" v-model="fileName"><br>
-       </div>
-       <div class="center">
-                   Notes: <textarea rows="5" cols="50" v-model="notes"></textarea><br>
-         <button class="button is-primary" @click="updateImg">Update Image</button>
-       </div>
-     </div>
-   </section>
+        Notes: <textarea
+          v-model="notes"
+          rows="5"
+          cols="50"
+        /><br>
+        <button
+          class="button is-primary"
+          @click="updateImg"
+        >
+          Update Image
+        </button>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
-import RsService from '@/services/RsService'
+import RsService from '../services/RsService'
 export default {
   name: 'EditImg',
-  data() {
+  data () {
     return {
       title: '',
       fileName: '',
       notes: ''
     }
   },
-  mounted() {
+  mounted () {
     this.getImg()
   },
   methods: {
-    async getImg() {
+    async getImg () {
       const response = await RsService.getImg({
         id: this.$route.params.id
       })
-        this.title = response.data.title,
-        this.fileName = response.data.fileName,
-        this.notes = response.data.notes
+      this.title = response.data.title
+      this.fileName = response.data.fileName
+      this.notes = response.data.notes
     },
-    async updateImg() {
+    async updateImg () {
       await RsService.updateImg({
         id: this.$route.params.id,
         title: this.title,

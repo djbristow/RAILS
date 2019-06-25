@@ -1,85 +1,85 @@
-import Api from '@/services/Api'
+import Api from './Api'
 
 export default {
-  fetchRslist() {
+  fetchRslist () {
     return Api().get('rslist')
   },
-  fetchAllRslist() {
+  fetchAllRslist () {
     return Api().get('rslistall')
   },
-  addRs(params) {
+  addRs (params) {
     return Api().post('add_rs', params)
   },
-  updateRs(params) {
+  updateRs (params) {
     return Api().put('rs/' + params.id, params)
   },
-  getRs(params) {
+  getRs (params) {
     return Api().get('rs/' + params.id)
   },
-  getRsById(id) {
+  getRsById (id) {
     return Api().get('rs/' + id)
   },
-  deleteRs(id) {
+  deleteRs (id) {
     return Api().delete('rs/' + id)
   },
-  getRsRoad(params) {
+  getRsRoad (params) {
     return Api().get('rs_road/' + params)
   },
-  fetchImglist() {
+  fetchImglist () {
     return Api().get('imglist')
   },
-  getImg(params) {
+  getImg (params) {
     return Api().get('img/' + params.id)
   },
-  getImgById(id) {
+  getImgById (id) {
     return Api().get('img/' + id)
   },
-  getImgByFile(fileName) {
+  getImgByFile (fileName) {
     return Api().get('img_file/' + fileName)
   },
-  deleteImg(id) {
+  deleteImg (id) {
     return Api().delete('img/' + id)
   },
-  updateImg(params) {
+  updateImg (params) {
     return Api().put('img/' + params.id, params)
   },
-  addImg(params) {
+  addImg (params) {
     return Api().post('add_img', params)
   },
-  fetchAarlist() {
+  fetchAarlist () {
     return Api().get('aarlist')
   },
-  getAar(params) {
+  getAar (params) {
     return Api().get('aar/' + params.id)
   },
-  getAarByCode(code) {
+  getAarByCode (code) {
     return Api().get('aar_code/' + code)
   },
-  deleteAar(id) {
+  deleteAar (id) {
     return Api().delete('aar/' + id)
   },
-  updateAar(params) {
+  updateAar (params) {
     return Api().put('aar/' + params.id, params)
   },
-  addAar(params) {
+  addAar (params) {
     return Api().post('add_aar', params)
   },
-  fetchColist() {
+  fetchColist () {
     return Api().get('colist')
   },
-  getCo(params) {
+  getCo (params) {
     return Api().get('co/' + params.id)
   },
-  getCoByName(name) {
+  getCoByName (name) {
     return Api().get('co_name/' + name)
   },
-  deleteCo(id) {
+  deleteCo (id) {
     return Api().delete('co/' + id)
   },
-  updateCo(params) {
+  updateCo (params) {
     return Api().put('co/' + params.id, params)
   },
-  addCo(params) {
+  addCo (params) {
     return Api().post('add_co', params)
   }
 }

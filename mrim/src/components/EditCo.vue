@@ -1,26 +1,49 @@
 <template>
-   <section>
-      <div class="center">
-     <p class="title is-5">Update Company</p>
-     </div>
-     <br>
-     <div class="form">
-        <div class="content">
-             Short Name: <input type="text" name="shortName" v-model="shortName"><br>
-             Long Name: <input type="text" name="longName" v-model="longName"><br>
-             Type: <input type="text" name="industryType" v-model="industryType"><br>
-             Location: <input type="text" name="industryLocation" v-model="industryLocation"><br>
-         <button class="button is-primary" @click="updateCo">Update Company</button>
-       </div>
-     </div>
-   </section>
+  <section>
+    <div class="center">
+      <p class="title is-5">
+        Update Company
+      </p>
+    </div>
+    <br>
+    <div class="form">
+      <div class="content">
+        Short Name: <input
+          v-model="shortName"
+          type="text"
+          name="shortName"
+        ><br>
+        Long Name: <input
+          v-model="longName"
+          type="text"
+          name="longName"
+        ><br>
+        Type: <input
+          v-model="industryType"
+          type="text"
+          name="industryType"
+        ><br>
+        Location: <input
+          v-model="industryLocation"
+          type="text"
+          name="industryLocation"
+        ><br>
+        <button
+          class="button is-primary"
+          @click="updateCo"
+        >
+          Update Company
+        </button>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
-import RsService from '@/services/RsService'
+import RsService from '../services/RsService'
 export default {
   name: 'EditCo',
-  data() {
+  data () {
     return {
       shortName: '',
       longName: '',
@@ -28,20 +51,20 @@ export default {
       industryLocation: ''
     }
   },
-  mounted() {
+  mounted () {
     this.getCo()
   },
   methods: {
-    async getCo() {
+    async getCo () {
       const response = await RsService.getCo({
         id: this.$route.params.id
       })
-        this.shortName = response.data.shortName,
-        this.longName = response.data.longName,
-        this.industryType = response.data.industryType,
-        this.industryLocation = response.data.industryLocation
+      this.shortName = response.data.shortName
+      this.longName = response.data.longName
+      this.industryType = response.data.industryType
+      this.industryLocation = response.data.industryLocation
     },
-    async updateCo() {
+    async updateCo () {
       await RsService.updateCo({
         id: this.$route.params.id,
         shortName: this.shortName,
