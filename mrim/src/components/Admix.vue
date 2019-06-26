@@ -4,7 +4,8 @@
       <p class="title is-5">
         Admin Import Export
       </p>
-    </div>File to export:
+    </div>
+    File to export:
     <v-select
       v-model="fileType"
       :options="selected"
@@ -23,6 +24,7 @@
       />
     </a>
     <br>
+    File to Import:
     <input
       id="file"
       ref="file"
@@ -503,7 +505,7 @@ export default {
 section {
   display: block;
   margin: auto;
-  width: 650px;
+  width: 350px;
   padding: 10px;
 }
 .center {

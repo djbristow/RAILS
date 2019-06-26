@@ -3,11 +3,12 @@ import App from './App'
 import router from './router'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
-import VueSelect from 'vue-select'
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css'
 
 Vue.config.productionTip = false
 Vue.use(Buefy)
-Vue.component('v-select', VueSelect)
+Vue.component('v-select', vSelect)
 new Vue({
   el: '#app',
   router,
