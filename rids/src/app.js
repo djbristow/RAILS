@@ -1,10 +1,10 @@
+// This express app prodes an API for Vue applications to get and put data
+// to the MOngoDB
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-//const morgan = require('morgan')
 
 const app = express()
-//app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 
@@ -18,7 +18,7 @@ var Rollingstock = require("../models/Rollingstock");
 
 // The following CRUD functions handle data in the aarCodes collection
 app.get('/aarlist', (req, res) => {
-  AarCode.find({}, function (error, aarCodes) {
+  find({}, function (error, aarCodes) {
     if (error) {
       console.error(error);
     }
@@ -50,7 +50,7 @@ app.post('/add_aar', (req, res) => {
 })
 app.get('/aar/:id', (req, res) => {
   var db = req.db;
-  AarCode.findById(req.params.id, function (error, post) {
+  findById(req.params.id, function (error, post) {
     if (error) {
       console.error(error);
     }
@@ -59,7 +59,7 @@ app.get('/aar/:id', (req, res) => {
 })
 app.get('/aar_code/:id', (req, res) => {
   var db = req.db;
-  AarCode.findOne({ aarCode: req.params.id }, '_id', function (error, post) {
+  findOne({ aarCode: req.params.id }, '_id', function (error, post) {
     if (error) {
       console.error(error);
     }
@@ -69,7 +69,7 @@ app.get('/aar_code/:id', (req, res) => {
 })
 app.put('/aar/:id', (req, res) => {
   var db = req.db;
-  AarCode.findById(req.params.id, function (error, aarCode) {
+  findById(req.params.id, function (error, aarCode) {
     if (error) {
       console.error(error);
     }
@@ -88,7 +88,7 @@ app.put('/aar/:id', (req, res) => {
 })
 app.delete('/aar/:id', (req, res) => {
   var db = req.db;
-  AarCode.deleteOne({
+  deleteOne({
     _id: req.params.id
   }, function (err, post) {
     if (err)
@@ -101,7 +101,7 @@ app.delete('/aar/:id', (req, res) => {
 
 // The following CRUD functions handle data in the images collection
 app.get('/imglist', (req, res) => {
-  Image.find({}, function (error, images) {
+  _find({}, function (error, images) {
     if (error) {
       console.error(error);
     }
@@ -114,7 +114,7 @@ app.get('/imglist', (req, res) => {
 })
 app.get('/img/:id', (req, res) => {
   var db = req.db;
-  Image.findById(req.params.id, function (error, post) {
+  _findById(req.params.id, function (error, post) {
     if (error) {
       console.error(error);
     }
@@ -123,7 +123,7 @@ app.get('/img/:id', (req, res) => {
 })
 app.get('/img_file/:id', (req, res) => {
   var db = req.db;
-  Image.findOne({ fileName: req.params.id }, '_id', function (error, post) {
+  _findOne({ fileName: req.params.id }, '_id', function (error, post) {
     if (error) {
       console.error(error);
     }
@@ -133,7 +133,7 @@ app.get('/img_file/:id', (req, res) => {
 })
 app.put('/img/:id', (req, res) => {
   var db = req.db;
-  Image.findById(req.params.id, function (error, img) {
+  _findById(req.params.id, function (error, img) {
     if (error) { console.error(error); }
     img.title = req.body.title;
     img.fileName = req.body.fileName;
@@ -169,7 +169,7 @@ app.post('/add_img', (req, res) => {
 })
 app.delete('/img/:id', (req, res) => {
   var db = req.db;
-  Image.deleteOne({
+  _deleteOne({
     _id: req.params.id
   }, function (err, post) {
     if (err)
@@ -182,7 +182,7 @@ app.delete('/img/:id', (req, res) => {
 
 // The following CRUD functions handle data in the industries collection
 app.get('/colist', (req, res) => {
-  Industry.find({}, function (error, industries) {
+  __find({}, function (error, industries) {
     if (error) {
       console.error(error);
     }
@@ -195,7 +195,7 @@ app.get('/colist', (req, res) => {
 })
 app.get('/co/:id', (req, res) => {
   var db = req.db;
-  Industry.findById(req.params.id, function (error, post) {
+  __findById(req.params.id, function (error, post) {
     if (error) {
       console.error(error);
     }
@@ -204,7 +204,7 @@ app.get('/co/:id', (req, res) => {
 })
 app.get('/co_name/:id', (req, res) => {
   var db = req.db;
-  Industry.findOne({ shortName: req.params.id }, '_id', function (error, post) {
+  __findOne({ shortName: req.params.id }, '_id', function (error, post) {
     if (error) {
       console.error(error);
     }
@@ -235,7 +235,7 @@ app.post('/add_co', (req, res) => {
 })
 app.put('/co/:id', (req, res) => {
   var db = req.db;
-  Industry.findById(req.params.id, function (error, industry) {
+  __findById(req.params.id, function (error, industry) {
     if (error) { console.error(error); }
     industry.shortName = req.body.shortName;
     industry.longName = req.body.longName;
@@ -253,7 +253,7 @@ app.put('/co/:id', (req, res) => {
 })
 app.delete('/co/:id', (req, res) => {
   var db = req.db;
-  Industry.deleteOne({
+  __deleteOne({
     _id: req.params.id
   }, function (err, post) {
     if (err)
@@ -266,7 +266,7 @@ app.delete('/co/:id', (req, res) => {
 
 // The following CRUD functions handle data in the rollingstocks collection
 app.get('/rslist', (req, res) => {
-  Rollingstock.find({}, 'roadName roadNumber color aarCode description', function (error, rollingstocks) {
+  ___find({}, 'roadName roadNumber color aarCode description', function (error, rollingstocks) {
     if (error) {
       console.error(error);
     }
@@ -279,7 +279,7 @@ app.get('/rslist', (req, res) => {
   })
 })
 app.get('/rslistall', (req, res) => {
-  Rollingstock.find({}, function (error, rollingstocks) {
+  ___find({}, function (error, rollingstocks) {
     if (error) {
       console.error(error);
     }
@@ -293,7 +293,7 @@ app.get('/rslistall', (req, res) => {
 })
 app.get('/rs/:id', (req, res) => {
   var db = req.db;
-  Rollingstock.findById(req.params.id, function (error, post) {
+  ___findById(req.params.id, function (error, post) {
     if (error) {
       console.error(error);
     }
@@ -363,7 +363,7 @@ app.post('/add_rs', (req, res) => {
 })
 app.put('/rs/:id', (req, res) => {
   var db = req.db;
-  Rollingstock.findById(req.params.id, function (error, rs) {
+  ___findById(req.params.id, function (error, rs) {
     if (error) { console.error(error); }
     rs.roadName = req.body.roadName;
     rs.roadNumber = req.body.roadNumber;
@@ -401,7 +401,7 @@ app.put('/rs/:id', (req, res) => {
 })
 app.get('/rs_rfid/:id', (req, res) => {
   var db = req.db;
-  Rollingstock.findOne({
+  ___findOne({
     rfid: req.params.id
   }, 'roadName roadNumber', function (error, post) {
     if (error) {
@@ -413,7 +413,7 @@ app.get('/rs_rfid/:id', (req, res) => {
 app.get('/rs_road/:id', (req, res) => {
   let rn = req.params.id.split("-");
   var db = req.db;
-  Rollingstock.findOne({
+  ___findOne({
     roadName: rn[0],
     roadNumber: rn[1]
   }, '_id', function (error, post) {
@@ -425,7 +425,7 @@ app.get('/rs_road/:id', (req, res) => {
 })
 app.delete('/rs/:id', (req, res) => {
   var db = req.db;
-  Rollingstock.deleteOne({
+  ___deleteOne({
     _id: req.params.id
   }, function (err, post) {
     if (err)

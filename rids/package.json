@@ -1,6 +1,6 @@
 {
   "name": "server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,11 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.4",
-    "express": "^4.16.3",
-    "moment": "^2.22.1",
-    "mongoose": "^5.3.2",
-    "morgan": "^1.9.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "mongoose": "^5.6.4",
     "nodemon": "^1.17.4"
   }
 }
