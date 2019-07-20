@@ -7,3 +7,4 @@
 ./rsrm/node_modules
 ./rsrm/.vscode/
 ./rsrm/dist
+.vscode/
