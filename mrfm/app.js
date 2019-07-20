@@ -1,5 +1,7 @@
 var express = require("express");
+var cors = require("cors");
 var app = express();
+app.use(cors());
 var efp = require("express-form-post");
 const formPost = efp({
     store: "disk",
