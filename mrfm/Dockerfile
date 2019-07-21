@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:lts-alpine
 RUN mkdir -p /usr/djb
 RUN mkdir -p /usr/djb/public
 WORKDIR /usr/djb
