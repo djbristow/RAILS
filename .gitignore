@@ -8,5 +8,5 @@
 ./rsrm/.vscode/
 ./rsrm/dist/
 .vscode/
-./ppds/node_modules/
-./ppds/.vscode
+ppds/node_modules/
+ppds/.vscode
