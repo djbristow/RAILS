@@ -1,3 +1,6 @@
+// The Company model capture details about both the retailer 
+// or store where items are purchased and the manufacturer of
+// model components
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

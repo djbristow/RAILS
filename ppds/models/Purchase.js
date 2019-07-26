@@ -1,3 +1,5 @@
+// The Purchase model represent an item purchased from a store
+// where a single unit price is captured
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

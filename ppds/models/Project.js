@@ -1,3 +1,5 @@
+// The Project model represents th elements capture about a 
+// single project
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

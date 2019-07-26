@@ -25,7 +25,6 @@ Projects and Purchases Data Services is an Express Mongoose aplication that conn
 ## Component dependencies
 * MongoDB running on port 27017
 
-
 ## Run Setup
 
 ``` bash
