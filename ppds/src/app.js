@@ -29,7 +29,6 @@ app.get('/mcolist', (req, res) => {
   })
 })
 app.post('/add_mco', (req, res) => {
-  db = req.db;
   new_Company = new Company({
     name: req.body.name,
     website: req.body.website,
@@ -51,8 +50,7 @@ app.post('/add_mco', (req, res) => {
   })
 })
 app.get('/mco/:id', (req, res) => {
-  var db = req.db;
-  AarCode.findById(req.params.id, function (error, post) {
+  Company.findById(req.params.id, function (error, post) {
     if (error) {
       console.error(error);
     }
@@ -60,16 +58,15 @@ app.get('/mco/:id', (req, res) => {
   })
 })
 app.get('/mco_name/:id', (req, res) => {
-  var db = req.db;
-  AarCode.findOne({ aarCode: req.params.id }, '_id', function (error, post) {
+  Company.findOne({name: req.params.id }, '_id', function (error, post) {
     if (error) {
       console.error(error);
     }
+    console.log(post)
     res.send(post)
   })
 })
 app.put('/mco/:id', (req, res) => {
-  var db = req.db;
   Company.findById(req.params.id, function (error, company) {
     if (error) {
       console.error(error);
@@ -94,7 +91,6 @@ app.put('/mco/:id', (req, res) => {
   })
 })
 app.delete('/mco/:id', (req, res) => {
-  var db = req.db;
   Company.deleteOne({
     _id: req.params.id
   }, function (err, post) {
@@ -120,7 +116,6 @@ app.get('/projlist', (req, res) => {
   })
 })
 app.get('/proj/:id', (req, res) => {
-  var db = req.db;
   Project.findById(req.params.id, function (error, post) {
     if (error) {
       console.error(error);
@@ -129,7 +124,6 @@ app.get('/proj/:id', (req, res) => {
   })
 })
 app.put('/proj/:id', (req, res) => {
-  var db = req.db;
   Project.findById(req.params.id, function (error, project) {
     if (error) { console.error(error); }
     project.title = req.body.title;
@@ -149,10 +143,6 @@ app.put('/proj/:id', (req, res) => {
   })
 })
 app.post('/add_proj', (req, res) => {
-  var db = req.db;
-  var title = req.body.title;
-  var fileName = req.body.fileName;
-  var notes = req.body.notes;
   var new_project = new Project({
     title: req.body.title,
     type: req.body.type,
@@ -171,7 +161,6 @@ app.post('/add_proj', (req, res) => {
   })
 })
 app.delete('/proj/:id', (req, res) => {
-  var db = req.db;
   Project.deleteOne({
     _id: req.params.id
   }, function (err, post) {
@@ -196,8 +185,7 @@ app.get('/purlist', (req, res) => {
     _id: -1
   })
 })
-app.get('/purchase/:id', (req, res) => {
-  var db = req.db;
+app.get('/pur/:id', (req, res) => {
   Purchase.findById(req.params.id, function (error, post) {
     if (error) {
       console.error(error);
@@ -206,16 +194,25 @@ app.get('/purchase/:id', (req, res) => {
   })
 })
 app.post('/add_pur', (req, res) => {
-  var db = req.db;
-  var shortName = req.body.shortName;
-  var longName = req.body.longName;
-  var industryType = req.body.industryType;
-  var industryLocation = req.body.industryLocation;
-  var new_industry = new Industry({
-    shortName: shortName,
-    longName: longName,
-    industryType: industryType,
-    industryLocation: industryLocation
+  var date = req.body.date;
+  var store = req.body.store;
+  var item = req.body.item;
+  var desciption = req.body.desciption;
+  var manufacturer = req.body.manufacturer;
+  var unitcost = req.body.unitcost;
+  var qty = req.body.qty;
+  var project = req.body.project;
+  var notes = req.body.notes;
+  var new_industry = new Purchase({
+    date: date,
+    store: store,
+    item: item,
+    desciption: desciption,
+    manufacturer: manufacturer,
+    unitcost: unitcost,
+    qty: qty,
+    project: project,
+    notes: notes
   })
   new_industry.save(function (error) {
     if (error) {
@@ -230,11 +227,16 @@ app.put('/pur/:id', (req, res) => {
   var db = req.db;
   Purchase.findById(req.params.id, function (error, purchase) {
     if (error) { console.error(error); }
-    industry.shortName = req.body.shortName;
-    industry.longName = req.body.longName;
-    industry.industryType = req.body.industryType;
-    industry.industryLocation = req.body.industryLocation;
-    industry.save(function (error) {
+    purchase.date = req.body.date;
+    purchase.store = req.body.store;
+    purchase.item = req.body.item;
+    purchase.desciption = req.body.desciption;
+    purchase.manufacturer = req.body.manufacturer;
+    purchase.unitcost = req.body.unitcost;
+    purchase.qty = req.body.qty;
+    purchase.project = req.body.project;
+    purchase.notes = req.body.notes;
+    purchase.save(function (error) {
       if (error) {
         console.log(error)
       }
