@@ -18,11 +18,11 @@ var ProjectSchema = new Schema({
         type: String,
         trim: true
     },
-    startdate:{
+    startdate: {
         type: Date,
         required: true
     },
-    enddate:{
+    enddate: {
         type: Date
     },
     notes: {
