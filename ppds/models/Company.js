@@ -8,7 +8,6 @@ var CompanySchema = new Schema({
     name: {
         type: String,
         required: true,
-        minlength: 2,
         trim: true
     },
     type: {
@@ -24,23 +23,7 @@ var CompanySchema = new Schema({
         type: String,
         trim: true
     },
-    street: {
-        type: String,
-        trim: true
-    },
-    city: {
-        type: String,
-        trim: true
-    },
-    state: {
-        type: String,
-        trim: true
-    },
-    zip: {
-        type: String,
-        trim: true
-    },
-    country: {
+    address: {
         type: String,
         trim: true
     },

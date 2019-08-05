@@ -31,13 +31,10 @@ app.get('/mcolist', (req, res) => {
 app.post('/add_mco', (req, res) => {
   new_Company = new Company({
     name: req.body.name,
+    type: req.body.type,
     website: req.body.website,
     phone: req.body.phone,
-    street: req.body.street,
-    city: req.body.city,
-    state: req.body.state,
-    zip: req.body.zip,
-    country: req.body.country,
+    address: req.body.address,
     notes: req.body.notes
   })
   new_Company.save(function (error) {
@@ -72,13 +69,10 @@ app.put('/mco/:id', (req, res) => {
       console.error(error);
     }
     company.name = req.body.name;
+    company.type = req.body.type;
     company.website = req.body.website;
     company.phone = req.body.phone;
-    company.street = req.body.street;
-    company.city = req.body.city;
-    company.state = req.body.state;
-    company.zip = req.body.zip;
-    company.country = req.body.country;
+    company.address = req.body.address;
     company.notes = req.body.notes;
     company.save(function (error) {
       if (error) {
