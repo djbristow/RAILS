@@ -1,0 +1,69 @@
+{
+  "name": "mppm",
+  "version": "1.1.1",
+  "description": "Model Project and Purchase Manager",
+  "author": "David Bristow <dave@bristow-family.org>",
+  "private": true,
+  "scripts": {
+    "dev": "webpack-dev-server --progress --config build/webpack.config.dev.js",
+    "prod": "webpack --config build/webpack.config.prod.js",
+    "lint": "eslint --ext .js,.vue src",
+    "lint:fix": "eslint --ext .js,.vue src --fix"
+  },
+  "dependencies": {
+    "ajv": "^6.10.0",
+    "axios": "^0.18.1",
+    "buefy": "^0.7.7",
+    "moment": "^2.24.0",
+    "vue": "~2.6.10",
+    "vue-router": "^3.0.2",
+    "vue-select": "^3.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
+    "compression-webpack-plugin": "~2.0",
+    "copy-webpack-plugin": "^5.0.2",
+    "cross-env": "~5.2",
+    "css-loader": "^3.0.0",
+    "eslint": "^5.15.3",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^5.2.2",
+    "file-loader": "^4.0.0",
+    "friendly-errors-webpack-plugin": "~1.7",
+    "html-webpack-plugin": "~3.2",
+    "mini-css-extract-plugin": "~0.5",
+    "node-sass": "~4.11",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "sass-loader": "~7.1",
+    "uglifyjs-webpack-plugin": "~1.2",
+    "url-loader": "^2.0.0",
+    "vue-loader": "~15.6",
+    "vue-style-loader": "~4.1",
+    "vue-template-compiler": "~2.6",
+    "webpack": "~4.29",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-cli": "~3.2",
+    "webpack-dev-server": "~3.1",
+    "webpack-hot-middleware": "~2.24",
+    "webpack-merge": "~4.2"
+  },
+  "engines": {
+    "node": ">= 10.16.0",
+    "npm": ">= 6.9.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}

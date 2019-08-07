@@ -1,6 +1,6 @@
 rids/node_modules/
 mrim/node_modules/
-mrim/dist
+mrim/dist/
 mrim/.vscode/
 isub/node_modules/
 mrfm/node_modules/
@@ -9,4 +9,7 @@ rsrm/.vscode/
 rsrm/dist/
 .vscode/
 ppds/node_modules/
-ppds/.vscode
+ppds/.vscode/
+mppm/node_modules/
+mppm/dist/
+mppm/.vscode/
