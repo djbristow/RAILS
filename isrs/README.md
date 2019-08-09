@@ -1,10 +1,10 @@
-# isub
+# isrs
 &copy; David Bristow, 2019
 
-IoT Subscriber is a Express application that subscribes to messages from ths MQTT Broker and sends them to a MEVN web application using web sockets. This application uses port 3005.
+IoT Subscriber is a Express application that subscribes to RFID messages from the MQTT Broker and sends them to a MEVN web application using web sockets. This application uses port 3005.
 
 ## Version
-* 1.0.1
+* 1.0.2
 
 ## License
 
