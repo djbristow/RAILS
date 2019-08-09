@@ -2,7 +2,7 @@
 &copy; David Bristow, 2019
 
 # Version
-* 1.3.0
+* 1.3.1 - 8/8/2019
 
 RAILS is a software model and implemenation of an automated system to assist the model railroader achieve realism in the operation of a model railroad. The model then drives the development of software.
 For further information see http://kjcrr.org/rails
@@ -37,8 +37,8 @@ The initial components of the design are:
 * MRFM - Model Railroad File Manager
 * ISRS - IoT Subscriber to RFID Services subscribes to the topic sensors/rfid and sends the Iot message to RSRM
 * ISLS - (in planning) IoT Subscriber to Location Services subscribes to topics that provide location information ie IR Sensors and RFID sensors
-* PPDS - (in development) Project and Purchase Data Services a MongoDB database with collections used by MPPM
-* MPPM - (in development) Model Project and Purchase Manager allows a user to enter in formation about their projects and purchases
+* PPDS - Project and Purchase Data Services a MongoDB database with collections used by MPPM
+* MPPM - Model Project and Purchase Manager allows a user to enter in formation about their projects and purchases
 
 The Kicad-projects directory contains circuit PCB designs for some hardware components.
 
