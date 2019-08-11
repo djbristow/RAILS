@@ -8,50 +8,29 @@
     <br>
     <div class="form">
       <div class="content">
-        Company:
-        <input
-          v-model="name"
-          type="text"
-          name="name"
-          size="40"
-        >
-        <br>Type:
-        <input
-          v-model="type"
-          type="text"
-          name="type"
-          size="40"
-        >
-        <br>Website:
-        <input
-          v-model="website"
-          type="text"
-          name="website"
-          size="40"
-        >
-        <br>Phone:
-        <input
-          v-model="phone"
-          type="text"
-          name="phone"
-          size="40"
-        >
-        <br>Street:
-        <input
-          v-model="address"
-          type="text"
-          name="address"
-          size="40"
-        >
-        <br>Notes:
-        <textarea
-          v-model="notes"
-          rows="5"
-          cols="40"
-        />
-        <br>
+        <b-field label="Company">
+          <b-input v-model="name" />
+        </b-field>
+        <b-field label="Type">
+          <b-input v-model="type" />
+        </b-field>
+        <b-field label="Website">
+          <b-input v-model="website" />
+        </b-field>
+        <b-field label="Phone">
+          <b-input v-model="phone" />
+        </b-field>
+        <b-field label="Address">
+          <b-input v-model="address" />
+        </b-field>
+        <b-field label="Notes">
+          <b-input
+            v-model="notes"
+            type="textarea"
+          />
+        </b-field>
         <button
-          class="button is-primary"
+          class="button is-light"
           @click="addMco"
         >
           Add Model Company
@@ -95,13 +74,13 @@ export default {
 </script>
 <style scoped>
 section {
-  width: 500px;
+  width: 400px;
   margin: auto;
 }
 .center {
   text-align: center;
 }
 .content {
-  text-align: right;
+  text-align: left;
 }
 </style>

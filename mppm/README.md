@@ -2,7 +2,7 @@
 &copy; David Bristow, 2019
 
 ## Version
-* 1.0.1
+* 1.1.0
 
 Model Project and Purchase Manager is a MEVN application that provides a user with a web application to display, create and update information of the projects and purchased items. This web application uses port 8080 natively but mapped to 3007 in docker container.
 

@@ -5,73 +5,40 @@
         Update Purchase
       </p>
     </div>
-    <br>
     <div class="form">
       <div class="content">
-        Date:
-        <input
-          v-model="date"
-          type="text"
-          name="date"
-          size="40"
-        >
-        <br>Store:
-        <input
-          v-model="store"
-          type="text"
-          name="store"
-          size="40"
-        >
-        <br>Item:
-        <input
-          v-model="item"
-          type="text"
-          name="item"
-          size="40"
-        >
-        <br>Desciption:
-        <input
-          v-model="desciption"
-          type="text"
-          name="desciption"
-          size="40"
-        >
-        <br>Manufacturer:
-        <input
-          v-model="manufacturer"
-          type="text"
-          name="manufacturer"
-          size="40"
-        >
-        <br>Unit Cost:
-        <input
-          v-model="unitcost"
-          type="text"
-          name="unitcost"
-          size="40"
-        >
-        <br>Qty:
-        <input
-          v-model="qty"
-          type="text"
-          name="qty"
-          size="40"
-        >
-        <br>Project:
-        <input
-          v-model="project"
-          type="text"
-          name="project"
-          size="40"
-        >
-        <br>Notes:
-        <textarea
-          v-model="notes"
-          rows="5"
-          cols="40"
-        /><br>
+        <b-field label="Date">
+          <b-datepicker
+            v-model="date"
+            icon="calendar-today"
+            editable
+          />
+        </b-field>
+        <b-field label="Store">
+          <b-input v-model="store" />
+        </b-field>
+        <b-field label="Item">
+          <b-input v-model="item" />
+        </b-field>
+        <b-field label="Description">
+          <b-input v-model="desciption" />
+        </b-field>
+        <b-field label="Manufacturer">
+          <b-input v-model="manufacturer" />
+        </b-field>
+        <b-field label="Quantity">
+          <b-input v-model="qty" />
+        </b-field><b-field label="Unit Cost">
+          <b-input v-model="unitcost" />
+        </b-field>
+        <b-field label="Notes">
+          <b-input
+            v-model="notes"
+            type="textarea"
+          />
+        </b-field>
         <button
-          class="button is-primary"
+          class="button is-light"
           @click="updatePur"
         >
           Update Purchase
@@ -87,7 +54,7 @@ export default {
   name: 'EditPur',
   data () {
     return {
-      date: '',
+      date: null,
       store: '',
       item: '',
       desciption: '',
@@ -106,8 +73,7 @@ export default {
       const response = await PpService.getPur({
         id: this.$route.params.id
       })
-      console.log(response.data)
-      this.date = response.data.date
+      this.date = new Date(response.data.date)
       this.store = response.data.store
       this.item = response.data.item
       this.desciption = response.data.desciption
@@ -139,13 +105,13 @@ export default {
 </script>
 <style scoped>
 section {
-  width: 500px;
+  width: 400px;
   margin: auto;
 }
 .center {
   text-align: center;
 }
 .content {
-  text-align: right;
+  text-align: left;
 }
 </style>

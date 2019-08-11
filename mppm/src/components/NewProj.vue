@@ -5,53 +5,44 @@
         Add Project
       </p>
     </div>
-    <br>
     <div class="form">
       <div class="content">
-        Title:
-        <input
-          v-model="title"
-          type="text"
-          name="title"
-          size="40"
-        >
-        <br>Type:
-        <input
-          v-model="type"
-          type="text"
-          name="type"
-          size="40"
-        >
-        <br>Description:
-        <input
-          v-model="description"
-          type="text"
-          name="description"
-          size="40"
-        >
-        <br>Start:
-        <input
-          v-model="startdate"
-          type="text"
-          name="startdate"
-          size="40"
-        >
-        <br>End:
-        <input
-          v-model="enddate"
-          type="text"
-          name="enddate"
-          size="40"
-        >
-        <br>Notes:
-        <textarea
-          v-model="notes"
-          rows="5"
-          cols="40"
-        />
-        <br>
+        <b-field label="Title">
+          <b-input v-model="title" />
+        </b-field>
+        <b-field label="Type">
+          <b-input v-model="type" />
+        </b-field>
+        <b-field label="Description">
+          <b-input
+            v-model="description"
+            type="textarea"
+          />
+        </b-field>
+        <b-field label="Start Date">
+          <b-datepicker
+            v-model="startdate"
+            placeholder="Type or select a date..."
+            icon="calendar-today"
+            editable
+          />
+        </b-field>
+        <b-field label="End Date">
+          <b-datepicker
+            v-model="enddate"
+            placeholder="Type or select a date..."
+            icon="calendar-today"
+            editable
+          />
+        </b-field>
+        <b-field label="Notes">
+          <b-input
+            v-model="notes"
+            type="textarea"
+          />
+        </b-field>
         <button
-          class="button is-primary"
+          class="button is-light"
           @click="addProj"
         >
           Add Project
@@ -70,8 +61,8 @@ export default {
       title: '',
       type: '',
       description: '',
-      startdate: '',
-      enddate: '',
+      startdate: null,
+      enddate: null,
       notes: ''
     }
   },
@@ -94,13 +85,13 @@ export default {
 </script>
 <style scoped>
 section {
-  width: 500px;
+  width: 400px;
   margin: auto;
 }
 .center {
   text-align: center;
 }
 .content {
-  text-align: right;
+  text-align: left;
 }
 </style>
