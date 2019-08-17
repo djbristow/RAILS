@@ -7,143 +7,121 @@
     </div>
     <div class="form">
       <div class="columns">
-        <div class="column is-half">
+        <div class="column is-one-third">
           <div class="content">
-            Road Name*: <input
-              v-model="roadName"
-              type="text"
-              name="roadName"
-            ><br>
-            Road Number*: <input
-              v-model="roadNumber"
-              type="text"
-              name="roadNumber"
-            ><br>
-            Color: <input
-              v-model="color"
-              type="text"
-              name="color"
-            ><br>
-            AAR Code*: <input
-              v-model="aarCode"
-              type="text"
-              name="aarCode"
-            ><br>
-            Description: <input
-              v-model="description"
-              type="text"
-              name="description"
-            ><br>
-            Builder: <input
-              v-model="bldr"
-              type="text"
-              name="bldr"
-            ><br>
-            Built Date: <input
-              v-model="bltDate"
-              type="date"
-              name="bltDate"
-            ><br>
-            Number Built: <input
-              v-model="numberBlt"
-              type="text"
-              name="numberBlt"
-            ><br>
-            In Service Date: <input
-              v-model="inSvcDate"
-              type="date"
-              name="inSvcDate"
-            ><br>
-            Inside Length: <input
-              v-model="insideLength"
-              type="text"
-              name="insideLength"
-            ><br>
-            Inside Height: <input
-              v-model="insideHeight"
-              type="text"
-              name="insideHeight"
-            ><br>
-            Inside Width: <input
-              v-model="insideWidth"
-              type="text"
-              name="insideWidth"
-            ><br>
+            <b-field label="Road Name*">
+              <b-input v-model="roadName" />
+            </b-field>
+            <b-field label="Road Number*">
+              <b-input v-model="roadNumber" />
+            </b-field>
+            <b-field label="Color">
+              <b-input v-model="color" />
+            </b-field>
+            <b-field label="AAR Code*">
+              <b-input v-model="aarCode" />
+            </b-field>
+            <b-field label="Description">
+              <b-input v-model="description" />
+            </b-field>
+            <b-field label="Builder">
+              <b-input v-model="bldr" />
+            </b-field>
+            <b-field label="Built Date">
+              <b-datepicker
+                v-model="bltDate"
+                placeholder="Type or select a date..."
+                icon="calendar-today"
+                editable
+              />
+            </b-field>
+            <b-field label="Number Built">
+              <b-input v-model="numberBlt" />
+            </b-field>
+            <b-field label="In Service Date">
+              <b-datepicker
+                v-model="inSvcDate"
+                placeholder="Type or select a date..."
+                icon="calendar-today"
+                editable
+              />
+            </b-field>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="content">
+            <b-field label="Inside Length">
+              <b-input v-model="insideLength" />
+            </b-field>
+            <b-field label="Inside Height">
+              <b-input v-model="insideHeight" />
+            </b-field>
+            <b-field label="Inside Width">
+              <b-input v-model="insideWidth" />
+            </b-field>
+            <b-field label="Capacity">
+              <b-input v-model="capacity" />
+            </b-field>
+            <b-field label="Weight Empty">
+              <b-input v-model="ltWeight" />
+            </b-field>
+            <b-field label="Load Limit">
+              <b-input v-model="loadLimit" />
+            </b-field>
+            <b-field label="Last Maint Date">
+              <b-datepicker
+                v-model="lastMaintDate"
+                placeholder="Type or select a date..."
+                icon="calendar-today"
+                editable
+              />
+            </b-field>
+            <b-field label="RS Status">
+              <b-input v-model="rsStatus" />
+            </b-field>
+            <b-field label="Home Location">
+              <b-input v-model="homeLocation" />
+            </b-field>
           </div>
         </div>
         <div class="column">
           <div class="content">
-            Capacity: <input
-              v-model="capacity"
-              type="text"
-              name="capacity"
-            ><br>
-            Weight Empty: <input
-              v-model="ltWeight"
-              type="text"
-              name="ltWeight"
-            ><br>
-            Load Limit: <input
-              v-model="loadLimit"
-              type="text"
-              name="loadLimit"
-            ><br>
-            Last Maint Date:<input
-              v-model="lastMaintDate"
-              type="date"
-              name="lastMaintDate"
-            ><br>
-            RS Status: <input
-              v-model="rsStatus"
-              type="text"
-              name="rsStatus"
-            ><br>
-            Home Location: <input
-              v-model="homeLocation"
-              type="text"
-              name="homeLocation"
-            ><br>
-            Location Now: <input
-              v-model="locationNow"
-              type="text"
-              name="locationNow"
-            ><br>
-            Image ID: <input
-              v-model="imageID"
-              type="text"
-              name="imageID"
-            ><br>
-            Model Weight: <input
-              v-model="modelWeight"
-              type="text"
-              name="modelWeight"
-            ><br>
-            Model Length: <input
-              v-model="modelLength"
-              type="text"
-              name="modelLength"
-            ><br>
-            RFID: <input
-              v-model="rfid"
-              type="text"
-              name="rfid"
-            ><br>
+            <b-field label="Location Now">
+              <b-input v-model="locationNow" />
+            </b-field>
+            <b-field label="Image ID">
+              <b-input v-model="imageID" />
+            </b-field>
+            <b-field label="Model Weight">
+              <b-input v-model="modelWeight" />
+            </b-field>
+            <b-field label="Model Length">
+              <b-input v-model="modelLength" />
+            </b-field>
+            <b-field label="RFID">
+              <b-input v-model="rfid" />
+            </b-field>
+            <b-field label="Model Length">
+              <b-input v-model="modelLength" />
+            </b-field>
+            <b-field label="RFID">
+              <b-input v-model="rfid" />
+            </b-field>
+            <b-field label="Notes">
+              <b-input
+                v-model="notes"
+                type="textarea"
+              />
+            </b-field>
           </div>
         </div>
       </div>
-      <div class="center">
-        Notes: <textarea
-          v-model="notes"
-          rows="5"
-          cols="40"
-        /><br>
-        <button
-          class="button is-primary"
-          @click="addRs"
-        >
-          Add Rolling Stock
-        </button>
-      </div>
+      <button
+        class="button is-light"
+        @click="addRs"
+      >
+        Add Rolling Stock
+      </button>
     </div>
   </section>
 </template>
@@ -159,18 +137,18 @@ export default {
       color: '',
       aarCode: '',
       description: '',
-      numberBlt: '',
-      inSvcDate: '',
+      numberBlt: 0,
+      inSvcDate: null,
       insideLength: '',
       insideHeight: '',
       insideWidth: '',
       capacity: '',
       bldr: '',
-      bltDate: '',
+      bltDate: null,
       notes: '',
       ltWeight: '',
       loadLimit: '',
-      lastMaintDate: '',
+      lastMaintDate: null,
       locationNow: '',
       homeLocation: '',
       rsStatus: '',
@@ -217,13 +195,13 @@ export default {
 </script>
 <style scoped>
 section {
-  width: 900px;
+  width: 1200px;
   margin: auto;
 }
 .center {
   text-align: center;
 }
 .content {
-  text-align: right;
+  text-align: left;
 }
 </style>

@@ -75,6 +75,7 @@
     </b-field>
   </section>
 </template>
+
 <script>
 import RsService from '../services/RsService'
 const ModalForm = {
@@ -141,14 +142,12 @@ export default {
     async deleteImg (id) {
       await RsService.deleteImg(id)
       this.getImglist()
-      this.$router.push({
-        name: 'Imglist'
-      })
     },
     async cardModal (id) {
+      console.log(id)
       const response = await RsService.getImgById(id)
       var imageURL = './static/img/' + response.data.fileName
-      this.$modal.open({
+      this.$buefy.modal.open({
         parent: this,
         props: {
           fileName: response.data.fileName,

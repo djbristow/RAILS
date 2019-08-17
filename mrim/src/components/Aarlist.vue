@@ -106,9 +106,6 @@ export default {
     async deleteAar (id) {
       await RsService.deleteAar(id)
       this.getAarlist()
-      this.$router.push({
-        name: 'Aarlist'
-      })
     }
   }
 }

@@ -51,7 +51,7 @@
         <b-table-column
           field="description"
           label="Description"
-          width="100"
+          width="300"
         >
           {{ props.row.description }}
         </b-table-column>
@@ -66,7 +66,7 @@
         <b-table-column
           field="_id"
           label="Action"
-          width="150"
+          width="75"
           sortable
         >
           <a
@@ -240,14 +240,9 @@ export default {
     async deleteRs (id) {
       await RsService.deleteRs(id)
       this.getRslist()
-      this.$router.push({
-        name: 'Rslist'
-      })
     },
     formatDate (unformatDate) {
-      console.log(unformatDate)
       if (unformatDate === null || unformatDate === '') {
-        console.log('date is either null or zero length string!')
         return ''
       } else {
         return moment.utc(unformatDate).format('MM/DD/YYYY')
@@ -259,8 +254,6 @@ export default {
       var isImage = false
       var imageURL = null
       n = response.data.imageID.length
-      // console.log(response.data.imageID)
-      // console.log(n)
       if (n > 0) {
         isImage = true
         imageURL = './static/img/' + response.data.imageID
@@ -268,8 +261,7 @@ export default {
       } else {
         isImage = false
       }
-      // console.log(this.formatDate(response.data.bltDate))
-      this.$modal.open({
+      this.$buefy.modal.open({
         parent: this,
         props: {
           aarCode: response.data.aarCode,
@@ -311,7 +303,7 @@ export default {
 section {
   display: block;
   margin: auto;
-  width: 1000px;
+  width: 1100px;
   padding: 10px;
 }
 .center {

@@ -11,25 +11,31 @@
       enctype="multipart/form-data"
     >
       <div class="content">
-        Title: <input
-          v-model="title"
-          type="text"
-          name="title"
-        ><br>
-        <input
-          id="file"
-          ref="file"
-          type="file"
-          accept="image/*"
-          @change="handleFileUpload()"
-        ><br>
-        Notes: <textarea
-          v-model="notes"
-          rows="5"
-          cols="40"
-        /><br>
+        <b-field label="Title">
+          <b-input v-model="title" />
+        </b-field>
+        <b-field class="file">
+          <b-upload v-model="file">
+            <a class="button is-light">
+              <b-icon icon="upload" />
+              <span>Click to upload</span>
+            </a>
+          </b-upload>
+          <span
+            v-if="file"
+            class="file-name"
+          >
+            {{ file.name }}
+          </span>
+        </b-field>
+        <b-field label="Notes">
+          <b-input
+            v-model="notes"
+            type="textarea"
+          />
+        </b-field>
         <button
-          class="button is-primary"
+          class="button is-light"
           @click="addImg"
         >
           Add Image
@@ -67,7 +73,7 @@ export default {
     submitImg () {
       let formData = new FormData()
       formData.append('file', this.file)
-      // console.log(formData);
+      this.fileName = this.file.name
       axios({
         method: 'POST',
         'Content-Type': 'multipart/form-data',
@@ -75,16 +81,11 @@ export default {
         data: formData
       })
         .then(function () {
-          console.log('hmmm sucess')
+          console.log('sucedded to upload')
         })
         .catch(function () {
           console.log('failed to upload')
         })
-    },
-    handleFileUpload () {
-      this.file = this.$refs.file.files[0]
-      this.fileName = this.file.name
-      console.log('done handling file in page')
     }
   }
 }
@@ -100,6 +101,6 @@ section {
 }
 
 .content {
-  text-align: right;
+  text-align: left;
 }
 </style>

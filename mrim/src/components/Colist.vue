@@ -114,9 +114,6 @@ export default {
     async deleteCo (id) {
       await RsService.deleteCo(id)
       this.getColist()
-      this.$router.push({
-        name: 'Colist'
-      })
     }
   }
 }

@@ -1,124 +1,140 @@
 <template>
   <div id="app">
-    <nav class="navbar is-fixed-top has-shadow is-spaced">
-      <div class="navbar-brand">
-        <a
-          class="navbar-item"
-          href="http://kjcrr.org"
-          target="_blank"
-        ><strong>KJ&C RR</strong>
-        </a>
-        <div
-          class="navbar-burger burger"
-          :class="{'is-active': navIsActive}"
-          data-target="mainNav"
-          @click="toggleMenu"
-        >
-          <span />
-          <span />
-          <span />
-        </div>
-      </div>
-      <div
-        id="mainNav"
-        class="navbar-menu"
-        :class="{'is-active': navIsActive}"
-      >
-        <div class="navbar-start">
-          <div class="navbar-item">
-            <router-link to="/">
-              Home
-            </router-link>
-          </div>
-          <div class="navbar-item">
-            <router-link to="/Admix">
-              Admin
-            </router-link>
-          </div>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <strong>Rollingstock</strong>
-            <div
-              id="moreDropdown"
-              class="navbar-dropdown"
+    <section>
+      <b-navbar>
+        <template slot="brand">
+          <b-navbar-item>
+            <b-dropdown
+              hoverable
+              aria-role="list"
             >
-              <div class="navbar-item">
+              <button
+                slot="trigger"
+                class="button is-light"
+              >
+                <span>MRIM</span>
+                <b-icon icon="menu-down" />
+              </button>
+              <b-dropdown-item aria-role="listitem">
+                <router-link to="/">
+                  Home
+                </router-link>
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
+                <router-link to="/Admix">
+                  Admin
+                </router-link>
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
+                <a
+                  href="https://kjcrr.org"
+                  target="_blank"
+                >
+                  KJ&C RR
+                </a>
+              </b-dropdown-item>
+            </b-dropdown>
+          </b-navbar-item>
+        </template>
+        <template slot="start">
+          <b-navbar-item>
+            <b-dropdown
+              hoverable
+              aria-role="list"
+            >
+              <button
+                slot="trigger"
+                class="button is-light"
+              >
+                <span>Rollingstock</span>
+                <b-icon icon="menu-down" />
+              </button>
+              <b-dropdown-item aria-role="listitem">
                 <router-link to="/Rslist">
                   List
                 </router-link>
-              </div>
-              <hr class="navbar-divider">
-              <div class="navbar-item">
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
                 <router-link to="/RS/new">
                   New
                 </router-link>
-              </div>
-            </div>
-          </div>
-        &nbsp;&nbsp;&nbsp;
-          <div class="navbar-item has-dropdown is-hoverable">
-            <strong>Images</strong>
-            <div
-              id="moreDropdown"
-              class="navbar-dropdown"
+              </b-dropdown-item>
+            </b-dropdown>
+          </b-navbar-item>
+          <b-navbar-item>
+            <b-dropdown
+              hoverable
+              aria-role="list"
             >
-              <div class="navbar-item">
+              <button
+                slot="trigger"
+                class="button is-light"
+              >
+                <span>Images</span>
+                <b-icon icon="menu-down" />
+              </button>
+              <b-dropdown-item aria-role="listitem">
                 <router-link to="/Imglist">
                   List
                 </router-link>
-              </div>
-              <hr class="navbar-divider">
-              <div class="navbar-item">
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
                 <router-link to="/Img/new">
                   New
                 </router-link>
-              </div>
-            </div>
-          </div>
-        &nbsp;&nbsp;&nbsp;
-          <div class="navbar-item has-dropdown is-hoverable">
-            <strong>AAR Codes</strong>
-            <div
-              id="moreDropdown"
-              class="navbar-dropdown"
+              </b-dropdown-item>
+            </b-dropdown>
+          </b-navbar-item>
+          <b-navbar-item>
+            <b-dropdown
+              hoverable
+              aria-role="list"
             >
-              <div class="navbar-item">
+              <button
+                slot="trigger"
+                class="button is-light"
+              >
+                <span>AAR Codes</span>
+                <b-icon icon="menu-down" />
+              </button>
+              <b-dropdown-item aria-role="listitem">
                 <router-link to="/Aarlist">
                   List
                 </router-link>
-              </div>
-              <hr class="navbar-divider">
-              <div class="navbar-item">
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
                 <router-link to="/Aar/new">
                   New
                 </router-link>
-              </div>
-            </div>
-          </div>
-        &nbsp;&nbsp;&nbsp;
-          <div class="navbar-item has-dropdown is-hoverable">
-            <strong>Companies</strong>
-            <div
-              id="moreDropdown"
-              class="navbar-dropdown"
+              </b-dropdown-item>
+            </b-dropdown>
+          </b-navbar-item>
+          <b-navbar-item>
+            <b-dropdown
+              hoverable
+              aria-role="list"
             >
-              <div class="navbar-item">
+              <button
+                slot="trigger"
+                class="button is-light"
+              >
+                <span>Companies</span>
+                <b-icon icon="menu-down" />
+              </button>
+              <b-dropdown-item aria-role="listitem">
                 <router-link to="/Colist">
                   List
                 </router-link>
-              </div>
-              <hr class="navbar-divider">
-              <div class="navbar-item">
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
                 <router-link to="/Co/new">
                   New
                 </router-link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <section>
-      <br><br><br><br><br>
+              </b-dropdown-item>
+            </b-dropdown>
+          </b-navbar-item>
+        </template>
+      </b-navbar>
       <div class="center">
         <h1 class="title is-3">
           Model Railroad Inventory Manager

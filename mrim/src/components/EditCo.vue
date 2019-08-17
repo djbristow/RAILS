@@ -8,28 +8,20 @@
     <br>
     <div class="form">
       <div class="content">
-        Short Name: <input
-          v-model="shortName"
-          type="text"
-          name="shortName"
-        ><br>
-        Long Name: <input
-          v-model="longName"
-          type="text"
-          name="longName"
-        ><br>
-        Type: <input
-          v-model="industryType"
-          type="text"
-          name="industryType"
-        ><br>
-        Location: <input
-          v-model="industryLocation"
-          type="text"
-          name="industryLocation"
-        ><br>
+        <b-field label="Short Name">
+          <b-input v-model="shortName" />
+        </b-field>
+        <b-field label="Long Name">
+          <b-input v-model="longName" />
+        </b-field>
+        <b-field label="Type">
+          <b-input v-model="industryType" />
+        </b-field>
+        <b-field label="Location">
+          <b-input v-model="industryLocation" />
+        </b-field>
         <button
-          class="button is-primary"
+          class="button is-light"
           @click="updateCo"
         >
           Update Company
@@ -81,13 +73,13 @@ export default {
 </script>
 <style scoped>
 section {
-  width: 500px;
+  width: 400px;
   margin: auto;
 }
 .center {
   text-align: center;
 }
 .content {
-  text-align: right;
+  text-align: left;
 }
 </style>

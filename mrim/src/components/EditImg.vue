@@ -8,25 +8,20 @@
     <br>
     <div class="form">
       <div class="content">
-        Title: <input
-          v-model="title"
-          type="text"
-          name="title"
-        ><br>
-        Filename: <input
-          v-model="fileName"
-          type="text"
-          name="fileName"
-        ><br>
-      </div>
-      <div class="center">
-        Notes: <textarea
-          v-model="notes"
-          rows="5"
-          cols="50"
-        /><br>
+        <b-field label="Title">
+          <b-input v-model="title" />
+        </b-field>
+        <b-field label="Filename">
+          <b-input v-model="title" />
+        </b-field>
+        <b-field label="Notes">
+          <b-input
+            v-model="notes"
+            type="textarea"
+          />
+        </b-field>
         <button
-          class="button is-primary"
+          class="button is-light"
           @click="updateImg"
         >
           Update Image
@@ -75,13 +70,13 @@ export default {
 </script>
 <style scoped>
 section {
-  width: 500px;
+  width: 400px;
   margin: auto;
 }
 .center {
   text-align: center;
 }
 .content {
-  text-align: right;
+  text-align: left;
 }
 </style>

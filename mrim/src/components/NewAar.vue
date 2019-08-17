@@ -8,23 +8,20 @@
     <br>
     <div class="form">
       <div class="content">
-        AAR Code: <input
-          v-model="aarCode"
-          type="text"
-          name="aarCode"
-        ><br>
-        RS Type: <input
-          v-model="rollingstockType"
-          type="text"
-          name="rollingstockType"
-        ><br>
-        Description: <input
-          v-model="description"
-          type="text"
-          name="description"
-        ><br>
+        <b-field label="AAR Code">
+          <b-input v-model="aarCode" />
+        </b-field>
+        <b-field label="RS Type">
+          <b-input v-model="rollingstockType" />
+        </b-field>
+        <b-field label="Description">
+          <b-input
+            v-model="description"
+            type="textarea"
+          />
+        </b-field>
         <button
-          class="button is-primary"
+          class="button is-light"
           @click="addAar"
         >
           Add AAR Code
@@ -69,6 +66,6 @@ section {
   text-align: center;
 }
 .content {
-  text-align: right;
+  text-align: left;
 }
 </style>
