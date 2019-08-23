@@ -10,6 +10,9 @@
       enctype="multipart/form-data"
     >
       <div class="content">
+        <b-field label="#">
+          <b-input v-model="num" />
+        </b-field>
         <b-field label="Date">
           <b-datepicker
             v-model="date"
@@ -58,6 +61,7 @@ export default {
   name: 'NewPur',
   data () {
     return {
+      num: '',
       date: null,
       store: '',
       item: '',
@@ -72,6 +76,7 @@ export default {
   methods: {
     async addPur () {
       await PpService.addPur({
+        num: this.num,
         date: this.date,
         store: this.store,
         item: this.item,

@@ -5,15 +5,35 @@
         Admin Import Export
       </p>
     </div>
-    File to export:
-    <v-select
-      v-model="fileType"
-      :options="selected"
-    />
-    <v-select
-      v-model="fileFormat"
-      :options="options"
-    />
+    <b-field label="File Type to Export">
+      <b-select
+        v-model="fileExportType"
+        placeholder="Select a file"
+      >
+        <option value="Companies">
+          Companies
+        </option>
+        <option value="Projects">
+          Projects
+        </option>
+        <option value="Purchases">
+          Purchases
+        </option>
+      </b-select>
+    </b-field>
+    <b-field label="File Format">
+      <b-select
+        v-model="fileFormat"
+        placeholder="Select a format"
+      >
+        <option value="Json">
+          Json
+        </option>
+        <option value="CSV">
+          CSV
+        </option>
+      </b-select>
+    </b-field>
     <a
       href="#"
       @click="saveFile()"
@@ -21,20 +41,40 @@
       <b-icon
         icon="content-save"
         size="is-medium"
+        type="is-dark"
       />
     </a>
-    <br>
-    File to Import:
-    <input
-      id="file"
-      ref="file"
-      type="file"
-      @change="handleFileUpload()"
-    >
-    <v-select
-      v-model="fileRead"
-      :options="selected"
-    />
+    <hr>
+    <b-field label="File Type to Import">
+      <b-select
+        v-model="fileImportType"
+        placeholder="Select a file"
+      >
+        <option value="Companies">
+          Companies
+        </option>
+        <option value="Projects">
+          Projects
+        </option>
+        <option value="Purchases">
+          Purchases
+        </option>
+      </b-select>
+    </b-field>
+    <b-field class="file">
+      <b-upload v-model="file">
+        <a class="button is-light">
+          <b-icon icon="upload" />
+          <span>Click to upload</span>
+        </a>
+      </b-upload>
+      <span
+        v-if="file"
+        class="file-name"
+      >
+        {{ file.name }}
+      </span>
+    </b-field>
     <a
       href="#"
       @click="loadFile()"
@@ -42,23 +82,50 @@
       <b-icon
         icon="upload"
         size="is-medium"
+        type="is-dark"
+      />
+    </a>
+    <hr>
+    <b-field label="Create Report">
+      <b-select
+        v-model="reportType"
+        placeholder="Select a report"
+      >
+        <option value="Projects">
+          Projects
+        </option>
+        <option value="Purchases">
+          Purchases
+        </option>
+      </b-select>
+    </b-field>
+    <a
+      href="#"
+      @click="createPdf()"
+    >
+      <b-icon
+        icon="printer"
+        size="is-medium"
+        type="is-dark"
       />
     </a>
   </section>
 </template>
 <script>
 import PpService from '../services/PpService'
-// import FileReader from "FileReader";
+import moment from 'moment'
+import * as JsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name: 'Admix',
   data () {
     return {
-      options: ['Json', 'CSV'],
-      selected: ['Companies', 'Projects', 'Purchases'],
       action: null,
       file: null,
-      fileType: null,
+      fileExportType: null,
+      fileImportType: null,
       fileFormat: null,
+      reportType: null,
       response: null,
       documents: [],
       images: [],
@@ -73,7 +140,7 @@ export default {
   },
   methods: {
     async saveFile () {
-      switch (this.fileType) {
+      switch (this.fileExportType) {
         case 'Companies':
           this.response = await PpService.fetchMcolist()
           this.documents = this.response.data.companies
@@ -138,12 +205,14 @@ export default {
             this.fileName = 'purchases.json'
             this.data = JSON.stringify(this.documents)
           } else {
-            this.data = 'ID,Update,Date,Store,Item,Manufacturer,Unitcost,Qty,Project,Description,Notes\n'
+            this.data = 'ID,Update,Num,Date,Store,Item,Manufacturer,Unitcost,Qty,Project,Description,Notes\n'
             this.fileName = 'purchases.csv'
             for (i = 0; i < this.documents.length; i++) {
               this.data +=
                 this.documents[i]._id +
                 ',i,' +
+                this.documents[i].num +
+                ',' +
                 this.documents[i].date +
                 ',' +
                 this.documents[i].store +
@@ -164,7 +233,6 @@ export default {
                 '"\n'
             }
           }
-          break
       }
       const blob = new Blob([this.data], { type: 'text/plain' })
       const e = document.createEvent('MouseEvents')
@@ -194,7 +262,6 @@ export default {
       this.fileType = null
     },
     async loadFile () {
-      console.log('trying to import data')
       const getFileContent = inputFile => {
         const reader = new FileReader()
         return new Promise((resolve, reject) => {
@@ -209,7 +276,7 @@ export default {
         })
       }
       this.fileContent = await getFileContent(this.file)
-      switch (this.fileRead) {
+      switch (this.fileImportType) {
         case 'Companies': {
           var mcoDoc = []
           var collection = new Blob([], { type: 'text/plain' })
@@ -240,6 +307,10 @@ export default {
               })
             }
           }
+          this.fileImportType = null
+          this.$router.push({
+            name: 'Mcolist'
+          })
           break
         }
         case 'Projects': {
@@ -270,6 +341,10 @@ export default {
               })
             }
           }
+          this.fileImportType = null
+          this.$router.push({
+            name: 'Projlist'
+          })
           break
         }
         case 'Purchases': {
@@ -281,41 +356,159 @@ export default {
             purDoc = this.documents[0].split(',')
             if (purDoc[1] === 'a') {
               await PpService.addPur({
-                date: purDoc[2],
-                store: purDoc[3],
-                item: purDoc[4],
+                num: purDoc[2],
+                date: purDoc[3],
+                store: purDoc[4],
+                item: purDoc[5],
                 desciption: this.documents[1],
-                manufacturer: purDoc[5],
-                unitcost: purDoc[6],
-                qty: purDoc[7],
-                project: purDoc[8],
+                manufacturer: purDoc[6],
+                unitcost: purDoc[7],
+                qty: purDoc[8],
+                project: purDoc[9],
                 notes: this.documents[3]
               })
             } else if (purDoc[1] === 'u') {
               await PpService.updatePur({
                 id: purDoc[0],
-                date: purDoc[2],
-                store: purDoc[3],
-                item: purDoc[4],
+                num: purDoc[2],
+                date: purDoc[3],
+                store: purDoc[4],
+                item: purDoc[5],
                 desciption: this.documents[1],
-                manufacturer: purDoc[5],
-                unitcost: purDoc[6],
-                qty: purDoc[7],
-                project: purDoc[8],
+                manufacturer: purDoc[6],
+                unitcost: purDoc[7],
+                qty: purDoc[8],
+                project: purDoc[9],
                 notes: this.documents[3]
               })
             }
           }
-          break
+          this.fileImportType = null
+          this.$router.push({
+            name: 'Purlist'
+          })
         }
       }
       this.action = null
       this.fileRead = null
       this.file = null
     },
-    handleFileUpload () {
-      this.file = this.$refs.file.files[0]
-      console.log('got file name to load')
+    async createPdf (reportType) {
+      // http://raw.githack.com/MrRio/jsPDF/master/docs/index.html
+      // https://github.com/simonbengtsson/jsPDF-AutoTable
+      function Projrow (title, type, startdate, enddate, description, notes) {
+        this.title = title
+        this.type = type
+        this.startdate = startdate
+        this.enddate = enddate
+        this.description = description
+        this.notes = notes
+      }
+      function Purrow (num, date, store, item, desciption, manufacturer, unitcost, qty, notes, extendcost) {
+        this.num = num
+        this.date = date
+        this.store = store
+        this.item = item
+        this.desciption = desciption
+        this.manufacturer = manufacturer
+        this.unitcost = unitcost
+        this.qty = qty
+        this.notes = notes
+        this.extendcost = extendcost
+      }
+      switch (this.reportType) {
+        case 'Purchases': {
+          const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 2
+          })
+          this.response = await PpService.fetchPurlist()
+          this.documents = this.response.data.purchases
+          var i = 0
+          var purrows = []
+          for (i = 0; i < this.documents.length; i++) {
+            purrows[i] = new Purrow(
+              this.documents[i].num,
+              this.formatDate(this.documents[i].date),
+              this.documents[i].store,
+              this.documents[i].item,
+              this.documents[i].desciption,
+              this.documents[i].manufacturer,
+              formatter.format(this.documents[i].unitcost),
+              this.documents[i].qty,
+              this.documents[i].notes,
+              this.documents[i].extendcost = formatter.format(this.documents[i].unitcost * this.documents[i].qty)
+            )
+          }
+          var columns = [
+            { title: '#', dataKey: 'num' },
+            { title: 'Date', dataKey: 'date' },
+            { title: 'Store', dataKey: 'store' },
+            { title: 'Item', dataKey: 'item' },
+            { title: 'Description', dataKey: 'desciption' },
+            { title: 'Manufacturer', dataKey: 'manufacturer' },
+            { title: 'Cost', dataKey: 'unitcost' },
+            { title: 'Qty', dataKey: 'qty' },
+            { title: 'Total', dataKey: 'extendcost' },
+            { title: 'Notes', dataKey: 'notes' }
+          ]
+          var doc = new JsPDF('l', 'pt')
+          doc.text('Purchases Report', 350, 30)
+          doc.autoTable(columns, purrows, {
+            styles: { cellPadding: 3, fontSize: 9 },
+            theme: 'striped',
+            margin: { top: 50 }
+          })
+          doc.save('purchases.pdf')
+          break
+        }
+        case 'Projects': {
+          this.response = await PpService.fetchProjlist()
+          this.documents = this.response.data.projects
+          i = 0
+          var projrows = []
+          for (i = 0; i < this.documents.length; i++) {
+            projrows[i] = new Projrow(
+              this.documents[i].title,
+              this.documents[i].type,
+              this.formatDate(this.documents[i].startdate),
+              this.formatDate(this.documents[i].enddate),
+              this.documents[i].description,
+              this.documents[i].notes)
+          }
+          columns = [
+            { title: 'Title', dataKey: 'title' },
+            { title: 'Type', dataKey: 'type' },
+            { title: 'Start', dataKey: 'startdate' },
+            { title: 'Finish', dataKey: 'enddate' },
+            { title: 'Description', dataKey: 'description' },
+            { title: 'Notes', dataKey: 'notes' }
+          ]
+          doc = new JsPDF('l', 'pt')
+          doc.text('Projects Report', 350, 30)
+          // @ts-ignore
+          doc.autoTable(columns, projrows, {
+            styles: { cellPadding: 3, fontSize: 9 },
+            columnStyles: {
+              1: { cellWidth: 80 },
+              2: { cellWidth: 45 },
+              3: { cellWidth: 45 }
+            },
+            theme: 'striped',
+            margin: { top: 50 }
+          })
+          doc.save('projects.pdf')
+        }
+      }
+      this.reportType = null
+    },
+    formatDate (unformatDate) {
+      if (unformatDate === null || unformatDate === '') {
+        return ''
+      } else {
+        return moment.utc(unformatDate).format('MM/DD/YY')
+      }
     }
   }
 }

@@ -176,7 +176,7 @@ app.get('/purlist', (req, res) => {
       purchases: purchases
     })
   }).sort({
-    _id: -1
+    num: 1
   })
 })
 app.get('/pur/:id', (req, res) => {
@@ -188,6 +188,7 @@ app.get('/pur/:id', (req, res) => {
   })
 })
 app.post('/add_pur', (req, res) => {
+  var num = req.body.num;
   var date = req.body.date;
   var store = req.body.store;
   var item = req.body.item;
@@ -198,6 +199,7 @@ app.post('/add_pur', (req, res) => {
   var project = req.body.project;
   var notes = req.body.notes;
   var new_industry = new Purchase({
+    num: num,
     date: date,
     store: store,
     item: item,
@@ -221,6 +223,7 @@ app.put('/pur/:id', (req, res) => {
   var db = req.db;
   Purchase.findById(req.params.id, function (error, purchase) {
     if (error) { console.error(error); }
+    purchase.num = req.body.num;
     purchase.date = req.body.date;
     purchase.store = req.body.store;
     purchase.item = req.body.item;

@@ -46,12 +46,19 @@
           width="75"
         >
           <router-link :to="{ name: 'EditMco', params: { id: props.row._id } }">
-            <b-icon icon="pencil" />
+            <b-icon
+              icon="pencil"
+              type="is-dark"
+            />
           </router-link>
           <a
             href="#"
             @click="deleteMco(props.row._id)"
-          ><b-icon icon="delete-forever" /></a>
+          ><b-icon
+            icon="delete-forever"
+            type="is-dark"
+          />
+          </a>
         </b-table-column>
       </template>
     </b-table>

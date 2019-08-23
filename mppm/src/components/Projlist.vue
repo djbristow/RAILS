@@ -68,13 +68,19 @@
           width="75"
         >
           <router-link :to="{ name: 'EditProj', params: { id: props.row._id } }">
-            <b-icon icon="pencil" />
+            <b-icon
+              icon="pencil"
+              type="is-dark"
+            />
           </router-link>
           <a
             href="#"
             @click="deleteProj(props.row._id)"
           >
-            <b-icon icon="delete-forever" />
+            <b-icon
+              icon="delete-forever"
+              type="is-dark"
+            />
           </a>
         </b-table-column>
       </template>

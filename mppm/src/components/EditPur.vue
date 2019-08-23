@@ -7,6 +7,9 @@
     </div>
     <div class="form">
       <div class="content">
+        <b-field label="#">
+          <b-input v-model="num" />
+        </b-field>
         <b-field label="Date">
           <b-datepicker
             v-model="date"
@@ -54,6 +57,7 @@ export default {
   name: 'EditPur',
   data () {
     return {
+      num: 0,
       date: null,
       store: '',
       item: '',
@@ -73,6 +77,7 @@ export default {
       const response = await PpService.getPur({
         id: this.$route.params.id
       })
+      this.num = response.data.num
       this.date = new Date(response.data.date)
       this.store = response.data.store
       this.item = response.data.item
@@ -86,6 +91,7 @@ export default {
     async updatePur () {
       await PpService.updatePur({
         id: this.$route.params.id,
+        num: this.num,
         date: this.date,
         store: this.store,
         item: this.item,

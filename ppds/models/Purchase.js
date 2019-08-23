@@ -4,6 +4,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Purchase = new Schema({
+    num: {
+        type: Number
+    },
     date: {
         type: Date,
         required: true

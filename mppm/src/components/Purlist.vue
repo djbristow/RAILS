@@ -17,6 +17,14 @@
     >
       <template slot-scope="props">
         <b-table-column
+          field="num"
+          label="#"
+          width="25"
+          sortable
+        >
+          {{ props.row.num }}
+        </b-table-column>
+        <b-table-column
           field="date"
           label="Date"
           width="125"
@@ -74,13 +82,19 @@
           width="80"
         >
           <router-link :to="{ name: 'EditPur', params: { id: props.row._id } }">
-            <b-icon icon="pencil" />
+            <b-icon
+              icon="pencil"
+              type="is-dark"
+            />
           </router-link>
           <a
             href="#"
             @click="deletePur(props.row._id)"
           >
-            <b-icon icon="delete-forever" />
+            <b-icon
+              icon="delete-forever"
+              type="is-dark"
+            />
           </a>
         </b-table-column>
       </template>
@@ -155,7 +169,7 @@ export default {
       if (unformatDate === null || unformatDate === '') {
         return ''
       } else {
-        return moment.utc(unformatDate).format('YYYY-MM-DD')
+        return moment.utc(unformatDate).format('MM/DD/YY')
       }
     }
   }
