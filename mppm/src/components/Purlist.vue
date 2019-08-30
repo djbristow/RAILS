@@ -13,7 +13,7 @@
       :default-sort-direction="defaultSortDirection"
       :striped="isStriped"
       :narrowed="isNarrowed"
-      default-sort="date"
+      default-sort="num"
     >
       <template slot-scope="props">
         <b-table-column
@@ -169,7 +169,7 @@ export default {
       if (unformatDate === null || unformatDate === '') {
         return ''
       } else {
-        return moment.utc(unformatDate).format('MM/DD/YY')
+        return moment.utc(unformatDate).format('YYYY-MM-DD')
       }
     }
   }

@@ -423,11 +423,15 @@ export default {
             currency: 'USD',
             minimumFractionDigits: 2
           })
+          var totalcost = 0
+          var extendcost = 0
           this.response = await PpService.fetchPurlist()
           this.documents = this.response.data.purchases
           var i = 0
           var purrows = []
           for (i = 0; i < this.documents.length; i++) {
+            extendcost = this.documents[i].unitcost * this.documents[i].qty
+            totalcost += extendcost
             purrows[i] = new Purrow(
               this.documents[i].num,
               this.formatDate(this.documents[i].date),
@@ -438,7 +442,7 @@ export default {
               formatter.format(this.documents[i].unitcost),
               this.documents[i].qty,
               this.documents[i].notes,
-              this.documents[i].extendcost = formatter.format(this.documents[i].unitcost * this.documents[i].qty)
+              this.documents[i].extendcost = formatter.format(extendcost)
             )
           }
           var columns = [
@@ -458,8 +462,21 @@ export default {
           doc.autoTable(columns, purrows, {
             styles: { cellPadding: 3, fontSize: 9 },
             theme: 'striped',
+            didDrawPage: function (data) {
+              // Footer
+              var str = 'Page ' + doc.internal.getNumberOfPages()
+              console.log(doc.internal.getNumberOfPages())
+              doc.setFontSize(9)
+              var pageSize = doc.internal.pageSize
+              var pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight()
+              doc.text(str, data.settings.margin.left, pageHeight - 10)
+            },
             margin: { top: 50 }
           })
+          var finalY = doc.previousAutoTable.finalY
+          doc.setFontSize(10)
+          var summary = 'The number purchases made was ' + this.documents.length + ' for a total cost of ' + formatter.format(totalcost)
+          doc.text(summary, 100, finalY + 20)
           doc.save('purchases.pdf')
           break
         }
