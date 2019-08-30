@@ -1,8 +1,6 @@
 FROM node:lts-alpine AS builder
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
-COPY package*.json /usr/djb 
-RUN npm install
 COPY . /usr/djb
 RUN npm run prod
 
