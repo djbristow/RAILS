@@ -40,6 +40,9 @@ var RollingstockSchema = new Schema({
     insideWidth: {
         type: String
     },
+    loadTypes: {
+        type: String
+    },
     capacity: {
         type: String
     },

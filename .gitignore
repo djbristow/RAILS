@@ -1,4 +1,5 @@
 rids/node_modules/
+rids/rids.code-workspace
 mrim/node_modules/
 mrim/dist/
 mrim/.vscode/
