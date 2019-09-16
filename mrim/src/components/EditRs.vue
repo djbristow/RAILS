@@ -59,6 +59,9 @@
             <b-field label="Inside Width">
               <b-input v-model="insideWidth" />
             </b-field>
+            <b-field label="Load Types">
+              <b-input v-model="loadTypes" />
+            </b-field>
             <b-field label="Capacity">
               <b-input v-model="capacity" />
             </b-field>
@@ -79,13 +82,13 @@
             <b-field label="RS Status">
               <b-input v-model="rsStatus" />
             </b-field>
-            <b-field label="Home Location">
-              <b-input v-model="homeLocation" />
-            </b-field>
           </div>
         </div>
         <div class="column">
           <div class="content">
+            <b-field label="Home Location">
+              <b-input v-model="homeLocation" />
+            </b-field>
             <b-field label="Location Now">
               <b-input v-model="locationNow" />
             </b-field>
@@ -94,12 +97,6 @@
             </b-field>
             <b-field label="Model Weight">
               <b-input v-model="modelWeight" />
-            </b-field>
-            <b-field label="Model Length">
-              <b-input v-model="modelLength" />
-            </b-field>
-            <b-field label="RFID">
-              <b-input v-model="rfid" />
             </b-field>
             <b-field label="Model Length">
               <b-input v-model="modelLength" />

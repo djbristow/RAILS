@@ -131,6 +131,7 @@ const ModalForm = {
     insideWidth: String,
     lastMaintDate: String,
     loadLimit: String,
+    loadTypes: String,
     locationNow: String,
     ltWeight: String,
     modelLength: String,
@@ -177,7 +178,8 @@ const ModalForm = {
            Inside Length: {{insideLength}} <br>
            Inside Height: {{insideHeight}} <br>
            Inside Width: {{insideWidth}} <br>
-      Capacity: {{capacity}} <br>
+           Load Types: {{loadTypes}} <br>
+           Capacity: {{capacity}} <br>
           </div>
         </div>
         <div class="column">
@@ -278,6 +280,7 @@ export default {
           insideWidth: response.data.insideWidth,
           lastMaintDate: this.formatDate(response.data.lastMaintDate),
           loadLimit: response.data.loadLimit,
+          loadTypes: response.data.loadTypes,
           locationNow: response.data.locationNow,
           ltWeight: response.data.ltWeight,
           modelLength: response.data.modelLength,
