@@ -31,7 +31,6 @@ app.get('/aarlist', (req, res) => {
 })
 
 app.post('/add_aar', (req, res) => {
-  var db = req.db;
   var aarCode = req.body.aarCode;
   var description = req.body.description;
   var rollingstockType = req.body.rollingstockType;
@@ -50,7 +49,6 @@ app.post('/add_aar', (req, res) => {
   })
 })
 app.get('/aar/:id', (req, res) => {
-  var db = req.db;
   AarCode.findById(req.params.id, function (error, post) {
     if (error) {
       console.error(error);
@@ -59,17 +57,16 @@ app.get('/aar/:id', (req, res) => {
   })
 })
 app.get('/aar_code/:id', (req, res) => {
-  var db = req.db;
-  AarCode.findOne({ aarCode: req.params.id }, '_id', function (error, post) {
+  AarCode.findOne({
+    aarCode: req.params.id
+  }, '_id', function (error, post) {
     if (error) {
       console.error(error);
     }
     res.send(post)
-  }
-  )
+  })
 })
 app.put('/aar/:id', (req, res) => {
-  var db = req.db;
   AarCode.findById(req.params.id, function (error, aarCode) {
     if (error) {
       console.error(error);
@@ -88,7 +85,6 @@ app.put('/aar/:id', (req, res) => {
   })
 })
 app.delete('/aar/:id', (req, res) => {
-  var db = req.db;
   AarCode.deleteOne({
     _id: req.params.id
   }, function (err, post) {
@@ -114,7 +110,6 @@ app.get('/imglist', (req, res) => {
   })
 })
 app.get('/img/:id', (req, res) => {
-  var db = req.db;
   Image.findById(req.params.id, function (error, post) {
     if (error) {
       console.error(error);
@@ -123,8 +118,9 @@ app.get('/img/:id', (req, res) => {
   })
 })
 app.get('/img_file/:id', (req, res) => {
-  var db = req.db;
-  Image.findOne({ fileName: req.params.id }, '_id', function (error, post) {
+  Image.findOne({
+    fileName: req.params.id
+  }, '_id', function (error, post) {
     if (error) {
       console.error(error);
     }
@@ -132,9 +128,10 @@ app.get('/img_file/:id', (req, res) => {
   })
 })
 app.put('/img/:id', (req, res) => {
-  var db = req.db;
   Image.findById(req.params.id, function (error, img) {
-    if (error) { console.error(error); }
+    if (error) {
+      console.error(error);
+    }
     img.title = req.body.title;
     img.fileName = req.body.fileName;
     img.notes = req.body.notes;
@@ -149,7 +146,6 @@ app.put('/img/:id', (req, res) => {
   })
 })
 app.post('/add_img', (req, res) => {
-  var db = req.db;
   var title = req.body.title;
   var fileName = req.body.fileName;
   var notes = req.body.notes;
@@ -168,7 +164,6 @@ app.post('/add_img', (req, res) => {
   })
 })
 app.delete('/img/:id', (req, res) => {
-  var db = req.db;
   Image.deleteOne({
     _id: req.params.id
   }, function (err, post) {
@@ -194,7 +189,6 @@ app.get('/colist', (req, res) => {
   })
 })
 app.get('/co/:id', (req, res) => {
-  var db = req.db;
   Industry.findById(req.params.id, function (error, post) {
     if (error) {
       console.error(error);
@@ -203,17 +197,16 @@ app.get('/co/:id', (req, res) => {
   })
 })
 app.get('/co_name/:id', (req, res) => {
-  var db = req.db;
-  Industry.findOne({ shortName: req.params.id }, '_id', function (error, post) {
+  Industry.findOne({
+    shortName: req.params.id
+  }, '_id', function (error, post) {
     if (error) {
       console.error(error);
     }
     res.send(post)
-  }
-  )
+  })
 })
 app.post('/add_co', (req, res) => {
-  var db = req.db;
   var shortName = req.body.shortName;
   var longName = req.body.longName;
   var industryType = req.body.industryType;
@@ -234,9 +227,10 @@ app.post('/add_co', (req, res) => {
   })
 })
 app.put('/co/:id', (req, res) => {
-  var db = req.db;
   Industry.findById(req.params.id, function (error, industry) {
-    if (error) { console.error(error); }
+    if (error) {
+      console.error(error);
+    }
     industry.shortName = req.body.shortName;
     industry.longName = req.body.longName;
     industry.industryType = req.body.industryType;
@@ -252,7 +246,6 @@ app.put('/co/:id', (req, res) => {
   })
 })
 app.delete('/co/:id', (req, res) => {
-  var db = req.db;
   Industry.deleteOne({
     _id: req.params.id
   }, function (err, post) {
@@ -278,6 +271,39 @@ app.get('/rslist', (req, res) => {
     'roadNumber': 1
   })
 })
+app.get('/rslistroadnames', (req, res) => {
+  Rollingstock.distinct('roadName', function (error, roadnames) {
+    if (error) {
+      console.error(error);
+    }
+    roadnames.sort();
+    res.send({
+      roadnames: roadnames
+    })
+  })
+})
+app.get('/rslistaarcodes', (req, res) => {
+  Rollingstock.distinct('aarCode', function (error, aarcodes) {
+    if (error) {
+      console.error(error);
+    }
+    aarcodes.sort();
+    res.send({
+      aarcodes: aarcodes
+    })
+  })
+})
+app.get('/rslistopstatuses', (req, res) => {
+  Rollingstock.distinct('rsStatus', function (error, opstatuses) {
+    if (error) {
+      console.error(error);
+    }
+    opstatuses.sort();
+    res.send({
+      opstatuses: opstatuses
+    })
+  })
+})
 app.get('/rslistall', (req, res) => {
   Rollingstock.find({}, function (error, rollingstocks) {
     if (error) {
@@ -292,7 +318,6 @@ app.get('/rslistall', (req, res) => {
   })
 })
 app.get('/rs/:id', (req, res) => {
-  var db = req.db;
   Rollingstock.findById(req.params.id, function (error, post) {
     if (error) {
       console.error(error);
@@ -301,7 +326,6 @@ app.get('/rs/:id', (req, res) => {
   })
 })
 app.post('/add_rs', (req, res) => {
-  var db = req.db;
   var roadName = req.body.roadName;
   var roadNumber = req.body.roadNumber;
   var color = req.body.color;
@@ -318,6 +342,7 @@ app.post('/add_rs', (req, res) => {
   var notes = req.body.notes;
   var ltWeight = req.body.ltWeight;
   var loadLimit = req.body.loadLimit;
+  var loadTypes = req.body.loadTypes;
   var lastMaintDate = req.body.lastMaintDate;
   var locationNow = req.body.locationNow;
   var homeLocation = req.body.homeLocation;
@@ -343,6 +368,7 @@ app.post('/add_rs', (req, res) => {
     notes: notes,
     ltWeight: ltWeight,
     loadLimit: loadLimit,
+    loadTypes: loadTypes,
     lastMaintDate: lastMaintDate,
     locationNow: locationNow,
     homeLocation: homeLocation,
@@ -356,16 +382,16 @@ app.post('/add_rs', (req, res) => {
     if (error) {
       console.log(error)
     }
-    console.log("made it")
     res.send({
-        success: true
+      success: true
     })
   })
 })
 app.put('/rs/:id', (req, res) => {
-  var db = req.db;
   Rollingstock.findById(req.params.id, function (error, rs) {
-    if (error) { console.error(error); }
+    if (error) {
+      console.error(error);
+    }
     rs.roadName = req.body.roadName;
     rs.roadNumber = req.body.roadNumber;
     rs.color = req.body.color;
@@ -382,6 +408,7 @@ app.put('/rs/:id', (req, res) => {
     rs.notes = req.body.notes;
     rs.ltWeight = req.body.ltWeight;
     rs.loadLimit = req.body.loadLimit;
+    rs.loadTypes = req.body.loadTypes;
     rs.lastMaintDate = req.body.lastMaintDate;
     rs.locationNow = req.body.locationNow;
     rs.homeLocation = req.body.homeLocation;
@@ -401,7 +428,6 @@ app.put('/rs/:id', (req, res) => {
   })
 })
 app.get('/rs_rfid/:id', (req, res) => {
-  var db = req.db;
   Rollingstock.findOne({
     rfid: req.params.id
   }, 'roadName roadNumber', function (error, post) {
@@ -413,7 +439,6 @@ app.get('/rs_rfid/:id', (req, res) => {
 })
 app.get('/rs_road/:id', (req, res) => {
   let rn = req.params.id.split("-");
-  var db = req.db;
   Rollingstock.findOne({
     roadName: rn[0],
     roadNumber: rn[1]
@@ -425,7 +450,6 @@ app.get('/rs_road/:id', (req, res) => {
   })
 })
 app.delete('/rs/:id', (req, res) => {
-  var db = req.db;
   Rollingstock.deleteOne({
     _id: req.params.id
   }, function (err, post) {
