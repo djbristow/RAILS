@@ -26,6 +26,11 @@
                 </router-link>
               </b-dropdown-item>
               <b-dropdown-item aria-role="listitem">
+                <router-link to="/Report">
+                  Reports
+                </router-link>
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
                 <a
                   href="https://kjcrr.org"
                   target="_blank"

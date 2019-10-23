@@ -139,6 +139,7 @@ export default {
       insideLength: '',
       insideHeight: '',
       insideWidth: '',
+      loadTypes: '',
       capacity: '',
       bldr: '',
       bltDate: null,
@@ -173,6 +174,7 @@ export default {
       this.insideLength = response.data.insideLength
       this.insideHeight = response.data.insideHeight
       this.insideWidth = response.data.insideWidth
+      this.loadTypes = response.data.loadTypes
       this.capacity = response.data.capacity
       this.bldr = response.data.bldr
       this.bltDate = new Date(response.data.bltDate)
@@ -201,6 +203,7 @@ export default {
         insideLength: this.insideLength,
         insideHeight: this.insideHeight,
         insideWidth: this.insideWidth,
+        loadTypes: this.loadTypes,
         capacity: this.capacity,
         bldr: this.bldr,
         bltDate: this.bltDate,

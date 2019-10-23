@@ -44,6 +44,7 @@
       <b-icon
         icon="content-save"
         size="is-medium"
+        type="is-dark"
       />
     </a>
     <hr>
@@ -87,6 +88,7 @@
       <b-icon
         icon="upload"
         size="is-medium"
+        type="is-dark"
       />
     </a>
   </section>
@@ -264,7 +266,6 @@ export default {
                 '"\n'
             }
           }
-          break
       }
       const blob = new Blob([this.data], { type: 'text/plain' })
       const e = document.createEvent('MouseEvents')
@@ -290,6 +291,7 @@ export default {
         null
       )
       a.dispatchEvent(e)
+      this.fileExportType = null
       this.fileFormat = null
       this.fileType = null
     },

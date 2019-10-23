@@ -26,7 +26,7 @@ app.get('/aarlist', (req, res) => {
       aarCodes: aarCodes
     })
   }).sort({
-    _id: -1
+    aarCode: 1
   })
 })
 
@@ -185,7 +185,7 @@ app.get('/colist', (req, res) => {
       industries: industries
     })
   }).sort({
-    _id: -1
+    shortName: 1
   })
 })
 app.get('/co/:id', (req, res) => {

@@ -14,6 +14,7 @@ import Colist from 'components/Colist'
 import EditCo from 'components/EditCo'
 import NewCo from 'components/NewCo'
 import Admix from 'components/Admix'
+import Report from 'components/Report'
 
 Vue.use(Router)
 
@@ -90,6 +91,11 @@ export default new Router({
       path: '/Admix',
       name: 'Admix',
       component: Admix
+    },
+    {
+      path: '/Report',
+      name: 'Report',
+      component: Report
     }
   ]
 })

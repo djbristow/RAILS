@@ -81,5 +81,14 @@ export default {
   },
   addCo (params) {
     return Api().post('add_co', params)
+  },
+  fetchUniqueRoadNames () {
+    return Api().get('rslistroadnames')
+  },
+  fetchUniqueAarCodes () {
+    return Api().get('rslistaarcodes')
+  },
+  fetchUniqueStatuses () {
+    return Api().get('rslistopstatuses')
   }
 }
