@@ -219,20 +219,24 @@ export default {
       this.response = await RsService.fetchImglist()
       this.documents = this.response.data.images
       var doc = new JsPDF('p', 'pt')
+      var height = doc.internal.pageSize.height
       doc.text('Images Report', 250, 30)
       doc.setFontSize(10)
       for (i = 0; i < this.documents.length; i++) {
-        doc.text('Title: ' + this.documents[i].title, 50, y)
-        doc.text('File: ' + this.documents[i].fileName, 50, y + 20)
-        doc.text('Notes: ' + this.documents[i].notes, 50, y + 40)
         var imageURL = './static/img/' + this.documents[i].fileName
         var imageData = await this.loadImg(imageURL)
         var h = imageData.height / (imageData.width / 275)
+        if (y + h > height - 50) {
+          doc.addPage()
+          y = 70
+        }
         doc.addImage(imageData.imgData, 'JPEG', 290, y, 275, h, undefined, 'NONE')
-        y = y + 60 + h
+        console.log(y)
+        doc.text('Title: ' + this.documents[i].title, 50, y)
+        doc.text('File: ' + this.documents[i].fileName, 50, y + 20)
+        doc.text('Notes: ' + this.documents[i].notes, 50, y + 40)
+        y = y + 20 + h
       }
-      // var width = doc.internal.pageSize.width
-      // var height = doc.internal.pageSize.height
       doc.save('images.pdf')
     },
     async loadImg (url) {

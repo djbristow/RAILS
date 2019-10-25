@@ -1,7 +1,14 @@
-FROM node:lts-alpine AS builder
+FROM ubuntu AS builder
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y git
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
-COPY package*.json /usr/djb 
+COPY package.json /usr/djb
+RUN apt-get -y install curl gnupg
+RUN curl -sL https://deb.nodesource.com/setup_11.x  | bash -
+RUN apt-get -y install nodejs
+RUN npm install
 RUN npm install
 COPY . /usr/djb
 RUN npm run prod
