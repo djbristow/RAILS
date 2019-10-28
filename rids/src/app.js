@@ -442,7 +442,7 @@ app.get('/rs_road/:id', (req, res) => {
   Rollingstock.findOne({
     roadName: rn[0],
     roadNumber: rn[1]
-  }, _id, function (error, post) {
+  }, function (error, post) {
     if (error) {
       console.error(error);
     }
