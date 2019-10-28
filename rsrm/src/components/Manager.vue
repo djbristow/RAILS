@@ -117,16 +117,17 @@ export default {
     this.opensocketListener()
   },
   methods: {
-    async getRs (rfid) {
+    async getRs (message) {
       let rs = {
         rfid: '',
         roadName: 'unkn',
         roadNumber: '',
-        sensor: 'rfidRdr01'
+        sensor: ''
       }
-      rs.rfid = rfid
-      this.newSensor = rs.sensor
-      const response = await RsService.getRsRfid(rfid)
+      rs.rfid = message.rfid
+      this.newSensor = message.sensor
+      rs.sensor = this.newSensor
+      const response = await RsService.getRsRfid(message.rfid)
       if (response.data === '') {
         this.rollingstocks.unshift(rs)
       } else {
@@ -134,7 +135,6 @@ export default {
         rs.roadNumber = response.data.roadNumber
         this.rollingstocks.unshift(rs)
       }
-      // when rollinstocks length is greater than 20 pop() the last element of the array
     },
     opensocketListener () {
       socket.on('connect', () => {
@@ -144,8 +144,7 @@ export default {
         this.connStatus = 'Disconnected'
       })
       socket.on('rfidmsg', message => {
-        this.getRs(message.rfid)
-        console.log(message)
+        this.getRs(message)
       })
     },
     async updateRs (id) {
@@ -187,6 +186,7 @@ export default {
           insideLength: response.data.insideLength,
           insideHeight: response.data.insideHeight,
           insideWidth: response.data.insideWidth,
+          loadTypes: response.data.loadTypes,
           capacity: response.data.capacity,
           bldr: response.data.bldr,
           bltDate: response.data.bltDate,
@@ -217,11 +217,9 @@ section {
   width: 900px;
   padding: 10px;
 }
-
 .center {
   text-align: center;
 }
-
 a {
   color: #42b983;
 }
