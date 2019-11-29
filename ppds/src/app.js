@@ -14,6 +14,7 @@ var db = mongodb_conn_module.connect();
 var Company = require("../models/Company");
 var Project = require("../models/Project");
 var Purchase = require("../models/Purchase");
+var Rollingstock = require("../models/Rollingstock")
 
 // The following CRUD functions handle data in the companies collection
 app.get('/mcolist', (req, res) => {
@@ -125,6 +126,8 @@ app.put('/proj/:id', (req, res) => {
     project.description = req.body.description;
     project.startdate = req.body.startdate;
     project.enddate = req.body.enddate;
+    project.roadname = req.body.roadname;
+    project.roadnumbers = req.body.roadnumbers;
     project.notes = req.body.notes;
     project.save(function (error) {
       if (error) {
@@ -143,6 +146,8 @@ app.post('/add_proj', (req, res) => {
     description: req.body.description,
     startdate: req.body.startdate,
     enddate: req.body.enddate,
+    roadname: req.body.roadname,
+    roadnumbers: req.body.roadnumbers,
     notes: req.body.notes
   })
   new_project.save(function (error) {
@@ -188,29 +193,21 @@ app.get('/pur/:id', (req, res) => {
   })
 })
 app.post('/add_pur', (req, res) => {
-  var num = req.body.num;
-  var date = req.body.date;
-  var store = req.body.store;
-  var item = req.body.item;
-  var desciption = req.body.desciption;
-  var manufacturer = req.body.manufacturer;
-  var unitcost = req.body.unitcost;
-  var qty = req.body.qty;
-  var project = req.body.project;
-  var notes = req.body.notes;
-  var new_industry = new Purchase({
-    num: num,
-    date: date,
-    store: store,
-    item: item,
-    desciption: desciption,
-    manufacturer: manufacturer,
-    unitcost: unitcost,
-    qty: qty,
-    project: project,
-    notes: notes
+  var new_purcahse = new Purchase({
+    num: req.body.num,
+    date: req.body.date,
+    store: req.body.store,
+    item: req.body.item,
+    desciption: req.body.desciption,
+    manufacturer: req.body.manufacturer,
+    unitcost: req.body.unitcost,
+    qty: req.body.qty,
+    project: req.body.project,
+    roadname: req.body.roadname,
+    roadnumbers: req.body.roadnumbers,
+    notes: req.body.notes
   })
-  new_industry.save(function (error) {
+  new_purchase.save(function (error) {
     if (error) {
       console.log(error)
     }
@@ -232,6 +229,8 @@ app.put('/pur/:id', (req, res) => {
     purchase.unitcost = req.body.unitcost;
     purchase.qty = req.body.qty;
     purchase.project = req.body.project;
+    purchase.roadname = req.body.roadname;
+    purchase.roadnumbers = req.body.roadnumbers;
     purchase.notes = req.body.notes;
     purchase.save(function (error) {
       if (error) {
@@ -253,6 +252,18 @@ app.delete('/pur/:id', (req, res) => {
     res.send({
       success: true
     })
+  })
+})
+app.get('/rs_road/:id', (req, res) => {
+  let rn = req.params.id.split("-");
+  Rollingstock.findOne({
+    roadName: rn[0],
+    roadNumber: rn[1]
+  }, function (error, post) {
+    if (error) {
+      console.error(error);
+    }
+    res.send(post)
   })
 })
 

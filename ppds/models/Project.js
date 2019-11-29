@@ -25,6 +25,13 @@ var ProjectSchema = new Schema({
     enddate: {
         type: Date
     },
+    roadname: {
+        type: String,
+        trim: true
+    },
+    roadnumbers: {
+        type: String
+    },
     notes: {
         type: String,
         trim: true

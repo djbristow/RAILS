@@ -40,6 +40,13 @@ var Purchase = new Schema({
     project: {
         type: String
     },
+    roadname: {
+        type: String,
+        trim: true
+    },
+    roadnumbers: {
+        type: String
+    },
     notes: {
         type: String
     }
