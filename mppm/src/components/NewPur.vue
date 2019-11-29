@@ -10,33 +10,58 @@
       enctype="multipart/form-data"
     >
       <div class="content">
-        <b-field label="#">
-          <b-input v-model="num" />
-        </b-field>
-        <b-field label="Date">
-          <b-datepicker
-            v-model="date"
-            placeholder="Type or select a date..."
-            icon="calendar-today"
-            editable
-          />
-        </b-field>
-        <b-field label="Store">
-          <b-input v-model="store" />
-        </b-field>
-        <b-field label="Item">
-          <b-input v-model="item" />
-        </b-field>
-        <b-field label="Description">
-          <b-input v-model="desciption" />
-        </b-field>
-        <b-field label="Manufacturer">
-          <b-input v-model="manufacturer" />
-        </b-field>
-        <b-field label="Quantity">
-          <b-input v-model="qty" />
-        </b-field><b-field label="Unit Cost">
-          <b-input v-model="unitcost" />
+        <div class="columns">
+          <div class="column is-one-half">
+            <div class="content">
+              <b-field label="#">
+                <b-input v-model="num" />
+              </b-field>
+              <b-field label="Date">
+                <b-datepicker
+                  v-model="date"
+                  icon="calendar-today"
+                  editable
+                />
+              </b-field>
+              <b-field label="Store">
+                <b-input v-model="store" />
+              </b-field>
+              <b-field label="Item">
+                <b-input v-model="item" />
+              </b-field>
+              <b-field label="Description">
+                <b-input v-model="desciption" />
+              </b-field>
+            </div>
+          </div>
+          <div class="column is-one-half">
+            <div class="content">
+              <b-field label="Manufacturer">
+                <b-input v-model="manufacturer" />
+              </b-field>
+              <b-field label="Quantity">
+                <b-input v-model="qty" />
+              </b-field>
+              <b-field label="Unit Cost">
+                <b-input v-model="unitcost" />
+              </b-field>
+              <b-field label="Project">
+                <b-input v-model="project" />
+              </b-field>
+              <b-field
+                v-if="needsRSInfo"
+                label="Roadname"
+              >
+                <b-input v-model="roadname" />
+              </b-field>
+            </div>
+          </div>
+        </div>
+        <b-field
+          v-if="needsRSInfo"
+          label="Roadnumbers"
+        >
+          <b-input v-model="roadnumbers" />
         </b-field>
         <b-field label="Notes">
           <b-input
@@ -70,7 +95,14 @@ export default {
       unitcost: '',
       qty: '',
       project: '',
+      roadname: '',
+      roadnumbers: '',
       notes: ''
+    }
+  },
+  computed: {
+    needsRSInfo: function () {
+      return (this.project === 'RTR')
     }
   },
   methods: {
@@ -85,6 +117,8 @@ export default {
         unitcost: this.unitcost,
         qty: this.qty,
         project: this.project,
+        roadname: this.roadname,
+        roadnumbers: this.roadnumbers,
         notes: this.notes
       })
       this.$router.push({
@@ -96,7 +130,7 @@ export default {
 </script>
 <style scoped>
 section {
-  width: 400px;
+  width: 700px;
   margin: auto;
 }
 .center {

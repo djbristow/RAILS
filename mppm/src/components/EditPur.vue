@@ -7,32 +7,58 @@
     </div>
     <div class="form">
       <div class="content">
-        <b-field label="#">
-          <b-input v-model="num" />
-        </b-field>
-        <b-field label="Date">
-          <b-datepicker
-            v-model="date"
-            icon="calendar-today"
-            editable
-          />
-        </b-field>
-        <b-field label="Store">
-          <b-input v-model="store" />
-        </b-field>
-        <b-field label="Item">
-          <b-input v-model="item" />
-        </b-field>
-        <b-field label="Description">
-          <b-input v-model="desciption" />
-        </b-field>
-        <b-field label="Manufacturer">
-          <b-input v-model="manufacturer" />
-        </b-field>
-        <b-field label="Quantity">
-          <b-input v-model="qty" />
-        </b-field><b-field label="Unit Cost">
-          <b-input v-model="unitcost" />
+        <div class="columns">
+          <div class="column is-one-half">
+            <div class="content">
+              <b-field label="#">
+                <b-input v-model="num" />
+              </b-field>
+              <b-field label="Date">
+                <b-datepicker
+                  v-model="date"
+                  icon="calendar-today"
+                  editable
+                />
+              </b-field>
+              <b-field label="Store">
+                <b-input v-model="store" />
+              </b-field>
+              <b-field label="Item">
+                <b-input v-model="item" />
+              </b-field>
+              <b-field label="Description">
+                <b-input v-model="desciption" />
+              </b-field>
+            </div>
+          </div>
+          <div class="column is-one-half">
+            <div class="content">
+              <b-field label="Manufacturer">
+                <b-input v-model="manufacturer" />
+              </b-field>
+              <b-field label="Quantity">
+                <b-input v-model="qty" />
+              </b-field>
+              <b-field label="Unit Cost">
+                <b-input v-model="unitcost" />
+              </b-field>
+              <b-field label="Project">
+                <b-input v-model="project" />
+              </b-field>
+              <b-field
+                v-if="needsRSInfo"
+                label="Roadname"
+              >
+                <b-input v-model="roadname" />
+              </b-field>
+            </div>
+          </div>
+        </div>
+        <b-field
+          v-if="needsRSInfo"
+          label="Roadnumbers"
+        >
+          <b-input v-model="roadnumbers" />
         </b-field>
         <b-field label="Notes">
           <b-input
@@ -50,7 +76,6 @@
     </div>
   </section>
 </template>
-
 <script>
 import PpService from '../services/PpService'
 export default {
@@ -65,8 +90,15 @@ export default {
       manufacturer: '',
       unitcost: '',
       qty: '',
+      roadname: '',
+      roadnumbers: '',
       project: '',
       notes: ''
+    }
+  },
+  computed: {
+    needsRSInfo: function () {
+      return (this.project === 'RTR')
     }
   },
   mounted () {
@@ -85,6 +117,8 @@ export default {
       this.manufacturer = response.data.manufacturer
       this.unitcost = response.data.unitcost
       this.qty = response.data.qty
+      this.roadname = response.data.roadname
+      this.roadnumbers = response.data.roadnumbers
       this.project = response.data.project
       this.notes = response.data.notes
     },
@@ -99,6 +133,8 @@ export default {
         manufacturer: this.manufacturer,
         unitcost: this.unitcost,
         qty: this.qty,
+        roadname: this.roadname,
+        roadnumbers: this.roadnumbers,
         project: this.project,
         notes: this.notes
       })
@@ -111,7 +147,7 @@ export default {
 </script>
 <style scoped>
 section {
-  width: 400px;
+  width: 700px;
   margin: auto;
 }
 .center {

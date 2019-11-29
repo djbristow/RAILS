@@ -11,6 +11,7 @@ import Purlist from 'components/Purlist'
 import EditPur from 'components/EditPur'
 import NewPur from 'components/NewPur'
 import Admix from 'components/Admix'
+import Report from 'components/Report'
 
 Vue.use(Router)
 
@@ -72,6 +73,11 @@ export default new Router({
       path: '/Admix',
       name: 'Admix',
       component: Admix
+    },
+    {
+      path: '/Report',
+      name: 'Report',
+      component: Report
     }
   ]
 })

@@ -2,11 +2,11 @@
 &copy; David Bristow, 2019
 
 ## Version
-* 1.2.0
+* 1.3.0
 
 Model Project and Purchase Manager is a MEVN application that provides a user with a web application to display, create and update information of the projects and purchased items. Additionally MPPM creates PDF reports of projects and purchases.
 
-This web application uses port 8080 natively but mapped to 3008 in docker container.
+This web application uses port 8080 natively but mapped to 3008 in a docker container.
 
 ## License
 
@@ -40,3 +40,4 @@ npm run prod
 
 # clean up format
 npm run lint:fix
+```
