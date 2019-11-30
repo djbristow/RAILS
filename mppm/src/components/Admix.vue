@@ -352,7 +352,7 @@ export default {
                 unitcost: purDoc[7],
                 qty: purDoc[8],
                 project: purDoc[9],
-                roadname: projDoc[10],
+                roadname: purDoc[10],
                 roadnumbers: this.documents[1],
                 notes: this.documents[5]
               })
@@ -368,7 +368,7 @@ export default {
                 unitcost: purDoc[7],
                 qty: purDoc[8],
                 project: purDoc[9],
-                roadname: projDoc[10],
+                roadname: purDoc[10],
                 roadnumbers: this.documents[1],
                 notes: this.documents[5]
               })
