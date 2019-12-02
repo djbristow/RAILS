@@ -1,6 +1,6 @@
 {
   "name": "rids",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "moment": "^2.24.0",
-    "mongoose": "^5.7.7",
+    "mongoose": "^5.7.13",
     "nodemon": "^1.17.4"
   }
 }

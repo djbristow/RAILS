@@ -98,6 +98,17 @@ app.delete('/mco/:id', (req, res) => {
 })
 
 // The following CRUD functions handle data in the projects collection
+app.get('/projectlisttype', (req, res) => {
+  Project.distinct('type', function (error, projects) {
+    if (error) {
+      console.error(error);
+    }
+    projects.sort();
+    res.send({
+      projects: projects
+    })
+  })
+})
 app.get('/projlist', (req, res) => {
   Project.find({}, function (error, projects) {
     if (error) {
@@ -107,7 +118,7 @@ app.get('/projlist', (req, res) => {
       projects: projects
     })
   }).sort({
-    _id: -1
+    startdate: 1
   })
 })
 app.get('/proj/:id', (req, res) => {
