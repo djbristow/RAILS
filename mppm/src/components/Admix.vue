@@ -340,7 +340,6 @@ export default {
           for (i = 1; i < collection.length - 1; i++) {
             this.documents = collection[i].split('"')
             purDoc = this.documents[0].split(',')
-            console.log(purDoc[10] + ' ' + this.documents[1])
             if (purDoc[1] === 'a') {
               await PpService.addPur({
                 num: purDoc[2],

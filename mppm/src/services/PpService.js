@@ -16,6 +16,9 @@ export default {
   deleteMco (id) {
     return Api().delete('mco/' + id)
   },
+  fetchUniqueProjectTypes () {
+    return Api().get('projectlisttype')
+  },
   fetchProjlist () {
     return Api().get('projlist')
   },
