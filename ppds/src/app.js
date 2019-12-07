@@ -183,6 +183,39 @@ app.delete('/proj/:id', (req, res) => {
 })
 
 // The following CRUD functions handle data in the purchases collection
+app.get('/purlistmanufacturer', (req, res) => {
+  Purchase.distinct('manufacturer', function (error, purchases) {
+    if (error) {
+      console.error(error);
+    }
+    purchases.sort();
+    res.send({
+      purchases: purchases
+    })
+  })
+})
+app.get('/purliststore', (req, res) => {
+  Purchase.distinct('store', function (error, purchases) {
+    if (error) {
+      console.error(error);
+    }
+    purchases.sort();
+    res.send({
+      purchases: purchases
+    })
+  })
+})
+app.get('/purlistproject', (req, res) => {
+  Purchase.distinct('project', function (error, purchases) {
+    if (error) {
+      console.error(error);
+    }
+    purchases.sort();
+    res.send({
+      purchases: purchases
+    })
+  })
+})
 app.get('/purlist', (req, res) => {
   Purchase.find({}, function (error, purchases) {
     if (error) {
@@ -204,7 +237,7 @@ app.get('/pur/:id', (req, res) => {
   })
 })
 app.post('/add_pur', (req, res) => {
-  var new_purcahse = new Purchase({
+  var new_purchase = new Purchase({
     num: req.body.num,
     date: req.body.date,
     store: req.body.store,
@@ -263,6 +296,17 @@ app.delete('/pur/:id', (req, res) => {
     res.send({
       success: true
     })
+  })
+})
+app.get('/fetch_purchases/:id', (req, res) => {
+  let proj = req.params.id
+  Purchase.find({
+    project: proj
+  }, function (error, post) {
+    if (error) {
+      console.error(error);
+    }
+    res.send(post)
   })
 })
 app.get('/rs_road/:id', (req, res) => {
