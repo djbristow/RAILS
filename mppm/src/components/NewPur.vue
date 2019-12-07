@@ -107,6 +107,9 @@ export default {
   },
   methods: {
     async addPur () {
+      /* if (this.project === '') {
+        this.project = 'u'
+      } */
       await PpService.addPur({
         num: this.num,
         date: this.date,
@@ -116,7 +119,7 @@ export default {
         manufacturer: this.manufacturer,
         unitcost: this.unitcost,
         qty: this.qty,
-        project: this.project,
+        project: (this.project === '') ? 'u' : this.project,
         roadname: this.roadname,
         roadnumbers: this.roadnumbers,
         notes: this.notes

@@ -40,6 +40,18 @@ export default {
   fetchPurlist () {
     return Api().get('purlist')
   },
+  fetchPurListProj (params) {
+    return Api().get('fetch_purchases/' + params)
+  },
+  fetchUniquePurchaseProjects () {
+    return Api().get('purlistproject')
+  },
+  fetchUniquePurchaseManufacturer () {
+    return Api().get('purlistmanufacturer')
+  },
+  fetchUniquePurchaseStore () {
+    return Api().get('purliststore')
+  },
   getPur (params) {
     return Api().get('pur/' + params.id)
   },

@@ -119,10 +119,13 @@ export default {
       this.qty = response.data.qty
       this.roadname = response.data.roadname
       this.roadnumbers = response.data.roadnumbers
-      this.project = response.data.project
+      this.project = (response.data.project === 'u') ? '' : response.data.project
       this.notes = response.data.notes
     },
     async updatePur () {
+      if (this.project === '') {
+        this.project = 'u'
+      }
       await PpService.updatePur({
         id: this.$route.params.id,
         num: this.num,
@@ -135,7 +138,7 @@ export default {
         qty: this.qty,
         roadname: this.roadname,
         roadnumbers: this.roadnumbers,
-        project: this.project,
+        project: (this.project === '') ? 'u' : this.project,
         notes: this.notes
       })
       this.$router.push({
