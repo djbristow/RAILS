@@ -4,7 +4,6 @@ mrim/node_modules/
 mrim/dist/
 mrim/.vscode/
 isub/node_modules/
-mrfm/node_modules/
 rsrm/node_modules/
 rsrm/.vscode/
 rsrm/dist/
@@ -15,3 +14,4 @@ mppm/node_modules/
 mppm/dist/
 mppm/.vscode/
 isrs/node_modules/
+mrfm/node_modules/

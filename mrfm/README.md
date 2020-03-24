@@ -4,7 +4,7 @@
 Model Railroad File Manager is a Express application that stores files on the server. This application uses port 3003.
 
 ## Version
-* 1.0.1
+* 1.0.2
 
 ## License
 
