@@ -100,6 +100,7 @@
 import RsService from '../services/RsService'
 import io from 'socket.io-client'
 var socket = io.connect('http://localhost:3005')
+
 export default {
   name: 'Manager',
   data () {
