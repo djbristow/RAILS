@@ -18,6 +18,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "moment": "^2.24.0",
+    "minimist": ">=1.2.2",
+    "mkdirp": ">=1.0.3",
     "mongoose": "^5.7.7",
     "nodemon": "^1.17.4"
   }
