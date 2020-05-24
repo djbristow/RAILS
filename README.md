@@ -1,8 +1,8 @@
 # RAILS
-&copy; David Bristow, 2019
+&copy; David Bristow, 2020
 
 # Version
-* 1.3.1 - 8/8/2019
+* 1.4.0 - 5/24/2020
 
 RAILS is a software model and implemenation of an automated system to assist the model railroader achieve realism in the operation of a model railroad. The model then drives the development of software.
 For further information see http://kjcrr.org/rails
@@ -27,18 +27,29 @@ For further information see http://kjcrr.org/rails
 ![System Design](https://github.com/djbristow/RAILS/blob/master/sysdesign.png)
 
 The initial components of the design are:
-* RFID Sensor - a micro-controller programmed to read an RFID reader and publish the value is a Message Queuing Telemetry Transport (MQTT) client - there are two directories on for a simulator (rfidsim) and the other for microcontrollers (microcontroller), which contains two sketches one for a the TI Tiva C and another for an ESP8266.
-* IR Sensor - (in planning) a micro-controller programmed to read an IR sensors and publish their values is a MQTT client
-* MQTT Broker - the MQTT broker, the heart of any publish/subscribe protocol, is responsible for receiving messages, filtering them, posting to designated topics and sending messages to clients subscribing to topics (no source code as this component is a docker image available at https://hub.docker.com/_/eclipse-mosquitto/ )
-* MongoDB - the MongoDB the data storage compenent is a non-sql database (no source code as this is a docker image avaibale at https://hub.docker.com/_/mongo/ )
-* RSRM - the Rolling Stock RFID Manager allows a user to match a RFID value to a rolling stock Road Name and number
-* RIDS - Railroad Inventory Data Services a MongoDB database with collections used by RSRM and MRIM
-* MRIM - Model Railroad Inventory Manager
-* MRFM - Model Railroad File Manager
-* ISRS - IoT Subscriber to RFID Services subscribes to the topic sensors/rfid and sends the Iot message to RSRM
-* ISLS - (in planning) IoT Subscriber to Location Services subscribes to topics that provide location information ie IR Sensors and RFID sensors
-* PPDS - Project and Purchase Data Services a MongoDB database with collections used by MPPM
-* MPPM - Model Project and Purchase Manager allows a user to enter in formation about their projects and purchases
 
-The Kicad-projects directory contains circuit PCB designs for some hardware components.
+* Micro Controllers using the Message Queuing Telemetry Transport (MQTT) protocol:
+RFID Controller – processes RFID tags obtained from a RFID reader and then publishes the value
+Turnout Controller – subscribes to turnout commands then to act on the command to cause the turnout to move. It then publishes the state of the turnout
+IR Controller – (in planning) processes IR sensors and publishes their values
+* MQTT Broker – the MQTT broker, the heart of any publish/subscribe protocol, is responsible for receiving messages, filtering them, posting to designated topics and sending messages to clients subscribing to topics. The subscribers and publishers bridge the MQTT elements with the GUI applications:
+ * ISRS – (formerly ISUB) IoT Subscriber RFID Services subscribes to RFID tags and pushes them via a web-socket to the RSRM component
+ * ISLS – (in planning) IoT Subscriber Location Services subscribes to topics that provide location information i.e. IR Sensors and RFID sensors
+ * ISTS – (in development) IoT Subscriber Turnout Services subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component
+ * IPTS – (in development) IoT Publisher Turnout Services publishes turnout commands to a Turnout Controller
+* GUI applications that provide users access to RAILS
+ * RSRM – the Rolling Stock RFID Manager allows a user to match a RFID value to a rolling stock road name and number
+ * MRIM – the Model Railroad Inventory Manager allows a user to create, update and delete model railroad assets, such as rolling stock
+ * MPPM – the Model Project and Purchase Manager allows a user to enter information about their projects and purchases
+ * MRLM – (in development) the Model Railroad Layout Manager allows a user to enter information about their layout and control elements of it
+* Data Micro Services – components that handle data objects
+ * MR Data – the document repository, mongoDB, to store complete lists of items such as rolling stock, industries (producers and consumers), track elements,turnouts, projects, purchases, etc.
+ * RIDS – Railroad Inventory Data Services provides REST access to railroad inventory documents
+ * PPDS – Project and Purchase Data Services provides REST access to model railroad projects and purchases documents
+ * RLDS – Railroad Layout Data Services provides REST access to model railroad layout documents
+* MRFM – the Model Railroad File Manager allows the user to upload image files for the use by the MRIM component
+* Images – the file store for the images uploaded by MRFM component and used by the MRIM component
+
+
+
 
