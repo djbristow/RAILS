@@ -50,7 +50,8 @@ The components of this design are:
 - Images – the file store for the images uploaded by MRFM component and used by the MRIM component
 
 
-|Name|Title|Port|Version|Date|
+|Name |Title                                  |Port |Version|Date     |
+|-----|---------------------------------------|-----|-------|---------|
 |RIDS|Railroad Inventory Data Services|3000|1.2.2|1/14/2020|
 |MRIM|Model Railroad Inventory Manager|3001|1.3.1|3/24/2020|
 |RSRM|Rollingstock RFID Manager|3002|1.1.0|10/25/2019|
