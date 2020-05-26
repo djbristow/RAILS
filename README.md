@@ -53,11 +53,11 @@ The components of this design are:
 |Name |Title                                  |Port |Version|Date     |
 |-----|---------------------------------------|-----|-------|---------|
 |RIDS|Railroad Inventory Data Services|3000|1.2.2|1/14/2020|
-|MRIM|Model Railroad Inventory Manager|3001|1.3.1|3/24/2020|
-|RSRM|Rollingstock RFID Manager|3002|1.1.0|10/25/2019|
+|MRIM|Model Railroad Inventory Manager|3001|1.3.2|5/26/2020|
+|RSRM|Rollingstock RFID Manager|3002|1.1.1|5/25/2020|
 |MRFM|Model Railroad File Manager|3003|1.0.2|3/24/2020|
 |MRLM|Model Railroad Layout Manager|3004|1.0.0|TBA|
-|ISRS|IoT Subscriber RFID Services|3005|1.0.3|3/24/2020|
+|ISRS|IoT Subscriber RFID Services|3005|1.0.4|5/25/2020|
 |RLDS|Railroad Layout Data Sevices|3006|1.0.0|TBA|
 |PPDS|Plans and Purchases Data Services|3007|1.3.1|3/24/2020|
 |MPPM|Model Projects and Purchase Manager|3008|1.4.1|3/24/2020|
