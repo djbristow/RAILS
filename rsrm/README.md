@@ -1,8 +1,8 @@
 # rsrm
-&copy; David Bristow, 2019
+&copy; David Bristow, 2020
 
 ## Version
-* 1.1.0
+* 1.1.1 - 5/25/2020
 
 Rolling Stock RFID Manager is a MEVN application that provides a user with a web application to show, when an RFID tag is read, the road name and number of the rolling stock associated with that tag. If there is no association with a peice of rolling stock input fields are privided to allow the user to eneter the road name and number. This web application uses port 3002.
 
