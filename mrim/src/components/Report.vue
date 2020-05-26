@@ -468,7 +468,7 @@ export default {
       doc.autoTable(columns, rsrows, {
         styles: { cellPadding: 3, fontSize: 9 },
         columnStyles: {
-          0: { cellWidth: 60 }
+          0: { cellWidth: 70 }
         },
         theme: 'striped',
         didDrawPage: function (data) {
