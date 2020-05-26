@@ -1,6 +1,6 @@
 {
   "name": "app.js",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "A app to get RFIDs from a Node-RED app and pair to a RS number",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,6 @@
     "express": "^4.17.1",
     "mqtt": "^3.0.0",
     "socket.io": "^2.2.0",
-    "minimist": ">=1.2.2"
+    "minimist": ">=1.2.5"
   }
 }
