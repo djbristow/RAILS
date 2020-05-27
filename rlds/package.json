@@ -1,0 +1,26 @@
+{
+  "name": "rlds",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "DJ Bristow",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/djbristow/RAILS"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "minimist": ">=1.2.2",
+    "mkdirp": ">=1.0.3",
+    "mongoose": "^5.9.16",
+    "nodemon": "^1.17.4"
+  }
+}

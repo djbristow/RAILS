@@ -1,6 +1,9 @@
 rids/node_modules/
 rids/rids.code-workspace
 rids/.vscode/
+rlds/node_modules/
+rlds/rids.code-workspace
+rlds/.vscode/
 ppds/node_modules/
 ppds/.vscode/
 isrs/node_modules/
