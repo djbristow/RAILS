@@ -1,17 +1,21 @@
 {
   "name": "app.js",
-  "version": "1.0.4",
-  "description": "A app to get RFIDs from a Node-RED app and pair to a RS number",
+  "version": "1.0.5",
+  "description": "A app subscribes to topic 'sensors/rfid' from the broker and pass it on",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "David Bristow",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/djbristow/RAILS"
+  },
   "dependencies": {
     "express": "^4.17.1",
-    "mqtt": "^3.0.0",
-    "socket.io": "^2.2.0",
+    "mqtt": "^4.1.0",
+    "socket.io": "^2.3.0",
     "minimist": ">=1.2.5"
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "app.js",
-  "version": "1.0.0",
-  "description": "A app to get micro info from th ebroker and pass it on",
+  "version": "1.0.1",
+  "description": "A app subscribes to topic 'micro' from the broker and pass it on",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
