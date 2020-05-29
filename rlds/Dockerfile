@@ -4,5 +4,5 @@ WORKDIR /usr/djb
 COPY package.json /usr/djb 
 RUN npm install
 COPY . /usr/djb
-EXPOSE 3000
+EXPOSE 3006
 CMD node ./src/app.js
