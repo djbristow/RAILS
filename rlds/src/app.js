@@ -117,7 +117,7 @@ app.get('/microlist', (req, res) => {
   })
 })
 app.get('/micro/:id', (req, res) => {
-  Image.findById(req.params.id, function (error, post) {
+  Micro.findById(req.params.id, function (error, post) {
     if (error) {
       console.error(error);
     }
@@ -125,7 +125,7 @@ app.get('/micro/:id', (req, res) => {
   })
 })
 app.get('/micro_id/:id', (req, res) => {
-  Image.findOne({
+  Micro.findOne({
     microID: req.params.id
   }, '_id', function (error, post) {
     if (error) {
@@ -135,7 +135,7 @@ app.get('/micro_id/:id', (req, res) => {
   })
 })
 app.put('/micro/:id', (req, res) => {
-  Image.findById(req.params.id, function (error, micro) {
+  Micro.findById(req.params.id, function (error, micro) {
     if (error) {
       console.error(error);
     }
@@ -174,7 +174,7 @@ app.post('/add_micro', (req, res) => {
   })
 })
 app.delete('/micro/:id', (req, res) => {
-  Image.deleteOne({
+  Micro.deleteOne({
     _id: req.params.id
   }, function (err, post) {
     if (err)
