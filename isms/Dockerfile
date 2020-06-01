@@ -4,5 +4,4 @@ WORKDIR /usr/djb
 COPY package.json /usr/djb 
 RUN npm install
 COPY . /usr/djb
-EXPOSE 3009
 CMD node ./app.js

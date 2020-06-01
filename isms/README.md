@@ -1,10 +1,10 @@
 # isms
 &copy; David Bristow, 2020
 
-IoT Subscriber is a Express application that subscribes to micro messages from the MQTT Broker and sends them to a MEVN web application using web sockets. This application uses port 3009.
+IoT Subscriber is an application that subscribes to micro messages from the MQTT Broker and adds or updates the micros collection.
 
 ## Version
-* 1.0.0 - 5/29/2020
+* 1.1.0 - 5/31/2020
 
 ## License
 
@@ -25,6 +25,7 @@ IoT Subscriber is a Express application that subscribes to micro messages from t
 
 ## Component dependencies
 * MQTT Broker running on port 1883
+* RLDS running on port 3006
 
 ## Run Setup
 
