@@ -63,7 +63,7 @@ The components of this design are:
 |PPDS|Plans and Purchases Data Services|3007|1.3.1|3/24/2020|
 |MPPM|Model Projects and Purchase Manager|3008|1.4.1|3/24/2020|
 |ISMS|IoT Subscriber Micro Controller Services||1.1.0|5/31/2020|
-|ISTS|IoT Subscriber Turnout Services|3010|1.0.0|TBA|
+|ISTS|IoT Subscriber Turnout Services|3010|1.0.0|6/4/2020|
 |IPTS|IoT Publisher Turnout Services|3011|1.0.0|TBA|
 
 
