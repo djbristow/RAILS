@@ -32,16 +32,16 @@ The components of this design are:
   - Turnout Controller – subscribes to turnout commands then to act on the command to cause the turnout to move. It then publishes the state of the turnout
   - IR Controller – (in planning) processes IR sensors and publishes their values
 - MQTT Broker – the MQTT broker, the heart of any publish/subscribe protocol, is responsible for receiving messages, filtering them, posting to designated topics and sending messages to clients subscribing to topics. The subscribers and publishers bridge the MQTT elements with the GUI applications:
-  - ISRS – (formerly ISUB) IoT Subscriber RFID Services subscribes to RFID tags and pushes them via a web-socket to the RSRM component
+  - ISRS – IoT Subscriber RFID Services subscribes to RFID tags and pushes them via a web-socket to the RSRM component
   - ISLS – (in planning) IoT Subscriber Location Services subscribes to topics that provide location information i.e. IR Sensors and RFID sensors
-  - ISTS – (in development) IoT Subscriber Turnout Services subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component
+  - ISTS – IoT Subscriber Turnout Services subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component
   - IPTS – (in development) IoT Publisher Turnout Services publishes turnout commands to a Turnout Controller
   - ISMS - IoT Subscriber Micro Services subscribes to micros and adds or updates micros collection in RAILS
 - GUI applications that provide users access to RAILS
   - RSRM – the Rolling Stock RFID Manager allows a user to match a RFID value to a rolling stock road name and number
   - MRIM – the Model Railroad Inventory Manager allows a user to create, update and delete model railroad assets, such as rolling stock
   - MPPM – the Model Project and Purchase Manager allows a user to enter information about their projects and purchases
-  - MRLM – (in development) the Model Railroad Layout Manager allows a user to enter information about their layout and control elements of it
+  - MRLM – the Model Railroad Layout Manager allows a user to enter information about their layout and control elements of it
 - Data Micro Services – components that handle data objects
   - MR Data – the document repository, mongoDB, to store complete lists of items such as rolling stock, industries (producers and consumers), track elements,turnouts, projects, purchases, etc.
   - RIDS – Railroad Inventory Data Services provides REST access to railroad inventory documents
@@ -54,8 +54,8 @@ The components of this design are:
 |Name |Title                                  |Port |Version|Date     |
 |-----|---------------------------------------|-----|-------|---------|
 |RIDS|Railroad Inventory Data Services|3000|1.2.2|1/14/2020|
-|MRIM|Model Railroad Inventory Manager|3001|1.3.2|5/26/2020|
-|RSRM|Rollingstock RFID Manager|3002|1.1.1|5/25/2020|
+|MRIM|Model Railroad Inventory Manager|3001|1.3.3|6/6/2020|
+|RSRM|Rollingstock RFID Manager|3002|1.1.2|6/6/2020|
 |MRFM|Model Railroad File Manager|3003|1.0.2|3/24/2020|
 |MRLM|Model Railroad Layout Manager|3004|1.0.0|TBA|
 |ISRS|IoT Subscriber RFID Services|3005|1.0.4|5/25/2020|

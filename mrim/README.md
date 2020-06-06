@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020
 
 ## Version
-* 1.3.2 - 5/26/2020
+* 1.3.3 - 6/6/2020
 
 Model Railroad Inventory Manager is a MEVN application that provides a user with a web application to display, create and update information of the inventoried items. This web application uses port 3001.
 
