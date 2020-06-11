@@ -54,14 +54,14 @@ The components of this design are:
 |Name |Title                                  |Port |Version|Date     |
 |-----|---------------------------------------|-----|-------|---------|
 |RIDS|Railroad Inventory Data Services|3000|1.2.2|1/14/2020|
-|MRIM|Model Railroad Inventory Manager|3001|1.3.3|6/6/2020|
+|MRIM|Model Railroad Inventory Manager|3001|1.3.4|6/10/2020|
 |RSRM|Rollingstock RFID Manager|3002|1.1.2|6/6/2020|
 |MRFM|Model Railroad File Manager|3003|1.0.2|3/24/2020|
 |MRLM|Model Railroad Layout Manager|3004|1.0.0|TBA|
 |ISRS|IoT Subscriber RFID Services|3005|1.0.4|5/25/2020|
 |RLDS|Railroad Layout Data Sevices|3006|1.0.2|5/31/2020|
 |PPDS|Plans and Purchases Data Services|3007|1.3.1|3/24/2020|
-|MPPM|Model Projects and Purchase Manager|3008|1.4.1|3/24/2020|
+|MPPM|Model Projects and Purchase Manager|3008|1.4.2|6/10/2020|
 |ISMS|IoT Subscriber Micro Controller Services||1.1.0|5/31/2020|
 |ISTS|IoT Subscriber Turnout Services|3010|1.0.0|6/4/2020|
 |IPTS|IoT Publisher Turnout Services|3011|1.0.0|TBA|

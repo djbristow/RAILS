@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img src="../assets/kjc.png">
-    <h4>v1.1.0</h4>
+    <h4>v1.3.4</h4>
     <p>Number of Rolling Stock {{ rollingstocksize }}</p>
     <p>Number of Images {{ imagesize }}</p>
     <p>Number of Companies {{ companysize }}</p>

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img src="../assets/kjc.png">
-    <h4>v1.4.0</h4>
+    <h4>v1.4.2</h4>
     <p>Number of Model Railroad Companies {{ companysize }}</p>
     <p>Number of Projects {{ projectsize }}</p>
     <p>Number of Purchases {{ purchasesize }}</p>
