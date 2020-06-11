@@ -16,7 +16,11 @@ mrfm/node_modules/
 mrfm/.vscode/
 mrim/node_modules/
 mrim/dist/
-mrim/.vscode/
+mrlm/.vscode/
+mrlm/node_modules/
+mrlm/dist/
+mrlm/.vscode/
+mrlm/.*
 rsrm/node_modules/
 rsrm/.vscode/
 rsrm/dist/
