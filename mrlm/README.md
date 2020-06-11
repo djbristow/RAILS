@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020
 
 ## Version
-* 1.0.0 - 6/30/2020
+* 1.0.1 - 6/11/2020
 
 Model Railway Layout Manager is a MEVN application that provides a user with a web application to show, when an RFID tag is read,  This web application uses port 3004.
 
@@ -25,6 +25,7 @@ Model Railway Layout Manager is a MEVN application that provides a user with a w
 ## Component dependencies
 * ISTS IoT Subscriber running on port 3010
 * RLDS Railroad Layout Data Services running on port 3006
+* IPTS IoT Publisher running on port 3011
 
 ## Build Setup
 

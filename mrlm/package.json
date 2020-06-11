@@ -1,6 +1,6 @@
 {
   "name": "mrlm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Model Railway Layout Manager a microservice component of RAILS ",
   "author": "David Bristow",
   "license": "Apache-2.0",

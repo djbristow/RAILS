@@ -57,30 +57,45 @@
             </b-table-column>
             <b-table-column
               field="_id"
-              label="Action"
-              width="100"
-              sortable
+              label="Points"
+              width="50"
             >
-              <a
-                href="#"
-                @click="throwTo(props.row._id)"
-              >
+              <div v-if="props.row.lock !== ''">
                 <img
-                  src="../assets/thrown.svg"
-                  alt="An example icon"
+                  src="../assets/lock.svg"
                   style="width:32px;height:32px"
                 >
-              </a>
-              <a
-                href="#"
-                @click="closeTo(props.row._id)"
-              >
-                <img
-                  src="../assets/closed.svg"
-                  alt="An example icon"
-                  style="width:32px;height:32px;color:red"
-                >
-              </a>
+              </div>
+              <div v-else>
+                <div v-if="props.row.state === 'CLOSED'">
+                  <a
+                    href="#"
+                    @click="throwTo(props.row._id)"
+                  >
+                    <img
+                      src="../assets/thrown.svg"
+                      style="width:32px;height:32px"
+                    >
+                  </a>
+                </div>
+                <div v-else>
+                  <a
+                    href="#"
+                    @click="closeTo(props.row._id)"
+                  >
+                    <img
+                      src="../assets/closed.svg"
+                      style="width:32px;height:32px"
+                    >
+                  </a>
+                </div>
+              </div>
+            </b-table-column>
+            <b-table-column
+              field="_id"
+              label="Action"
+              width="75"
+            >
               <router-link :to="{ name: 'EditTo', params: { id: props.row._id } }">
                 <b-icon icon="pencil" />
               </router-link>
@@ -158,19 +173,20 @@ export default {
     async throwTo (id) {
       const turnout = this.turnouts.find(turnout => turnout._id === id)
       if (turnout.state.toLowerCase() !== 'thrown') {
-        const msg = { topic: turnout.controller, to: turnout.toNum, cmd: 'throw' }
+        const msg = { src: 'mrlm', topic: turnout.controller, to: turnout.toNum, cmd: 'throw' }
         this.pubMsg(msg)
       }
     },
     async closeTo (id) {
       const turnout = this.turnouts.find(turnout => turnout._id === id)
       if (turnout.state.toLowerCase() !== 'closed') {
-        const msg = { topic: turnout.controller, to: turnout.toNum, cmd: 'close' }
+        const msg = { src: 'mrlm', topic: turnout.controller, to: turnout.toNum, cmd: 'close' }
         this.pubMsg(msg)
       }
     },
     async pubMsg (msg) {
       await RsService.postMsg(msg)
+      this.getTolist()
     },
     formatDate (epochTime) {
       if (epochTime === null || epochTime === '') {
