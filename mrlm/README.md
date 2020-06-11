@@ -4,7 +4,7 @@
 ## Version
 * 1.0.1 - 6/11/2020
 
-Model Railway Layout Manager is a MEVN application that provides a user with a web application to show, when an RFID tag is read,  This web application uses port 3004.
+Model Railway Layout Manager is a MEVN application that provides a user with a web application to show layout information.  This web application uses port 3004.
 
 ## License
 
