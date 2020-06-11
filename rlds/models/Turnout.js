@@ -5,21 +5,30 @@ var TurnoutSchema = new Schema({
   toID: {
     type: String,
     required: true,
-    minlength: 2,
     trim: true
+  },
+  toNum: {
+    type: String,
+    required: true
   },
   controller: {
     type: String,
     required: true
   },
-  direction: {
+  state: {
     type: String,
     required: true
   },
   type: {
     type: String
   },
+  lock: {
+    type: String
+  },
   notes: {
+    type: String
+  },
+  lastUpdate: {
     type: String
   }
   });

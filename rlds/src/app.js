@@ -24,7 +24,8 @@ app.get('/tolist', (req, res) => {
       turnouts: turnouts
     })
   }).sort({
-    aarCode: 1
+    'controller': 1,
+    'toNum': 1
   })
 })
 
@@ -32,16 +33,20 @@ app.post('/add_to', (req, res) => {
   var toID = req.body.toID;
   var toNum = req.body.toNum;
   var controller = req.body.controller
-  var direction = req.body.direction;
+  var state = req.body.state;
   var type = req.body.type;
-  var notes = req.body.notes
+  var lock = req.body.lock;
+  var notes = req.body.notes;
+  var lastUpdate = req.body.lastUpdate;
   var new_Turnout = new Turnout({
     toID: toID,
     toNum: toNum,
     controller: controller,
-    direction: direction,
+    state: state,
     type: type,
-    notes: notes
+    lock: lock,
+    notes: notes,
+    lastUpdate: lastUpdate
   })
   new_Turnout.save(function (error) {
     if (error) {
@@ -70,17 +75,32 @@ app.get('/to/:id', (req, res) => {
     res.send(post)
   })
 })
-app.put('/to/:id', (req, res) => {
+app.get('/to_ident/:id', (req, res) => {
+  let to = req.params.id.split("-");
+  Turnout.findOne({
+    controller: to[0],
+    toNum: to[1]
+  }, function (error, post) {
+    if (error) {
+      console.error(error);
+    }
+      res.send(post)
+  })
+})
+app.put('/update_to/:id', (req, res) => {
+console.log(req.params.id);
   Turnout.findById(req.params.id, function (error, turnout) {
     if (error) {
       console.error(error);
     }
-    turnout.toID = req.body.toID,
-    turnout.toNum = req.body.toNum,
-    turnout.controller = req.body.controller,
-    turnout.direction = req.body.direction,
-    turnout.type = req.body.type,
-    turnout.notes = req.body.notes
+    turnout.toID = req.body.toID;
+    turnout.toNum = req.body.toNum;
+    turnout.controller = req.body.controller;
+    turnout.state = req.body.state;
+    turnout.type = req.body.type;
+    turnout.lock = req.body.lock;
+    turnout.notes = req.body.notes;
+    turnout.lastUpdate = req.body.lastUpdate;
     turnout.save(function (error) {
       if (error) {
         console.log(error)
@@ -103,7 +123,7 @@ app.delete('/to/:id', (req, res) => {
   })
 })
 
-// The following CRUD functions handle data in the images collection
+// The following CRUD functions handle data in the micros collection
 app.get('/microlist', (req, res) => {
   Micro.find({}, function (error, micros) {
     if (error) {
@@ -134,7 +154,7 @@ app.get('/micro_id/:id', (req, res) => {
     res.send(post)
   })
 })
-app.put('/micro/:id', (req, res) => {
+app.put('/update_micro/:id', (req, res) => {
   Micro.findById(req.params.id, function (error, micro) {
     if (error) {
       console.error(error);
