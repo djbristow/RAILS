@@ -3,7 +3,7 @@
     <div class="mgr">
       <div class="center">
         <p class="title is-5">
-          Model Railroad Layout Manager
+          Turnouts
         </p>
       </div>
       <div class="form">
@@ -137,6 +137,10 @@ export default {
   methods: {
     async getTo (message) {
       const res = await RsService.getToByIdentity(message.cntrlr + '-' + message.to)
+      let lock = res.data.lock
+      if (lock === 'MRLM') {
+        lock = ''
+      }
       await RsService.updateTo({
         id: res.data._id,
         toID: res.data.toID,
@@ -144,7 +148,7 @@ export default {
         controller: res.data.controller,
         state: message.dir,
         type: res.data.type,
-        lock: res.data.lock,
+        lock: lock,
         notes: res.data.notes,
         lastUpdate: message.et
       })
@@ -171,20 +175,16 @@ export default {
       this.getTolist()
     },
     async throwTo (id) {
-      const turnout = this.turnouts.find(turnout => turnout._id === id)
-      if (turnout.state.toLowerCase() !== 'thrown') {
-        const msg = { src: 'mrlm', topic: turnout.controller, to: turnout.toNum, cmd: 'throw' }
-        this.pubMsg(msg)
-      }
+      const cmd = 'THROW'
+      this.pubMsg(id, cmd)
     },
     async closeTo (id) {
-      const turnout = this.turnouts.find(turnout => turnout._id === id)
-      if (turnout.state.toLowerCase() !== 'closed') {
-        const msg = { src: 'mrlm', topic: turnout.controller, to: turnout.toNum, cmd: 'close' }
-        this.pubMsg(msg)
-      }
+      const cmd = 'CLOSE'
+      this.pubMsg(id, cmd)
     },
-    async pubMsg (msg) {
+    async pubMsg (id, cmd) {
+      const turnout = this.turnouts.find(turnout => turnout._id === id)
+      const msg = { id: id, src: 'MRLM', topic: turnout.controller, to: turnout.toNum, cmd: cmd }
       await RsService.postMsg(msg)
       this.getTolist()
     },
