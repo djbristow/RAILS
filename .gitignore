@@ -6,6 +6,7 @@ rlds/rids.code-workspace
 rlds/.vscode/
 ppds/node_modules/
 ppds/.vscode/
+ipts/node_modules/
 isrs/node_modules/
 isms/node_modules/
 ists/node_modules/
