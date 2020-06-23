@@ -45,10 +45,10 @@ async function handlePost(params) {
       notes: turnout.notes,
       lastUpdate: et
     });
-    msg = '{"to":"' + params.to + '","cmd":"' + params.cmd + '"}';
+    msg = '{"cntrlr":"' +  turnout.controller + '","to":"' + params.to + '","cmd":"' + params.cmd + '"}';
+    // console.log(msg);
     topic = 'acts/to/' + params.topic;
     client.publish(topic.toString(), msg);
-    client.end();
   }
 }
 
@@ -57,7 +57,7 @@ client.on('connect', () => {
 })
 
 app.post('/to', (req, res) => {
-  console.log(req.body.id);
+  // console.log(req.body.id);
   handlePost(req.body);
 })
 

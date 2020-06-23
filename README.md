@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020
 
 # Version
-* 1.5.0 - 6/11/2020
+* 1.5.1 - 6/22/2020
 
 RAILS is a software model and implemenation of an automated system to assist the model railroader achieve realism in the operation of a model railroad. The model then drives the development of software.
 For further information see http://kjcrr.org/rails
@@ -35,7 +35,7 @@ The components of this design are:
   - ISRS – IoT Subscriber RFID Services subscribes to RFID tags and pushes them via a web-socket to the RSRM component
   - ISLS – (in planning) IoT Subscriber Location Services subscribes to topics that provide location information i.e. IR Sensors and RFID sensors
   - ISTS – IoT Subscriber Turnout Services subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component
-  - IPTS – (in development) IoT Publisher Turnout Services publishes turnout commands to a Turnout Controller
+  - IPTS – IoT Publisher Turnout Services publishes turnout commands to a Turnout Controller
   - ISMS - IoT Subscriber Micro Services subscribes to micros and adds or updates micros collection in RAILS
 - GUI applications that provide users access to RAILS
   - RSRM – the Rolling Stock RFID Manager allows a user to match a RFID value to a rolling stock road name and number
@@ -64,7 +64,7 @@ The components of this design are:
 |MPPM|Model Projects and Purchase Manager|3008|1.4.2|6/10/2020|
 |ISMS|IoT Subscriber Micro Controller Services||1.1.0|5/31/2020|
 |ISTS|IoT Subscriber Turnout Services|3010|1.0.0|6/4/2020|
-|IPTS|IoT Publisher Turnout Services|3011|1.0.0|6/15/2020|
+|IPTS|IoT Publisher Turnout Services|3011|1.0.1|6/22/2020|
 
 
 
