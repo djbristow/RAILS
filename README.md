@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020
 
 # Version
-* 1.5.1 - 6/22/2020
+* 1.5.2 - 7/12/2020
 
 RAILS is a software model and implemenation of an automated system to assist the model railroader achieve realism in the operation of a model railroad. The model then drives the development of software.
 For further information see http://kjcrr.org/rails
@@ -61,7 +61,7 @@ The components of this design are:
 |ISRS|IoT Subscriber RFID Services|3005|1.0.4|5/25/2020|
 |RLDS|Railroad Layout Data Sevices|3006|1.0.2|5/31/2020|
 |PPDS|Plans and Purchases Data Services|3007|1.3.1|3/24/2020|
-|MPPM|Model Projects and Purchase Manager|3008|1.4.2|6/10/2020|
+|MPPM|Model Projects and Purchase Manager|3008|1.4.3|7/12/2020|
 |ISMS|IoT Subscriber Micro Controller Services||1.1.0|5/31/2020|
 |ISTS|IoT Subscriber Turnout Services|3010|1.0.0|6/4/2020|
 |IPTS|IoT Publisher Turnout Services|3011|1.0.1|6/22/2020|

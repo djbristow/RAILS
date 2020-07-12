@@ -162,13 +162,13 @@ export default {
           this.documents[i].description,
           this.documents[i].notes)
       }
-      var columns = [
-        { title: 'Title', dataKey: 'title' },
-        { title: 'Type', dataKey: 'type' },
-        { title: 'Start', dataKey: 'startdate' },
-        { title: 'Finish', dataKey: 'enddate' },
-        { title: 'Description', dataKey: 'description' },
-        { title: 'Notes', dataKey: 'notes' }
+      var colDefinition = [
+        { dataKey: 'title', header: 'Title' },
+        { dataKey: 'type', header: 'Type' },
+        { dataKey: 'startdate', header: 'Start' },
+        { dataKey: 'enddate', header: 'Finish' },
+        { dataKey: 'description', header: 'Description' },
+        { dataKey: 'notes', header: 'Notes' }
       ]
       if (this.projSortType === 'startdate') {
         byTitle = 'Start Date'
@@ -215,7 +215,9 @@ export default {
       doc.text(newTitle, 350, 30)
       if (this.projBreakType === 'continuous' || this.projSortType === 'name' || this.projSortType === 'startdate') {
       // @ts-ignore
-        doc.autoTable(columns, projrows, {
+        doc.autoTable({
+          columns: colDefinition,
+          body: projrows,
           styles: { cellPadding: 3, fontSize: 9 },
           columnStyles: {
             0: { cellWidth: 100 },
@@ -252,7 +254,9 @@ export default {
               k++
             }
           }
-          doc.autoTable(columns, somerows, {
+          doc.autoTable({
+            columns: colDefinition,
+            body: projrows,
             styles: { cellPadding: 3, fontSize: 9 },
             columnStyles: {
               0: { cellWidth: 100 },
@@ -313,6 +317,7 @@ export default {
       var purrows = []
       if (this.purSortType !== 'proj') {
         this.response = await PpService.fetchPurlist()
+        console.log('made it past getting purchase list')
         this.documents = this.response.data.purchases
         for (i = 0; i < this.documents.length; i++) {
           extendcost = this.documents[i].unitcost * this.documents[i].qty
@@ -409,23 +414,25 @@ export default {
           startRow[uniques.length - 1] = purrows.length
           break
       }
-      var columns = [
-        { title: '#', dataKey: 'num' },
-        { title: 'Date', dataKey: 'date' },
-        { title: 'Store', dataKey: 'store' },
-        { title: 'Item', dataKey: 'item' },
-        { title: 'Description', dataKey: 'desciption' },
-        { title: 'Manufacturer', dataKey: 'manufacturer' },
-        { title: 'Cost', dataKey: 'unitcost' },
-        { title: 'Qty', dataKey: 'qty' },
-        { title: 'Total', dataKey: 'extendcost' },
-        { title: 'Notes', dataKey: 'notes' }
+      var colDefinition = [
+        { dataKey: 'num', header: '#' },
+        { dataKey: 'date', header: 'Date' },
+        { dataKey: 'store', header: 'Store' },
+        { dataKey: 'item', header: 'Item' },
+        { dataKey: 'desciption', header: 'Description' },
+        { dataKey: 'manufacturer', header: 'Manufacturer' },
+        { dataKey: 'unitcost', header: 'Cost' },
+        { dataKey: 'qty', header: 'Qty' },
+        { dataKey: 'extendcost', header: 'Total' },
+        { dataKey: 'notes', header: 'Notes' }
       ]
       var doc = new JsPDF('l', 'pt')
       var newTitle = title + byTitle
       doc.text(newTitle, 350, 30)
-      if (this.projBreakType === 'continuous') {
-        doc.autoTable(columns, purrows, {
+      if (this.purBreakType === 'continuous') {
+        doc.autoTable({
+          columns: colDefinition,
+          body: purrows,
           styles: { cellPadding: 3, fontSize: 9 },
           theme: 'striped',
           didDrawPage: function (data) {
@@ -440,7 +447,8 @@ export default {
         })
         var finalY = doc.previousAutoTable.finalY
         doc.setFontSize(10)
-        var summary = 'The number purchases made was ' + this.documents.length + ' for a total cost of ' + formatter.format(totalcost)
+        var summary = 'The number purchases made was ' + purrows.length + ' for a total cost of ' + formatter.format(totalcost)
+        console.log(summary)
         doc.text(summary, 100, finalY + 20)
       } else {
         k = 0
@@ -455,9 +463,15 @@ export default {
             doc.text(uniques[i], 50, 40)
           } else if (i !== 0) {
             finalY = doc.previousAutoTable.finalY
-            doc.text(uniques[i], 50, finalY + 20)
+            if (uniques[i] === 'u') {
+              doc.text('Project Unassigned', 50, finalY + 20)
+            } else {
+              doc.text(uniques[i], 50, finalY + 20)
+            }
           }
-          doc.autoTable(columns, somerows, {
+          doc.autoTable({
+            columns: colDefinition,
+            body: somerows,
             styles: { cellPadding: 3, fontSize: 9 },
             theme: 'striped',
             didDrawPage: function (data) {
@@ -470,6 +484,7 @@ export default {
             },
             margin: { top: 50 }
           })
+          console.log('----------------------')
           if (this.purBreakType === 'pagebreaks' && i < uniques.length - 1) {
             doc.addPage()
           }
