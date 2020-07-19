@@ -158,14 +158,16 @@ export default {
           this.documents[i].description)
       }
       var columns = [
-        { title: 'AAR', dataKey: 'aarCode' },
-        { title: 'RS Type', dataKey: 'rollingstockType' },
-        { title: 'Description', dataKey: 'description' }
+        { header: 'AAR', dataKey: 'aarCode' },
+        { header: 'RS Type', dataKey: 'rollingstockType' },
+        { header: 'Description', dataKey: 'description' }
       ]
       var doc = new JsPDF('l', 'pt')
       doc.text('AAR Codes Report', 350, 30)
       // @ts-ignore
-      doc.autoTable(columns, aarrows, {
+      doc.autoTable({
+        columns: columns,
+        body: aarrows,
         styles: { cellPadding: 3, fontSize: 9 },
         columnStyles: {
           0: { cellWidth: 60 },
@@ -195,15 +197,17 @@ export default {
           this.documents[i].industryLocation)
       }
       var columns = [
-        { title: 'Title', dataKey: 'shortName' },
-        { title: 'Name', dataKey: 'longName' },
-        { title: 'Type', dataKey: 'industryType' },
-        { title: 'Location', dataKey: 'industryLocation' }
+        { header: 'Title', dataKey: 'shortName' },
+        { header: 'Name', dataKey: 'longName' },
+        { header: 'Type', dataKey: 'industryType' },
+        { header: 'Location', dataKey: 'industryLocation' }
       ]
       var doc = new JsPDF('l', 'pt')
       doc.text('Companies Report', 350, 30)
       // @ts-ignore
-      doc.autoTable(columns, corows, {
+      doc.autoTable({
+        columns: columns,
+        body: corows,
         styles: { cellPadding: 3, fontSize: 10 },
         columnStyles: {
           0: { cellWidth: 60 }
@@ -311,18 +315,18 @@ export default {
           this.documents[i].rsStatus)
       }
       var columns = [
-        { title: 'Road', dataKey: 'roadName' },
-        { title: 'Number', dataKey: 'roadNumber' },
-        { title: 'AAR', dataKey: 'aarCode' },
-        { title: 'Description', dataKey: 'description' },
-        { title: 'Color', dataKey: 'color' },
-        { title: 'Builder', dataKey: 'bldr' },
-        { title: 'Built', dataKey: 'bltDate' },
-        { title: 'Capacity', dataKey: 'capacity' },
-        { title: 'Empty', dataKey: 'ltWeight' },
-        { title: 'Max', dataKey: 'loadLimit' },
-        { title: 'Maintenance', dataKey: 'lastMaintDate' },
-        { title: 'Status', dataKey: 'rsStatus' }
+        { header: 'Road', dataKey: 'roadName' },
+        { header: 'Number', dataKey: 'roadNumber' },
+        { header: 'AAR', dataKey: 'aarCode' },
+        { header: 'Description', dataKey: 'description' },
+        { header: 'Color', dataKey: 'color' },
+        { header: 'Builder', dataKey: 'bldr' },
+        { header: 'Built', dataKey: 'bltDate' },
+        { header: 'Capacity', dataKey: 'capacity' },
+        { header: 'Empty', dataKey: 'ltWeight' },
+        { header: 'Max', dataKey: 'loadLimit' },
+        { header: 'Maintenance', dataKey: 'lastMaintDate' },
+        { header: 'Status', dataKey: 'rsStatus' }
       ]
       if (this.sortType === 'aar') {
         byTitle = 'AAR Code'
@@ -356,7 +360,9 @@ export default {
       doc.text(newTitle, 350, 30)
       if (this.breakType === 'continuous') {
         // @ts-ignore
-        doc.autoTable(columns, rsrows, {
+        doc.autoTable({
+          columns: columns,
+          body: rsrows,
           styles: { cellPadding: 3, fontSize: 9 },
           columnStyles: {
             0: { cellWidth: 40 }
@@ -455,17 +461,19 @@ export default {
           this.documents[i].rfid)
       }
       var columns = [
-        { title: 'RFID', dataKey: 'rfid' },
-        { title: 'Road', dataKey: 'roadName' },
-        { title: 'Number', dataKey: 'roadNumber' },
-        { title: 'Color', dataKey: 'color' },
-        { title: 'AAR', dataKey: 'aarCode' },
-        { title: 'Description', dataKey: 'description' }
+        { header: 'RFID', dataKey: 'rfid' },
+        { header: 'Road', dataKey: 'roadName' },
+        { header: 'Number', dataKey: 'roadNumber' },
+        { header: 'Color', dataKey: 'color' },
+        { header: 'AAR', dataKey: 'aarCode' },
+        { header: 'Description', dataKey: 'description' }
       ]
       var doc = new JsPDF('p', 'pt')
       doc.text('RFID Report', 220, 30)
       // @ts-ignore
-      doc.autoTable(columns, rsrows, {
+      doc.autoTable({
+        columns: columns,
+        body: rsrows,
         styles: { cellPadding: 3, fontSize: 9 },
         columnStyles: {
           0: { cellWidth: 70 }
