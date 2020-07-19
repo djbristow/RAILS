@@ -11,15 +11,13 @@
     "lint:fix": "eslint --ext .js,.vue src --fix"
   },
   "dependencies": {
-    "ajv": "^6.10.0",
-    "acorn": "6.4.1",
-    "axios": "^0.18.1",
-    "buefy": "^0.7.7",
-    "say": "^0.16.0",
-    "socket.io-client": "^2.2.0",
-    "style-loader": "^0.23.1",
-    "vue": "~2.6.10",
-    "vue-router": "~3.0.2"
+    "ajv": "^6.12.3",
+    "axios": "^0.19.2",
+    "buefy": "^0.8.20",
+    "socket.io-client": "^2.3.0",
+    "style-loader": "^1.2.1",
+    "vue": "~2.6.11",
+    "vue-router": "^3.3.4"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
