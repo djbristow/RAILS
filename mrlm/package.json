@@ -1,6 +1,6 @@
 {
   "name": "mrlm",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Model Railway Layout Manager a microservice component of RAILS ",
   "author": "David Bristow",
   "license": "Apache-2.0",
@@ -16,15 +16,15 @@
   },
   "dependencies": {
     "acorn": "7.2.0",
-    "ajv": "^6.12.2",
+    "ajv": "^6.12.3",
     "axios": "^0.19.2",
     "buefy": "^0.8.20",
-    "moment": "^2.26.0",
+    "moment": "^2.27.0",
     "socket.io-client": "^2.3.0",
     "style-loader": "^1.2.1",
     "vue": "2.6.11",
-    "vue-router": "~3.3.2",
-    "vue-select": "^3.10.3"
+    "vue-router": "~3.3.4",
+    "vue-select": "^3.10.7"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",

@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020
 
 ## Version
-* 1.0.2 - 6/11/2020
+* 1.0.3 - 7/19/2020
 
 Model Railway Layout Manager is a MEVN application that provides a user with a web application to show layout information.  This web application uses port 3004.
 

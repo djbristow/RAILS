@@ -146,7 +146,7 @@ export default {
         toID: res.data.toID,
         toNum: res.data.toNum,
         controller: res.data.controller,
-        state: message.dir,
+        state: message.state,
         type: res.data.type,
         lock: lock,
         notes: res.data.notes,
