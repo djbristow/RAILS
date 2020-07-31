@@ -1,10 +1,10 @@
 # mrfm
-&copy; David Bristow, 2019
+&copy; David Bristow, 2019-2020
 
 Model Railroad File Manager is a Express application that stores files on the server. This application uses port 3003.
 
 ## Version
-* 1.0.2
+* 1.0.3 - 7/31/2020
 
 ## License
 
