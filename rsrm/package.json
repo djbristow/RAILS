@@ -45,7 +45,7 @@
     "mini-css-extract-plugin": "~0.5",
     "node-sass": "^4.13.1",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "serialize-javascript": "2.1.2",
+    "serialize-javascript": "3.1.0",
     "sass-loader": "~7.1",
     "uglifyjs-webpack-plugin": "2.2.0",
     "url-loader": "^2.0.0",
