@@ -430,7 +430,7 @@ app.put('/rs/:id', (req, res) => {
 app.get('/rs_rfid/:id', (req, res) => {
   Rollingstock.findOne({
     rfid: req.params.id
-  }, 'roadName roadNumber', function (error, post) {
+  }, 'roadName roadNumber color aarCode', function (error, post) {
     if (error) {
       console.error(error);
     }

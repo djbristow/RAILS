@@ -1,6 +1,6 @@
 {
   "name": "rsrm",
-  "version": "1.1.4",
+  "version": "2.0",
   "description": "Rolling Stock RFID Manager a microservice component of RAILS ",
   "author": "dbristow <dave@bristow-family.org>",
   "private": true,

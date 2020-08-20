@@ -2,7 +2,8 @@ const newLocal = require('mongoose');
 var mongoose = newLocal;
 
 const options = {
-	useNewUrlParser: true
+	useNewUrlParser: true,
+    useUnifiedTopology: true
   }
 
 module.exports.connect = function () {
