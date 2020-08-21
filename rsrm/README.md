@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020
 
 ## Version
-* 2.0 - 8/19/2020
+* 2.0.1 - 8/21/2020
 
 Rolling Stock RFID Manager is a MEVN application that provides a user with a web application to show, when an RFID tag is read, the road name and number of the rolling stock associated with that tag. If there is no association with a peice of rolling stock input fields are privided to allow the user to eneter the road name and number. This web application uses port 3002.
 
@@ -26,15 +26,22 @@ Rolling Stock RFID Manager is a MEVN application that provides a user with a web
 * ISRS IoT Subscriber running on port 3005
 * RIDS Railroad Inventory Data Services running on port 3000
 
-## Build Setup
-
-``` bash
-# install dependencies
+## Project setup
+```
 npm install
+```
 
-# serve with hot reload at localhost:8080
-npm run dev
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-# build for production with minification
-npm run prod
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
 ```
