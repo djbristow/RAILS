@@ -1,5 +1,5 @@
 // This express app prodes an API for Vue applications to get and put data
-// to the MOngoDB
+// to the MongoDB
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
@@ -15,6 +15,225 @@ var AarCode = require("../models/AarCode");
 var Image = require("../models/Image");
 var Industry = require("../models/Industry");
 var Rollingstock = require("../models/Rollingstock");
+var Structure = require("../models/Structure");
+
+// The following CRUD functions handle data in the structures collection
+app.get('/structlist', (req, res) => {
+  Structure.find({}, function (error, structures) {
+    if (error) {
+      console.error(error);
+    }
+    res.send({
+      structures: structures
+    }).sort({
+      title: 1
+    })
+  })
+})
+app.post('/add_struct', (req, res) => {
+  var title = req.body.title
+  var structureUse = req.body.structureUse
+  var description = req.body.description
+  var owner = req.body.owner
+  var location = req.body.location
+  var construction = req.body.construction
+  var builtDate = req.body.builtDate
+  var size = req.body.size
+  var image = req.body.image
+  var new_Structure = new Structure({
+    title: title,
+    structureUse: structureUse,
+    description: description,
+    owner: owner,
+    location: location,
+    construction: construction,
+    builtDate: builtDate,
+    size: size,
+    image: image
+  })
+  new_Structure.save(function (error) {
+    if (error) {
+      console.log(error)
+    }
+    res.send({
+      success: true
+    })
+  })
+})
+app.get('/struct/:id', (req, res) => {
+  Structure.findById(req.params.id, function (error, post) {
+    if (error) {
+      console.error(error);
+    }
+    res.send(post)
+  })
+})
+app.put('/struct/:id', (req, res) => {
+  Structure.findById(req.params.id, function (error, structure) {
+    if (error) {
+      console.error(error);
+    }
+    structure.title = req.body.title;
+    structure.structureUse = req.body.structureUse;
+    structure.description = req.body.description;
+    structure.description = req.body.description;
+    structure.owner = req.body.owner;
+    structure.location = req.body.location;
+    structure.construction = req.body.construction;
+    structure.builtDate = req.body.builtDate;
+    structure.size = req.body.size;
+    structure.image = req.body.image;
+    structure.save(function (error) {
+      if (error) {
+        console.log(error)
+      }
+      res.send({
+        success: true
+      })
+    })
+  })
+})
+app.delete('/struct/:id', (req, res) => {
+  Structure.deleteOne({
+    _id: req.params.id
+  }, function (err, post) {
+    if (err)
+      res.send(err)
+    res.send({
+      success: true
+    })
+  })
+})
+
+// The following CRUD functions handle data in the istructures collection
+app.get('/istructlist', (req, res) => {
+  Istructure.find({}, function (error, istructures) {
+    if (error) {
+      console.error(error);
+    }
+    res.send({
+      istructures: istructures
+    }).sort({
+      title: 1
+    })
+  })
+})
+app.post('/add_istruct', (req, res) => {
+  var title = req.body.title
+  var structureUse = req.body.structureUse
+  var description = req.body.description
+  var owner = req.body.owner
+  var location = req.body.location
+  var construction = req.body.construction
+  var builtDate = req.body.builtDate
+  var size = req.body.size
+  var image = req.body.image
+  var type = req.body.type
+  var rawMaterials = req.body.rawMaterials
+  var rMCapacity = req.body.rMCapacity
+  var conRate = req.body.conRate
+  var priority = req.body.priority
+  var aarCodeIn = req.body.aarCodeIn
+  var product = req.body.product
+  var productCap = req.body.productCap
+  var prodRate = req.body.prodRate
+  var aarCodeOut = req.body.aarCodeOut
+  var unloadDuration = req.body.unloadDuration
+  var loadDuration = req.body.loadDuration
+  var sidingCap = req.body.sidingCap
+  var notes = req.body.notes
+  var new_Istructure = new Istructure({
+    title: title,
+    structureUse: structureUse,
+    description: description,
+    owner: owner,
+    location: location,
+    construction: construction,
+    builtDate: builtDate,
+    size: size,
+    image: image,
+    type: type,
+    rawMaterials: rawMaterials,
+    rMCapacity: rMCapacity,
+    conRate: conRate,
+    priority: priority,
+    aarCodeIn: aarCodeIn,
+    product: product,
+    productCap: productCap,
+    prodRate: prodRate,
+    aarCodeOut: aarCodeOut,
+    unloadDuration: unloadDuration,
+    loadDuration: loadDuration,
+    sidingCap: sidingCap,
+    notes: notes
+  })
+  new_Istructure.save(function (error) {
+    if (error) {
+      console.log(error)
+    }
+    res.send({
+      success: true
+    })
+  })
+})
+app.get('/istruct/:id', (req, res) => {
+  Istructure.findById(req.params.id, function (error, post) {
+    if (error) {
+      console.error(error);
+    }
+    res.send(post)
+  })
+})
+app.put('/istruct/:id', (req, res) => {
+  Istructure.findById(req.params.id, function (error, istructure) {
+    if (error) {
+      console.error(error);
+    }
+    istructure.title = req.body.title;
+    istructure.structureUse = req.body.structureUse;
+    istructure.description = req.body.description;
+    istructure.description = req.body.description;
+    istructure.owner = req.body.owner;
+    istructure.location = req.body.location;
+    istructure.construction = req.body.construction;
+    istructure.builtDate = req.body.builtDate;
+    istructure.size = req.body.size;
+    istructure.image = req.body.image;
+    istructure.type = req.body.type
+    istructure.rawMaterials = req.body.rawMaterials
+    istructure.rMCapacity = req.body.rMCapacity
+    istructure.conRate = req.body.conRate
+    istructure.priority = req.body.priority
+    istructure.aarCodeIn = req.body.aarCodeIn
+    istructure.product = req.body.product
+    istructure.productCap = req.body.productCap
+    istructure.prodRate = req.body.prodRate
+    istructure.aarCodeOut = req.body.aarCodeOut
+    istructure.unloadDuration = req.body.unloadDuration
+    istructure.loadDuration = req.body.loadDuration
+    istructure.sidingCap = req.body.sidingCap
+    istructure.notes = req.body.notes
+    istructure.save(function (error) {
+      if (error) {
+        console.log(error)
+      }
+      res.send({
+        success: true
+      })
+    })
+  })
+})
+app.delete('/istruct/:id', (req, res) => {
+  Istructure.deleteOne({
+    _id: req.params.id
+  }, function (err, post) {
+    if (err)
+      res.send(err)
+    res.send({
+      success: true
+    })
+  })
+})
 
 // The following CRUD functions handle data in the aarCodes collection
 app.get('/aarlist', (req, res) => {
