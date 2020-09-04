@@ -4,7 +4,7 @@
 IoT Subscriber is an application that subscribes to micro messages from the MQTT Broker and adds or updates the micros collection.
 
 ## Version
-* 1.1.0 - 5/31/2020
+* 1.1.1 - 9/3/2020
 
 ## License
 
