@@ -1,6 +1,6 @@
 {
   "name": "ppds",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "express": "^4.17.1",
     "moment": "^2.27.0",
     "minimist": "^1.2.5",
-    "mongoose": "^5.9.26",
+    "mongoose": "^5.10.2",
     "nodemon": "^2.0.4"
   }
 }
