@@ -1,6 +1,6 @@
 {
   "name": "rlds",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "moment": "^2.27.0",
     "minimist": "^1.2.5",
     "mkdirp": "^1.0.4",
-    "mongoose": "^5.9.26",
+    "mongoose": "^5.10.2",
     "nodemon": "^2.0.4"
   }
 }

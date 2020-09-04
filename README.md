@@ -59,7 +59,7 @@ The components of this design are:
 |MRFM|Model Railroad File Manager|3003|1.0.3|7/31/2020|
 |MRLM|Model Railroad Layout Manager|3004|1.0.3|7/19/2020|
 |ISRS|IoT Subscriber RFID Services|3005|1.0.4|5/25/2020|
-|RLDS|Railroad Layout Data Sevices|3006|1.0.5|7/31/2020|
+|RLDS|Railroad Layout Data Sevices|3006|1.0.6|9/3/2020|
 |PPDS|Plans and Purchases Data Services|3007|1.3.2|7/31/2020|
 |MPPM|Model Projects and Purchase Manager|3008|1.4.3|7/12/2020|
 |ISMS|IoT Subscriber Micro Controller Services||1.1.0|5/31/2020|
