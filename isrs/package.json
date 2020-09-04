@@ -1,6 +1,6 @@
 {
-  "name": "app.js",
-  "version": "1.0.5",
+  "name": "isrs",
+  "version": "1.0.6",
   "description": "A app subscribes to topic 'sensors/rfid' from the broker and pass it on",
   "main": "index.js",
   "scripts": {
