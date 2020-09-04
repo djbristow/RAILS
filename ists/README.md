@@ -4,7 +4,7 @@
 IoT Subscriber is a Express application that subscribes to Turnout contact switch messages from the MQTT Broker and sends them to a MEVN web application using web sockets. This application uses port 3010.
 
 ## Version
-* 1.0.0 - 6/4/2020
+* 1.0.1 - 9/3/2020
 
 ## License
 
