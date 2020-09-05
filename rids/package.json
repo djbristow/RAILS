@@ -1,6 +1,6 @@
 {
   "name": "rids",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Provides web services to access Rails document collection in MongoDB",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "moment": "^2.27.0",
     "minimist": "^1.2.5",
     "mkdirp": "^1.0.4",
-    "mongoose": "^5.10.2",
+    "mongoose": "^5.10.3",
     "nodemon": "^2.0.4"
   }
 }

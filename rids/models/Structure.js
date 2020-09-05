@@ -31,6 +31,52 @@ var StructureSchema = new Schema({
     },
     image: {
         type: String
+    },
+    isIndustrial: {
+        type: Boolean,
+        default: false
+    },
+    type: {
+        type: String
+    },
+    rawMaterials: {
+        type: String
+    },
+    rMCapacity: {
+        type: String
+    },
+    conRate: {
+        type: String
+    },
+    priority: {
+        type: String
+    },
+    aarCodeIn: {
+        type: String
+    },
+    product: {
+        type: String
+    },
+    productCap: {
+        type: String
+    },
+    prodRate: {
+        type: String
+    },
+    aarCodeOut: {
+        type: String
+    },
+    unloadDuration: {
+        type: String
+    },
+    loadDuration: {
+        type: String
+    },
+    sidingCap: {
+        type: String
+    },
+    notes: {
+        type: String
     }
 });
 
