@@ -12,7 +12,7 @@
           <b-input v-model="title" />
         </b-field>
         <b-field label="Filename">
-          <b-input v-model="title" />
+          <b-input v-model="fileName" />
         </b-field>
         <b-field label="Notes">
           <b-input

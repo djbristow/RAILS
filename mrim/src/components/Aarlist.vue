@@ -1,9 +1,7 @@
 <template>
   <section>
     <div class="center">
-      <p class="title is-5">
-        AAR Codes
-      </p>
+      <p class="title is-5">AAR Codes</p>
     </div>
     <b-table
       :data="aarCodes"
@@ -15,100 +13,75 @@
       :narrowed="isNarrowed"
       default-sort="roadName"
     >
-      <template slot-scope="props">
-        <b-table-column
-          field="aarCode"
-          label="Code"
-          width="50"
-          sortable
-        >
-          {{ props.row.aarCode }}
-        </b-table-column>
-        <b-table-column
-          field="rollingstockType"
-          label="RS Type"
-          width="125"
-          sortable
-        >
-          {{ props.row.rollingstockType }}
-        </b-table-column>
-        <b-table-column
-          field="description"
-          label="Description"
-          width="750"
-        >
-          {{ props.row.description }}
-        </b-table-column>
-        <b-table-column
-          field="_id"
-          label="Action"
-          width="75"
-          sortable
-        >
-          <router-link :to="{ name: 'EditAar', params: { id: props.row._id } }">
-            <b-icon icon="pencil" />
-          </router-link>
-          <a
-            href="#"
-            @click="deleteAar(props.row._id)"
-          ><b-icon icon="delete-forever" /></a>
-        </b-table-column>
-      </template>
+      <b-table-column
+        field="aarCode"
+        label="Code"
+        width="50"
+        sortable
+        v-slot="props"
+      >{{ props.row.aarCode }}</b-table-column>
+      <b-table-column
+        field="rollingstockType"
+        label="RS Type"
+        width="125"
+        sortable
+        v-slot="props"
+      >{{ props.row.rollingstockType }}</b-table-column>
+      <b-table-column
+        field="description"
+        label="Description"
+        width="750"
+        v-slot="props"
+      >{{ props.row.description }}</b-table-column>
+      <b-table-column field="_id" label="Action" width="75" sortable v-slot="props">
+        <router-link :to="{ name: 'EditAar', params: { id: props.row._id } }">
+          <b-icon icon="pencil" />
+        </router-link>
+        <a href="#" @click="deleteAar(props.row._id)">
+          <b-icon icon="delete-forever" />
+        </a>
+      </b-table-column>
     </b-table>
-    <b-field
-      grouped
-      group-multiline
-    >
-      <b-select
-        v-model="perPage"
-        :disabled="!isPaginated"
-      >
-        <option value="10">
-          10 per page
-        </option>
-        <option value="20">
-          20 per page
-        </option>
-        <option value="30">
-          30 per page
-        </option>
-        <option value="40">
-          40 per page
-        </option>
+    <b-field grouped group-multiline>
+      <b-select v-model="perPage" :disabled="!isPaginated">
+        <option value="10">10 per page</option>
+        <option value="20">20 per page</option>
+        <option value="30">30 per page</option>
+        <option value="40">40 per page</option>
       </b-select>
     </b-field>
   </section>
 </template>
 <script>
-import RsService from '../services/RsService'
+import RsService from "../services/RsService";
 export default {
-  name: 'Aarlist',
-  data () {
+  name: "Aarlist",
+  data() {
     return {
       aarCodes: [],
       isPaginated: true,
       isPaginationSimple: false,
       isNarrowed: true,
       isStriped: true,
-      defaultSortDirection: 'asc',
+      defaultSortDirection: "asc",
       currentPage: 1,
-      perPage: 10
-    }
+      perPage: 10,
+    };
   },
-  mounted () {
-    this.getAarlist()
+  mounted() {
+    this.getAarlist();
   },
   methods: {
-    async getAarlist () {
-      const response = await RsService.fetchAarlist()
-      this.aarCodes = response.data.aarCodes
+    async getAarlist() {
+      const response = await RsService.fetchAarlist();
+      this.aarCodes = response.data.aarCodes;
     },
-    async deleteAar (id) {
-      await RsService.deleteAar(id)
-      this.getAarlist()
-    }
-  }
-}
+    async deleteAar(id) {
+      await RsService.deleteAar(id);
+      this.getAarlist();
+    },
+  },
+};
 </script>
    <style scoped>
 section {

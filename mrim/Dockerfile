@@ -1,17 +1,10 @@
-FROM ubuntu:19.10 AS builder
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y git
+FROM node:lts-alpine AS builder
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
-COPY package.json /usr/djb
-RUN apt-get -y install curl gnupg
-RUN curl -sL https://deb.nodesource.com/setup_12.x  | bash -
-RUN apt-get -y install nodejs
-RUN npm install
+COPY package.json /usr/djb 
 RUN npm install
 COPY . /usr/djb
-RUN npm run prod
+RUN npm run build
 
 FROM node:lts-alpine
 RUN npm install -g http-server

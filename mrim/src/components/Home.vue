@@ -1,42 +1,46 @@
 <template>
   <div class="home">
-    <img src="../assets/kjc.png">
-    <h4>v1.3.4</h4>
+    <img src="../assets/kjc.png" />
+    <h4>2.0.0</h4>
     <p>Number of Rolling Stock {{ rollingstocksize }}</p>
     <p>Number of Images {{ imagesize }}</p>
     <p>Number of Companies {{ companysize }}</p>
     <p>Number of AAR codes {{ aarsize }}</p>
+    <p>Number of Structures {{ structuresize }}</p>
   </div>
 </template>
 
 <script>
-import RsService from '../services/RsService'
+import RsService from "../services/RsService";
 export default {
-  name: 'Home',
-  data () {
+  name: "Home",
+  data() {
     return {
       rollingstocksize: 0,
       imagesize: 0,
       companysize: 0,
-      aarsize: 0
-    }
+      aarsize: 0,
+      structuresize: 0,
+    };
   },
-  mounted () {
-    this.getSizes()
+  mounted() {
+    this.getSizes();
   },
   methods: {
-    async getSizes () {
-      const respRs = await RsService.fetchRslist()
-      this.rollingstocksize = respRs.data.rollingstocks.length
-      const respImg = await RsService.fetchImglist()
-      this.imagesize = respImg.data.images.length
-      const respCo = await RsService.fetchColist()
-      this.companysize = respCo.data.industries.length
-      const respAar = await RsService.fetchAarlist()
-      this.aarsize = respAar.data.aarCodes.length
-    }
-  }
-}
+    async getSizes() {
+      const respRs = await RsService.fetchRslist();
+      this.rollingstocksize = respRs.data.rollingstocks.length;
+      const respImg = await RsService.fetchImglist();
+      this.imagesize = respImg.data.images.length;
+      const respCo = await RsService.fetchColist();
+      this.companysize = respCo.data.industries.length;
+      const respAar = await RsService.fetchAarlist();
+      this.aarsize = respAar.data.aarCodes.length;
+      const respStruct = await RsService.fetchStructlist();
+      this.structuresize = respStruct.data.structures.length;
+    },
+  },
+};
 </script>
 
 <style scoped>

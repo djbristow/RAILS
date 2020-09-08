@@ -1,9 +1,7 @@
 <template>
   <section>
     <div class="center">
-      <p class="title is-5">
-        Update Rolling Stock
-      </p>
+      <p class="title is-5">Update Rolling Stock</p>
     </div>
     <div class="form">
       <div class="columns">
@@ -105,92 +103,84 @@
               <b-input v-model="rfid" />
             </b-field>
             <b-field label="Notes">
-              <b-input
-                v-model="notes"
-                type="textarea"
-              />
+              <b-input v-model="notes" type="textarea" />
             </b-field>
           </div>
         </div>
       </div>
-      <button
-        class="button is-light"
-        @click="updateRs"
-      >
-        Update Rolling Stock
-      </button>
+      <button class="button is-light" @click="updateRs">Update Rolling Stock</button>
     </div>
   </section>
 </template>
 
 <script>
-import RsService from '../services/RsService'
+import RsService from "../services/RsService";
 export default {
-  name: 'EditRs',
-  data () {
+  name: "EditRs",
+  data() {
     return {
-      roadName: '',
-      roadNumber: '',
-      color: '',
-      aarCode: '',
-      description: '',
-      numberBlt: '',
+      roadName: "",
+      roadNumber: "",
+      color: "",
+      aarCode: "",
+      description: "",
+      numberBlt: "",
       inSvcDate: null,
-      insideLength: '',
-      insideHeight: '',
-      insideWidth: '',
-      loadTypes: '',
-      capacity: '',
-      bldr: '',
+      insideLength: "",
+      insideHeight: "",
+      insideWidth: "",
+      loadTypes: "",
+      capacity: "",
+      bldr: "",
       bltDate: null,
-      notes: '',
-      ltWeight: '',
-      loadLimit: '',
+      notes: "",
+      ltWeight: "",
+      loadLimit: "",
       lastMaintDate: null,
-      locationNow: '',
-      homeLocation: '',
-      rsStatus: '',
-      imageID: '',
-      modelWeight: '',
-      modelLength: '',
-      rfid: ''
-    }
+      locationNow: "",
+      homeLocation: "",
+      rsStatus: "",
+      imageID: "",
+      modelWeight: "",
+      modelLength: "",
+      rfid: "",
+    };
   },
-  mounted () {
-    this.getRs()
+  mounted() {
+    this.getRs();
   },
   methods: {
-    async getRs () {
+    async getRs() {
       const response = await RsService.getRs({
-        id: this.$route.params.id
-      })
-      this.roadName = response.data.roadName
-      this.roadNumber = response.data.roadNumber
-      this.color = response.data.color
-      this.aarCode = response.data.aarCode
-      this.description = response.data.description
-      this.numberBlt = response.data.numberBlt
-      this.inSvcDate = new Date(response.data.inSvcDate)
-      this.insideLength = response.data.insideLength
-      this.insideHeight = response.data.insideHeight
-      this.insideWidth = response.data.insideWidth
-      this.loadTypes = response.data.loadTypes
-      this.capacity = response.data.capacity
-      this.bldr = response.data.bldr
-      this.bltDate = new Date(response.data.bltDate)
-      this.notes = response.data.notes
-      this.ltWeight = response.data.ltWeight
-      this.loadLimit = response.data.loadLimit
-      this.lastMaintDate = new Date(response.data.lastMaintDate)
-      this.locationNow = response.data.locationNow
-      this.homeLocation = response.data.homeLocation
-      this.rsStatus = response.data.rsStatus
-      this.imageID = response.data.imageID
-      this.modelWeight = response.data.modelWeight
-      this.modelLength = response.data.modelLength
-      this.rfid = response.data.rfid
+        id: this.$route.params.id,
+      });
+      this.roadName = response.data.roadName;
+      this.roadNumber = response.data.roadNumber;
+      this.color = response.data.color;
+      this.aarCode = response.data.aarCode;
+      this.description = response.data.description;
+      this.numberBlt = response.data.numberBlt;
+      this.inSvcDate = new Date(response.data.inSvcDate);
+      this.insideLength = response.data.insideLength;
+      this.insideHeight = response.data.insideHeight;
+      this.insideWidth = response.data.insideWidth;
+      this.loadTypes = response.data.loadTypes;
+      this.capacity = response.data.capacity;
+      this.bldr = response.data.bldr;
+      this.bltDate = new Date(response.data.bltDate);
+      this.notes = response.data.notes;
+      this.ltWeight = response.data.ltWeight;
+      this.loadLimit = response.data.loadLimit;
+      this.lastMaintDate = new Date(response.data.lastMaintDate);
+      this.locationNow = response.data.locationNow;
+      this.homeLocation = response.data.homeLocation;
+      this.rsStatus = response.data.rsStatus;
+      this.imageID = response.data.imageID;
+      this.modelWeight = response.data.modelWeight;
+      this.modelLength = response.data.modelLength;
+      this.rfid = response.data.rfid;
     },
-    async updateRs () {
+    async updateRs() {
       await RsService.updateRs({
         id: this.$route.params.id,
         roadName: this.roadName,
@@ -217,14 +207,14 @@ export default {
         imageID: this.imageID,
         modelWeight: this.modelWeight,
         modelLength: this.modelLength,
-        rfid: this.rfid
-      })
+        rfid: this.rfid,
+      });
       this.$router.push({
-        name: 'Rslist'
-      })
-    }
-  }
-}
+        name: "Rslist",
+      });
+    },
+  },
+};
 </script>
 <style scoped>
 section {

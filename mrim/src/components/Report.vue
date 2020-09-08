@@ -125,7 +125,8 @@
 <script>
 import RsService from '../services/RsService'
 import moment from 'moment'
-import * as JsPDF from 'jspdf'
+// import * as JsPDF from 'jspdf'
+import { jsPDF } from 'jspdf'
 import 'jspdf-autotable'
 export default {
   name: 'Report',
@@ -162,7 +163,7 @@ export default {
         { header: 'RS Type', dataKey: 'rollingstockType' },
         { header: 'Description', dataKey: 'description' }
       ]
-      var doc = new JsPDF('l', 'pt')
+      var doc = new jsPDF('l', 'pt')
       doc.text('AAR Codes Report', 350, 30)
       // @ts-ignore
       doc.autoTable({
@@ -202,7 +203,7 @@ export default {
         { header: 'Type', dataKey: 'industryType' },
         { header: 'Location', dataKey: 'industryLocation' }
       ]
-      var doc = new JsPDF('l', 'pt')
+      var doc = new jsPDF('l', 'pt')
       doc.text('Companies Report', 350, 30)
       // @ts-ignore
       doc.autoTable({
@@ -222,7 +223,7 @@ export default {
       var y = 70
       this.response = await RsService.fetchImglist()
       this.documents = this.response.data.images
-      var doc = new JsPDF('p', 'pt')
+      var doc = new jsPDF('p', 'pt')
       var height = doc.internal.pageSize.height
       doc.text('Images Report', 250, 30)
       doc.setFontSize(10)
@@ -355,7 +356,7 @@ export default {
           return 0
         })
       }
-      var doc = new JsPDF('l', 'pt')
+      var doc = new jsPDF('l', 'pt')
       var newTitle = title + byTitle
       doc.text(newTitle, 350, 30)
       if (this.breakType === 'continuous') {
@@ -468,7 +469,7 @@ export default {
         { header: 'AAR', dataKey: 'aarCode' },
         { header: 'Description', dataKey: 'description' }
       ]
-      var doc = new JsPDF('p', 'pt')
+      var doc = new jsPDF('p', 'pt')
       doc.text('RFID Report', 220, 30)
       // @ts-ignore
       doc.autoTable({

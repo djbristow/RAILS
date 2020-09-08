@@ -90,5 +90,22 @@ export default {
   },
   fetchUniqueStatuses () {
     return Api().get('rslistopstatuses')
+  },
+  fetchStructlist () {
+    return Api().get('structlist')
+  },
+  addStruct (params) {
+    console.log(params)
+    return Api().post('add_struct', params)
+  },
+  getStruct (params) {
+    return Api().get('struct/' + params.id)
+  },
+  deleteStruct (id) {
+    return Api().delete('struct/' + id)
+  },
+  updateStruct (params) {
+    console.log(params)
+    return Api().put('struct/' + params.id, params)
   }
 }

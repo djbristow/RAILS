@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020
 
 ## Version
-* 1.3.5 - 7/19/2020
+* 2.0.0 - 9/5/2020
 
 Model Railroad Inventory Manager is a MEVN application that provides a user with a web application to display, create and update information of the inventoried items. This web application uses port 3001.
 
@@ -12,6 +12,7 @@ The following lists of items, commonly found in model railroads, are managed by 
 * AAR Codes
 * Images
 * Companies
+* Structures
 
 ## PDF Reports
 The following PDF reports are created by this application:
@@ -44,17 +45,25 @@ The application exports inventories in either JSON or CSV and imports files in C
 * RIDS - Railroad Inventory Data Services running on port 3000
 * MRFM - Model Railroad File Manager running on port 3003
 
-## Build Setup
-```bash
-# install dependencies
+## Project setup
+```
 npm install
+```
 
-# serve with hot reload at localhost:8080
-npm run dev
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-# build for production with minification
-npm run prod
+### Compiles and minifies for production
+```
+npm run build
+```
 
-# run eslint and repair
-npm run lint:fix
+### Lints and fixes files
+```
+npm run lint
+```
 
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
