@@ -4,122 +4,73 @@
       <b-navbar>
         <template slot="brand">
           <b-navbar-item>
-            <b-dropdown
-              hoverable
-              aria-role="list"
-            >
-              <button
-                slot="trigger"
-                class="button is-light"
-              >
+            <b-dropdown hoverable aria-role="list">
+              <button slot="trigger" class="button is-light">
                 <span>MPPM</span>
                 <b-icon icon="menu-down" />
               </button>
               <b-dropdown-item aria-role="listitem">
-                <router-link to="/">
-                  Home
-                </router-link>
+                <router-link to="/">Home</router-link>
               </b-dropdown-item>
               <b-dropdown-item aria-role="listitem">
-                <router-link to="/Admix">
-                  Admin
-                </router-link>
+                <router-link to="/Admix">Admin</router-link>
               </b-dropdown-item>
               <b-dropdown-item aria-role="listitem">
-                <router-link to="/Report">
-                  Reports
-                </router-link>
+                <router-link to="/Report">Reports</router-link>
               </b-dropdown-item>
               <b-dropdown-item aria-role="listitem">
-                <a
-                  href="https://kjcrr.org"
-                  target="_blank"
-                >
-                  KJ&C RR
-                </a>
+                <a href="https://kjcrr.org" target="_blank">KJ&C RR</a>
               </b-dropdown-item>
             </b-dropdown>
           </b-navbar-item>
         </template>
         <template slot="start">
           <b-navbar-item>
-            <b-dropdown
-              hoverable
-              aria-role="list"
-            >
-              <button
-                slot="trigger"
-                class="button is-light"
-              >
+            <b-dropdown hoverable aria-role="list">
+              <button slot="trigger" class="button is-light">
                 <span>Companies</span>
                 <b-icon icon="menu-down" />
               </button>
               <b-dropdown-item aria-role="listitem">
-                <router-link to="/Mcolist">
-                  List
-                </router-link>
+                <router-link to="/Mcolist">List</router-link>
               </b-dropdown-item>
               <b-dropdown-item aria-role="listitem">
-                <router-link to="/Mco/new">
-                  New
-                </router-link>
+                <router-link to="/Mco/new">New</router-link>
               </b-dropdown-item>
             </b-dropdown>
           </b-navbar-item>
           <b-navbar-item>
-            <b-dropdown
-              hoverable
-              aria-role="list"
-            >
-              <button
-                slot="trigger"
-                class="button is-light"
-              >
+            <b-dropdown hoverable aria-role="list">
+              <button slot="trigger" class="button is-light">
                 <span>Projects</span>
                 <b-icon icon="menu-down" />
               </button>
               <b-dropdown-item aria-role="listitem">
-                <router-link to="/Projlist">
-                  List
-                </router-link>
+                <router-link to="/Projlist">List</router-link>
               </b-dropdown-item>
               <b-dropdown-item aria-role="listitem">
-                <router-link to="/Proj/new">
-                  New
-                </router-link>
+                <router-link to="/Proj/new">New</router-link>
               </b-dropdown-item>
             </b-dropdown>
           </b-navbar-item>
           <b-navbar-item>
-            <b-dropdown
-              hoverable
-              aria-role="list"
-            >
-              <button
-                slot="trigger"
-                class="button is-light"
-              >
+            <b-dropdown hoverable aria-role="list">
+              <button slot="trigger" class="button is-light">
                 <span>Purchases</span>
                 <b-icon icon="menu-down" />
               </button>
               <b-dropdown-item aria-role="listitem">
-                <router-link to="/Purlist">
-                  List
-                </router-link>
+                <router-link to="/Purlist">List</router-link>
               </b-dropdown-item>
               <b-dropdown-item aria-role="listitem">
-                <router-link to="/Pur/new">
-                  New
-                </router-link>
+                <router-link to="/Pur/new">New</router-link>
               </b-dropdown-item>
             </b-dropdown>
           </b-navbar-item>
         </template>
       </b-navbar>
       <div class="center">
-        <h1 class="title is-3">
-          Model Projects and Purchases Manager
-        </h1>
+        <h1 class="title is-3">Model Projects and Purchases Manager</h1>
       </div>
       <router-view />
     </section>
@@ -128,26 +79,24 @@
 
 <script>
 export default {
-  name: 'App',
-  data () {
+  name: "App",
+  data() {
     return {
-      navIsActive: false
-    }
+      navIsActive: false,
+    };
   },
   methods: {
     toggleMenu: function () {
-      this.navIsActive = !this.navIsActive
-    }
-  }
-}
+      this.navIsActive = !this.navIsActive;
+    },
+  },
+};
 </script>
-
 <style scoped>
 img {
   padding-left: 25px;
   padding-right: 20px;
 }
-
 .center {
   text-align: center;
 }

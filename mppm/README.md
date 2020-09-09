@@ -1,8 +1,8 @@
 # mppm
-&copy; David Bristow, 2019
+&copy; David Bristow, 2019 - 2020
 
 ## Version
-* 1.4.3 - 7/12/2020
+* 1.5.0 - 9/9/2020
 
 Model Project and Purchase Manager is a MEVN application that provides a user with a web application to display, create and update information of the projects and purchased items. Additionally MPPM creates PDF reports of projects and purchases.
 
@@ -27,17 +27,26 @@ This web application uses port 8080 natively but mapped to 3008 in a docker cont
 ## Component dependencies
 * PPDS - Project and Purchase Data Services running on port 3007
 
-## Build Setup
-```bash
-# install dependencies
-npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run prod
-
-# clean up format
-npm run lint:fix
+## Project setup
 ```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

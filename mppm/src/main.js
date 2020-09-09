@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App'
+import App from './App.vue'
 import router from './router'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
@@ -12,5 +12,5 @@ Vue.component('v-select', vSelect)
 new Vue({
   el: '#app',
   router,
-  render: h => h(App)
+  render: h => h(App),
 }).$mount('#app')

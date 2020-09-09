@@ -15,12 +15,12 @@
       :narrowed="isNarrowed"
       default-sort="title"
     >
-      <template slot-scope="props">
         <b-table-column
           field="title"
           label="Title"
           width="200"
           sortable
+          v-slot="props"
         >
           {{ props.row.title }}
         </b-table-column>
@@ -29,6 +29,7 @@
           label="Type"
           width="150"
           sortable
+          v-slot="props"
         >
           {{ props.row.type }}
         </b-table-column>
@@ -36,6 +37,7 @@
           field="description"
           label="Description"
           width="300"
+          v-slot="props"
         >
           {{ props.row.description }}
         </b-table-column>
@@ -44,6 +46,7 @@
           label="Start"
           width="120"
           sortable
+          v-slot="props"
         >
           {{ props.row.startdate }}
         </b-table-column>
@@ -51,6 +54,7 @@
           field="enddate"
           label="End"
           width="120"
+          v-slot="props"
         >
           {{ props.row.enddate }}
         </b-table-column>
@@ -58,6 +62,7 @@
           field="notes"
           label="Notes"
           width="300"
+          v-slot="props"
         >
           {{ props.row.notes }}
         </b-table-column>
@@ -66,6 +71,7 @@
           field="_id"
           label="Action"
           width="75"
+          v-slot="props"
         >
           <router-link :to="{ name: 'EditProj', params: { id: props.row._id } }">
             <b-icon
@@ -83,7 +89,6 @@
             />
           </a>
         </b-table-column>
-      </template>
     </b-table>
     <b-field
       grouped
