@@ -2,7 +2,7 @@ FROM node:lts-alpine AS builder
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
 COPY . /usr/djb
-RUN npm run prod
+RUN npm run build
 
 FROM node:lts-alpine
 RUN npm install -g http-server
