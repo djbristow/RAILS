@@ -18,6 +18,18 @@ var Rollingstock = require("../models/Rollingstock");
 var Structure = require("../models/Structure");
 
 // The following CRUD functions handle data in the structures collection
+app.get('/structlistall', (req, res) => {
+  Structure.find({}, function (error, structures) {
+    if (error) {
+      console.error(error);
+    }
+    res.send({
+      structures: structures
+    })
+  }).sort({
+    title: 1
+  })
+})
 app.get('/structlist', (req, res) => {
   Structure.find({}, 'title structureUse owner location builtDate', function (error, structures) {
     if (error) {
