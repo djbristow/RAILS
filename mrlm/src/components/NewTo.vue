@@ -76,7 +76,7 @@ export default {
 </script>
 <style scoped>
 section {
-  width: 1200px;
+  width: 400px;
   margin: auto;
 }
 .center {

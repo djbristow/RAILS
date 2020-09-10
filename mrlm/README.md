@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020
 
 ## Version
-* 1.0.3 - 7/19/2020
+* 1.1.0 - 9/9/2020
 
 Model Railway Layout Manager is a MEVN application that provides a user with a web application to show layout information.  This web application uses port 3004.
 
@@ -27,15 +27,25 @@ Model Railway Layout Manager is a MEVN application that provides a user with a w
 * RLDS Railroad Layout Data Services running on port 3006
 * IPTS IoT Publisher running on port 3011
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run prod
+## Project setup
 ```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

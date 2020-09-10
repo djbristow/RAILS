@@ -1,9 +1,7 @@
 <template>
   <section>
     <div class="center">
-      <p class="title is-5">
-        Micro Controllers
-      </p>
+      <p class="title is-5">Micro Controllers</p>
     </div>
     <b-table
       :data="micros"
@@ -15,86 +13,69 @@
       :narrowed="isNarrowed"
       default-sort="roadName"
     >
-      <template slot-scope="props">
-        <b-table-column
-          field="microID"
-          label="Name"
-          width="50"
-          sortable
-        >
-          {{ props.row.microID }}
-        </b-table-column>
-        <b-table-column
-          field="microIP"
-          label="IP"
-          width="125"
-          sortable
-        >
-          {{ props.row.microIP }}
-        </b-table-column>
-        <b-table-column
-          field="purpose"
-          label="Purpose"
-          width="750"
-        >
-          {{ props.row.purpose }}
-        </b-table-column>
-        <b-table-column
-          field="et"
-          label="Last Update"
-          width="100"
-        >
-          {{ props.row.et }}
-        </b-table-column>
-        <b-table-column
-          field="_id"
-          label="Action"
-          width="75"
-          sortable
-        >
-          <router-link :to="{ name: 'EditMicro', params: { id: props.row._id } }">
-            <b-icon icon="pencil" />
-          </router-link>
-          <a
-            href="#"
-            @click="deleteMicro(props.row._id)"
-          ><b-icon icon="delete-forever" /></a>
-        </b-table-column>
-      </template>
+      <b-table-column
+        field="microID"
+        label="Name"
+        width="50"
+        sortable
+        v-slot="props"
+      >{{ props.row.microID }}</b-table-column>
+      <b-table-column
+        field="microIP"
+        label="IP"
+        width="125"
+        sortable
+        v-slot="props"
+      >{{ props.row.microIP }}</b-table-column>
+      <b-table-column
+        field="purpose"
+        label="Purpose"
+        width="750"
+        v-slot="props"
+      >{{ props.row.purpose }}</b-table-column>
+      <b-table-column field="et" label="Last Update" width="100" v-slot="props">{{ props.row.et }}</b-table-column>
+      <b-table-column field="_id" label="Action" width="75" sortable v-slot="props">
+        <router-link :to="{ name: 'EditMicro', params: { id: props.row._id } }">
+          <b-icon icon="pencil" />
+        </router-link>
+        <a href="#" @click="deleteMicro(props.row._id)">
+          <b-icon icon="delete-forever" />
+        </a>
+      </b-table-column>
     </b-table>
   </section>
 </template>
 <script>
-import RsService from '../services/RsService'
+import RsService from "../services/RsService";
 export default {
-  name: 'Microlist',
-  data () {
+  name: "Microlist",
+  data() {
     return {
       micros: [],
       isPaginated: true,
       isPaginationSimple: false,
       isNarrowed: true,
       isStriped: true,
-      defaultSortDirection: 'asc',
+      defaultSortDirection: "asc",
       currentPage: 1,
-      perPage: 10
-    }
+      perPage: 10,
+    };
   },
-  mounted () {
-    this.getMicrolist()
+  mounted() {
+    this.getMicrolist();
   },
   methods: {
-    async getMicrolist () {
-      const response = await RsService.fetchMicroList()
-      this.micros = response.data.micros
+    async getMicrolist() {
+      const response = await RsService.fetchMicroList();
+      this.micros = response.data.micros;
     },
-    async deleteMicro (id) {
-      await RsService.deleteMicro(id)
-      const response = await RsService.fetchMicroList()
-      this.micros = response.data.micros
-    }
-  }
-}
+    async deleteMicro(id) {
+      await RsService.deleteMicro(id);
+      const response = await RsService.fetchMicroList();
+      this.micros = response.data.micros;
+    },
+  },
+};
 </script>
    <style scoped>
 section {

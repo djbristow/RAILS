@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from 'components/Home'
-import ToList from 'components/ToList'
-import NewTo from 'components/NewTo'
-import EditTo from 'components/EditTo'
-import MicroList from 'components/MicroList'
-import EditMicro from 'components/EditMicro'
-import NewMicro from 'components/NewMicro'
-import Admix from 'components/Admix'
+import Home from '../components/Home'
+import ToList from '../components/ToList'
+import NewTo from '../components/NewTo'
+import EditTo from '../components/EditTo'
+import MicroList from '../components/MicroList'
+import EditMicro from '../components/EditMicro'
+import NewMicro from '../components/NewMicro'
+import Admix from '../components/Admix'
 
 Vue.use(Router)
 
