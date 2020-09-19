@@ -3,34 +3,41 @@
     <div class="mgr">
       <div class="center">
         <p class="title is-5">Rollingstock RFID Manager</p>
-        <p>Version 2.0.1</p>
+        <p>Version 2.0.2</p>
       </div>
       <b-table :data="rollingstocks" :striped="isStriped" :narrowed="isNarrowed">
-        <template slot-scope="props">
-          <b-table-column field="sensor" label="Sensor" width="100">{{ props.row.sensor }}</b-table-column>
-          <b-table-column field="rfid" label="RFID" width="100">{{ props.row.rfid }}</b-table-column>
+        <b-table-column
+          field="sensor"
+          label="Sensor"
+          width="100"
+          v-slot="props"
+        >{{ props.row.sensor }}</b-table-column>
+        <b-table-column field="rfid" label="RFID" width="100" v-slot="props">{{ props.row.rfid }}</b-table-column>
+        <b-table-column
+          field="roadNameNumber"
+          label="Road Name and Number"
+          width="300"
+          v-slot="props"
+        >
           <div v-if="props.row.roadNameNumber === 'RS not in inventory'">
-            <b-table-column field="roadNameNumber" label="Road Name and Number" width="300">
-              <span style="color:red">{{ props.row.roadNameNumber }}</span>
-            </b-table-column>
+            <span style="color:red">{{ props.row.roadNameNumber }}</span>
           </div>
-          <div v-else>
-            <b-table-column
-              field="roadNameNumber"
-              label="Road Name and Number"
-              width="200"
-            >{{ props.row.roadNameNumber }}</b-table-column>
+          <div v-else>{{ props.row.roadNameNumber }}</div>
+        </b-table-column>
+        <b-table-column field="color" label="Color" width="150" v-slot="props">{{ props.row.color }}</b-table-column>
+        <b-table-column
+          field="aarCode"
+          label="AAR"
+          width="100"
+          v-slot="props"
+        >{{ props.row.aarCode }}</b-table-column>
+        <b-table-column field="_id" label="Register" width="100" v-slot="props">
+          <div v-if="props.row.roadNameNumber === 'Not Registered'">
+            <a href="#" @click="cardModal(props.row.rfid)">
+              <b-icon icon="check-circle-outline" />
+            </a>
           </div>
-          <b-table-column field="color" label="Color" width="150">{{ props.row.color }}</b-table-column>
-          <b-table-column field="aarCode" label="AAR" width="100">{{ props.row.aarCode }}</b-table-column>
-          <b-table-column field="_id" label="Register" width="100">
-            <div v-if="props.row.roadNameNumber === 'Not Registered'">
-              <a href="#" @click="cardModal(props.row.rfid)">
-                <b-icon icon="check-circle-outline" />
-              </a>
-            </div>
-          </b-table-column>
-        </template>
+        </b-table-column>
       </b-table>
     </div>
     <b-modal :active.sync="isCardModalActive" :width="350">
@@ -62,7 +69,7 @@ var socket = io.connect("http://localhost:3005");
 
 export default {
   name: "Manager",
-  
+
   data() {
     return {
       isCardModalActive: false,
@@ -77,7 +84,7 @@ export default {
       newRoadNumber: "",
       newSensor: "",
       name: "",
-      number: ""
+      number: "",
     };
   },
   mounted() {
@@ -121,21 +128,21 @@ export default {
       this.updateRfid = rfid;
       this.isCardModalActive = true;
     },
-    async updateRs () {
-      let params = this.name + "-" + this.number
-      let roadNameNumber = this.name + " " + this.number
-      let color = ""
-      let aarCode = ""
-      const response = await RsService.getRsRoad(params)
-      let rsid = response.data._id
+    async updateRs() {
+      let params = this.name + "-" + this.number;
+      let roadNameNumber = this.name + " " + this.number;
+      let color = "";
+      let aarCode = "";
+      const response = await RsService.getRsRoad(params);
+      let rsid = response.data._id;
       if (typeof rsid === "undefined") {
-        roadNameNumber = "RS not in inventory"
+        roadNameNumber = "RS not in inventory";
       } else {
         const response = await RsService.getRs({
-          id: rsid
-        })
-        color = response.data.color
-        aarCode = response.data.aarCode
+          id: rsid,
+        });
+        color = response.data.color;
+        aarCode = response.data.aarCode;
         await RsService.updateRs({
           id: rsid,
           roadName: this.name,
@@ -162,21 +169,21 @@ export default {
           imageID: response.data.imageID,
           modelWeight: response.data.modelWeight,
           modelLength: response.data.modelLength,
-          rfid: this.updateRfid
-        })
+          rfid: this.updateRfid,
+        });
       }
       for (var i = 0; i < this.rollingstocks.length; i++) {
         if (this.rollingstocks[i].rfid === this.updateRfid) {
-          this.rollingstocks[i].roadNameNumber = roadNameNumber
-          this.rollingstocks[i].color = color
-          this.rollingstocks[i].aarCode = aarCode
+          this.rollingstocks[i].roadNameNumber = roadNameNumber;
+          this.rollingstocks[i].color = color;
+          this.rollingstocks[i].aarCode = aarCode;
         }
       }
-      this.name = ""
-      this.number = ""
-      this.isCardModalActive = false
-    }
-  }
+      this.name = "";
+      this.number = "";
+      this.isCardModalActive = false;
+    },
+  },
 };
 </script>
 <style scoped>
@@ -193,7 +200,7 @@ header.modal-card-head {
   background-color: rgb(106, 181, 243);
 }
 p.modal-card-title {
-  color:rgb(17, 22, 66);
+  color: rgb(17, 22, 66);
 }
 p.rfid-text {
   color: steelblue;

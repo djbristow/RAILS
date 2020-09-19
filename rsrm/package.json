@@ -1,6 +1,6 @@
 {
   "name": "rsrm",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Rolling Stock RFID Manager a microservice component of RAILS ",
   "author": "dbristow <dave@bristow-family.org>",
   "private": true,
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "buefy": "^0.8.0",
+    "buefy": "^0.9.3",
     "core-js": "^3.6.5",
     "socket.io-client": "^2.3.0",
     "vue": "^2.6.11"
