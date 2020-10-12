@@ -1,3 +1,4 @@
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -14,6 +15,6 @@ var AarSchema = new Schema({
   description: {
     type: String
   }
-  });
+});
 
-  module.exports = mongoose.model('AarCode', AarSchema);
+module.exports = mongoose.model('AarCode', AarSchema);

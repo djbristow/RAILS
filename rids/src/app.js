@@ -16,6 +16,67 @@ var Image = require("../models/Image");
 var Industry = require("../models/Industry");
 var Rollingstock = require("../models/Rollingstock");
 var Structure = require("../models/Structure");
+var Dcc = require("../models/Dcc");
+
+// The following CRUD functions handle data in the DCC collection
+app.get('/dcclistall', (req, res) => {
+  Dcc.find({}, function (error, dccs) {
+    if (error) {
+      console.error(error);
+    }
+    res.send({
+      dccs: dccs
+    })
+  })
+})
+app.delete('/dcc/:id', (req, res) => {
+  Dcc.deleteOne({
+    _id: req.params.id
+  }, function (err, post) {
+    if (err)
+      res.send(err)
+    res.send({
+      success: true
+    })
+  })
+})
+app.post('/add_dcc', (req, res) => {
+  var new_Dcc = new Dcc({
+    locomotiveID: req.body.locomotiveID,
+    mfg: req.body.mfg,
+    family: req.body.family,
+    model: req.body.model,
+    address: req.body.address
+  })
+  new_Dcc.save(function (error) {
+    if (error) {
+      console.log(error)
+    }
+    res.send({
+      success: true
+    })
+  })
+})
+app.put('/dcc/:id', (req, res) => {
+  Dcc.findById(req.params.id, function (error, dcc) {
+    if (error) {
+      console.error(error);
+    }
+    dcc.locomotiveID = req.body.locomotiveID;
+    dcc.mfg = req.body.mfg;
+    dcc.family = req.body.family;
+    dcc.model = req.body.model;
+    dcc.address = req.body.address;
+    dcc.save(function (error) {
+      if (error) {
+        console.log(error)
+      }
+      res.send({
+        success: true
+      })
+    })
+  })
+})
 
 // The following CRUD functions handle data in the structures collection
 app.get('/structlistall', (req, res) => {
@@ -469,6 +530,19 @@ app.get('/rs/:id', (req, res) => {
       console.error(error);
     }
     res.send(post)
+  })
+})
+app.get('/rslocomotives', (req, res) => {
+  Rollingstock.find({ $or: [{ aarCode: "DE" }, { aarCode: "SE" }] }, function (error, rollingstocks) {
+    if (error) {
+      console.error(error);
+    }
+    res.send({
+      rollingstocks: rollingstocks
+    })
+  }).sort({
+    'roadName': 1,
+    'roadNumber': 1
   })
 })
 app.post('/add_rs', (req, res) => {
