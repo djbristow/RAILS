@@ -25,6 +25,18 @@ export default {
   getRsRoad(params) {
     return Api().get('rs_road/' + params)
   },
+  fetchUniqueRoadNames() {
+    return Api().get('rslistroadnames')
+  },
+  fetchRSLocomotives() {
+    return Api().get('rslocomotives')
+  },
+  fetchUniqueAarCodes() {
+    return Api().get('rslistaarcodes')
+  },
+  fetchUniqueStatuses() {
+    return Api().get('rslistopstatuses')
+  },
   fetchImglist() {
     return Api().get('imglist')
   },
@@ -82,15 +94,6 @@ export default {
   addCo(params) {
     return Api().post('add_co', params)
   },
-  fetchUniqueRoadNames() {
-    return Api().get('rslistroadnames')
-  },
-  fetchUniqueAarCodes() {
-    return Api().get('rslistaarcodes')
-  },
-  fetchUniqueStatuses() {
-    return Api().get('rslistopstatuses')
-  },
   fetchStructlist() {
     return Api().get('structlist')
   },
@@ -110,5 +113,11 @@ export default {
   },
   fetchAllStructlist() {
     return Api().get('structlistall')
+  },
+  fetchDcclist() {
+    return Api().get('dcclistall')
+  },
+  addDcc(params) {
+    return Api().post('add_dcc', params)
   }
 }

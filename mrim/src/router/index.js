@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/Home'
 import Rslist from '../components/Rslist'
+import Locomotivelist from '../components/Locomotivelist'
+import NewDcc from '../components/NewDcc'
 import NewRs from '../components/NewRs'
 import EditRs from '../components/EditRs'
 import Imglist from '../components/Imglist'
@@ -34,6 +36,16 @@ export default new Router({
       path: '/Rslist',
       name: 'Rslist',
       component: Rslist
+    },
+    {
+      path: '/Locomotivelist',
+      name: 'Locomotivelist',
+      component: Locomotivelist
+    },
+    {
+      path: '/RS/dcc',
+      name: 'NewDcc',
+      component: NewDcc,
     },
     {
       path: '/RS/new',

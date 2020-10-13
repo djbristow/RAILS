@@ -1,8 +1,10 @@
 <template>
   <div class="home">
     <img src="../assets/kjc.png" />
-    <h4>2.1.1</h4>
+    <h4>2.2.0</h4>
     <p>Number of Rolling Stock {{ rollingstocksize }}</p>
+    <p>Number of Locomotives {{ locomotivesize }}</p>
+    <p>Number of Decoders {{ dccsize }}</p>
     <p>Number of Images {{ imagesize }}</p>
     <p>Number of Companies {{ companysize }}</p>
     <p>Number of AAR codes {{ aarsize }}</p>
@@ -17,6 +19,8 @@ export default {
   data() {
     return {
       rollingstocksize: 0,
+      locomotivesize: 0,
+      dccsize: 0,
       imagesize: 0,
       companysize: 0,
       aarsize: 0,
@@ -28,16 +32,20 @@ export default {
   },
   methods: {
     async getSizes() {
-      const respRs = await RsService.fetchRslist();
-      this.rollingstocksize = respRs.data.rollingstocks.length;
-      const respImg = await RsService.fetchImglist();
-      this.imagesize = respImg.data.images.length;
-      const respCo = await RsService.fetchColist();
-      this.companysize = respCo.data.industries.length;
-      const respAar = await RsService.fetchAarlist();
-      this.aarsize = respAar.data.aarCodes.length;
-      const respStruct = await RsService.fetchStructlist();
-      this.structuresize = respStruct.data.structures.length;
+      var resp = await RsService.fetchRslist();
+      this.rollingstocksize = resp.data.rollingstocks.length;
+      resp = await RsService.fetchRSLocomotives();
+      this.locomotivesize = resp.data.rollingstocks.length;
+      resp = await RsService.fetchDcclist();
+      this.dccsize = resp.data.dccs.length;
+      resp = await RsService.fetchImglist();
+      this.imagesize = resp.data.images.length;
+      resp = await RsService.fetchColist();
+      this.companysize = resp.data.industries.length;
+      resp = await RsService.fetchAarlist();
+      this.aarsize = resp.data.aarCodes.length;
+      resp = await RsService.fetchStructlist();
+      this.structuresize = resp.data.structures.length;
     },
   },
 };

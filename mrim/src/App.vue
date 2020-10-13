@@ -35,7 +35,13 @@
                 <router-link to="/Rslist">List</router-link>
               </b-dropdown-item>
               <b-dropdown-item aria-role="listitem">
-                <router-link to="/RS/new">New</router-link>
+                <router-link to="/Locomotivelist">Locomotives</router-link>
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
+                <router-link to="/RS/dcc">New DCC</router-link>
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
+                <router-link to="/RS/new">New RS</router-link>
               </b-dropdown-item>
             </b-dropdown>
           </b-navbar-item>
