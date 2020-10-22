@@ -108,7 +108,6 @@ export default {
     return Api().delete('struct/' + id)
   },
   updateStruct(params) {
-    console.log(params)
     return Api().put('struct/' + params.id, params)
   },
   fetchAllStructlist() {
@@ -119,5 +118,8 @@ export default {
   },
   addDcc(params) {
     return Api().post('add_dcc', params)
+  },
+  updateDcc(params) {
+    return Api().put('dcc/' + params.id, params)
   }
 }

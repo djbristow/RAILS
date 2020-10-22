@@ -51,7 +51,6 @@ export default {
         this.roadName + "-" + this.roadNumber
       );
       this.locomotiveID = response.data._id;
-      console.log(this.locomotiveID);
       await RsService.addDcc({
         locomotiveID: this.locomotiveID,
         mfg: this.mfg,

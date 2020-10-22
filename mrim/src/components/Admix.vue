@@ -9,6 +9,7 @@
         <option value="Companies">Companies</option>
         <option value="Images">Images</option>
         <option value="Rolling Stock">Rolling Stock</option>
+        <option value="DCC">DCC</option>
         <option value="Structures">Structures</option>
       </b-select>
     </b-field>
@@ -28,6 +29,8 @@
         <option value="Companies">Companies</option>
         <option value="Images">Images</option>
         <option value="Rolling Stock">Rolling Stock</option>
+        <option value="DCC">DCC</option>
+        <option value="JMRI Roster">JMRI Roster</option>
         <option value="Structures">Structures</option>
       </b-select>
     </b-field>
@@ -47,7 +50,9 @@
 </template>
 <script>
 import RsService from "../services/RsService";
+//import  * as parser from "xml2json";
 // import FileReader from "FileReader";
+//var parser = require('xml2json');
 export default {
   name: "Admix",
   data() {
@@ -216,6 +221,35 @@ export default {
                 ',"' +
                 this.documents[i].notes +
                 '"\n';
+            }
+          }
+          break;
+        case "DCC":
+          {
+            this.response = await RsService.fetchDcclist();
+            this.documents = this.response.data.dccs;
+            if (this.fileFormat === "Json") {
+              this.fileName = "dcc.json";
+              this.data = JSON.stringify(this.documents);
+            } else {
+              this.data = "Id,Update,Locomotive Id,Mfg,Family,Model,Address\n";
+              this.fileName = "dcc.csv";
+              for (i = 0; i < this.documents.length; i++) {
+                this.data +=
+                  '"' +
+                  this.documents[i]._id +
+                  '","i","' +
+                  this.documents[i].locomotiveID +
+                  '","' +
+                  this.documents[i].mfg +
+                  '","' +
+                  this.documents[i].family +
+                  '","' +
+                  this.documents[i].model +
+                  '","' +
+                  this.documents[i].address +
+                  '"\n';
+              }
             }
           }
           break;
@@ -496,6 +530,103 @@ export default {
           });
           break;
         }
+        case "DCC":
+          {
+            var dccDoc = [];
+            collection = new Blob([], { type: "text/plain" });
+            collection = this.fileContent.split("\n");
+            for (i = 1; i < collection.length - 1; i++) {
+              dccDoc = collection[i].split('","');
+              if (dccDoc[1] === "a") {
+                await RsService.addDcc({
+                  locomotiveID: dccDoc[2],
+                  mfg: dccDoc[3],
+                  family: dccDoc[4],
+                  model: dccDoc[5],
+                  address: dccDoc[6].slice(0, -1),
+                });
+              }
+              if (dccDoc[1] === "u") {
+                await RsService.updateDcc({
+                  id: dccDoc[0].slice(1),
+                  locomotiveID: dccDoc[2],
+                  mfg: dccDoc[3],
+                  family: dccDoc[4],
+                  model: dccDoc[5],
+                  address: dccDoc[6].slice(0, -1),
+                });
+              }
+            }
+            this.fileImportType = null;
+            this.$router.push({
+              name: "Locomotivelist",
+            });
+          }
+          break;
+        case "JMRI Roster":
+          {
+            var response = await RsService.fetchDcclist();
+            var decoders = response.data.dccs;
+            var convert = require("xml-js");
+            var result = convert.xml2json(this.fileContent, {
+              compact: true,
+              spaces: 4,
+            });
+            var jmriRoster = JSON.parse(result);
+            var locomotives =
+              jmriRoster["roster-config"]["roster"]["locomotive"];
+            for (i = 0; i < locomotives.length; i++) {
+              const getDecoder = decoders.find(
+                (decoder) =>
+                  decoder.address === locomotives[i]._attributes.dccAddress
+              );
+              if (getDecoder == undefined) {
+                response = await RsService.getRsRoad(
+                  locomotives[i]._attributes.roadName +
+                    "-" +
+                    locomotives[i]._attributes.roadNumber
+                );
+                if (response.data.length == 0) {
+                  alert(
+                    "Locomotive " +
+                      locomotives[i]._attributes.roadName +
+                      " " +
+                      locomotives[i]._attributes.roadNumber +
+                      " is not in inventory"
+                  );
+                } else {
+                  await RsService.addDcc({
+                    locomotiveID: response.data._id,
+                    mfg: locomotives[i]._attributes.mfg,
+                    family: locomotives[i].decoder._attributes.family,
+                    model: locomotives[i].decoder._attributes.model,
+                    address: locomotives[i]._attributes.dccAddress,
+                  });
+                }
+              } else {
+                if (
+                  getDecoder.mfg != locomotives[i]._attributes.mfg ||
+                  getDecoder.family !=
+                    locomotives[i].decoder._attributes.family ||
+                  getDecoder.model != locomotives[i].decoder._attributes.model
+                ) {
+                  await RsService.updateDcc({
+                    id: getDecoder._id,
+                    locomotiveID: getDecoder.locomotiveID,
+                    mfg: locomotives[i]._attributes.mfg,
+                    family: locomotives[i].decoder._attributes.family,
+                    model: locomotives[i].decoder._attributes.model,
+                    address: getDecoder.address,
+                  });
+                }
+              }
+            }
+            this.fileImportType = null;
+            this.$router.push({
+              name: "Locomotivelist",
+            });
+          }
+          break;
         case "Structures": {
           i = 0;
           var structureDoc = [];
