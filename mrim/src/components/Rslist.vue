@@ -118,9 +118,9 @@
                 <br />
                 Image ID: {{mImageID}}
                 <br />
-                Model Weight: {{mModelLength}}
+                Model Length: {{mModelLength}}
                 <br />
-                Model Length: {{mModelWeight}}
+                Model Weight: {{mModelWeight}}
                 <br />
                 RFID: {{mRfid}}
                 <br />
