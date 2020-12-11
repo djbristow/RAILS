@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020
 
 # Version
-* 1.11.0 - 10/21/20
+* 1.11.1 - 12/11/20
 RAILS is a software model and implemenation of an automated system to assist the model railroader achieve realism in the operation of a model railroad. The model then drives the development of software.
 For further information see http://kjcrr.org/rails
 
@@ -55,7 +55,7 @@ The components of this design are:
 |RIDS|Railroad Inventory Data Services|3000|1.5.0|10/11/2020|
 |MRIM|Model Railroad Inventory Manager|3001|2.3.1|11/10/2020|
 |RSRM|Rollingstock RFID Manager|3002|2.0.2|9/18/2020|
-|MRFM|Model Railroad File Manager|3003|1.0.3|7/31/2020|
+|MRFM|Model Railroad File Manager|3003|1.0.4|12/11/2020|
 |MRLM|Model Railroad Layout Manager|3004|1.1.0|9/9/2020|
 |ISRS|IoT Subscriber RFID Services|3005|1.0.6|9/3/2020|
 |RLDS|Railroad Layout Data Sevices|3006|1.0.6|9/3/2020|
