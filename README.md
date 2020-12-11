@@ -56,7 +56,7 @@ The components of this design are:
 |MRIM|Model Railroad Inventory Manager|3001|2.3.1|11/10/2020|
 |RSRM|Rollingstock RFID Manager|3002|2.0.2|9/18/2020|
 |MRFM|Model Railroad File Manager|3003|1.0.4|12/11/2020|
-|MRLM|Model Railroad Layout Manager|3004|1.1.0|9/9/2020|
+|MRLM|Model Railroad Layout Manager|3004|1.1.1|12/11/2020|
 |ISRS|IoT Subscriber RFID Services|3005|1.0.6|9/3/2020|
 |RLDS|Railroad Layout Data Sevices|3006|1.0.6|9/3/2020|
 |PPDS|Plans and Purchases Data Services|3007|1.3.4|12/11/2020|
