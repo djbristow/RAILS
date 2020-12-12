@@ -1,14 +1,9 @@
 {
   "name": "rids",
-  "version": "1.5.0",
-  "description": "Provides web services to access Rails document collection in MongoDB",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "DJ Bristow",
+  "version": "1.5.1",
+  "description": "Railroad Inventory Data Services",
+  "private": true,
+  "author": "DJ Bristow <dave@bristow-family.org>",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -20,7 +15,6 @@
     "moment": "^2.29.1",
     "minimist": "^1.2.5",
     "mkdirp": "^1.0.4",
-    "mongoose": "^5.10.9",
-    "nodemon": "^2.0.4"
+    "mongoose": "^5.11.7"
   }
 }
