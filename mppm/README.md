@@ -2,7 +2,7 @@
 &copy; David Bristow, 2019 - 2020
 
 ## Version
-* 1.5.2 - 9/20/2020
+* 1.5.3 - 12/11/2020
 
 Model Project and Purchase Manager is a MEVN application that provides a user with a web application to display, create and update information of the projects and purchased items. Additionally MPPM creates PDF reports of projects and purchases.
 
