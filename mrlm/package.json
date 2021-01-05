@@ -1,6 +1,6 @@
 {
   "name": "mrlm",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Model Railroad Layout Manager",
   "private": true,
   "author": "DJ Bristow <dave@bristow-family.org>",
@@ -17,7 +17,7 @@
   "dependencies": {
     "acorn": "^8.0.1",
     "ajv": "^6.12.4",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "buefy": "^0.9.3",
     "core-js": "^3.6.5",
     "moment": "^2.27.0",
