@@ -1,10 +1,10 @@
 # isms
-&copy; David Bristow, 2020
+&copy; David Bristow, 2020-2021
 
 IoT Subscriber is an application that subscribes to micro messages from the MQTT Broker and adds or updates the micros collection.
 
 ## Version
-* 1.1.1 - 9/3/2020
+* 1.1.2 - 1/5/2021
 
 ## License
 
