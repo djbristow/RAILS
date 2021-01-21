@@ -1,7 +1,7 @@
 {
   "name": "ists",
-  "version": "1.0.1",
-  "description": "A app subscribes to topic 'sensors/toc' from the broker and pass it on",
+  "version": "1.0.2",
+  "description": "IoT Subscriber Turnout Services",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "mqtt": "^4.2.1",
-    "socket.io": "^2.3.0",
-    "minimist": ">=1.2.5"
+    "mqtt": "^4.2.6",
+    "socket.io": "^2.4.0",
+    "minimist": "^1.2.5"
   }
 }
