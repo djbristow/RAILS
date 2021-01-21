@@ -1,21 +1,21 @@
 {
   "name": "isrs",
-  "version": "1.0.6",
-  "description": "A app subscribes to topic 'sensors/rfid' from the broker and pass it on",
+  "version": "1.0.7",
+  "description": "IoT Subscriber RFID Services",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "David Bristow",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/djbristow/RAILS"
   },
   "dependencies": {
     "express": "^4.17.1",
-    "mqtt": "^4.2.1",
-    "socket.io": "^2.3.0",
-    "minimist": ">=1.2.5"
+    "mqtt": "^4.2.6",
+    "socket.io": "^2.4.0",
+    "minimist": "^1.2.5"
   }
 }
