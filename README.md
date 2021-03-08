@@ -59,7 +59,7 @@ The components of this design are:
 |MRLM|Model Railroad Layout Manager|3004|1.1.2|1/5/2021|
 |ISRS|IoT Subscriber RFID Services|3005|1.0.7|1/21/2021|
 |PPDS|Plans and Purchases Data Services|3007|1.3.4|12/11/2020|
-|MPPM|Model Projects and Purchase Manager|3008|1.5.4|1/5/2021|
+|MPPM|Model Projects and Purchase Manager|3008|1.5.5|3/8/2021|
 |ISMS|IoT Subscriber Micro Controller Services||1.1.2|1/5/2021|
 |ISTS|IoT Subscriber Turnout Services|3010|1.0.2|1/21/2021|
 |IPTS|IoT Publisher Turnout Services|3011|1.0.2|1/5/2021|
