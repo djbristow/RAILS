@@ -1,6 +1,6 @@
 {
   "name": "rsrm",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Rolling Stock RFID Manager",
   "author": "dbristow <dave@bristow-family.org>",
   "private": true,
