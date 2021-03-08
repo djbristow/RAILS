@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020-2021
 
 # Version
-* 1.11.3 - 1/21/21
+* 1.11.4 - 3/8/21
 RAILS is a software model and implemenation of an automated system to assist the model railroader achieve realism in the operation of a model railroad. The model then drives the development of software.
 For further information see http://kjcrr.org/rails
 
