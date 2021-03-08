@@ -53,7 +53,7 @@ The components of this design are:
 |Name |Title                                  |Port |Version|Date     |
 |-----|---------------------------------------|-----|-------|---------|
 |RIDS|Railroad Inventory Data Services|3000|1.5.1|12/11/2020|
-|MRIM|Model Railroad Inventory Manager|3001|2.3.3|1/5/2021|
+|MRIM|Model Railroad Inventory Manager|3001|2.3.4|3/8/2021|
 |RSRM|Rollingstock RFID Manager|3002|2.0.5|3/8/2021|
 |MRFM|Model Railroad File Manager|3003|1.0.4|12/11/2020|
 |MRLM|Model Railroad Layout Manager|3004|1.1.2|1/5/2021|

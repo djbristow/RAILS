@@ -1,6 +1,6 @@
 {
   "name": "mrim",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "Model Railroad Inventory Manager",
   "author": "David Bristow <dave@bristow-family.org>",
   "private": true,
@@ -15,7 +15,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "ajv": "^6.12.6",
+    "ajv": "7.2.1",
     "axios": "^0.21.1",
     "buefy": "^0.9.4",
     "core-js": "^3.7.0",
@@ -23,14 +23,14 @@
     "jspdf-autotable": "^3.5.13",
     "moment": "^2.29.1",
     "vue": "^2.6.12",
-    "vue-router": "^3.4.9",
-    "vue-select": "^3.10.8",
+    "vue-router": "^3.5.1",
+    "vue-select": "^3.11.2",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.5.9",
-    "@vue/cli-plugin-eslint": "4.5.9",
-    "@vue/cli-service": "4.5.9",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
