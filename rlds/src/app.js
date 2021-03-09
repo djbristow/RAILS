@@ -1,11 +1,11 @@
 // This express app prodes an API for Vue applications to get and put data
 // to the MongoDB
 const express = require('express')
-const bodyParser = require('body-parser')
+//const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const app = express()
-app.use(bodyParser.json())
+app.use(express.json())
 app.use(cors())
 
 const mongodb_conn_module = require('./mongodbConnModule');
@@ -13,6 +13,7 @@ var db = mongodb_conn_module.connect();
 
 var Turnout = require("../models/Turnout");
 var Micro = require("../models/Micro");
+var TPLight = require("../models/TPLight");
 
 // The following CRUD functions handle data in the turnouts collection
 app.get('/tolist', (req, res) => {
@@ -28,7 +29,6 @@ app.get('/tolist', (req, res) => {
     'toNum': 1
   })
 })
-
 app.post('/add_to', (req, res) => {
   var toID = req.body.toID;
   var toNum = req.body.toNum;
@@ -84,11 +84,21 @@ app.get('/to_ident/:id', (req, res) => {
     if (error) {
       console.error(error);
     }
-      res.send(post)
+    res.send(post)
+  })
+})
+app.get('/to_name/:id', (req, res) => {
+  Turnout.findOne({
+    toID: req.params.id
+  }, function (error, post) {
+    if (error) {
+      console.error(error);
+    }
+    res.send(post)
   })
 })
 app.put('/update_to/:id', (req, res) => {
-console.log(req.params.id);
+  //console.log(req.params.id);
   Turnout.findById(req.params.id, function (error, turnout) {
     if (error) {
       console.error(error);
@@ -195,6 +205,83 @@ app.post('/add_micro', (req, res) => {
 })
 app.delete('/micro/:id', (req, res) => {
   Micro.deleteOne({
+    _id: req.params.id
+  }, function (err, post) {
+    if (err)
+      res.send(err)
+    res.send({
+      success: true
+    })
+  })
+})
+
+// The following CRUD functions handle data in the tplights collection
+app.get('/tpllist', (req, res) => {
+  TPLight.find({}, function (error, tplights) {
+    if (error) {
+      console.error(error);
+    }
+    res.send({
+      tplights: tplights
+    })
+  }).sort({
+    'controller': 1,
+    'toNum': 1
+  })
+})
+app.get('/tpl_id/:id', (req, res) => {
+  TPLight.findById(req.params.id, function (error, post) {
+    if (error) {
+      console.error(error);
+    }
+    res.send(post)
+  })
+})
+app.post('/add_tpl', (req, res) => {
+  var to_id = req.body.to_id;
+  var tplNum = req.body.tplNum;
+  var controller = req.body.controller;
+  var panelName = req.body.panelName;
+  var panelNum = req.body.panelNum;
+  var new_tpl = new TPLight({
+    to_id: to_id,
+    tplNum: tplNum,
+    controller: controller,
+    panelName: panelName,
+    panelNum: panelNum
+  })
+  new_tpl.save(function (error) {
+    if (error) {
+      console.log(error)
+    }
+    res.send({
+      success: true
+    })
+  })
+})
+app.put('/update_tpl/:id', (req, res) => {
+  TPLight.findById(req.params.id, function (error, tpl) {
+    if (error) {
+      console.error(error);
+    }
+    tpl.to_id = req.body.to_id;
+    tpl.tplNum = req.body.tplNum;
+    tpl.controller = req.body.controller;
+    tpl.panelName = req.body.panelName;
+    tpl.panelNum = req.body.panelNum;
+    tpl.lightNum = req.body.lightNum;
+    tpl.save(function (error) {
+      if (error) {
+        console.log(error)
+      }
+      res.send({
+        success: true
+      })
+    })
+  })
+})
+app.delete('/tpl/:id', (req, res) => {
+  TPLight.deleteOne({
     _id: req.params.id
   }, function (err, post) {
     if (err)
