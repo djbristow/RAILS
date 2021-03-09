@@ -2,11 +2,30 @@ import Api from './Api'
 import ApiToCmd from './ApiToCmd'
 
 export default {
+  fetchTPLightList() {
+    return Api().get('tpllist')
+  },
+  deleteTPL(id) {
+    return Api().delete('tpl/' + id)
+  },
+  addTPL (params) {
+    return Api().post('add_tpl', params)
+  },
+  getTPL (params) {
+    return Api().get('tpl_id/' + params.id)
+  },
+  updateTPL (params) {
+    return Api().put('update_tpl/' + params.id, params)
+  },
   fetchToList () {
     return Api().get('tolist')
   },
   getToByIdentity (params) {
     return Api().get('to_ident/' + params)
+  },
+  getToByName (params) {
+    //console.log(params.id)
+    return Api().get('to_name/' + params)
   },
   getTo (params) {
     return Api().get('to_id/' + params.id)

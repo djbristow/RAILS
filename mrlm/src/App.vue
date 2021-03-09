@@ -85,6 +85,30 @@
               </b-dropdown-item>
             </b-dropdown>
           </b-navbar-item>
+          <b-navbar-item>
+            <b-dropdown
+              hoverable
+              aria-role="list"
+            >
+              <button
+                slot="trigger"
+                class="button is-light"
+              >
+                <span>TP Lights</span>
+                <b-icon icon="menu-down" />
+              </button>
+              <b-dropdown-item aria-role="listitem">
+                <router-link to="/TPLList">
+                  List
+                </router-link>
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
+                <router-link to="/TPL/new">
+                  New
+                </router-link>
+              </b-dropdown-item>
+            </b-dropdown>
+          </b-navbar-item>
         </template>
       </b-navbar>
       <div class="center">

@@ -1,9 +1,10 @@
 <template>
   <div class="home">
     <img src="../assets/kjc.png">
-    <h4>v1.1.2</h4>
+    <h4>v1.2.0</h4>
     <p>Number of Micros {{ microsize }}</p>
     <p>Number of Turnouts {{ turnoutsize }}</p>
+    <p>Number of Turnout Panel Lights {{ tplsize }}</p>
   </div>
 </template>
 
@@ -14,7 +15,8 @@ export default {
   data () {
     return {
       microsize: 0,
-      turnoutsize: 0
+      turnoutsize: 0,
+      tplsize: 0
     }
   },
   mounted () {
@@ -26,6 +28,8 @@ export default {
       this.microsize = respMicro.data.micros.length
       const respTo = await RsService.fetchToList()
       this.turnoutsize = respTo.data.turnouts.length
+      const respTPL = await RsService.fetchTPLightList()
+      this.tplsize = respTPL.data.tplights.length
     }
   }
 }

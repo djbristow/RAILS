@@ -4,6 +4,9 @@ import Home from '../components/Home'
 import ToList from '../components/ToList'
 import NewTo from '../components/NewTo'
 import EditTo from '../components/EditTo'
+import TPLList from '../components/TPLList'
+import NewTPL from '../components/NewTPL'
+import EditTPL from '../components/EditTPL'
 import MicroList from '../components/MicroList'
 import EditMicro from '../components/EditMicro'
 import NewMicro from '../components/NewMicro'
@@ -34,6 +37,21 @@ export default new Router({
       path: '/TO/:id',
       name: 'EditTo',
       component: EditTo
+    },
+    {
+      path: '/TPLList',
+      name: 'TPLList',
+      component: TPLList
+    },
+    {
+      path: '/TPL/new',
+      name: 'NewTPL',
+      component: NewTPL
+    },
+    {
+      path: '/TPL/:id',
+      name: 'EditTPL',
+      component: EditTPL
     },
     {
       path: '/MicroList',
