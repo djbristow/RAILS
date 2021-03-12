@@ -1,0 +1,18 @@
+{
+  "name": "istc",
+  "version": "1.0.0",
+  "description": "IoT Subscriber and Publisher Turnout Panel Controller",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Bristow",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/djbristow/RAILS"
+  },
+  "dependencies": {
+    "mqtt": "^4.2.6",
+    "axios": "^0.21.1"
+  }
+}
