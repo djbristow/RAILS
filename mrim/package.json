@@ -1,6 +1,6 @@
 {
   "name": "mrim",
-  "version": "2.3.4",
+  "version": "2.3.5",
   "description": "Model Railroad Inventory Manager",
   "author": "David Bristow <dave@bristow-family.org>",
   "private": true,
@@ -19,7 +19,7 @@
     "axios": "^0.21.1",
     "buefy": "^0.9.4",
     "core-js": "^3.7.0",
-    "jspdf": "^2.1.1",
+    "jspdf": "^2.3.1",
     "jspdf-autotable": "^3.5.13",
     "moment": "^2.29.1",
     "vue": "^2.6.12",
