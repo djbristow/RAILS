@@ -171,4 +171,7 @@ section {
   position: relative;
   width: 100%;
 }
+a {
+  color: #474749;
+}
 </style>

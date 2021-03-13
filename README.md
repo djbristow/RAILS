@@ -54,7 +54,7 @@ The components of this design are:
 |Name |Title                                  |Port |Version|Date     |
 |-----|---------------------------------------|-----|-------|---------|
 |RIDS|**R**ailroad **I**nventory **D**ata **S**ervices|3000|1.5.1|12/11/2020|
-|MRIM|**M**odel **R**ailroad **I**nventory **M**anager|3001|2.3.5|3/12/2021|
+|MRIM|**M**odel **R**ailroad **I**nventory **M**anager|3001|2.3.6|3/12/2021|
 |RSRM|**R**olling**s**tock **R**FID **M**anager|3002|2.0.5|3/8/2021|
 |MRFM|**M**odel **R**ailroad **F**ile **M**anager|3003|1.0.4|12/11/2020|
 |MRLM|**M**odel **R**ailroad **L**ayout **M**anager|3004|1.2.0|3/8/2021|

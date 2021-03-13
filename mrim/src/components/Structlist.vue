@@ -296,4 +296,7 @@ section {
   background-color: rgb(106, 181, 243);
   width: 680px;
 }
+a {
+  color: #474749;
+}
 </style>
