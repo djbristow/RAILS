@@ -171,4 +171,7 @@ section {
 .center {
   text-align: center;
 }
+a {
+  color: #474749;
+}
 </style>

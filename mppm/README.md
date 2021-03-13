@@ -2,9 +2,9 @@
 &copy; David Bristow, 2019-2021
 
 ## Version
-* 1.5.5 - 3/8/2021
+* 1.5.6 - 3/12/2021
 
-Model Project and Purchase Manager is a MEVN application that provides a user with a web application to display, create and update information of the projects and purchased items. Additionally MPPM creates PDF reports of projects and purchases.
+**M**odel **P**roject and **P**urchase **M**anager is a MEVN application that provides a user with a web application to display, create and update information of the projects and purchased items. Additionally MPPM creates PDF reports of projects and purchases.
 
 This web application uses port 8080 natively but mapped to 3008 in a docker container.
 

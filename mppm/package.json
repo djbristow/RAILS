@@ -1,6 +1,6 @@
 {
   "name": "mppm",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "description": "Model Project and Purchase Manager",
   "private": true,
   "author": "DJ Bristow <dave@bristow-family.org>",
@@ -15,21 +15,21 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "ajv": "^6.12.4",
+    "ajv": "^7.2.1",
     "axios": "^0.21.1",
-    "buefy": "^0.9.3",
-    "core-js": "^3.6.5",
-    "jspdf": "^2.1.1",
-    "jspdf-autotable": "^3.5.12",
-    "moment": "^2.27.0",
-    "vue": "^2.6.11",
-    "vue-router": "^3.4.3",
-    "vue-select": "^3.10.8"
+    "buefy": "^0.9.4",
+    "core-js": "^3.9.1",
+    "jspdf": "^2.3.1",
+    "jspdf-autotable": "^3.5.14",
+    "moment": "^2.29.1",
+    "vue": "^2.6.12",
+    "vue-router": "^3.5.1",
+    "vue-select": "^3.11.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@vue/cli-plugin-babel": "~4.5.9",
+    "@vue/cli-plugin-eslint": "~4.5.9",
+    "@vue/cli-service": "~4.5.9",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
