@@ -1,22 +1,20 @@
 // This express app prodes an API for Vue applications to publish 
 // turnout cmd messages to a MQTT broker
-const express = require('express'),
-      bodyParser = require('body-parser'),
+const axios = require('axios'),
       cors = require('cors'),
-      app = express(),
-      axios = require('axios'),
-      mqtt = require('mqtt'),
-      client = mqtt.connect('mqtt://127.0.0.1:1883')
-      
-app.use(bodyParser.json())
-app.use(cors())
+      express = require('express'),
+      mqtt = require('mqtt');
 
+var client = mqtt.connect('mqtt://' + process.env.MQTT_PORT_1883_TCP_ADDR + ':' + process.env.MQTT_PORT_1883_TCP_PORT, { clientId: "mqttjs02" });
+var app = express();
+    app.use(cors())
+    app.use(express.json())
 var msg = null;
 var topic = null;
 
 function rlds() {
   return axios.create({
-    baseURL: `http://localhost:3006`
+    baseURL: 'http://' + process.env.RLDS_PORT_3006_TCP_ADDR + ':' + process.env.RLDS_PORT_3006_TCP_PORT
   })
 }
 
@@ -57,8 +55,8 @@ client.on('connect', () => {
 })
 
 app.post('/to', (req, res) => {
-  // console.log(req.body.id);
   handlePost(req.body);
 })
 
 app.listen(process.env.PORT || 3011)
+console.log("IPTS started v1.1.2")

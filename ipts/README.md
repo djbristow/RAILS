@@ -1,10 +1,10 @@
 # ipts
 &copy; David Bristow, 2020-2021
 
-IoT Publish Turnout Services is an Express Mongoose aplication that connects to a MongoDB database containing layout collections to check and update locks. It receives web socket messages providing turnout commands. It publishes mqtt turnout messages to the MQTT Broker. This application uses port 3011.
+**I**oT **P**ublish **T**urnout **S**ervices is an Express aplication that checks turnout collections to check and update locks. It receives web socket messages providing turnout commands. It publishes mqtt turnout messages to the MQTT Broker. This application uses port 3011.
 
 ## Version
-* 1.0.2 - 1/5/2021
+* 1.1.2 - 3/14/2021
 
 ## License
 
@@ -34,5 +34,9 @@ IoT Publish Turnout Services is an Express Mongoose aplication that connects to 
 npm install
 
 # start
+export MQTT_PORT_1883_TCP_ADDR='127.0.0.1'
+export MQTT_PORT_1883_TCP_PORT='1883'
+export RLDS_PORT_3006_TCP_ADDR='127.0.0.1'
+export RLDS_PORT_3006_TCP_PORT='3006'
 node ./src/app
 ```
