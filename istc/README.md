@@ -1,10 +1,10 @@
 # istc
 &copy; David Bristow, 2021
 
-**I**oT **S**ubscriber and Publisher **T**urnout Panel **C**ontroller is a node application that subscribes to turnout contact switch (sensors/toc), turnout panel button (sensors/pb), and turnout command (acts/to/#) messages from the MQTT Broker. It publishes turnout panel light (acts/tpl/#) messages. It checks and updates the Turnout collection when a turnout contact switch message was initaited by a panel button event. If the turnout is unlocked and a panel button event is received for that turnout a turnout command is published.
+**I**oT **S**ubscriber and Publisher **T**urnout Panel **C**ontroller is a node application that subscribes to turnout contact switch (sensors/toc), turnout panel button (sensors/pb), and turnout command (acts/to/#) messages from the MQTT Broker. It publishes turnout panel light (acts/tpl/#) messages. It checks and updates the Turnout collection when a turnout contact switch message was initaited by a panel button event. If the turnout is unlocked and a panel button event is received for that turnout a turnout command is published. 
 
 ## Version
-* 1.0.0 - 3/10/2021
+* 1.1.0 - 3/14/2021
 
 ## License
 
@@ -34,11 +34,10 @@
 npm install
 
 # start
+export MQTT_PORT_1883_TCP_ADDR='127.0.0.1'
+export MQTT_PORT_1883_TCP_PORT='1883'
+export RLDS_PORT_3006_TCP_ADDR='127.0.0.1'
+export RLDS_PORT_3006_TCP_PORT='3006'
 node app
 ```
-
-when a subscbribed sensor/toc message received set light to state if locked by this app unlock
-
-when button pushed, check to see if the turnout is locked if it is do nothing... if not lock then publish a acts/to/cntrllr# message
-
 

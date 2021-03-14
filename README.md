@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020-2021
 
 # Version
-* 1.12.1 - 3/12/21
+* 1.12.2 - 3/14/21
 RAILS is a software model and implemenation of an automated system to assist the model railroader achieve realism in the operation of a model railroad. The model then drives the development of software.
 For further information see http://kjcrr.org/rails
 
@@ -50,7 +50,6 @@ The components of this design are:
   - MRFM – the **M**odel **R**ailroad **F**ile **M**anager allows the user to upload image files for the use by the MRIM component
   - Images – the file store for the images uploaded by MRFM component and used by the MRIM component
 
-
 |Name |Title                                  |Port |Version|Date     |
 |-----|---------------------------------------|-----|-------|---------|
 |RIDS|**R**ailroad **I**nventory **D**ata **S**ervices|3000|1.5.1|12/11/2020|
@@ -65,7 +64,7 @@ The components of this design are:
 |ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices||1.1.2|1/5/2021|
 |ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices|3010|1.0.2|1/21/2021|
 |IPTS|**I**oT **P**ublisher **T**urnout **S**ervices|3011|1.0.2|1/5/2021|
-|ISTC|**I**oT **S**ubscriber and Publisher **T**urnout Panel **C**ontroller||1.0.0|3/3/2021|
+|ISTC|**I**oT **S**ubscriber and Publisher **T**urnout Panel **C**ontroller||1.1.0|3/14/2021|
 
 
 

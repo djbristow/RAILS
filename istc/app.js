@@ -1,11 +1,11 @@
 var mqtt = require('mqtt'),
   axios = require('axios');
-var client = mqtt.connect("mqtt://127.0.0.1:1883", { clientId: "mqttjs01" });
+var client = mqtt.connect('mqtt://' + process.env.MQTT_PORT_1883_TCP_ADDR + ':' + process.env.MQTT_PORT_1883_TCP_PORT, { clientId: "mqttjs01" });
 let tos = [];
 
 function rlds() {
   return axios.create({
-    baseURL: 'http://localhost:3006'
+    baseURL: 'http://' + process.env.RLDS_PORT_3006_TCP_ADDR + ':' + process.env.RLDS_PORT_3006_TCP_PORT
   })
 }
 
@@ -79,7 +79,7 @@ async function initialize() {
     topic = 'acts/tpl/' + this.tos[i].tplCntlr;
     client.publish(topic.toString(), msg);
   }
-  console.log('Panel lights initilized');
+  console.log('Panel lights initilized v1.1.0');
 }
 
 client.on('connect', function () {
@@ -122,7 +122,6 @@ async function handleMsg(topic, message) {
     } else {
       const resp = await getTo(foundTos.to_id)
       let turnout = resp.data
-      console.log(turnout)
       let state = turnout.state
       let cmd = ''
       if (turnout.lock === "") {
@@ -149,7 +148,6 @@ async function handleMsg(topic, message) {
           + '","to":"' + turnout.toNum
           + '","cmd":"' + cmd + '"}'
         topic = 'acts/to/' + turnout.controller;
-        console.log(topic.toString() + " " + msg)
         client.publish(topic.toString(), msg);
       }
     }
