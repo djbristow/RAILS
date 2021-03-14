@@ -1,6 +1,6 @@
 {
   "name": "isms",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "IoT Subscriber Micro Controller Services",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,6 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "mqtt": "^4.2.1"
+    "mqtt": "^4.2.6"
   }
 }

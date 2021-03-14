@@ -1,10 +1,11 @@
 const mqtt = require('mqtt'),
-  client = mqtt.connect('mqtt://127.0.0.1:1883'),
-  axios = require('axios')
+     axios = require('axios');
+
+var client = mqtt.connect('mqtt://' + process.env.MQTT_PORT_1883_TCP_ADDR + ':' + process.env.MQTT_PORT_1883_TCP_PORT, { clientId: "mqttjs02" });
 
 function rlds() {
   return axios.create({
-    baseURL: `http://localhost:3006`
+    baseURL: 'http://' + process.env.RLDS_PORT_3006_TCP_ADDR + ':' + process.env.RLDS_PORT_3006_TCP_PORT
   })
 }
 
@@ -59,3 +60,4 @@ async function handleMicroMsg(message) {
     });
   }
 }
+  console.log("ISMS Started v1.2.0")

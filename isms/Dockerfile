@@ -4,4 +4,4 @@ WORKDIR /usr/djb
 COPY package.json /usr/djb 
 RUN npm install
 COPY . /usr/djb
-CMD node ./app.js
+CMD node ./src/app.js

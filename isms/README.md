@@ -1,10 +1,10 @@
 # isms
 &copy; David Bristow, 2020-2021
 
-IoT Subscriber is an application that subscribes to micro messages from the MQTT Broker and adds or updates the micros collection.
+**I**oT **S**ubscriber **M**icro-controller **S**ervices is an application that subscribes to micro messages from the MQTT Broker and adds or updates the micros collection.
 
 ## Version
-* 1.1.2 - 1/5/2021
+* 1.2.2 - 3/14/2021
 
 ## License
 
@@ -34,5 +34,9 @@ IoT Subscriber is an application that subscribes to micro messages from the MQTT
 npm install
 
 # start
-node app
+export MQTT_PORT_1883_TCP_ADDR='127.0.0.1'
+export MQTT_PORT_1883_TCP_PORT='1883'
+export RLDS_PORT_3006_TCP_ADDR='127.0.0.1'
+export RLDS_PORT_3006_TCP_PORT='3006'
+node ./src/app
 ```
