@@ -1,5 +1,5 @@
 # RAILS
-&copy; David Bristow, 2020-2021
+&copy; David Bristow, 2019-2021
 
 # Version
 * 1.12.2 - 3/14/21
