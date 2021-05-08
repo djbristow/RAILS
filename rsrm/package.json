@@ -1,6 +1,6 @@
 {
   "name": "rsrm",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Rolling Stock RFID Manager",
   "author": "dbristow <dave@bristow-family.org>",
   "private": true,
@@ -24,7 +24,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.5.9",
     "@vue/cli-plugin-eslint": "4.5.9",
-    "@vue/cli-service": "4.5.9",
+    "@vue/cli-service": "^4.5.13",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
