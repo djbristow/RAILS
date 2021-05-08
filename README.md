@@ -62,7 +62,7 @@ The components of this design are:
 |PPDS|**P**lans and **P**urchases **D**ata **S**ervices|3007|1.3.4|12/11/2020|
 |MPPM|**M**odel **P**rojects and **P**urchase **M**anager|3008|1.5.6|3/12/2021|
 |ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices||1.2.0|3/14/2021|
-|ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices|3010|1.0.2|1/21/2021|
+|ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices|3010|1.0.3|5/8/2021|
 |IPTS|**I**oT **P**ublisher **T**urnout **S**ervices|3011|1.1.2|3/14/2021|
 |ISTC|**I**oT **S**ubscriber and Publisher **T**urnout Panel **C**ontroller||1.1.0|3/14/2021|
 
