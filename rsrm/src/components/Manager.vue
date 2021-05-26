@@ -3,7 +3,7 @@
     <div class="mgr">
       <div class="center">
         <p class="title is-5">Rollingstock RFID Manager</p>
-        <p>Version 2.0.6</p>
+        <p>Version 2.0.7</p>
       </div>
       <b-table :data="rollingstocks" :striped="isStriped" :narrowed="isNarrowed">
         <b-table-column
