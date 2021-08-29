@@ -55,16 +55,16 @@ The components of this design are:
 |RIDS|**R**ailroad **I**nventory **D**ata **S**ervices|3000|1.5.2|8/28/2021|
 |MRIM|**M**odel **R**ailroad **I**nventory **M**anager|3001|2.3.7|8/28/2021|
 |RSRM|**R**olling**s**tock **R**FID **M**anager|3002|2.0.9|8/28/2021|
-|MRFM|**M**odel **R**ailroad **F**ile **M**anager|3003|1.0.4|12/11/2020|
-|MRLM|**M**odel **R**ailroad **L**ayout **M**anager|3004|1.2.0|3/8/2021|
-|ISRS|**I**oT **S**ubscriber **R**FID **S**ervices|3005|1.0.8|5/8/2021|
+|MRFM|**M**odel **R**ailroad **F**ile **M**anager|3003|1.0.5|8/29/2021|
+|MRLM|**M**odel **R**ailroad **L**ayout **M**anager|3004|1.2.1|5/29/2021|
+|ISRS|**I**oT **S**ubscriber **R**FID **S**ervices|3005|1.0.8|8/29/2021|
 |RLDS|**R**ailroad **L**ayout **D**ata **S**ervices|3006|1.1.1|8/28/2021
 |PPDS|**P**lans and **P**urchases **D**ata **S**ervices|3007|1.3.6|8/28/2021|
 |MPPM|**M**odel **P**rojects and **P**urchase **M**anager|3008|1.5.8|8/28/2021|
-|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices||1.2.0|3/14/2021|
-|ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices|3010|1.0.3|5/8/2021|
-|IPTS|**I**oT **P**ublisher **T**urnout **S**ervices|3011|1.1.2|3/14/2021|
-|ISTC|**I**oT **S**ubscriber and Publisher **T**urnout Panel **C**ontroller||1.1.0|3/14/2021|
+|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices||1.2.3|8/29/2021|
+|ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices|3010|1.1.1|8/29/2021|
+|IPTS|**I**oT **P**ublisher **T**urnout **S**ervices|3011|1.1.3|8/29/2021|
+|ISTC|**I**oT **S**ubscriber and Publisher **T**urnout Panel **C**ontroller||1.1.1|8/29/2021|
 
 
 
