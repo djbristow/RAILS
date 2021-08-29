@@ -4,7 +4,7 @@
 **I**oT **S**ubscriber **M**icro-controller **S**ervices is an application that subscribes to micro messages from the MQTT Broker and adds or updates the micros collection.
 
 ## Version
-* 1.2.2 - 3/14/2021
+* 1.2.3 - 8/29/2021
 
 ## License
 
