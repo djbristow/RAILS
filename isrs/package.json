@@ -1,6 +1,6 @@
 {
   "name": "isrs",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "IoT Subscriber RFID Services",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "minimist": "^1.2.5",
-    "mqtt": "^4.2.6",
-    "socket.io": "^2.4.0"
+    "mqtt": "^4.2.8",
+    "socket.io": "^4.1.3"
   }
 }
