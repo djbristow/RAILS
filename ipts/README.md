@@ -4,7 +4,7 @@
 **I**oT **P**ublish **T**urnout **S**ervices is an Express aplication that checks turnout collections to check and update locks. It receives web socket messages providing turnout commands. It publishes mqtt turnout messages to the MQTT Broker. This application uses port 3011.
 
 ## Version
-* 1.1.2 - 3/14/2021
+* 1.1.3 - 8/29/2021
 
 ## License
 
