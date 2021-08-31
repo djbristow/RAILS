@@ -57,7 +57,7 @@ The components of this design are:
 |RSRM|**R**olling**s**tock **R**FID **M**anager|3002|2.0.9|8/28/2021|
 |MRFM|**M**odel **R**ailroad **F**ile **M**anager|3003|1.0.5|8/29/2021|
 |MRLM|**M**odel **R**ailroad **L**ayout **M**anager|3004|1.2.1|8/29/2021|
-|ISRS|**I**oT **S**ubscriber **R**FID **S**ervices|3005|1.0.10|8/29/2021|
+|ISRS|**I**oT **S**ubscriber **R**FID **S**ervices|3005|1.1.0|8/31/2021|
 |RLDS|**R**ailroad **L**ayout **D**ata **S**ervices|3006|1.1.1|8/28/2021
 |PPDS|**P**lans and **P**urchases **D**ata **S**ervices|3007|1.3.6|8/28/2021|
 |MPPM|**M**odel **P**rojects and **P**urchase **M**anager|3008|1.5.8|8/28/2021|

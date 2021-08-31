@@ -4,7 +4,7 @@
 IoT Subscriber is a Express application that subscribes to RFID messages from the MQTT Broker and sends them to a MEVN web application using web sockets. This application uses port 3005.
 
 ## Version
-* 1.0.10 - 8/29/2021
+* 1.1.0 - 8/31/2021
 
 ## License
 
@@ -32,6 +32,9 @@ IoT Subscriber is a Express application that subscribes to RFID messages from th
 # install dependencies
 npm install
 
-# start
+# start NB-RSRM port is 3002 if running on Docker, in dev port is likely 8080
+export RSRM_TCP_PORT='3002'
+export MQTT_PORT_1883_TCP_ADDR='127.0.0.1'
+export MQTT_PORT_1883_TCP_PORT='1883'
 node app
 ```
