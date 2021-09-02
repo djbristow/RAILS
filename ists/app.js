@@ -1,27 +1,34 @@
 const mqtt = require('mqtt'),
-      client = mqtt.connect('mqtt://' + process.env.MQTT_PORT_1883_TCP_ADDR + ':' + process.env.MQTT_PORT_1883_TCP_PORT),
-      //lient = mqtt.connect('mqtt://127.0.0.1:1883'),
-      express = require('express'),
-      app = express(),
-      server = require('http').createServer(app),
-      io = require('socket.io').listen(server)
+     app = require('express')(),
+     cors = require('cors');
 
-client.on('connect', function() {
-     console.log ("MQTT Connected")
+app.use(cors());
+
+var httpServer = require('http').createServer(app);
+var io = require('socket.io')(httpServer, {
+     cors: {
+          origin: "http://localhost:" + process.env.MRLM_TCP_PORT,
+          methods: ["GET", "POST"]
+     }
+})
+
+var client = mqtt.connect('mqtt://' + process.env.MQTT_PORT_1883_TCP_ADDR + ':' + process.env.MQTT_PORT_1883_TCP_PORT);
+
+function handleMqtt(message) {
+     let parsedMsg = JSON.parse(message);
+     io.sockets.emit('tocmsg', parsedMsg);
+}
+
+client.on('connect', function () {
+     console.log("MQTT Connected")
      client.subscribe('sensors/toc')
 })
 
-client.on('message', function(topic, message) {
+client.on('message', function (topic, message) {
      return handleMqtt(message);
      client.end();
 })
 
-function handleMqtt(message){
-  console.log(message.toString())
- let parsedMsg = JSON.parse(message);
- io.emit('tocmsg', parsedMsg);
-}
-
-server.listen(3010, function(){
-      console.log("App listening on port 3010")
+server.listen(3010, function () {
+     console.log("App, version 1.2.0 listening on port 3010")
 });

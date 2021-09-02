@@ -1,6 +1,6 @@
 {
   "name": "ists",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "IoT Subscriber Turnout Services",
   "main": "app.js",
   "scripts": {
@@ -13,6 +13,7 @@
     "url": "https://github.com/djbristow/RAILS"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "minimist": "^1.2.5",
     "mqtt": "^4.2.8",
