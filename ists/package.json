@@ -1,6 +1,6 @@
 {
   "name": "ists",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "IoT Subscriber Turnout Services",
   "main": "app.js",
   "scripts": {

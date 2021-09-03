@@ -29,6 +29,6 @@ client.on('message', function (topic, message) {
      client.end();
 })
 
-server.listen(3010, function () {
-     console.log("App, version 1.2.0 listening on port 3010")
+httpServer.listen(3010, function () {
+     console.log("App, version 1.2.1 listening on port 3010")
 });
