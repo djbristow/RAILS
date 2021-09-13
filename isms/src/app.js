@@ -60,4 +60,4 @@ async function handleMicroMsg(message) {
     });
   }
 }
-  console.log("ISMS Started v1.2.0")
+  console.log("ISMS Started v1.2.4")

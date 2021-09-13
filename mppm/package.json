@@ -1,6 +1,6 @@
 {
   "name": "mppm",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "description": "Model Project and Purchase Manager",
   "private": true,
   "author": "DJ Bristow <dave@bristow-family.org>",
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "ajv": "8.6.2",
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "buefy": "^0.9.10",
     "core-js": "^3.16.3",
     "jspdf": "^2.3.1",
@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.13",
-    "@vue/cli-plugin-eslint": "~4.5.13",
-    "@vue/cli-service": "~4.5.13",
+    "@vue/cli-plugin-eslint": "^4.5.13",
+    "@vue/cli-service": "^4.5.13",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",

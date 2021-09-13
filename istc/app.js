@@ -79,7 +79,7 @@ async function initialize() {
     topic = 'acts/tpl/' + this.tos[i].tplCntlr;
     client.publish(topic.toString(), msg);
   }
-  console.log('Panel lights initilized v1.1.0');
+  console.log('Panel lights initilized v1.1.2');
 }
 
 client.on('connect', function () {

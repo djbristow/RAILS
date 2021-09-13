@@ -4,7 +4,7 @@
 **I**oT **S**ubscriber and Publisher **T**urnout Panel **C**ontroller is a node application that subscribes to turnout contact switch (sensors/toc), turnout panel button (sensors/pb), and turnout command (acts/to/#) messages from the MQTT Broker. It publishes turnout panel light (acts/tpl/#) messages. It checks and updates the Turnout collection when a turnout contact switch message was initaited by a panel button event. If the turnout is unlocked and a panel button event is received for that turnout a turnout command is published. 
 
 ## Version
-* 1.1.1 - 8/29/2021
+* 1.1.2 - 9/13/2021
 
 ## License
 
