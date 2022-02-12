@@ -19,7 +19,7 @@
     "axios": "^0.24.0",
     "buefy": "^0.9.10",
     "core-js": "^3.16.3",
-    "follow-redirects": "^1.14.7",
+    "follow-redirects": "^1.14.8",
     "jspdf": "^2.4.0",
     "jspdf-autotable": "^3.5.14",
     "moment": "^2.29.1",
