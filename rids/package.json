@@ -15,6 +15,6 @@
     "minimist": "^1.2.6",
     "mkdirp": "^1.0.4",
     "moment": "^2.29.3",
-    "mongoose": "^6.3.5"
+    "mongoose": "^6.4.6"
   }
 }
