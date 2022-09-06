@@ -17,6 +17,12 @@ var MicroSchema = new Schema({
   },
   purpose: {
     type: String
+  },
+  location: {
+    type: String
+  },
+  status: {
+    type: String
   }
   });
 

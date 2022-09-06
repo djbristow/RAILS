@@ -173,6 +173,8 @@ app.put('/update_micro/:id', (req, res) => {
     micro.microIP = req.body.microIP;
     micro.et = req.body.et;
     micro.purpose = req.body.purpose;
+    micro.location = req.body.location;
+    micro.status = req.body.status;
     micro.save(function (error) {
       if (error) {
         console.log(error)
@@ -192,7 +194,9 @@ app.post('/add_micro', (req, res) => {
     microID: microID,
     microIP: microIP,
     et: et,
-    purpose: purpose
+    purpose: purpose,
+    location: location,
+    status: status,
   })
   new_micro.save(function (error) {
     if (error) {
