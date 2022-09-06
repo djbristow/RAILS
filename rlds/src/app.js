@@ -173,8 +173,8 @@ app.put('/update_micro/:id', (req, res) => {
     micro.microIP = req.body.microIP;
     micro.et = req.body.et;
     micro.purpose = req.body.purpose;
-    micro.location = req.body.location;
     micro.status = req.body.status;
+    micro.sensorLoc = req.body.sensorLoc;
     micro.save(function (error) {
       if (error) {
         console.log(error)
@@ -190,13 +190,15 @@ app.post('/add_micro', (req, res) => {
   var microIP = req.body.microIP;
   var et = req.body.et;
   var purpose = req.body.purpose;
+  var sensorLoc = req.body.sensorLoc;
+  var status = req.body.status;
   var new_micro = new Micro({
     microID: microID,
     microIP: microIP,
     et: et,
     purpose: purpose,
-    location: location,
-    status: status,
+    sensorLoc: sensorLoc,
+    status: status
   })
   new_micro.save(function (error) {
     if (error) {
