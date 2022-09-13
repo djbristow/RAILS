@@ -1,8 +1,8 @@
 {
   "name": "isms",
-  "version": "1.2.4",
+  "version": "2.0.0",
   "description": "IoT Subscriber Micro Controller Services",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,7 +13,8 @@
     "url": "https://github.com/djbristow/RAILS"
   },
   "dependencies": {
-    "axios": "^0.21.4",
-    "mqtt": "^4.2.8"
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
+    "mqtt": "^4.3.7"
   }
 }

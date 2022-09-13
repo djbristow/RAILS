@@ -1,7 +1,9 @@
 const mqtt = require('mqtt'),
-     axios = require('axios');
+  axios = require('axios');
 
 var client = mqtt.connect('mqtt://' + process.env.MQTT_PORT_1883_TCP_ADDR + ':' + process.env.MQTT_PORT_1883_TCP_PORT, { clientId: "mqttjs02" });
+console.log("ISMS Started v2.0.0")
+setTimeout(checkStatus, 6000);
 
 function rlds() {
   return axios.create({
@@ -19,7 +21,34 @@ client.on('message', function (topic, message) {
   client.end();
 })
 
+async function checkStatus() {
+  const cet = Math.round(Date.now()/1000);
+  // console.log(cet);
+  let status = "";
+  let response = await fetchMicroList();
+  let micros = response.data.micros
+  micros.forEach(micro => {
+    if ((cet - micro.et) < 300) {
+      status = "Up"
+    } else if ((cet - micro.et) < 600) {
+      status = "Late"
+    } else {
+      status = "Down"
+    }
+    if (micro.status !== status) {
+      micro.status = status;
+      updateMicro(micro);
+    }
+  })
+  setTimeout(checkStatus, 120000);
+}
+
+function fetchMicroList() {
+  return rlds().get('microlist/')
+}
+
 function getMicroID(params) {
+  console.log(params)
   return rlds().get('micro_id/' + params.id)
 }
 
@@ -28,36 +57,41 @@ function addMicro(params) {
 }
 
 function getMicro(id) {
- return rlds().get('micro/' + id)
+  return rlds().get('micro/' + id)
 }
 
-function updateMicro(params){
-  return rlds().put('micro/' + params._id, params)
+async function updateMicro(params) {
+  return rlds().put('update_micro/' + params._id, params)
 }
 
 async function handleMicroMsg(message) {
   let parsedMsg = JSON.parse(message);
-  const response = await getMicroID({
-    id: parsedMsg.micro
+  let response = await getMicroID({
+    id: parsedMsg.sensor
   });
-  const key = response.data._id;
+  let key = response.data._id
   if (key == undefined) {
     addMicro({
-      microID: parsedMsg.micro,
+      microID: parsedMsg.sensor,
       microIP: parsedMsg.ip,
       et: parsedMsg.et,
-      purpose: "undefined"
+      purpose: "",
+      sensorLoc: "",
+      status: "Up"
     });
   } else {
-    const response = await getMicro(key);
-    const purpose = response.data.purpose;
+    let response = await getMicro(key);
+    let purpose = response.data.purpose;
+    let sensorLoc = response.data.sensorLoc;
+    let status = "Up";
     updateMicro({
       _id: key,
-      microID: parsedMsg.micro,
+      microID: parsedMsg.sensor,
       microIP: parsedMsg.ip,
       et: parsedMsg.et,
-      purpose: purpose
+      purpose: purpose,
+      sensorLoc: sensorLoc,
+      status: status
     });
   }
 }
-  console.log("ISMS Started v1.2.4")

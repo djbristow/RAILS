@@ -1,10 +1,10 @@
 # isms
-&copy; David Bristow, 2020-2021
+&copy; David Bristow, 2020-2022
 
-**I**oT **S**ubscriber **M**icro-controller **S**ervices is an application that subscribes to micro messages from the MQTT Broker and adds or updates the micros collection.
+**I**oT **S**ubscriber **M**icro-controller **S**ervices is an application that subscribes to micro messages from the MQTT Broker and adds or updates the micros collection via RLDS services. If a heartbeat message is not received within 5 minutes the status of the micro is down graded to "Late" and if it is longer than 10 minutes the status is updated to "Down".
 
 ## Version
-* 1.2.4 - 9/13/2021
+* 2.0.0 - 9/12/2022
 
 ## License
 
