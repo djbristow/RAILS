@@ -165,7 +165,7 @@ app.get('/micro_id/:id', (req, res) => {
   })
 })
 app.put('/update_micro/:id', (req, res) => {
-  Micro.findById(req.params.id, function (error, micro) {
+  Micro.findById(req.body._id, function (error, micro) {
     if (error) {
       console.error(error);
     }
