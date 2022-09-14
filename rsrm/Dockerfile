@@ -1,4 +1,4 @@
-FROM node:lts-alpine AS builder
+FROM node AS builder
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
 COPY package.json /usr/djb 
@@ -6,7 +6,7 @@ RUN npm install
 COPY . /usr/djb
 RUN npm run build
 
-FROM node:lts-alpine
+FROM node
 RUN npm install -g http-server
 RUN mkdir -p /usr/djb/dist
 WORKDIR /usr/djb/dist
