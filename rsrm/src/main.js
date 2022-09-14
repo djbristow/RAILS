@@ -1,12 +1,15 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
-import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
+import vuetify from './plugins/vuetify'
+import { loadFonts } from './plugins/webfontloader'
+// import '@mdi/font/css/materialdesignicons.css'
+import router from './router'
+import store from './store'
 
-Vue.use(Buefy)
+loadFonts()
 
-Vue.config.productionTip = false
-
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+createApp(App)
+  .use(store)
+  .use(router)
+  .use(vuetify)
+  .mount('#app')

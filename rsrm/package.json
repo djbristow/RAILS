@@ -1,52 +1,35 @@
 {
   "name": "rsrm",
-  "version": "2.0.10",
+  "version": "3.1.0",
   "description": "Rolling Stock RFID Manager",
   "author": "dbristow <dave@bristow-family.org>",
   "private": true,
   "license": "Apache-2.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/djbristow/RAILS"
-  },
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "vite preview",
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^0.21.4",
-    "buefy": "^0.9.10",
-    "core-js": "^3.16.3",
-    "socket.io-client": "^4.1.3",
-    "vue": "^2.6.14"
+    "@mdi/font": "^7.0.96",
+    "axios": "^0.27.2",
+    "date-fns": "^2.29.3",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.25",
+    "roboto-fontface": "*",
+    "socket.io-client": "^4.5.1",
+    "vue": "^3.2.38",
+    "vue-json-csv": "^2.1.0",
+    "vue-router": "^4.0.13",
+    "vuetify": "^3.0.0-beta.10",
+    "vuex": "^4.0.2",
+    "webfontloader": "^1.0.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.5.13",
-    "@vue/cli-plugin-eslint": "^4.5.13",
-    "@vue/cli-service": "^4.5.13",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.14"
+    "@vitejs/plugin-vue": "^3.1.0",
+    "vite": "3.1.0",
+    "vite-plugin-vuetify": "^1.0.0-alpha.17"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+  "type": "module"
 }
