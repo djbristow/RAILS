@@ -30,5 +30,6 @@ function handleRfid(message){
 }
 
 httpServer.listen(3005, function() {
+      console.log("ISRS Started v1.1.2")
       console.log("App listening on port 3005")
 });

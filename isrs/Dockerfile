@@ -5,4 +5,4 @@ COPY package.json /usr/djb
 RUN npm install
 COPY . /usr/djb
 EXPOSE 3005
-CMD node ./app.js
+CMD node ./src/app.js
