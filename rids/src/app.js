@@ -273,8 +273,8 @@ app.get('/aar_code/:id', (req, res) => {
     res.send(post)
   })
 })
-app.put('/aar/:id', (req, res) => {
-  AarCode.findById(req.params.id, function (error, aarCode) {
+app.put('/update_aar/:id', (req, res) => {
+  AarCode.findById(req.body._id, function (error, aarCode) {
     if (error) {
       console.error(error);
     }
