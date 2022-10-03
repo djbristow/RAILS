@@ -3,6 +3,7 @@ import Admin from '../views/Admin.vue'
 import About from '../views/About.vue'
 import Rollingstock from '../views/Rollingstock.vue'
 import Reader from '../views/Reader.vue'
+import AarCodes from '../views/AarCodes.vue'
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     name: 'Reader',
     component: Reader,
   },
+  {
+    path: '/aarcodes',
+    name: 'AarCodes',
+    component: AarCodes,
+  }
 ];
 
 const router = createRouter({

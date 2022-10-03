@@ -62,7 +62,6 @@ export default {
         sensorLoc: this.sensorLoc,
         status: this.status,
       });
-      
       this.$emit("closeEditMicroDialog");
     },
   },

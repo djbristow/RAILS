@@ -2,6 +2,7 @@ import ApiRs from './ApiRs'
 import ApiMicro from './ApiMicro'
 
 export default {
+//Rollingstock Services
   addRs(params) {
     return ApiRs().post('add_rs', params)
   },
@@ -23,6 +24,21 @@ export default {
   deleteRs(id) {
     return ApiRs().delete('rs/' + id)
   },
+//AarCode Services
+  fetchAarlist() {
+    return ApiRs().get('aarlist')
+  },
+  deleteAarCode(id) {
+    return ApiRs().delete('aar/' + id)
+  },
+  updateAar(params) {
+    console.log(params)
+    return ApiRs().put('update_aar/' + params.id, params)
+  },
+  addAar(params) {
+    return ApiRs().post('add_aar', params)
+  },
+// Micro-controller services
   fetchMicroList () {
     return ApiMicro().get('microlist')
   },

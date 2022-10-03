@@ -69,7 +69,7 @@
             <v-text-field v-model="imageID" label="Image ID"></v-text-field>
           </v-row>
           <v-row dense>
-            <v-text-field v-model="notes" label="Notes"></v-text-field>
+            <v-textarea v-model="notes" label="Notes"></v-textarea>
           </v-row>
         </v-container>
       </v-card-text>
