@@ -22,7 +22,7 @@
     "follow-redirects": "^1.15.1",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.24",
-    "moment": "^2.29.3",
+    "moment": "^2.29.4",
     "vue": "^2.6.14",
     "vue-router": "^3.5.2",
     "vue-select": "^3.13.0",
