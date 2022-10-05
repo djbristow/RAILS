@@ -57,8 +57,8 @@ app.post('/add_dcc', (req, res) => {
     })
   })
 })
-app.put('/dcc/:id', (req, res) => {
-  Dcc.findById(req.params.id, function (error, dcc) {
+app.put('/update_dcc/:id', (req, res) => {
+  Dcc.findById(req.body._id, function (error, dcc) {
     if (error) {
       console.error(error);
     }
@@ -182,14 +182,13 @@ app.post('/add_struct', (req, res) => {
     })
   })
 })
-app.put('/struct/:id', (req, res) => {
-  Structure.findById(req.params.id, function (error, structure) {
+app.put('/update_struct/:id', (req, res) => {
+  Structure.findById(req.body._id, function (error, structure) {
     if (error) {
       console.error(error);
     }
     structure.title = req.body.title;
     structure.structureUse = req.body.structureUse;
-    structure.description = req.body.description;
     structure.description = req.body.description;
     structure.owner = req.body.owner;
     structure.location = req.body.location;
@@ -334,8 +333,8 @@ app.get('/img_file/:id', (req, res) => {
     res.send(post)
   })
 })
-app.put('/img/:id', (req, res) => {
-  Image.findById(req.params.id, function (error, img) {
+app.put('/update_img/:id', (req, res) => {
+  Image.findById(req.body._id, function (error, img) {
     if (error) {
       console.error(error);
     }
@@ -433,8 +432,8 @@ app.post('/add_co', (req, res) => {
     })
   })
 })
-app.put('/co/:id', (req, res) => {
-  Industry.findById(req.params.id, function (error, industry) {
+app.put('/update_co/:id', (req, res) => {
+  Industry.findById(req.body._id, function (error, industry) {
     if (error) {
       console.error(error);
     }
