@@ -5,7 +5,9 @@ var StructureSchema = new Schema({
     title: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique : true,
+        dropDups: true
     },
     structureUse: {
         required: true,

@@ -5,7 +5,9 @@ var ImageSchema = new Schema({
     fileName: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique : true,
+        dropDups: true
     },
     title: {
         type: String,

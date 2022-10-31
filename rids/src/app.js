@@ -77,6 +77,16 @@ app.put('/update_dcc/:id', (req, res) => {
     })
   })
 })
+app.get('/dcc_addr/:id', (req, res) => {
+  Dcc.findOne({
+    address: req.params.id
+  }, '_id', function (error, post) {
+    if (error) {
+      console.error(error);
+    }
+    res.send(post)
+  })
+})
 
 // The following CRUD functions handle data in the structures collection
 app.get('/structlistall', (req, res) => {
@@ -105,6 +115,16 @@ app.get('/structlist', (req, res) => {
 })
 app.get('/struct/:id', (req, res) => {
   Structure.findById(req.params.id, function (error, post) {
+    if (error) {
+      console.error(error);
+    }
+    res.send(post)
+  })
+})
+app.get('/struct_title/:id', (req, res) => {
+  AarCode.findOne({
+    title: req.params.id
+  }, '_id', function (error, post) {
     if (error) {
       console.error(error);
     }

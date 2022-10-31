@@ -7,7 +7,9 @@ var AarSchema = new Schema({
     type: String,
     required: true,
     minlength: 2,
-    trim: true
+    trim: true,
+    unique : true,
+    dropDups: true
   },
   rollingstockType: {
     type: String

@@ -18,7 +18,9 @@ var DccSchema = new Schema({
         type: String
     },
     address: {
-        type: String
+        type: String,
+        unique : true,
+        dropDups: true
     }
 });
 
