@@ -3,27 +3,15 @@
     <v-card-title class="headline"> Rollingstock Registration </v-card-title>
     <v-subheader>RFID Tag {{ rfid }}</v-subheader>
     <v-card-text>
-      <v-container
-        ><v-text-field
-          v-model="roadname"
-          label="Road Name"
-          required
-        ></v-text-field>
-        <v-text-field
-          v-model="roadnumber"
-          label="Road Number"
-          required
-        ></v-text-field
-      ></v-container>
+      <v-container>
+        <v-text-field v-model="roadname" label="Road Name" required></v-text-field>
+        <v-text-field v-model="roadnumber" label="Road Number" required></v-text-field>
+      </v-container>
       <v-container v-if="newrs">
         <div class="red--text mb-8">
           Rollingstock {{ roadname }} {{ roadnumber }} is not in the inventory
         </div>
-        <v-text-field
-          v-model="aarcode"
-          label="AAR Code"
-          required
-        ></v-text-field>
+        <v-text-field v-model="aarcode" label="AAR Code" required></v-text-field>
         <v-text-field v-model="color" label="Color" required></v-text-field>
       </v-container>
     </v-card-text>

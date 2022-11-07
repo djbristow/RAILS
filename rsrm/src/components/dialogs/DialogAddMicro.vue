@@ -7,10 +7,7 @@
         <v-text-field v-model="microIP" label="IP"></v-text-field>
         <v-text-field v-model="et" label="Time"></v-text-field>
         <v-text-field v-model="purpose" label="Purpose"></v-text-field>
-        <v-text-field
-          v-model="sensorLoc"
-          label="Sensor Location"
-        ></v-text-field>
+        <v-text-field v-model="sensorLoc" label="Sensor Location"></v-text-field>
         <v-text-field v-model="status" label="Status"></v-text-field>
       </v-container>
     </v-card-text>

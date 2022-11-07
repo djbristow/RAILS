@@ -20,23 +20,15 @@
             <v-icon color="blue darken-1" @click="editAarCode(item)">
               mdi-pencil
             </v-icon>
-            <v-icon color="red darken-1" @click="deleteAarCode(item)"
-              >mdi-delete</v-icon
-            >
+            <v-icon color="red darken-1" @click="deleteAarCode(item)">mdi-delete</v-icon>
           </td>
         </tr>
       </tbody>
       <v-dialog v-model="editAarCodeDialog">
-        <dialog-edit-aar-code
-          :aarCode="editableAarCode"
-          @closeEditAarCodeDialog="editAarCodeDialog = false"
-        />
+        <dialog-edit-aar-code :aarCode="editableAarCode" @closeEditAarCodeDialog="editAarCodeDialog = false" />
       </v-dialog>
       <v-dialog v-model="deleteAarCodeDialog">
-        <dialog-delete-aar-code
-          :aarCode="editableAarCode"
-          @closeDeleteAarCodeDialog="deleteAarCodeDialog = false"
-        />
+        <dialog-delete-aar-code :aarCode="editableAarCode" @closeDeleteAarCodeDialog="deleteAarCodeDialog = false" />
       </v-dialog>
       <v-dialog v-model="addAarCodeDialog">
         <dialog-add-aar-code @closeAddAarCodeDialog="addAarCodeDialog = false" />

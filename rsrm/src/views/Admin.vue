@@ -35,23 +35,15 @@
             <v-icon color="blue darken-1" @click="editMicro(item)">
               mdi-pencil
             </v-icon>
-            <v-icon color="red darken-1" @click="deleteMicro(item)"
-              >mdi-delete</v-icon
-            >
+            <v-icon color="red darken-1" @click="deleteMicro(item)">mdi-delete</v-icon>
           </td>
         </tr>
       </tbody>
       <v-dialog v-model="editMicroDialog">
-        <dialog-edit-micro
-          :micro="editableMicro"
-          @closeEditMicroDialog="editMicroDialog = false"
-        />
+        <dialog-edit-micro :micro="editableMicro" @closeEditMicroDialog="editMicroDialog = false" />
       </v-dialog>
       <v-dialog v-model="deleteMicroDialog">
-        <dialog-delete-micro
-          :micro="editableMicro"
-          @closeDeleteMicroDialog="deleteMicroDialog = false"
-        />
+        <dialog-delete-micro :micro="editableMicro" @closeDeleteMicroDialog="deleteMicroDialog = false" />
       </v-dialog>
       <v-dialog v-model="addMicroDialog">
         <dialog-add-Micro @closeAddMicroDialog="addMicroDialog = false" />
@@ -59,7 +51,9 @@
     </v-table>
     <br />
     <hr />
-    <download-csv :data="rs"><v-btn> Export RFID RS </v-btn></download-csv><br />
+    <download-csv :data="rs">
+      <v-btn> Export RFID RS </v-btn>
+    </download-csv><br />
     <v-btn @click="printRfids()" width="200">Print RFID Report</v-btn>
   </div>
 </template>

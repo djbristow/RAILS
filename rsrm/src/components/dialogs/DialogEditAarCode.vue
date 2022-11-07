@@ -19,7 +19,7 @@
     </v-card-actions>
   </v-card>
 </template>
-  <script>
+<script>
 export default {
   name: "DialogEditAarCode",
   props: ["aarCode"],
