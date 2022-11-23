@@ -15,7 +15,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "mqtt": "^4.2.8",
     "socket.io": "^4.1.3"
   }
