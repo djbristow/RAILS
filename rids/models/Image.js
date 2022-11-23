@@ -16,6 +16,10 @@ var ImageSchema = new Schema({
     notes: {
         type: String,
         trim: true
+    },
+    category: {
+        type: String,
+        trim: true
     }
 });
 

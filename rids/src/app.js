@@ -361,6 +361,7 @@ app.put('/update_img/:id', (req, res) => {
     img.title = req.body.title;
     img.fileName = req.body.fileName;
     img.notes = req.body.notes;
+    img.category = req.body.category;
     img.save(function (error) {
       if (error) {
         console.log(error)
@@ -378,7 +379,8 @@ app.post('/add_img', (req, res) => {
   var new_img = new Image({
     title: title,
     fileName: fileName,
-    notes: notes
+    notes: notes,
+    category: category
   })
   new_img.save(function (error) {
     if (error) {
