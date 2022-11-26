@@ -1,10 +1,10 @@
 # ipts
-&copy; David Bristow, 2020-2021
+&copy; David Bristow, 2020-2022
 
 **I**oT **P**ublish **T**urnout **S**ervices is an Express aplication that checks turnout collections to check and update locks. It receives web socket messages providing turnout commands. It publishes mqtt turnout messages to the MQTT Broker. This application uses port 3011.
 
 ## Version
-* 1.1.4 - 9/13/2021
+* 1.1.5 - 11/25/2022
 
 ## License
 

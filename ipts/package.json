@@ -1,6 +1,6 @@
 {
   "name": "ipts",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "IoT Publisher Turnout Services",
   "scripts": {
     "start": "nodemon src/app.js",
@@ -14,10 +14,10 @@
     "url": "https://github.com/djbristow/RAILS"
   },
   "dependencies": {
-    "axios": "^0.21.4",
+    "axios": "^1.2.0",
     "cors": "2.8.5",
-    "express": "^4.17.1",
-    "mqtt": "^4.2.8",
-    "nodemon": "^2.0.12"
+    "express": "^4.18.2",
+    "mqtt": "^4.3.7",
+    "nodemon": "^2.0.20"
   }
 }
