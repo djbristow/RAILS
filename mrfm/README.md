@@ -1,10 +1,10 @@
 # mrfm
 &copy; David Bristow, 2019-2022
 
-Model Railroad File Manager is a Express application that stores files on the server. This application uses port 3003.
+Model Railroad File Manager is a Hapi application that stores files on the server (POST). The images stored on the server also available for reterival (GET). This application uses port 3003.
 
 ## Version
-* 1.0.6 - 6/2/2022
+* 2.0.0 - 11/29/2022
 
 ## License
 
@@ -29,5 +29,7 @@ Model Railroad File Manager is a Express application that stores files on the se
 npm install
 
 # start
-node app
+export MRFM_TCP_PORT=3030
+export MRFM_TCP_ADDR='127.0.0.1'
+node ./src/app
 ```

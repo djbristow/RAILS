@@ -28,4 +28,5 @@ mrlm/.*
 rsrm/node_modules/
 rsrm/.vscode/
 rsrm/dist/
+mrfm/src/uploads/
 .vscode/
