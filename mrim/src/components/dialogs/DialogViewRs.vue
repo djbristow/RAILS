@@ -1,0 +1,64 @@
+<template>
+  <v-card width="900">
+    <v-card-title class="headline"> Rollingstock Details </v-card-title>
+    <v-container>
+      <v-row dense>
+        <v-col cols="4">
+          <v-text-field>Road Name: {{ rollingstock.roadName }}</v-text-field>
+          <v-text-field>Road Number: {{ rollingstock.roadNumber }}</v-text-field>
+          <v-text-field>AAR Code: {{ rollingstock.aarCode }}</v-text-field>
+          <v-text-field>Color: {{ rollingstock.color }}</v-text-field>
+          <v-text-field>Description: {{ rollingstock.description }}</v-text-field>
+        </v-col>
+        <v-col cols="8">
+          <v-img :src='imageServer' />
+        </v-col>
+      </v-row>
+      <v-row dense>
+        <v-text-field>Number Built: {{ rollingstock.numberBlt }}</v-text-field>
+        <v-text-field>Builder: {{ rollingstock.bldr }}</v-text-field>
+        <v-text-field>Built Date: {{ rollingstock.bltDate }}</v-text-field>
+        <v-text-field>In Service Date: {{ rollingstock.inSvcDate }}</v-text-field>
+      </v-row>
+      <v-row dense>
+        <v-text-field>Inside Length: {{ rollingstock.insideLength }}</v-text-field>
+        <v-text-field>Inside Height: {{ rollingstock.insideHeight }}</v-text-field>
+        <v-text-field>Inside Width: {{ rollingstock.insideWidth }}</v-text-field>
+        <v-text-field>Lt Weight: {{ rollingstock.ltWeight }}</v-text-field>
+      </v-row>
+      <v-row dense>
+        <v-text-field>Load Limit: {{ rollingstock.loadLimit }}</v-text-field>
+        <v-text-field>Load Types: {{ rollingstock.loadTypes }}</v-text-field>
+        <v-text-field>Capacity: {{ rollingstock.capacity }}</v-text-field>
+        <v-text-field>Home Location: {{ rollingstock.homeLocation }}</v-text-field>
+      </v-row>
+      <v-row dense>
+        <v-text-field>Last Maintenance: {{ rollingstock.lastMaintDate }}</v-text-field>
+        <v-text-field>Status: {{ rollingstock.rsStatus }}</v-text-field>
+      </v-row>
+      <v-card-subtitle>Model Details</v-card-subtitle>
+      <v-row dense>
+        <v-text-field>RFID Tag: {{ rollingstock.rfid }}</v-text-field>
+        <v-text-field>Weight: {{ rollingstock.modelWeight }}</v-text-field>
+        <v-text-field>Length: {{ rollingstock.modelLength }}</v-text-field>
+        <v-text-field>Image ID: {{ rollingstock.imageID }}</v-text-field>
+      </v-row>
+      <v-row dense>
+        <v-text-field>Notes: {{ rollingstock.notes}}</v-text-field>
+      </v-row>
+    </v-container>
+    <v-btn @click="$emit('closeViewRsDialog')" text>Close</v-btn>
+  </v-card>
+</template>
+<script>
+export default {
+  name: "DialogViewRs",
+  props: ["rollingstock"],
+  data: () => ({
+    imageServer: "",
+  }),
+  mounted: function () {
+    this.imageServer = 'http://' + import.meta.env.VITE_MRFM_TCP_ADDR +':'+ import.meta.env.VITE_MRFM_TCP_PORT +'/'+ this.rollingstock.imageID;
+  },
+};
+</script>

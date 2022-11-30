@@ -1,125 +1,112 @@
-import Api from './Api'
+import ApiRs from "./ApiRs";
 
 export default {
-  fetchRslist() {
-    return Api().get('rslist')
-  },
-  fetchAllRslist() {
-    return Api().get('rslistall')
-  },
+  // Rollingstock Services
   addRs(params) {
-    return Api().post('add_rs', params)
+    return ApiRs().post("add_rs", params);
   },
   updateRs(params) {
-    return Api().put('rs/' + params.id, params)
+    return ApiRs().put("rs/" + params._id, params);
   },
   getRs(params) {
-    return Api().get('rs/' + params.id)
-  },
-  getRsById(id) {
-    return Api().get('rs/' + id)
-  },
-  deleteRs(id) {
-    return Api().delete('rs/' + id)
+    return ApiRs().get("rs/" + params.id);
   },
   getRsRoad(params) {
-    return Api().get('rs_road/' + params)
+    return ApiRs().get("rs_road/" + params);
   },
-  fetchUniqueRoadNames() {
-    return Api().get('rslistroadnames')
+  fetchAllRslist() {
+    return ApiRs().get("rslistall");
   },
-  fetchRSLocomotives() {
-    return Api().get('rslocomotives')
+  deleteRs(id) {
+    return ApiRs().delete("rs/" + id);
   },
-  fetchUniqueAarCodes() {
-    return Api().get('rslistaarcodes')
-  },
-  fetchUniqueStatuses() {
-    return Api().get('rslistopstatuses')
-  },
-  fetchImglist() {
-    return Api().get('imglist')
-  },
-  getImg(params) {
-    return Api().get('img/' + params.id)
-  },
-  getImgById(id) {
-    return Api().get('img/' + id)
-  },
-  getImgByFile(fileName) {
-    return Api().get('img_file/' + fileName)
-  },
-  deleteImg(id) {
-    return Api().delete('img/' + id)
-  },
-  updateImg(params) {
-    return Api().put('img/' + params.id, params)
-  },
-  addImg(params) {
-    return Api().post('add_img', params)
-  },
+  // AarCode Services
   fetchAarlist() {
-    return Api().get('aarlist')
+    return ApiRs().get("aarlist");
   },
-  getAar(params) {
-    return Api().get('aar/' + params.id)
-  },
-  getAarByCode(code) {
-    return Api().get('aar_code/' + code)
-  },
-  deleteAar(id) {
-    return Api().delete('aar/' + id)
+  deleteAarCode(id) {
+    return ApiRs().delete("aar/" + id);
   },
   updateAar(params) {
-    return Api().put('aar/' + params.id, params)
+    return ApiRs().put("update_aar/" + params.id, params);
   },
   addAar(params) {
-    return Api().post('add_aar', params)
+    return ApiRs().post("add_aar", params);
   },
-  fetchColist() {
-    return Api().get('colist')
+  getAarByCode(code) {
+    return ApiRs().get("aar_code/" + code);
   },
-  getCo(params) {
-    return Api().get('co/' + params.id)
-  },
-  getCoByName(name) {
-    return Api().get('co_name/' + name)
-  },
-  deleteCo(id) {
-    return Api().delete('co/' + id)
-  },
-  updateCo(params) {
-    return Api().put('co/' + params.id, params)
-  },
-  addCo(params) {
-    return Api().post('add_co', params)
-  },
-  fetchStructlist() {
-    return Api().get('structlist')
-  },
+  // Structures Services
   addStruct(params) {
-    console.log(params)
-    return Api().post('add_struct', params)
+    return ApiRs().post("add_struct", params);
   },
   getStruct(params) {
-    return Api().get('struct/' + params.id)
+    return ApiRs().get("struct/" + params.id);
   },
   deleteStruct(id) {
-    return Api().delete('struct/' + id)
+    return ApiRs().delete("struct/" + id);
   },
   updateStruct(params) {
-    return Api().put('struct/' + params.id, params)
+    return ApiRs().put("update_struct/" + params._id, params);
   },
   fetchAllStructlist() {
-    return Api().get('structlistall')
+    return ApiRs().get("structlistall");
   },
+  getStructByTitle(title) {
+    return ApiRs().get("struct_title/" + title);
+  },
+  // Companies Services
+  fetchCoList() {
+    return ApiRs().get("colist");
+  },
+  addCo(params) {
+    return ApiRs().post("add_co", params);
+  },
+  deleteCo(id) {
+    return ApiRs().delete("co/" + id);
+  },
+  updateCo(params) {
+    return ApiRs().put("update_co/" + params.id, params);
+  },
+  getCoByName(name) {
+    return ApiRs().get("co_name/" + name);
+  },
+  // Decoders Services
   fetchDcclist() {
-    return Api().get('dcclistall')
+    return ApiRs().get("dcclistall");
   },
   addDcc(params) {
-    return Api().post('add_dcc', params)
+    return ApiRs().post("add_dcc", params);
   },
   updateDcc(params) {
-    return Api().put('dcc/' + params.id, params)
-  }
-}
+    return ApiRs().put("update_dcc/" + params.id, params);
+  },
+  deleteDcc(id) {
+    return ApiRs().delete("dcc/" + id);
+  },
+  getDccByAddr(addr) {
+    return ApiRs().get("dcc_addr/" + addr);
+  },
+  // Images Services
+  fetchImglist() {
+    return ApiRs().get("imglist");
+  },
+  getImg(params) {
+    return ApiRs().get("img/" + params.id);
+  },
+  getImgById(id) {
+    return ApiRs().get("img/" + id);
+  },
+  getImgByFile(fileName) {
+    return ApiRs().get("img_file/" + fileName);
+  },
+  deleteImg(id) {
+    return ApiRs().delete("img/" + id);
+  },
+  updateImg(params) {
+    return ApiRs().put("update_img/" + params.id, params);
+  },
+  addImg(params) {
+    return ApiRs().post("add_img", params);
+  },
+};

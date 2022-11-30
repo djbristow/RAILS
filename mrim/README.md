@@ -1,8 +1,8 @@
 # mrim
-&copy; David Bristow, 2020-2021
+&copy; David Bristow, 2020-2022
 
 ## Version
-* 2.3.10 - 6/2/2022
+* 3.0.0 - 12/1/2022
 
 **M**odel **R**ailroad **I**nventory **M**anager is a MEVN application that provides a user with a web application to display, create and update information of the inventoried items. This web application uses port 3001.
 
@@ -24,7 +24,7 @@ The following PDF reports are created by this application:
 * Rolling Stock sortable by Road Name and Road Number or AAR Code or Status
 
 ## Import/Export
-The application exports inventories in either JSON or CSV and imports files in CSV.
+The application exports and inventories in CSV files.
 
 ## License
 
@@ -44,27 +44,17 @@ The application exports inventories in either JSON or CSV and imports files in C
 
 ## Component dependencies
 * RIDS - Railroad Inventory Data Services running on port 3000
-* MRFM - Model Railroad File Manager running on port 3003
+* MRFM - Model Railroad File Manager running on port 3030
 
-## Project setup
-```
-npm install
-```
+# Vue 3 + Vite
+The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Recommended IDE Setup
+- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Environment Variables
+* VITE_MRFM_TCP_PORT=3030
+* VITE_MRFM_TCP_ADDR='127.0.0.1'
+* VITE_MYRIDS_TCP_PORT=3000
+* VITE_MYRIDS_TCP_ADDR='127.0.0.1'
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
