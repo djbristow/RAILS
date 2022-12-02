@@ -30,5 +30,5 @@ client.on('message', function (topic, message) {
 })
 
 httpServer.listen(3010, function () {
-     console.log("App, version 1.2.2 listening on port 3010")
+     console.log("App, version 1.2.3 listening on port 3010")
 });
