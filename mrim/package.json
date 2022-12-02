@@ -1,6 +1,6 @@
 {
   "name": "mrim",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Model Railroad Inventory Manager",
   "author": "dbristow <dave@bristow-family.org>",
   "private": true,
@@ -27,7 +27,7 @@
     "socket.io-client": "^4.5.3",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
-    "vuetify": "^3.0.2",
+    "vuetify": "^3.0.3",
     "vuex": "^4.1.0",
     "webfontloader": "^1.6.28"
   },
