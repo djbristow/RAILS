@@ -1,6 +1,6 @@
 {
   "name": "isms",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "IoT Subscriber Micro Controller Services",
   "main": "app.js",
   "scripts": {
