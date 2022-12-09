@@ -1,67 +1,55 @@
-import Api from './Api'
+import ApiPp from './ApiPp'
 
 export default {
+  // MR Companies
   fetchMcolist () {
-    return Api().get('mcolist')
+    return ApiPp().get('mcolist')
   },
   addMco (params) {
-    return Api().post('add_mco', params)
+    return ApiPp().post('add_mco', params)
   },
   updateMco (params) {
-    return Api().put('mco/' + params.id, params)
+    return ApiPp().put('update_mco/' + params.id, params)
   },
   getMco (params) {
-    return Api().get('mco/' + params.id)
+    return ApiPp().get('mco/' + params.id)
   },
   deleteMco (id) {
-    return Api().delete('mco/' + id)
+    return ApiPp().delete('mco/' + id)
   },
-  fetchUniqueProjectTypes () {
-    return Api().get('projectlisttype')
+  getMcoByName (name) {
+    return ApiPp().get('mco_name/' + name)
   },
+  // Projects
   fetchProjlist () {
-    return Api().get('projlist')
-  },
-  getProj (params) {
-    return Api().get('proj/' + params.id)
-  },
-  getProjById (id) {
-    return Api().get('proj/' + id)
-  },
-  deleteProj (id) {
-    return Api().delete('proj/' + id)
-  },
-  updateProj (params) {
-    return Api().put('proj/' + params.id, params)
+    return ApiPp().get('projlist')
   },
   addProj (params) {
-    return Api().post('add_proj', params)
+    return ApiPp().post('add_proj', params)
   },
+  updateProj (params) {
+    return ApiPp().put('update_proj/' + params.id, params)
+  },
+  deleteProj (id) {
+    return ApiPp().delete('proj/' + id)
+  },
+  getProjByTitle (id) {
+    return ApiPp().get('proj_title/' + id)
+  },
+  // Purchases
   fetchPurlist () {
-    return Api().get('purlist')
-  },
-  fetchPurListProj (params) {
-    return Api().get('fetch_purchases/' + params)
-  },
-  fetchUniquePurchaseProjects () {
-    return Api().get('purlistproject')
-  },
-  fetchUniquePurchaseManufacturer () {
-    return Api().get('purlistmanufacturer')
-  },
-  fetchUniquePurchaseStore () {
-    return Api().get('purliststore')
-  },
-  getPur (params) {
-    return Api().get('pur/' + params.id)
-  },
-  deletePur (id) {
-    return Api().delete('pur/' + id)
-  },
-  updatePur (params) {
-    return Api().put('pur/' + params.id, params)
+    return ApiPp().get('purlist')
   },
   addPur (params) {
-    return Api().post('add_pur', params)
-  }
+    return ApiPp().post('add_pur', params)
+  },
+  updatePur (params) {
+    return ApiPp().put('update_pur/' + params.id, params)
+  },
+  deletePur (id) {
+    return ApiPp().delete('pur/' + id)
+  },
+  getPurByNumber (number) {
+    return ApiPp().get('pur_number/' + number)
+  }, 
 }

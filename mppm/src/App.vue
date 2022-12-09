@@ -1,103 +1,61 @@
 <template>
-  <div id="app">
-    <section>
-      <b-navbar>
-        <template slot="brand">
-          <b-navbar-item>
-            <b-dropdown hoverable aria-role="list">
-              <button slot="trigger" class="button is-light">
-                <span>MPPM</span>
-                <b-icon icon="menu-down" />
-              </button>
-              <b-dropdown-item aria-role="listitem">
-                <router-link to="/">Home</router-link>
-              </b-dropdown-item>
-              <b-dropdown-item aria-role="listitem">
-                <router-link to="/Admix">Admin</router-link>
-              </b-dropdown-item>
-              <b-dropdown-item aria-role="listitem">
-                <router-link to="/Report">Reports</router-link>
-              </b-dropdown-item>
-              <b-dropdown-item aria-role="listitem">
-                <a href="https://kjcrr.org" target="_blank">KJ&C RR</a>
-              </b-dropdown-item>
-            </b-dropdown>
-          </b-navbar-item>
-        </template>
-        <template slot="start">
-          <b-navbar-item>
-            <b-dropdown hoverable aria-role="list">
-              <button slot="trigger" class="button is-light">
-                <span>Companies</span>
-                <b-icon icon="menu-down" />
-              </button>
-              <b-dropdown-item aria-role="listitem">
-                <router-link to="/Mcolist">List</router-link>
-              </b-dropdown-item>
-              <b-dropdown-item aria-role="listitem">
-                <router-link to="/Mco/new">New</router-link>
-              </b-dropdown-item>
-            </b-dropdown>
-          </b-navbar-item>
-          <b-navbar-item>
-            <b-dropdown hoverable aria-role="list">
-              <button slot="trigger" class="button is-light">
-                <span>Projects</span>
-                <b-icon icon="menu-down" />
-              </button>
-              <b-dropdown-item aria-role="listitem">
-                <router-link to="/Projlist">List</router-link>
-              </b-dropdown-item>
-              <b-dropdown-item aria-role="listitem">
-                <router-link to="/Proj/new">New</router-link>
-              </b-dropdown-item>
-            </b-dropdown>
-          </b-navbar-item>
-          <b-navbar-item>
-            <b-dropdown hoverable aria-role="list">
-              <button slot="trigger" class="button is-light">
-                <span>Purchases</span>
-                <b-icon icon="menu-down" />
-              </button>
-              <b-dropdown-item aria-role="listitem">
-                <router-link to="/Purlist">List</router-link>
-              </b-dropdown-item>
-              <b-dropdown-item aria-role="listitem">
-                <router-link to="/Pur/new">New</router-link>
-              </b-dropdown-item>
-            </b-dropdown>
-          </b-navbar-item>
-        </template>
-      </b-navbar>
-      <div class="center">
-        <h1 class="title is-3">Model Projects and Purchases Manager</h1>
-      </div>
-      <router-view />
-    </section>
-  </div>
-</template>
+  <v-app>
+    <v-app-bar color="blue" dark prominent image="./railway_track.jpg">
+      <v-app-bar-nav-icon
+        style="color: white"
+        @click="drawer = !drawer"
+      ></v-app-bar-nav-icon>
+      <v-toolbar-title style="color: white">RAILS</v-toolbar-title>
+      <v-spacer></v-spacer>
+    </v-app-bar>
 
+    <v-navigation-drawer app v-model="drawer">
+      <v-list-item>
+        <v-list-item-title class="text-h6">
+          Model Project & Purchase Manager
+        </v-list-item-title>
+        <v-list-item-subtitle> KJ&C RR </v-list-item-subtitle>
+      </v-list-item>
+      <v-list nav dense>
+        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to">
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-action>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <v-main>
+      <router-view></router-view>
+    </v-main>
+  </v-app>
+</template>
+  
 <script>
 export default {
-  name: "App",
-  data() {
-    return {
-      navIsActive: false,
-    };
+  data: () => ({
+    name: "App",
+    drawer: false,
+    items: [
+      { title: "Purchases", icon: "mdi-currency-usd", to: "/purchases" },
+      { title: "Projects", icon: "mdi-notebook-outline", to: "/projects"},
+      { title: "MR Companies", icon: "mdi-cog", to: "/mrcompanies" },
+      { title: "Admin", icon: "mdi-format-list-checks", to: "/" },
+      { title: "About", icon: "mdi-help-box", to: "/about" },
+    ],
+  }),
+  mounted() {
+    this.$store.dispatch("getPurchases");
+    this.$store.dispatch("getProjects");
+    this.$store.dispatch("getMrcos");
   },
-  methods: {
-    toggleMenu: function () {
-      this.navIsActive = !this.navIsActive;
-    },
-  },
+  methods: {},
 };
 </script>
-<style scoped>
-img {
-  padding-left: 25px;
-  padding-right: 20px;
-}
-.center {
-  text-align: center;
+<style>
+.xx {
+  margin-left: 50px;
+  width: 1200px;
+  padding: 10px;
 }
 </style>
