@@ -4,10 +4,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var CompanySchema = new Schema({
+var MrCompanySchema = new Schema({
     name: {
         type: String,
         required: true,
+        unique: true,
         trim: true
     },
     type: {
@@ -16,6 +17,10 @@ var CompanySchema = new Schema({
         trim: true
     },
     website: {
+        type: String,
+        trim: true
+    },
+    email: {
         type: String,
         trim: true
     },
@@ -33,5 +38,5 @@ var CompanySchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Company', CompanySchema);
+module.exports = mongoose.model('MrCompany', MrCompanySchema);
 

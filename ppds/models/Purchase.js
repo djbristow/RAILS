@@ -5,7 +5,8 @@ var Schema = mongoose.Schema;
 
 var Purchase = new Schema({
     num: {
-        type: Number
+        type: Number,
+        unqiue: true
     },
     date: {
         type: Date,

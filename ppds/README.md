@@ -3,8 +3,8 @@
 
 Projects and Purchases Data Services is an Express Mongoose aplication that connects to a MongoDB database containing inventory collections and provide data services to MPPM component. This application uses port 3007.
 
-## Version
-* 1.3.8 - 12/1/2022
+## Version1
+* 2.0.0 - 12/8/2022
 
 ## License
 
