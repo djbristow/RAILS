@@ -24,7 +24,6 @@
     "jspdf-autotable": "^3.5.28",
     "moment": "^2.29.4",
     "roboto-fontface": "*",
-    "socket.io-client": "^4.5.4",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
     "vuetify": "^3.0.4",
