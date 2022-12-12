@@ -52,6 +52,7 @@ export default {
     if (action == "a" && item._id !== "") {
       delete item._id;
     }
+    console.log ("item: ", item);
     switch (type) {
       case "Purchases":
         if (action == "a" || action == "u") {
@@ -82,12 +83,12 @@ export default {
       case "Projects":
         if (action == "a" || action == "u") {
           if (action == "a") {
-            store.dispatch("addNewProjects", item);
+            store.dispatch("addNewProject", item);
           } else {
-            store.dispatch("updateProjects", item);
+            store.dispatch("updateProject", item);
           }
         } else if (action == "d") {
-          store.dispatch("deleteProjects", item._id);
+          store.dispatch("deleteProject", item._id);
         } else {
           console.log("There is a problem");
         }
