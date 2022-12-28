@@ -12,7 +12,7 @@ module.exports.connect = function () {
 	db.on("error", console.error.bind(console, "connection error"));
 	db.once("open", function (callback) {
 		console.log("Connection Succeeded");
-        console.log("Version 1.9.1");
+        console.log("RIDS v1.9.2");
 		return db;
 	})
 }

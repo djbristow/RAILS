@@ -1,3 +1,7 @@
+// MRFM Model Railroad File Manager
+// This is a Hapi application that stores files on the server (POST). The images stored on
+// the server are also available for reterival (GET).
+
 const Hapi = require("@hapi/hapi");
 const fs = require("fs");
 const Path = require("path");
@@ -60,7 +64,8 @@ const init = async () => {
     },
   });
   await server.start();
-  console.log("Server Version 2.0.0 running on %s", server.info.uri);
+  console.log("MRFM v2.0.1, Started")
+  console.log("MRFM running on %s", server.info.uri);
 };
 process.on("unhandledRejection", (err) => {
   console.log(err);
