@@ -1,10 +1,10 @@
 # ists
 &copy; David Bristow, 2020-2022
 
-IoT Subscriber is a Express application that subscribes to Turnout contact switch messages from the MQTT Broker and sends them to a MEVN web application using web sockets. This application uses port 3010.
+**I**oT **S**ubscriber **T**urnout **S**ervices is a Express application that subscribes to turnout contact switch messages from the MQTT Broker and sends them to a Vue application using a web socket. This application uses port 3010.
 
 ## Version
-* 1.2.3 - 12/1/2022
+* 1.3.0 - 12/28/2022
 
 ## License
 
@@ -36,5 +36,5 @@ npm install
 export MQTT_PORT_1883_TCP_ADDR='127.0.0.1'
 export MQTT_PORT_1883_TCP_PORT='1883'
 export MRLM_TCP_PORT='3004'
-node app
+node ./src/app
 ```

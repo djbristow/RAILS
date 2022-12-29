@@ -1,3 +1,7 @@
+// ISTS - IoT Subscriber Turnout Services
+// This express app subscribes to turnout contacts (sensors/toc) from the MQTT Broker and
+// pushes them to a Vue application using a web socket.
+
 const mqtt = require('mqtt'),
      app = require('express')(),
      cors = require('cors');
@@ -30,5 +34,6 @@ client.on('message', function (topic, message) {
 })
 
 httpServer.listen(3010, function () {
-     console.log("App, version 1.2.3 listening on port 3010")
+     console.log("ISTS v1.3.0, started")
+     console.log("ISTS listening on port 3010")
 });
