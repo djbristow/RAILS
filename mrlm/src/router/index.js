@@ -1,77 +1,35 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '../components/Home'
-import ToList from '../components/ToList'
-import NewTo from '../components/NewTo'
-import EditTo from '../components/EditTo'
-import TPLList from '../components/TPLList'
-import NewTPL from '../components/NewTPL'
-import EditTPL from '../components/EditTPL'
-import MicroList from '../components/MicroList'
-import EditMicro from '../components/EditMicro'
-import NewMicro from '../components/NewMicro'
-import Admix from '../components/Admix'
-
-Vue.use(Router)
-
-export default new Router({
-  mode: 'hash',
-  base: __dirname,
-  routes: [
+import { createRouter, createWebHashHistory } from 'vue-router'
+import Admin from '../views/Admin.vue'
+import About from '../views/About.vue'
+import MicroContlr from '../views/MicroContlr.vue'
+import Turnouts from '../views/Turnouts.vue'
+import TPLights from '../views/TPLights.vue'
+const routes = [
+    {
+      path: '/Admin',
+      name: 'Admin',
+      component: Admin
+    },
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      name: 'About',
+      component: About
     },
     {
-      path: '/ToList',
-      name: 'ToList',
-      component: ToList
+      path: '/MicroContlr',
+      name: 'MicroContlr',
+      component: MicroContlr
     },
     {
-      path: '/TO/new',
-      name: 'NewTo',
-      component: NewTo
+      path: '/Turnouts',
+      name: 'Turnouts',
+      component: Turnouts
     },
     {
-      path: '/TO/:id',
-      name: 'EditTo',
-      component: EditTo
+      path: '/TPLights',
+      name: 'TPLights',
+      component: TPLights
     },
-    {
-      path: '/TPLList',
-      name: 'TPLList',
-      component: TPLList
-    },
-    {
-      path: '/TPL/new',
-      name: 'NewTPL',
-      component: NewTPL
-    },
-    {
-      path: '/TPL/:id',
-      name: 'EditTPL',
-      component: EditTPL
-    },
-    {
-      path: '/MicroList',
-      name: 'MicroList',
-      component: MicroList
-    },
-    {
-      path: '/Micro/new',
-      name: 'NewMicro',
-      component: NewMicro
-    },
-    {
-      path: '/Micro/:id',
-      name: 'EditMicro',
-      component: EditMicro
-    },
-    {
-      path: '/Admix',
-      name: 'Admix',
-      component: Admix
-    }
   ]
-})
+const router = createRouter({ history: createWebHashHistory(), routes })
+export default router
