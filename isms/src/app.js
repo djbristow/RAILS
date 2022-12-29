@@ -1,8 +1,12 @@
+// ISMS IoT Subscriber Micro-controller Services
+// This is an express application that subscribes to micro messages from the MQTT Broker 
+// and adds or updates the micros collection via RLDS services.
+
 const mqtt = require('mqtt'),
   axios = require('axios');
 
 var client = mqtt.connect('mqtt://' + process.env.MQTT_PORT_1883_TCP_ADDR + ':' + process.env.MQTT_PORT_1883_TCP_PORT, { clientId: "mqttjs02" });
-console.log("ISMS Started v2.0.2")
+console.log("ISMS v2.1.0, Started")
 setTimeout(checkStatus, 6000);
 
 function rlds() {
