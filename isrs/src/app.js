@@ -1,3 +1,7 @@
+// ISRS IoT Subscriber RFID Services 
+// This is an Express application that subscribes to RFID messages from the MQTT Broker 
+// and sends them to a web application using web sockets.
+
 const mqtt = require('mqtt'),     
       app = require('express')(),
       cors = require('cors');
@@ -30,6 +34,6 @@ function handleRfid(message){
 }
 
 httpServer.listen(3005, function() {
-      console.log("ISRS Started v1.1.4")
-      console.log("App listening on port 3005")
+      console.log("ISRS v1.2.0, Started")
+      console.log("ISRS listening on port 3005")
 });
