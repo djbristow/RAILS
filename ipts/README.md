@@ -1,10 +1,10 @@
 # ipts
 &copy; David Bristow, 2020-2022
 
-**I**oT **P**ublish **T**urnout **S**ervices is an Express aplication that checks turnout collections to check and update locks. It receives web socket messages providing turnout commands. It publishes mqtt turnout messages to the MQTT Broker. This application uses port 3011.
+**I**oT **P**ublish **T**urnout **S**ervices is an Express aplication that publishes mqtt turnout messages to the MQTT Broker. This application uses port 3011.
 
 ## Version
-* 1.1.6 - 12/1/2022
+* 2.0.0 - 12/28/2022
 
 ## License
 
@@ -23,7 +23,6 @@
 **NOTE**: This software depends on other packages that may be licensed under different open source licenses.
 
 ## Component dependencies
-* RLDS
 * MQTT Broker running on port 1883
 
 
@@ -36,7 +35,5 @@ npm install
 # start
 export MQTT_PORT_1883_TCP_ADDR='127.0.0.1'
 export MQTT_PORT_1883_TCP_PORT='1883'
-export RLDS_PORT_3006_TCP_ADDR='127.0.0.1'
-export RLDS_PORT_3006_TCP_PORT='3006'
 node ./src/app
 ```

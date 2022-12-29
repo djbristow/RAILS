@@ -1,12 +1,7 @@
 {
   "name": "ipts",
-  "version": "1.1.6",
+  "version": "2.0.0",
   "description": "IoT Publisher Turnout Services",
-  "scripts": {
-    "start": "nodemon src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
   "author": "David Bristow",
   "license": "Apache-2.0",
   "repository": {
@@ -14,10 +9,8 @@
     "url": "https://github.com/djbristow/RAILS"
   },
   "dependencies": {
-    "axios": "^1.2.0",
-    "cors": "2.8.5",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
-    "mqtt": "^4.3.7",
-    "nodemon": "^2.0.20"
+    "mqtt": "^4.3.7"
   }
 }
