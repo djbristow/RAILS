@@ -1,8 +1,8 @@
 # RAILS
-&copy; David Bristow, 2019-2021
+&copy; David Bristow, 2019-2022
 
 # Version
-* 1.12.9 - 9/13/22
+* 2.0.0 - 12/28/22cd 
 RAILS is a software model and implemenation of an automated system to assist the model railroader achieve realism in the operation of a model railroad. The model then drives the development of software.
 For further information see http://kjcrr.org/rails
 
@@ -23,7 +23,7 @@ For further information see http://kjcrr.org/rails
 **NOTE**: This software depends on other packages that may be licensed under different open source licenses.
 
 ## System Design
-![System Design](https://github.com/djbristow/RAILS/blob/master/sysdesign.png)
+![System Design](https://github.com/djbristow/RAILS/blob/master/sysdesign.svg)
 
 The components of this design are:
 - Micro Controllers using the Message Queuing Telemetry Transport (MQTT) protocol:
@@ -35,8 +35,10 @@ The components of this design are:
   - ISLS – (in planning) IoT Subscriber Location Services subscribes to topics that provide location information i.e. IR Sensors and RFID sensors
   - ISTS – **I**oT **S**ubscriber **T**urnout **S**ervices subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component
   - IPTS – **I**oT **P**ublisher **T**urnout **S**ervices publishes turnout commands to a Turnout Controller
+  - IPLS – **I**oT **P**ublisher Turnout Panel **L**ight **S**ervices publishes light commands to a Turnout Panel Controller
   - ISMS – **I**oT **S**ubscriber **M**icro-controller **S**ervices subscribes to micros and adds or updates micros collection in RAILS
-  - ISTC - **I**oT **S**ubscriber and Publisher **T**urnout Panel **C**ontroller subscribes to turnout commands, push button events, and turnout contacts. It publishes turnout commands and turnout panel light connands
+  - ISBS – **I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices subscribes to turnout panel push button events and pushes them via a web-socket to the MRLM component
+
 - GUI applications that provide users access to RAILS
   - RSRM – the **R**olling**s**tock **R**FID **M**anager allows a user to match a RFID value to a rolling stock road name and number
   - MRIM – the **M**odel **R**ailroad **I**nventory **M**anager allows a user to create, update and delete model railroad assets, such as rolling stock
@@ -52,19 +54,25 @@ The components of this design are:
 
 |Name |Title                                  |Port |Version|Date     |
 |-----|---------------------------------------|-----|-------|---------|
-|RIDS|**R**ailroad **I**nventory **D**ata **S**ervices|3000|1.9.1|12/1/2022|
-|MRIM|**M**odel **R**ailroad **I**nventory **M**anager|3001|3.0.1|12/1/2022|
-|RSRM|**R**olling**s**tock **R**FID **M**anager|3002|3.2.3|12/1/2022|
-|MRFM|**M**odel **R**ailroad **F**ile **M**anager|3030|2.0.0|11/29/2022|
-|MRLM|**M**odel **R**ailroad **L**ayout **M**anager|3004|1.2.2|9/13/2021|
-|ISRS|**I**oT **S**ubscriber **R**FID **S**ervices|3005|1.1.4|12/1/2022|
-|RLDS|**R**ailroad **L**ayout **D**ata **S**ervices|3006|1.2.3|12/1/2022|
-|PPDS|**P**lans and **P**urchases **D**ata **S**ervices|3007|1.3.8|12/1/2022|
-|MPPM|**M**odel **P**rojects and **P**urchase **M**anager|3008|1.5.9|9/13/2021|
-|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices||2.0.2|12/1/2022|
-|ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices|3010|1.2.3|12/1/2022|
-|IPTS|**I**oT **P**ublisher **T**urnout **S**ervices|3011|1.1.6|12./1/2022|
-|ISTC|**I**oT **S**ubscriber and Publisher **T**urnout Panel **C**ontroller||1.1.4|12/1/2022|
+-----------------------SPAs--------------------
+|MPPM|**M**odel **P**rojects and **P**urchase **M**anager|3008|2.0.2|12/28/2022|
+|MRIM|**M**odel **R**ailroad **I**nventory **M**anager|3001|3.0.2|12/28/2022|
+|MRLM|**M**odel **R**ailroad **L**ayout **M**anager|3004|2.0.0|12/28/2022|
+|RSRM|**R**olling**s**tock **R**FID **M**anager|3002|3.2.4|12/28/2022|
+---------------------Data Services--------------
+|MRFM|**M**odel **R**ailroad **F**ile **M**anager|3030|2.0.1|12/28/2022|
+|PPDS|**P**lans and **P**urchases **D**ata **S**ervices|3007|2.0.1|12/28/2022|
+|RIDS|**R**ailroad **I**nventory **D**ata **S**ervices|3000|1.9.2|12/28/2022|
+|RLDS|**R**ailroad **L**ayout **D**ata **S**ervices|3006|1.4.0|12/28/2022|
+---------------------IoT Services---------------
+|IPLS|**I**oT **P**ublisher Turnout Panel **L**ight **S**ervices|3013|1.0.1|12/29/2022|
+|IPTS|**I**oT **P**ublisher **T**urnout **S**ervices|3011|2.0.0|12/28/2022|
+|ISBS|**I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices|3012|1.0.0|12/28/2022|
+|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices||2.1.0|12/28/2022|
+|ISRS|**I**oT **S**ubscriber **R**FID **S**ervices|3005|1.2.0|12/28/2022|
+|ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices|3010|1.3.0|12/28/2022|
+
+
 
 
 
