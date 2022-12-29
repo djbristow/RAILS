@@ -9,19 +9,18 @@ var TPLightSchema = new Schema({
   },
   tplNum: {
     type: String,
-    required: true
+    required: true,
+    Unqiue: true
   },
   controller: {
     type: String,
     required: true
   },   
   panelName: {
-    type: String,
-    required: true
+    type: String
   },
   panelNum: {
-    type: String,
-    required: true
+    type: String
   }
   });
 

@@ -15,7 +15,7 @@ var TurnoutSchema = new Schema({
     type: String,
     required: true
   },
-  state: {
+  state: { // closed or thrown
     type: String,
     required: true
   },
@@ -30,7 +30,10 @@ var TurnoutSchema = new Schema({
   },
   lastUpdate: {
     type: String
-  }
+  },
+  toLoc: {
+    type: String
+  },
   });
 
   module.exports = mongoose.model('Turnout', TurnoutSchema);
