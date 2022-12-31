@@ -64,6 +64,7 @@ export default {
     } else {
       fileValid = "noAction";
     }
+    console.log(fileValid);
     return fileValid;
   },
   importFileContent(items, fileType) {
@@ -110,6 +111,7 @@ export default {
       case "Images":
         if (action == "a" || action == "u") {
           if (action == "a") {
+            console.log(item)
             store.dispatch("addNewImage", item);
           } else {
             store.dispatch("updateImage", item);
@@ -135,11 +137,11 @@ export default {
         break;
       case "Decoders":
         if (action == "a") {
-          store.dispatch("addDcc", item);
+          store.dispatch("addNewDecoder", item);
         } else if ((action = "u")) {
-          store.dispatch("updateDcc", item);
+          store.dispatch("updateDecoder", item);
         } else if (action == "d") {
-          store.dispatch("deleteDcc", item._id);
+          store.dispatch("deleteDecoder", item._id);
         } else {
           console.log("There is a problem");
         }

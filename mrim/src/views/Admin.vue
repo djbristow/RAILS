@@ -181,6 +181,7 @@ export default {
             this.selectedInpt,
             headers
           );
+          console.log(headers)
           if (fileValidation == "OK") {
             let rows = this.content.split("\n");
             let items = [];

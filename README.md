@@ -56,7 +56,7 @@ The components of this design are:
 |-----|---------------------------------------|-----|-------|---------|
 -----------------------SPAs--------------------
 |MPPM|**M**odel **P**rojects and **P**urchase **M**anager|3008|2.0.2|12/28/2022|
-|MRIM|**M**odel **R**ailroad **I**nventory **M**anager|3001|3.0.2|12/28/2022|
+|MRIM|**M**odel **R**ailroad **I**nventory **M**anager|3001|3.0.3|12/30/2022|
 |MRLM|**M**odel **R**ailroad **L**ayout **M**anager|3004|2.0.0|12/28/2022|
 |RSRM|**R**olling**s**tock **R**FID **M**anager|3002|3.2.4|12/28/2022|
 ---------------------Data Services--------------

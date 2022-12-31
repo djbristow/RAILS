@@ -10,12 +10,12 @@ import Decoders from '../views/Decoders.vue'
 import Images from '../views/Images.vue'
 const routes = [
   {
-    path: '/',
+    path: '/admin',
     name: 'Admin',
     component: Admin,
   },
   {
-    path: '/about',
+    path: '/',
     name: 'About',
     component: About,
   },

@@ -44,8 +44,8 @@ export default {
       { title: "AAR Codes", icon: "mdi-code-array", to: "/aarcodes" },
       { title: "Structures", icon: "mdi-office-building-marker", to: "/structures" },
       { title: "Companies", icon: "mdi-cog", to: "/companies" },
-      { title: "Admin", icon: "mdi-format-list-checks", to: "/" },
-      { title: "About", icon: "mdi-help-box", to: "/about" },
+      { title: "Admin", icon: "mdi-format-list-checks", to: "/admin" },
+      { title: "About", icon: "mdi-help-box", to: "/" },
     ],
   }),
   mounted() {
