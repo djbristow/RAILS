@@ -1,8 +1,8 @@
 # rsrm
-&copy; David Bristow, 2020-2022
+&copy; David Bristow, 2020-2023
 
 ## Version
-* 3.2.4 - 12/28/2022
+* 3.2.5 - 1/15/2023
 
 Rollingstock RFID Manager is a Mongo Express Vue Node (MEVN) application that provides a user with a web application to show, when an RFID tag is read, the road name and number of the rolling stock associated with that tag. If there is no association with a peice of rolling stock input fields are provided to allow the user to enter the road name and number. This web application uses port 3002.
 

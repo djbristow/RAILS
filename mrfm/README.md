@@ -1,10 +1,10 @@
 # mrfm
-&copy; David Bristow, 2019-2022
+&copy; David Bristow, 2019-2023
 
 **M**odel **R**ailroad **F**ile **M**anager is a Hapi application that stores files on the server (POST). The images stored on the server also available for reterival (GET). This application uses port 3030.
 
 ## Version
-* 2.0.1 - 12/28/2022
+* 2.0.2 - 1/15/2023
 
 ## License
 

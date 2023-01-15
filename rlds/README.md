@@ -1,10 +1,10 @@
 # rlds
-&copy; David Bristow, 2020-2022
+&copy; David Bristow, 2020-2023
 
 Railroad Layout Data Services is an Express Mongoose aplication that connects to a MongoDB database containing layout collections and provide data services to the MRLM and ISMS components. This application uses port 3006.
 
 ## Version
-* 1.4.0 - 12/28/2022
+* 1.4.1 - 1/15/2023
 
 ## License
 
