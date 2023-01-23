@@ -40,8 +40,8 @@ export default {
       { title: "Purchases", icon: "mdi-currency-usd", to: "/purchases" },
       { title: "Projects", icon: "mdi-notebook-outline", to: "/projects"},
       { title: "MR Companies", icon: "mdi-cog", to: "/mrcompanies" },
-      { title: "Admin", icon: "mdi-format-list-checks", to: "/" },
-      { title: "About", icon: "mdi-help-box", to: "/about" },
+      { title: "Admin", icon: "mdi-format-list-checks", to: "/admin" },
+      { title: "About", icon: "mdi-help-box", to: "/" },
     ],
   }),
   mounted() {

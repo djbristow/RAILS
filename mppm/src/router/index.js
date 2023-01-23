@@ -6,12 +6,12 @@ import Projects from '../views/Projects.vue'
 import Purchases from '../views/Purchases.vue'
 const routes = [
     {
-      path: '/',
+      path: '/Admin',
       name: 'Admin',
       component: Admin
     },
     {
-      path: '/About',
+      path: '/',
       name: 'About',
       component: About
     },

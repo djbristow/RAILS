@@ -17,7 +17,12 @@
         </p>
         <v-row>
           <v-col cols="4">
-            <v-file-input v-model="inFilename" accept="txt" label="File input" @change="onFileChange"></v-file-input>
+            <v-file-input
+              v-model="inFilename"
+              accept="txt"
+              label="File input"
+              @change="onFileChange"
+            ></v-file-input>
           </v-col>
           <v-col cols="4">
             <v-select :items="items" label="Collection" v-model="selectedInpt"></v-select>
@@ -33,18 +38,36 @@
         </v-row>
         <v-row>
           <v-col cols="3">
-            <v-select label="Report" v-model="printCollection"
-              :items="['Purchases', 'Projects', 'MR Companies']"></v-select>
+            <v-select
+              label="Report"
+              v-model="printCollection"
+              :items="['Purchases', 'Projects', 'MR Companies']"
+            ></v-select>
           </v-col>
           <v-col cols="3">
-            <v-select v-if="(printCollection === 'Purchases')" label="Sorted By" v-model="purSortBy"
-              :items="['Date', 'Project', 'Manufacturer', 'Store']"></v-select>
-              <v-select v-if="(printCollection === 'Projects')" label="Sorted By" v-model="projSortBy"
-              :items="['Name', 'Start Date', 'Type']"></v-select>
+            <v-select
+              v-if="printCollection === 'Purchases'"
+              label="Sorted By"
+              v-model="purSortBy"
+              :items="['Date', 'Project', 'Manufacturer', 'Store']"
+            ></v-select>
+            <v-select
+              v-if="printCollection === 'Projects'"
+              label="Sorted By"
+              v-model="projSortBy"
+              :items="['Name', 'Start Date', 'Type']"
+            ></v-select>
           </v-col>
           <v-col cols="3">
-            <v-select v-if="((printCollection === 'Purchases' && purSortBy !== 'Date') || printCollection === 'Projects')" label="Break" v-model="breakType"
-              :items="['Continuous', 'Table', 'Page']"></v-select>
+            <v-select
+              v-if="
+                (printCollection === 'Purchases' && purSortBy !== 'Date') ||
+                printCollection === 'Projects'
+              "
+              label="Break"
+              v-model="breakType"
+              :items="['Continuous', 'Table', 'Page']"
+            ></v-select>
           </v-col>
           <v-col cols="3">
             <v-btn @click="printFile"> Print </v-btn>
@@ -62,7 +85,7 @@ import PrintServices from "../services/PrintServices";
 
 export default {
   data: () => ({
-    items: ["Purchases", "Projects", "MrCompanies",],
+    items: ["Purchases", "Projects", "MrCompanies"],
     selectedExpt: null,
     selectedInpt: null,
     chosenFile: null,
@@ -124,12 +147,12 @@ export default {
       let isInQuotes = false;
       let line = Array.from(input);
       for (let currentPosition = 0; currentPosition < input.length; currentPosition++) {
-        if (line[currentPosition] == '\"') {
+        if (line[currentPosition] == '"') {
           isInQuotes = !isInQuotes;
-        } else if (line[currentPosition] == ',' && !isInQuotes) {
-          if(line[startPosition] == '\"') {
+        } else if (line[currentPosition] == "," && !isInQuotes) {
+          if (line[startPosition] == '"') {
             startPosition++;
-            endPosition = currentPosition -1;
+            endPosition = currentPosition - 1;
           } else {
             endPosition = currentPosition;
           }
@@ -146,35 +169,40 @@ export default {
       return tokens;
     },
     uploadFile() {
+      let msLineEnd = false;
       this.inptError = false;
       var reader = new FileReader();
       reader.readAsText(this.chosenFile);
       reader.onload = () => {
         this.content = reader.result;
+        if (this.content.includes("\r")) {
+          msLineEnd = true;
+        }
         reader.onloadend = () => {
-          let headers = this.content
-            .slice(0, this.content.indexOf("\n"))
-            .split(",");
-          let fileValidation = FileService.valFileType(
-            this.selectedInpt,
-            headers
-          );
+          let headers = this.content.slice(0, this.content.indexOf("\n")).split(",");
+          let fileValidation = FileService.valFileType(this.selectedInpt, headers);
+          if (msLineEnd){
+            let lastHeader = headers[headers.length-1].slice(0, -1);
+            headers[headers.length-1] = lastHeader
+            console.log(headers)
+          }
+          let rows = [];
           if (fileValidation == "OK") {
-            let rows = this.content.split("\n");
+            if (msLineEnd){
+              rows = this.content.split("\r\n");
+            } else {
+              rows = this.content.split("\n");
+            }
+            console.log(rows)
             let items = [];
             for (let i = 1; i < rows.length - 1; i++) {
               if (!rows[i].startsWith("i,")) {
                 let objValues = this.splitWithParser(rows[i]);
-                let rowObj = headers.reduce(function (
-                  obj,
-                  title,
-                  index
-                ) {
+                let rowObj = headers.reduce(function (obj, title, index) {
                   obj[title] = objValues[index];
                   return obj;
-                },
-                  {});
-                items.push(rowObj)
+                }, {});
+                items.push(rowObj);
               }
             }
             FileService.importFileContent(items, this.selectedInpt);
@@ -193,20 +221,20 @@ export default {
     printFile() {
       switch (this.printCollection) {
         case "MR Companies":
-          PrintServices.printMrCompanies()
+          PrintServices.printMrCompanies();
           break;
         case "Projects":
-          PrintServices.printProjects(this.projSortBy, this.breakType)
+          PrintServices.printProjects(this.projSortBy, this.breakType);
           break;
         case "Purchases":
-          PrintServices.printPurchases(this.purSortBy, this.breakType)
+          PrintServices.printPurchases(this.purSortBy, this.breakType);
           break;
       }
-      this.printCollection = null
-      this.purSortBy = null
-      this.projSortBy = null
-      this.breakType = null
+      this.printCollection = null;
+      this.purSortBy = null;
+      this.projSortBy = null;
+      this.breakType = null;
     },
-  }
-}
+  },
+};
 </script>
