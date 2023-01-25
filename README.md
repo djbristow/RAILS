@@ -54,7 +54,7 @@ The components of this design are:
   - Images – the file store for the images uploaded by MRFM component and used by the MRIM component
 
 |Name |Title                                  |Port |Version|Date     |
-|-----|---------------------------------------|-----|-------|---------|
+|-----|----------------------------------------------------------|-----|-------|---------|
 ------SPAs-------|----------------------------------------------------------|
 |MPPM|**M**odel **P**rojects and **P**urchase **M**anager|3008|2.0.4|1/23/2023|
 |MRIM|**M**odel **R**ailroad **I**nventory **M**anager|3001|3.0.5|1/24/2023|
