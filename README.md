@@ -55,17 +55,17 @@ The components of this design are:
 
 |Name |Title                                  |Port |Version|Date     |
 |-----|---------------------------------------|-----|-------|---------|
------------------------SPAs--------------------
+------SPAs-------|----------------------------------------------------------|
 |MPPM|**M**odel **P**rojects and **P**urchase **M**anager|3008|2.0.4|1/23/2023|
 |MRIM|**M**odel **R**ailroad **I**nventory **M**anager|3001|3.0.5|1/24/2023|
 |MRLM|**M**odel **R**ailroad **L**ayout **M**anager|3004|2.0.1|1/15/2023|
 |RSRM|**R**olling**s**tock **R**FID **M**anager|3002|3.2.5|1/15/2023|
----------------------Data Services--------------
+--Data Services--|----------------------------------------------------------|
 |MRFM|**M**odel **R**ailroad **F**ile **M**anager|3030|2.0.2|1/15/2023|
 |PPDS|**P**lans and **P**urchases **D**ata **S**ervices|3007|2.0.2|1/15/2023|
 |RIDS|**R**ailroad **I**nventory **D**ata **S**ervices|3000|1.9.3|1/15/2023|
 |RLDS|**R**ailroad **L**ayout **D**ata **S**ervices|3006|1.4.1|1/15/2023|
----------------------IoT Services---------------
+--IoT Services---|----------------------------------------------------------|
 |IPLS|**I**oT **P**ublisher Turnout Panel **L**ight **S**ervices|3013|1.0.2|1/15/2023|
 |IPTS|**I**oT **P**ublisher **T**urnout **S**ervices|3011|2.0.0|12/28/2022|
 |ISBS|**I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices|3012|1.0.1|1/15/2023|
