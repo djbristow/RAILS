@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020-2023
 
 ## Version
-* 3.0.4 - 1/15/2023
+* 3.0.5 - 1/24/2023
 
 **M**odel **R**ailroad **I**nventory **M**anager is a MEVN application that provides a user with a web application to display, create and update information of the inventoried items. This web application uses port 3001.
 
@@ -53,8 +53,8 @@ The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs]
 - [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
 
 ## Environment Variables
-* VITE_MRFM_TCP_PORT=3030
-* VITE_MRFM_TCP_ADDR='127.0.0.1'
-* VITE_MYRIDS_TCP_PORT=3000
-* VITE_MYRIDS_TCP_ADDR='127.0.0.1'
+* export VITE_MRFM_TCP_PORT=3030
+* export VITE_MRFM_TCP_ADDR='127.0.0.1'
+* export VITE_MYRIDS_TCP_PORT=3000
+* export VITE_MYRIDS_TCP_ADDR='127.0.0.1'
 

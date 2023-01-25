@@ -180,12 +180,11 @@ export default {
         }
         reader.onloadend = () => {
           let headers = this.content.slice(0, this.content.indexOf("\n")).split(",");
-          let fileValidation = FileService.valFileType(this.selectedInpt, headers);
           if (msLineEnd){
             let lastHeader = headers[headers.length-1].slice(0, -1);
             headers[headers.length-1] = lastHeader
-            console.log(headers)
           }
+          let fileValidation = FileService.valFileType(this.selectedInpt, headers);
           let rows = [];
           if (fileValidation == "OK") {
             if (msLineEnd){
@@ -193,7 +192,6 @@ export default {
             } else {
               rows = this.content.split("\n");
             }
-            console.log(rows)
             let items = [];
             for (let i = 1; i < rows.length - 1; i++) {
               if (!rows[i].startsWith("i,")) {
