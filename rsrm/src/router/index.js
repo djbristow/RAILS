@@ -7,12 +7,12 @@ import AarCodes from '../views/AarCodes.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/admin',
     name: 'Admin',
     component: Admin,
   },
   {
-    path: '/about',
+    path: '/',
     name: 'About',
     component: About,
   },

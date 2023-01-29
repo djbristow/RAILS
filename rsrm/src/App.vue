@@ -35,10 +35,10 @@ export default {
     drawer: false,
     items: [
       { title: "Reader", icon: "mdi-smart-card-reader", to: "/reader" },
-      { title: "Admin", icon: "mdi-format-list-checks", to: "/" },
+      { title: "Admin", icon: "mdi-format-list-checks", to: "/admin" },
       { title: "Rollingstock", icon: "mdi-train-car-box", to: "/rollingstock" },
       { title: "AAR Codes", icon: "mdi-code-array", to: "/aarcodes" },
-      { title: "About", icon: "mdi-help-box", to: "/about" },
+      { title: "About", icon: "mdi-help-box", to: "/" },
     ],
   }),
   mounted() {
