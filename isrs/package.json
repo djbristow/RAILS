@@ -1,6 +1,6 @@
 {
   "name": "isrs",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "IoT Subscriber RFID Services",
   "main": "app.js",
   "author": "David Bristow",
