@@ -31,7 +31,8 @@ The components of this design are:
   - RFID Controller – processes RFID tags obtained from a RFID reader and then publishes the value
   - Turnout Controller – subscribes to turnout commands then to act on the command to cause the turnout to move. It then publishes the state of the turnout
   - IR Controller – (in planning) processes IR sensors and publishes their values
-- MQTT Broker – the MQTT broker, the heart of any publish/subscribe protocol, is responsible for receiving messages, filtering them, posting to designated topics and sending messages to clients subscribing to topics. The subscribers and publishers bridge the MQTT elements with the GUI applications:
+- MQTT Broker – the MQTT broker, the heart of any publish/subscribe protocol, is responsible for receiving messages, filtering them, posting to designated topics and sending messages to clients subscribing to topics. The subscribers and publishers bridge the MQTT elements with the GUI applications are the components listed under the IoT Services.
+
   - ISRS – **I**oT **S**ubscriber **R**FID **S**ervices subscribes to RFID tags and pushes them via a web-socket to the RSRM component
   - ISLS – (in planning) IoT Subscriber Location Services subscribes to topics that provide location information i.e. IR Sensors and RFID sensors
   - ISTS – **I**oT **S**ubscriber **T**urnout **S**ervices subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component
@@ -66,12 +67,12 @@ The components of this design are:
 |RIDS|**R**ailroad **I**nventory **D**ata **S**ervices|3000|1.9.5|3/2/2023|
 |RLDS|**R**ailroad **L**ayout **D**ata **S**ervices|3006|1.4.3|3/2/2023|
 --IoT Services---|----------------------------------------------------------|
-|IPLS|**I**oT **P**ublisher Turnout Panel **L**ight **S**ervices|3013|1.0.4|3/1/2023|
-|IPTS|**I**oT **P**ublisher **T**urnout **S**ervices|3011|2.0.2|3/1/2023|
-|ISBS|**I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices|3012|1.0.3|3/1/2023|
-|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices||2.1.3|3/1/2023|
-|ISRS|**I**oT **S**ubscriber **R**FID **S**ervices|3005|1.2.2|3/1/2023|
-|ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices|3010|1.3.2|3/1/2023|
+|IPLS|**I**oT **P**ublisher Turnout Panel **L**ight **S**ervices publishes light commands to a Turnout Panel Controller|3013|1.0.4|3/1/2023|
+|IPTS|**I**oT **P**ublisher **T**urnout **S**ervices publishes turnout commands to a Turnout Controller|3011|2.0.2|3/1/2023|
+|ISBS|**I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices subscribes to turnout panel push button events and pushes them via a web-socket to the MRLM component|3012|1.0.3|3/1/2023|
+|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices subscribes to micros and adds or updates micros collection in RAILS||2.1.3|3/1/2023|
+|ISRS|**I**oT **S**ubscriber **R**FID **S**ervices subscribes to RFID tags and pushes them via a web-socket to the RSRM component |3005|1.2.2|3/1/2023|
+|ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component |3010|1.3.2|3/1/2023|
 
 
 
