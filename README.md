@@ -56,22 +56,22 @@ The components of this design are:
 |Name |Title                                  |Port |Version|Date     |
 |-----|----------------------------------------------------------|-----|-------|---------|
 ------SPAs-------|----------------------------------------------------------|
-|MPPM|**M**odel **P**rojects and **P**urchase **M**anager|3008|2.0.5|1/31/2023|
-|MRIM|**M**odel **R**ailroad **I**nventory **M**anager|3001|3.0.6|1/31/2023|
-|MRLM|**M**odel **R**ailroad **L**ayout **M**anager|3004|2.0.2|1/31/2023|
-|RSRM|**R**olling**s**tock **R**FID **M**anager|3002|3.2.7|1/29/2023|
+|MPPM|**M**odel **P**rojects and **P**urchase **M**anager|3008|2.0.6|3/2/2023|
+|MRIM|**M**odel **R**ailroad **I**nventory **M**anager|3001|3.0.7|3/2/2023|
+|MRLM|**M**odel **R**ailroad **L**ayout **M**anager|3004|2.0.3|3/2/2023|
+|RSRM|**R**olling**s**tock **R**FID **M**anager|3002|3.2.8|3/2/2023|
 --Data Services--|----------------------------------------------------------|
-|MRFM|**M**odel **R**ailroad **F**ile **M**anager|3030|2.0.3|1/31/2023|
-|PPDS|**P**lans and **P**urchases **D**ata **S**ervices|3007|2.0.3|1/31/2023|
-|RIDS|**R**ailroad **I**nventory **D**ata **S**ervices|3000|1.9.4|1/31/2023|
-|RLDS|**R**ailroad **L**ayout **D**ata **S**ervices|3006|1.4.2|1/31/2023|
+|MRFM|**M**odel **R**ailroad **F**ile **M**anager|3030|2.0.4|3/2/2023|
+|PPDS|**P**lans and **P**urchases **D**ata **S**ervices|3007|2.0.4|3/2/2023|
+|RIDS|**R**ailroad **I**nventory **D**ata **S**ervices|3000|1.9.5|3/2/2023|
+|RLDS|**R**ailroad **L**ayout **D**ata **S**ervices|3006|1.4.3|3/2/2023|
 --IoT Services---|----------------------------------------------------------|
-|IPLS|**I**oT **P**ublisher Turnout Panel **L**ight **S**ervices|3013|1.0.3|1/31/2023|
-|IPTS|**I**oT **P**ublisher **T**urnout **S**ervices|3011|2.0.1|1/31/2023|
-|ISBS|**I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices|3012|1.0.2|1/31/2023|
-|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices||2.1.2|1/31/2023|
-|ISRS|**I**oT **S**ubscriber **R**FID **S**ervices|3005|1.2.1|1/31/2023|
-|ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices|3010|1.3.1|1/31/2023|
+|IPLS|**I**oT **P**ublisher Turnout Panel **L**ight **S**ervices|3013|1.0.4|3/1/2023|
+|IPTS|**I**oT **P**ublisher **T**urnout **S**ervices|3011|2.0.2|3/1/2023|
+|ISBS|**I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices|3012|1.0.3|3/1/2023|
+|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices||2.1.3|3/1/2023|
+|ISRS|**I**oT **S**ubscriber **R**FID **S**ervices|3005|1.2.2|3/1/2023|
+|ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices|3010|1.3.2|3/1/2023|
 
 
 

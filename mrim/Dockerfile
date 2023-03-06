@@ -2,13 +2,13 @@ FROM node:lts-alpine AS builder
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
 COPY package.json /usr/djb 
-RUN npm install -g npm@9.3.1
+RUN npm install -g npm@9.5.1
 RUN npm install
 COPY . /usr/djb
 RUN npm run build
 
 FROM node:lts-alpine
-RUN npm install -g npm@9.4.0
+RUN npm install -g npm@9.5.1
 RUN npm install -g http-server
 RUN mkdir -p /usr/djb/dist
 WORKDIR /usr/djb/dist

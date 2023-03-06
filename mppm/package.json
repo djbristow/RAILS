@@ -1,6 +1,6 @@
 {
   "name": "mppm",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Model Project and Purchase Manager",
   "author": "dbristow <dave@bristow-family.org>",
   "private": true,
@@ -17,22 +17,22 @@
   },
   "dependencies": {
     "@mdi/font": "^7.0.96",
-    "axios": "^1.2.6",
+    "axios": "^1.3.4",
     "date-fns": "^2.29.3",
-    "export-from-json": "^1.7.0",
+    "export-from-json": "^1.7.2",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.28",
     "moment": "^2.29.4",
     "roboto-fontface": "*",
-    "vue": "^3.2.45",
+    "vue": "^3.2.47",
     "vue-router": "^4.1.6",
-    "vuetify": "^3.1.2",
+    "vuetify": "^3.1.6",
     "vuex": "^4.1.0",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
-    "vite": "4.0.4",
+    "vite": "4.1.4",
     "vite-plugin-vuetify": "^1.0.2"
   },
   "type": "module"
