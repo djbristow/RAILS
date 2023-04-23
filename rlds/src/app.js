@@ -15,45 +15,17 @@ var Micro = require("../models/Micro");
 var TPLight = require("../models/TPLight");
 
 // The following CRUD functions handle data in the turnouts collection
-app.get("/tolist", (req, res) => {
-  Turnout.find({}, function (error, turnouts) {
-    if (error) {
-      console.error(error);
-    }
-    res.send({
-      turnouts: turnouts,
-    });
-  }).sort({
+app.get("/tolist", async (req, res) => {
+  const tos = await Turnout.find().sort({
     controller: 1,
     toNum: 1,
   });
+  res.send(tos);
 });
-app.post("/add_to", (req, res) => {
-  var toID = req.body.toID;
-  var toNum = req.body.toNum;
-  var controller = req.body.controller;
-  var state = req.body.state;
-  var type = req.body.type;
-  var lock = req.body.lock;
-  var notes = req.body.notes;
-  var lastUpdate = req.body.lastUpdate;
-  var new_Turnout = new Turnout({
-    toID: toID,
-    toNum: toNum,
-    controller: controller,
-    state: state,
-    type: type,
-    lock: lock,
-    notes: notes,
-    lastUpdate: lastUpdate,
-  });
-  new_Turnout.save(function (error) {
-    if (error) {
-      console.log(error);
-    }
-    res.send({
-      success: true,
-    });
+app.post("/add_to", async (req, res) => {
+  await Turnout.create(req.body);
+  res.send({
+    success: true,
   });
 });
 app.get("/to_id/:id", (req, res) => {
@@ -145,121 +117,64 @@ app.delete("/to/:id", (req, res) => {
 });
 
 // The following CRUD functions handle data in the micros collection
-app.get("/microlist", (req, res) => {
-  Micro.find({}, function (error, micros) {
-    if (error) {
-      console.error(error);
-    }
-    res.send({
-      micros: micros,
-    });
-  }).sort({
+app.get("/microlist", async (req, res) => {
+  const micros = await Micro.find().sort({
     _id: -1,
   });
+  res.send(micros);
 });
-app.get("/micro/:id", (req, res) => {
-  Micro.findById(req.params.id, function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post);
+app.get("/micro/:id", async (req, res) => {
+  const micro = Micro.findById(req.params.id)
+    res.send(micro);
+});
+app.get("/micro_name/:id", async (req, res) => {
+  const micro = Micro.findOne({ microID: req.params.id })
+    res.send(micro);
+});
+app.get("/micro_id/:id", async (req, res) => {
+  const micro = await Micro.findOne({
+    microID: req.params.id,
+  });
+  res.send(micro);
+});
+app.post("/add_micro", async (req, res) => {
+  await Micro.create(req.body);
+  res.send({
+    success: true,
   });
 });
-app.get("/micro_name/:id", (req, res) => {
-  Micro.findOne({ microID: req.params.id }, "_id", function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post);
+app.put("/update_micro/:id", async (req, res) => {
+  const micro = await Micro.findById(req.body._id);
+  micro._id = req.body._id;
+  micro.microID = req.body.microID;
+  micro.microIP = req.body.microIP;
+  micro.et = req.body.et;
+  micro.purpose = req.body.purpose;
+  micro.status = req.body.status;
+  micro.sensorLoc = req.body.sensorLoc;
+  micro.notes = req.body.notes;
+  micro.lastUpdate = req.body.lastUpdate;
+  await micro.save();
+  res.send({
+    success: true,
   });
 });
-app.get("/micro_id/:id", (req, res) => {
-  Micro.findOne(
-    {
-      microID: req.params.id,
-    },
-    "_id",
-    function (error, post) {
-      if (error) {
-        console.error(error);
-      }
-      res.send(post);
-    }
-  );
-});
-app.put("/update_micro/:id", (req, res) => {
-  Micro.findById(req.body._id, function (error, micro) {
-    if (error) {
-      console.error(error);
-    }
-    micro._id = req.body._id;
-    micro.microID = req.body.microID;
-    micro.microIP = req.body.microIP;
-    micro.et = req.body.et;
-    micro.purpose = req.body.purpose;
-    micro.status = req.body.status;
-    micro.sensorLoc = req.body.sensorLoc;
-    micro.save(function (error) {
-      if (error) {
-        console.log(error);
-      }
-      res.send({
-        success: true,
-      });
-    });
+app.delete("/micro/:id", async (req, res) => {
+  await Micro.deleteOne({
+    _id: req.params.id,
   });
-});
-app.post("/add_micro", (req, res) => {
-  var microID = req.body.microID;
-  var microIP = req.body.microIP;
-  var et = req.body.et;
-  var purpose = req.body.purpose;
-  var sensorLoc = req.body.sensorLoc;
-  var status = req.body.status;
-  var new_micro = new Micro({
-    microID: microID,
-    microIP: microIP,
-    et: et,
-    purpose: purpose,
-    sensorLoc: sensorLoc,
-    status: status,
+  res.send({
+    success: true,
   });
-  new_micro.save(function (error) {
-    if (error) {
-      console.log(error);
-    }
-    res.send({
-      success: true,
-    });
-  });
-});
-app.delete("/micro/:id", (req, res) => {
-  Micro.deleteOne(
-    {
-      _id: req.params.id,
-    },
-    function (err, post) {
-      if (err) res.send(err);
-      res.send({
-        success: true,
-      });
-    }
-  );
 });
 
 // The following CRUD functions handle data in the tplights collection
-app.get("/tpllist", (req, res) => {
-  TPLight.find({}, function (error, tplights) {
-    if (error) {
-      console.error(error);
-    }
-    res.send({
-      tplights: tplights,
-    });
-  }).sort({
+app.get("/tpllist", async (req, res) => {
+  const tplights = await TPLight.find().sort({
     controller: 1,
     toNum: 1,
   });
+  res.send(tplights);
 });
 app.get("/tpl_id/:id", (req, res) => {
   TPLight.findById(req.params.id, function (error, post) {
@@ -283,26 +198,10 @@ app.get("/tpl_num/:id", (req, res) => {
     }
   );
 });
-app.post("/add_tpl", (req, res) => {
-  var to_id = req.body.to_id;
-  var tplNum = req.body.tplNum;
-  var controller = req.body.controller;
-  var panelName = req.body.panelName;
-  var panelNum = req.body.panelNum;
-  var new_tpl = new TPLight({
-    to_id: to_id,
-    tplNum: tplNum,
-    controller: controller,
-    panelName: panelName,
-    panelNum: panelNum,
-  });
-  new_tpl.save(function (error) {
-    if (error) {
-      console.log(error);
-    }
-    res.send({
-      success: true,
-    });
+app.post("/add_tpl", async (req, res) => {
+  await TPLight.create(req.body);
+  res.send({
+    success: true,
   });
 });
 app.put("/update_tpl/:id", (req, res) => {

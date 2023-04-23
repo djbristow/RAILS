@@ -1,14 +1,14 @@
 // This express app prodes an API for Vue applications to get and put data
 // to the MongoDB
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-const app = express()
-app.use(bodyParser.json())
-app.use(cors())
+const app = express();
+app.use(bodyParser.json());
+app.use(cors());
 
-const mongodb_conn_module = require('./mongodbConnModule');
+const mongodb_conn_module = require("./mongodbConnModule");
 var db = mongodb_conn_module.connect();
 
 var AarCode = require("../models/AarCode");
@@ -18,688 +18,408 @@ var Rollingstock = require("../models/Rollingstock");
 var Structure = require("../models/Structure");
 var Dcc = require("../models/Dcc");
 
+// The following CRUD functions handle data in the aarCodes collection
+app.get("/aarlist", async (req, res) => {
+  const aarCodes = await AarCode.find().sort({
+    aarCode: 1,
+  });
+  res.send(aarCodes);
+});
+app.get("/aar_code/:id", async (req, res) => {
+  const aar = await AarCode.findOne({
+    aarCode: req.params.id,
+  });
+  res.send(aar);
+});
+app.post("/add_aar", async (req, res) => {
+  await AarCode.create({
+    aarCode: req.body.aarCode,
+    description: req.body.description,
+    rollingstockType: req.body.rollingstockType,
+  });
+  res.send();
+});
+app.put("/update_aar/:id", async (req, res) => {
+  const aarCode = await AarCode.findById(req.body._id);
+  aarCode.aarCode = req.body.aarCode;
+  aarCode.rollingstockType = req.body.rollingstockType;
+  aarCode.description = req.body.description;
+  await aarCode.save();
+  res.send();
+});
+app.delete("/aar/:id", async (req, res) => {
+  await AarCode.deleteOne({
+    _id: req.params.id,
+  });
+  res.send();
+});
+
 // The following CRUD functions handle data in the DCC collection
-app.get('/dcclistall', (req, res) => {
-  Dcc.find({}, function (error, dccs) {
-    if (error) {
-      console.error(error);
-    }
-    res.send({
-      dccs: dccs
-    })
-  })
-})
-app.delete('/dcc/:id', (req, res) => {
-  Dcc.deleteOne({
-    _id: req.params.id
-  }, function (err, post) {
-    if (err)
-      res.send(err)
-    res.send({
-      success: true
-    })
-  })
-})
-app.post('/add_dcc', (req, res) => {
-  var new_Dcc = new Dcc({
+app.get("/dcclistall", async (req, res) => {
+  const dccs = await Dcc.find();
+  res.send(dccs);
+});
+app.get("/dcc_addr/:id", async (req, res) => {
+  const dcc = await Dcc.findOne({
+    address: req.params.id,
+  });
+  res.send(dcc);
+});
+app.post("/add_dcc", async (req, res) => {
+  await Dcc.create({
     locomotiveID: req.body.locomotiveID,
     mfg: req.body.mfg,
     family: req.body.family,
     model: req.body.model,
-    address: req.body.address
-  })
-  new_Dcc.save(function (error) {
-    if (error) {
-      console.log(error)
-    }
-    res.send({
-      success: true
-    })
-  })
-})
-app.put('/update_dcc/:id', (req, res) => {
-  Dcc.findById(req.body._id, function (error, dcc) {
-    if (error) {
-      console.error(error);
-    }
-    dcc.locomotiveID = req.body.locomotiveID;
-    dcc.mfg = req.body.mfg;
-    dcc.family = req.body.family;
-    dcc.model = req.body.model;
-    dcc.address = req.body.address;
-    dcc.save(function (error) {
-      if (error) {
-        console.log(error)
-      }
-      res.send({
-        success: true
-      })
-    })
-  })
-})
-app.get('/dcc_addr/:id', (req, res) => {
-  Dcc.findOne({
-    address: req.params.id
-  }, '_id', function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post)
-  })
-})
+    address: req.body.address,
+  });
+  res.send();
+});
+app.put("/update_dcc/:id", async (req, res) => {
+  const dcc = await Dcc.findById(req.body._id);
+  dcc.locomotiveID = req.body.locomotiveID;
+  dcc.mfg = req.body.mfg;
+  dcc.family = req.body.family;
+  dcc.model = req.body.model;
+  dcc.address = req.body.address;
+  await dcc.save();
+  res.send();
+});
+app.delete("/dcc/:id", async (req, res) => {
+  await Dcc.deleteOne({
+    _id: req.params.id,
+  });
+  res.send();
+});
 
 // The following CRUD functions handle data in the structures collection
-app.get('/structlistall', (req, res) => {
-  Structure.find({}, function (error, structures) {
-    if (error) {
-      console.error(error);
-    }
-    res.send({
-      structures: structures
-    })
-  }).sort({
-    title: 1
-  })
-})
-app.get('/structlist', (req, res) => {
-  Structure.find({}, 'title structureUse owner location builtDate', function (error, structures) {
-    if (error) {
-      console.error(error);
-    }
-    res.send({
-      structures: structures
-    })
-  }).sort({
-    title: 1
-  })
-})
-app.get('/struct/:id', (req, res) => {
-  Structure.findById(req.params.id, function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post)
-  })
-})
-app.get('/struct_title/:id', (req, res) => {
-  AarCode.findOne({
-    title: req.params.id
-  }, '_id', function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post)
-  })
-})
-app.delete('/struct/:id', (req, res) => {
-  Structure.deleteOne({
-    _id: req.params.id
-  }, function (err, post) {
-    if (err)
-      res.send(err)
-    res.send({
-      success: true
-    })
-  })
-})
-app.post('/add_struct', (req, res) => {
-  var title = req.body.title
-  var structureUse = req.body.structureUse
-  var description = req.body.description
-  var owner = req.body.owner
-  var location = req.body.location
-  var construction = req.body.construction
-  var builtDate = req.body.builtDate
-  var size = req.body.size
-  var image = req.body.image
-  var isIndustrial = req.body.isIndustrial
-  var type = req.body.type
-  var rawMaterials = req.body.rawMaterials
-  var rMCapacity = req.body.rMCapacity
-  var conRate = req.body.conRate
-  var priority = req.body.priority
-  var aarCodeIn = req.body.aarCodeIn
-  var product = req.body.product
-  var productCap = req.body.productCap
-  var prodRate = req.body.prodRate
-  var aarCodeOut = req.body.aarCodeOut
-  var unloadDuration = req.body.unloadDuration
-  var loadDuration = req.body.loadDuration
-  var sidingCap = req.body.sidingCap
-  var notes = req.body.notes
-  var new_Structure = new Structure({
-    title: title,
-    structureUse: structureUse,
-    description: description,
-    owner: owner,
-    location: location,
-    construction: construction,
-    builtDate: builtDate,
-    size: size,
-    image: image,
-    isIndustrial: isIndustrial,
-    type: type,
-    rawMaterials: rawMaterials,
-    rMCapacity: rMCapacity,
-    conRate: conRate,
-    priority: priority,
-    aarCodeIn: aarCodeIn,
-    product: product,
-    productCap: productCap,
-    prodRate: prodRate,
-    aarCodeOut: aarCodeOut,
-    unloadDuration: unloadDuration,
-    loadDuration: loadDuration,
-    sidingCap: sidingCap,
-    notes: notes
-  })
-  new_Structure.save(function (error) {
-    if (error) {
-      console.log(error)
-    }
-    res.send({
-      success: true
-    })
-  })
-})
-app.put('/update_struct/:id', (req, res) => {
-  Structure.findById(req.body._id, function (error, structure) {
-    if (error) {
-      console.error(error);
-    }
-    structure.title = req.body.title;
-    structure.structureUse = req.body.structureUse;
-    structure.description = req.body.description;
-    structure.owner = req.body.owner;
-    structure.location = req.body.location;
-    structure.construction = req.body.construction;
-    structure.builtDate = req.body.builtDate;
-    structure.size = req.body.size;
-    structure.image = req.body.image;
-    structure.isIndustrial = req.body.isIndustrial;
-    structure.type = req.body.type;
-    structure.rawMaterials = req.body.rawMaterials;
-    structure.rMCapacity = req.body.rMCapacity;
-    structure.conRate = req.body.conRate;
-    structure.priority = req.body.priority;
-    structure.aarCodeIn = req.body.aarCodeIn;
-    structure.product = req.body.product;
-    structure.productCap = req.body.productCap;
-    structure.prodRate = req.body.prodRate;
-    structure.aarCodeOut = req.body.aarCodeOut;
-    structure.unloadDuration = req.body.unloadDuration;
-    structure.loadDuration = req.body.loadDuration;
-    structure.sidingCap = req.body.sidingCap;
-    structure.notes = req.body.notes;
-    structure.save(function (error) {
-      if (error) {
-        console.log(error)
-      }
-      res.send({
-        success: true
-      })
-    })
-  })
-})
-
-// The following CRUD functions handle data in the aarCodes collection
-app.get('/aarlist', (req, res) => {
-  AarCode.find({}, function (error, aarCodes) {
-    if (error) {
-      console.error(error);
-    }
-    res.send({
-      aarCodes: aarCodes
-    })
-  }).sort({
-    aarCode: 1
-  })
-})
-
-app.post('/add_aar', (req, res) => {
-  var aarCode = req.body.aarCode;
-  var description = req.body.description;
-  var rollingstockType = req.body.rollingstockType;
-  var new_AarCode = new AarCode({
-    aarCode: aarCode,
-    description: description,
-    rollingstockType: rollingstockType
-  })
-  new_AarCode.save(function (error) {
-    if (error) {
-      console.log(error)
-    }
-    res.send({
-      success: true
-    })
-  })
-})
-app.get('/aar/:id', (req, res) => {
-  AarCode.findById(req.params.id, function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post)
-  })
-})
-app.get('/aar_code/:id', (req, res) => {
-  AarCode.findOne({
-    aarCode: req.params.id
-  }, '_id', function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post)
-  })
-})
-app.put('/update_aar/:id', (req, res) => {
-  AarCode.findById(req.body._id, function (error, aarCode) {
-    if (error) {
-      console.error(error);
-    }
-    aarCode.aarCode = req.body.aarCode;
-    aarCode.rollingstockType = req.body.rollingstockType;
-    aarCode.description = req.body.description;
-    aarCode.save(function (error) {
-      if (error) {
-        console.log(error)
-      }
-      res.send({
-        success: true
-      })
-    })
-  })
-})
-app.delete('/aar/:id', (req, res) => {
-  AarCode.deleteOne({
-    _id: req.params.id
-  }, function (err, post) {
-    if (err)
-      res.send(err)
-    res.send({
-      success: true
-    })
-  })
-})
+app.get("/structlistall", async (req, res) => {
+  const structures = await Structure.find().sort({
+    title: 1,
+  });
+  res.send(structures);
+});
+app.get("/struct_title/:id", async (req, res) => {
+  const structure = await Structure.findOne({
+    title: req.params.id,
+  });
+  res.send(structure);
+});
+app.post("/add_struct", async (req, res) => {
+  await Structure.create({
+    title: req.body.title,
+    structureUse: req.body.structureUse,
+    description: req.body.description,
+    owner: req.body.owner,
+    location: req.body.location,
+    construction: req.body.construction,
+    builtDate: req.body.builtDate,
+    size: req.body.size,
+    image: req.body.image,
+    isIndustrial: req.body.isIndustrial,
+    type: req.body.type,
+    rawMaterials: req.body.rawMaterials,
+    rMCapacity: req.body.rMCapacity,
+    conRate: req.body.conRate,
+    priority: req.body.priority,
+    aarCodeIn: req.body.aarCodeIn,
+    product: req.body.product,
+    productCap: req.body.productCap,
+    prodRate: req.body.prodRate,
+    aarCodeOut: req.body.aarCodeOut,
+    unloadDuration: req.body.unloadDuration,
+    loadDuration: req.body.loadDuration,
+    sidingCap: req.body.sidingCap,
+    notes: req.body.notes,
+  });
+  res.send();
+});
+app.put("/update_struct/:id", async (req, res) => {
+  const structure = await Structure.findById(req.body._id);
+  structure.title = req.body.title;
+  structure.structureUse = req.body.structureUse;
+  structure.description = req.body.description;
+  structure.owner = req.body.owner;
+  structure.location = req.body.location;
+  structure.construction = req.body.construction;
+  structure.builtDate = req.body.builtDate;
+  structure.size = req.body.size;
+  structure.image = req.body.image;
+  structure.isIndustrial = req.body.isIndustrial;
+  structure.type = req.body.type;
+  structure.rawMaterials = req.body.rawMaterials;
+  structure.rMCapacity = req.body.rMCapacity;
+  structure.conRate = req.body.conRate;
+  structure.priority = req.body.priority;
+  structure.aarCodeIn = req.body.aarCodeIn;
+  structure.product = req.body.product;
+  structure.productCap = req.body.productCap;
+  structure.prodRate = req.body.prodRate;
+  structure.aarCodeOut = req.body.aarCodeOut;
+  structure.unloadDuration = req.body.unloadDuration;
+  structure.loadDuration = req.body.loadDuration;
+  structure.sidingCap = req.body.sidingCap;
+  structure.notes = req.body.notes;
+  await structure.save();
+});
+app.delete("/struct/:id", async (req, res) => {
+  await Structure.deleteOne({
+    _id: req.params.id,
+  });
+  res.send();
+});
 
 // The following CRUD functions handle data in the images collection
-app.get('/imglist', (req, res) => {
-  Image.find({}, function (error, images) {
-    if (error) {
-      console.error(error);
-    }
-    res.send({
-      images: images
-    })
-  }).sort({
-    _id: -1
-  })
-})
-app.get('/img/:id', (req, res) => {
+app.get("/imglist", async (req, res) => {
+  const images = await Image.find().sort({
+    _id: -1,
+  });
+  res.send(images);
+});
+/* app.get("/img/:id", (req, res) => {
   Image.findById(req.params.id, function (error, post) {
     if (error) {
       console.error(error);
     }
-    res.send(post)
-  })
-})
-app.get('/img_file/:id', (req, res) => {
-  Image.findOne({
-    fileName: req.params.id
-  }, '_id', function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post)
-  })
-})
-app.put('/update_img/:id', (req, res) => {
-  Image.findById(req.body._id, function (error, img) {
-    if (error) {
-      console.error(error);
-    }
-    img.title = req.body.title;
-    img.fileName = req.body.fileName;
-    img.notes = req.body.notes;
-    img.category = req.body.category;
-    img.save(function (error) {
-      if (error) {
-        console.log(error)
-      }
-      res.send({
-        success: true
-      })
-    })
-  })
-})
-app.post('/add_img', (req, res) => {
-  var title = req.body.title;
-  var fileName = req.body.fileName;
-  var notes = req.body.notes;
-  var new_img = new Image({
-    title: title,
-    fileName: fileName,
-    notes: notes,
-    category: category
-  })
-  new_img.save(function (error) {
-    if (error) {
-      console.log(error)
-    }
-    res.send({
-      success: true
-    })
-  })
-})
-app.delete('/img/:id', (req, res) => {
-  Image.deleteOne({
-    _id: req.params.id
-  }, function (err, post) {
-    if (err)
-      res.send(err)
-    res.send({
-      success: true
-    })
-  })
-})
+    res.send(post);
+  });
+});*/
+app.get("/img_file/:id", async (req, res) => {
+  const img = await Image.findOne({
+    fileName: req.params.id,
+  });
+  res.send(img);
+});
+app.post("/add_img", async (req, res) => {
+  await Image.create({
+    title: req.body.title,
+    fileName: req.body.fileName,
+    notes: req.body.notes,
+    category: req.body.category,
+  });
+  res.send();
+});
+app.put("/update_img/:id", async (req, res) => {
+  const img = await Image.findById(req.body._id);
+  img.title = req.body.title;
+  img.fileName = req.body.fileName;
+  img.notes = req.body.notes;
+  img.category = req.body.category;
+  await img.save();
+  res.send();
+});
+app.delete("/img/:id", async (req, res) => {
+  await Image.deleteOne({
+    _id: req.params.id,
+  });
+  res.send();
+});
 
 // The following CRUD functions handle data in the industries collection
-app.get('/colist', (req, res) => {
-  Industry.find({}, function (error, industries) {
-    if (error) {
-      console.error(error);
-    }
-    res.send({
-      industries: industries
-    })
-  }).sort({
-    shortName: 1
-  })
-})
-app.get('/co/:id', (req, res) => {
+app.get("/colist", async (req, res) => {
+  const industries = await Industry.find().sort({
+    shortName: 1,
+  });
+  res.send(industries);
+});
+/* app.get("/co/:id", (req, res) => {
   Industry.findById(req.params.id, function (error, post) {
     if (error) {
       console.error(error);
     }
-    res.send(post)
-  })
-})
-app.get('/co_name/:id', (req, res) => {
-  Industry.findOne({
-    shortName: req.params.id
-  }, '_id', function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post)
-  })
-})
-app.post('/add_co', (req, res) => {
-  var shortName = req.body.shortName;
-  var longName = req.body.longName;
-  var industryType = req.body.industryType;
-  var industryLocation = req.body.industryLocation;
-  var new_industry = new Industry({
-    shortName: shortName,
-    longName: longName,
-    industryType: industryType,
-    industryLocation: industryLocation
-  })
-  new_industry.save(function (error) {
-    if (error) {
-      console.log(error)
-    }
-    res.send({
-      success: true
-    })
-  })
-})
-app.put('/update_co/:id', (req, res) => {
-  Industry.findById(req.body._id, function (error, industry) {
-    if (error) {
-      console.error(error);
-    }
-    industry.shortName = req.body.shortName;
-    industry.longName = req.body.longName;
-    industry.industryType = req.body.industryType;
-    industry.industryLocation = req.body.industryLocation;
-    industry.save(function (error) {
-      if (error) {
-        console.log(error)
-      }
-      res.send({
-        success: true
-      })
-    })
-  })
-})
-app.delete('/co/:id', (req, res) => {
-  Industry.deleteOne({
-    _id: req.params.id
-  }, function (err, post) {
-    if (err)
-      res.send(err)
-    res.send({
-      success: true
-    })
-  })
-})
+    res.send(post);
+  });
+}); */
+app.get("/co_name/:id", async (req, res) => {
+  const co = await Industry.findOne({
+    shortName: req.params.id,
+  });
+  res.send(co);
+});
+app.post("/add_co", async (req, res) => {
+  await Industry.create({
+    shortName: req.body.shortName,
+    longName: req.body.longName,
+    industryType: req.body.industryType,
+    industryLocation: req.body.industryLocation,
+  });
+  res.send();
+});
+app.put("/update_co/:id", async (req, res) => {
+  const industry = await Industry.findById(req.body._id);
+  industry.shortName = req.body.shortName;
+  industry.longName = req.body.longName;
+  industry.industryType = req.body.industryType;
+  industry.industryLocation = req.body.industryLocation;
+  await industry.save();
+  res.send();
+});
+app.delete("/co/:id", async (req, res) => {
+  await Industry.deleteOne({
+    _id: req.params.id,
+  });
+  res.send();
+});
 
 // The following CRUD functions handle data in the rollingstocks collection
-app.get('/rslist', (req, res) => {
-  Rollingstock.find({}, 'roadName roadNumber color aarCode description', function (error, rollingstocks) {
-    if (error) {
-      console.error(error);
+app.get("/rslistall", async (req, res) => {
+  const rollingstocks = await Rollingstock.find().sort({
+    roadName: 1,
+    roadNumber: 1,
+  });
+  res.send(rollingstocks);
+});
+/* app.get("/rslist", (req, res) => {
+  Rollingstock.find(
+    {},
+    "roadName roadNumber color aarCode description",
+    function (error, rollingstocks) {
+      if (error) {
+        console.error(error);
+      }
+      res.send({
+        rollingstocks: rollingstocks,
+      });
     }
-    res.send({
-      rollingstocks: rollingstocks
-    })
-  }).sort({
-    'roadName': 1,
-    'roadNumber': 1
-  })
-})
-app.get('/rslistroadnames', (req, res) => {
-  Rollingstock.distinct('roadName', function (error, roadnames) {
+  ).sort({
+    roadName: 1,
+    roadNumber: 1,
+  });
+});
+app.get("/rslistroadnames", (req, res) => {
+  Rollingstock.distinct("roadName", function (error, roadnames) {
     if (error) {
       console.error(error);
     }
     roadnames.sort();
     res.send({
-      roadnames: roadnames
-    })
-  })
-})
-app.get('/rslistaarcodes', (req, res) => {
-  Rollingstock.distinct('aarCode', function (error, aarcodes) {
+      roadnames: roadnames,
+    });
+  });
+});
+app.get("/rslistaarcodes", (req, res) => {
+  Rollingstock.distinct("aarCode", function (error, aarcodes) {
     if (error) {
       console.error(error);
     }
     aarcodes.sort();
     res.send({
-      aarcodes: aarcodes
-    })
-  })
-})
-app.get('/rslistopstatuses', (req, res) => {
-  Rollingstock.distinct('rsStatus', function (error, opstatuses) {
+      aarcodes: aarcodes,
+    });
+  });
+});
+app.get("/rslistopstatuses", (req, res) => {
+  Rollingstock.distinct("rsStatus", function (error, opstatuses) {
     if (error) {
       console.error(error);
     }
     opstatuses.sort();
     res.send({
-      opstatuses: opstatuses
-    })
-  })
-})
-app.get('/rslistall', (req, res) => {
-  Rollingstock.find({}, function (error, rollingstocks) {
-    if (error) {
-      console.error(error);
-    }
-    res.send({
-      rollingstocks: rollingstocks
-    })
-  }).sort({
-    'roadName': 1,
-    'roadNumber': 1
-  })
-})
-app.get('/rs/:id', (req, res) => {
-  Rollingstock.findById(req.params.id, function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post)
-  })
-})
-app.get('/rslocomotives', (req, res) => {
-  Rollingstock.find({ $or: [{ aarCode: "DE" }, { aarCode: "SE" }] }, function (error, rollingstocks) {
-    if (error) {
-      console.error(error);
-    }
-    res.send({
-      rollingstocks: rollingstocks
-    })
-  }).sort({
-    'roadName': 1,
-    'roadNumber': 1
-  })
-})
-app.post('/add_rs', (req, res) => {
-  var roadName = req.body.roadName;
-  var roadNumber = req.body.roadNumber;
-  var color = req.body.color;
-  var aarCode = req.body.aarCode;
-  var description = req.body.description;
-  var numberBlt = req.body.numberBlt;
-  var inSvcDate = req.body.inSvcDate;
-  var insideLength = req.body.insideLength;
-  var insideHeight = req.body.insideHeight;
-  var insideWidth = req.body.insideWidth;
-  var capacity = req.body.capacity;
-  var bldr = req.body.bldr;
-  var bltDate = req.body.bltDate;
-  var notes = req.body.notes;
-  var ltWeight = req.body.ltWeight;
-  var loadLimit = req.body.loadLimit;
-  var loadTypes = req.body.loadTypes;
-  var lastMaintDate = req.body.lastMaintDate;
-  var locationNow = req.body.locationNow;
-  var homeLocation = req.body.homeLocation;
-  var rsStatus = req.body.rsStatus;
-  var imageID = req.body.imageID;
-  var modelWeight = req.body.modelWeight;
-  var modelLength = req.body.modelLength;
-  var rfid = req.body.rfid;
-  var new_rs = new Rollingstock({
-    roadName: roadName,
-    roadNumber: roadNumber,
-    color: color,
-    aarCode: aarCode,
-    description: description,
-    numberBlt: numberBlt,
-    inSvcDate: inSvcDate,
-    insideLength: insideLength,
-    insideHeight: insideHeight,
-    insideWidth: insideWidth,
-    capacity: capacity,
-    bldr: bldr,
-    bltDate: bltDate,
-    notes: notes,
-    ltWeight: ltWeight,
-    loadLimit: loadLimit,
-    loadTypes: loadTypes,
-    lastMaintDate: lastMaintDate,
-    locationNow: locationNow,
-    homeLocation: homeLocation,
-    rsStatus: rsStatus,
-    imageID: imageID,
-    modelWeight: modelWeight,
-    modelLength: modelLength,
-    rfid: rfid
-  })
-  new_rs.save(function (error) {
-    if (error) {
-      console.log(error)
-    }
-    res.send({
-      success: true
-    })
-  })
-})
-app.put('/rs/:id', (req, res) => {
-  Rollingstock.findById(req.params.id, function (error, rs) {
-    if (error) {
-      console.error(error);
-    }
-    rs.roadName = req.body.roadName;
-    rs.roadNumber = req.body.roadNumber;
-    rs.color = req.body.color;
-    rs.aarCode = req.body.aarCode;
-    rs.description = req.body.description;
-    rs.numberBlt = req.body.numberBlt;
-    rs.inSvcDate = req.body.inSvcDate;
-    rs.insideLength = req.body.insideLength;
-    rs.insideHeight = req.body.insideHeight;
-    rs.insideWidth = req.body.insideWidth;
-    rs.capacity = req.body.capacity;
-    rs.bldr = req.body.bldr;
-    rs.bltDate = req.body.bltDate;
-    rs.notes = req.body.notes;
-    rs.ltWeight = req.body.ltWeight;
-    rs.loadLimit = req.body.loadLimit;
-    rs.loadTypes = req.body.loadTypes;
-    rs.lastMaintDate = req.body.lastMaintDate;
-    rs.locationNow = req.body.locationNow;
-    rs.homeLocation = req.body.homeLocation;
-    rs.rsStatus = req.body.rsStatus;
-    rs.imageID = req.body.imageID;
-    rs.modelWeight = req.body.modelWeight;
-    rs.modelLength = req.body.modelLength;
-    rs.rfid = req.body.rfid
-    rs.save(function (error) {
+      opstatuses: opstatuses,
+    });
+  });
+});
+
+app.get("/rslocomotives", (req, res) => {
+  Rollingstock.find(
+    { $or: [{ aarCode: "DE" }, { aarCode: "SE" }] },
+    function (error, rollingstocks) {
       if (error) {
-        console.log(error)
+        console.error(error);
       }
       res.send({
-        success: true
-      })
-    })
-  })
-})
-app.get('/rs_rfid/:id', (req, res) => {
-  Rollingstock.findOne({
-    rfid: req.params.id
-  }, 'roadName roadNumber color aarCode', function (error, post) {
-    if (error) {
-      console.error(error);
+        rollingstocks: rollingstocks,
+      });
     }
-    res.send(post)
-  })
-})
-app.get('/rs_road/:id', (req, res) => {
+  ).sort({
+    roadName: 1,
+    roadNumber: 1,
+  });
+}); */
+app.get("/rs/:id", async (req, res) => {
+  const rs = await Rollingstock.findById(req.params.id);
+  res.send(rs);
+});
+app.get("/rs_rfid/:id", async (req, res) => {
+  const rs = await Rollingstock.findOne(
+    {
+      rfid: req.params.id,
+    })
+      res.send(rs);
+});
+app.get("/rs_road/:id", async (req, res) => {
   let rn = req.params.id.split("-");
-  Rollingstock.findOne({
+  const rs = await Rollingstock.findOne({
     roadName: rn[0],
-    roadNumber: rn[1]
-  }, function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post)
-  })
-})
-app.delete('/rs/:id', (req, res) => {
-  Rollingstock.deleteOne({
-    _id: req.params.id
-  }, function (err, post) {
-    if (err)
-      res.send(err)
-    res.send({
-      success: true
-    })
-  })
-})
+    roadNumber: rn[1],
+  });
+  res.send(rs);
+});
+app.post("/add_rs", async (req, res) => {
+  await Rollingstock.create({
+    roadName: req.body.roadName,
+    roadNumber: req.body.roadNumber,
+    color: req.body.color,
+    aarCode: req.body.aarCode,
+    description: req.body.description,
+    numberBlt: req.body.numberBlt,
+    inSvcDate: req.body.inSvcDate,
+    insideLength: req.body.insideLength,
+    insideHeight: req.body.insideHeight,
+    insideWidth: req.body.insideWidth,
+    capacity: req.body.capacity,
+    bldr: req.body.bldr,
+    bltDate: req.body.bltDate,
+    notes: req.body.notes,
+    ltWeight: req.body.ltWeight,
+    loadLimit: req.body.loadLimit,
+    loadTypes: req.body.loadTypes,
+    lastMaintDate: req.body.lastMaintDate,
+    locationNow: req.body.locationNow,
+    homeLocation: req.body.homeLocation,
+    rsStatus: req.body.rsStatus,
+    imageID: req.body.imageID,
+    modelWeight: req.body.modelWeight,
+    modelLength: req.body.modelLength,
+    rfid: req.body.rfid,
+  });
+  res.send();
+});
+app.put("/rs/:id", async (req, res) => {
+  const rs = await Rollingstock.findById(req.params.id);
+  rs.roadName = req.body.roadName;
+  rs.roadNumber = req.body.roadNumber;
+  rs.color = req.body.color;
+  rs.aarCode = req.body.aarCode;
+  rs.description = req.body.description;
+  rs.numberBlt = req.body.numberBlt;
+  rs.inSvcDate = req.body.inSvcDate;
+  rs.insideLength = req.body.insideLength;
+  rs.insideHeight = req.body.insideHeight;
+  rs.insideWidth = req.body.insideWidth;
+  rs.capacity = req.body.capacity;
+  rs.bldr = req.body.bldr;
+  rs.bltDate = req.body.bltDate;
+  rs.notes = req.body.notes;
+  rs.ltWeight = req.body.ltWeight;
+  rs.loadLimit = req.body.loadLimit;
+  rs.loadTypes = req.body.loadTypes;
+  rs.lastMaintDate = req.body.lastMaintDate;
+  rs.locationNow = req.body.locationNow;
+  rs.homeLocation = req.body.homeLocation;
+  rs.rsStatus = req.body.rsStatus;
+  rs.imageID = req.body.imageID;
+  rs.modelWeight = req.body.modelWeight;
+  rs.modelLength = req.body.modelLength;
+  rs.rfid = req.body.rfid;
+  await rs.save();
+  res.send(rs);
+});
+app.delete("/rs/:id", async (req, res) => {
+  await Rollingstock.deleteOne({
+    _id: req.params.id,
+  });
+  res.send();
+});
 
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 3000);
