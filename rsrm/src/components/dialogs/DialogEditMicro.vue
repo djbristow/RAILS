@@ -7,7 +7,10 @@
         <v-text-field v-model="microIP" label="IP"></v-text-field>
         <v-text-field v-model="et" label="Time"></v-text-field>
         <v-text-field v-model="purpose" label="Purpose"></v-text-field>
-        <v-text-field v-model="sensorLoc" label="Sensor Location"></v-text-field>
+        <v-text-field
+          v-model="sensorLoc"
+          label="Sensor Location"
+        ></v-text-field>
         <v-text-field v-model="status" label="Status"></v-text-field>
       </v-container>
     </v-card-text>
@@ -22,45 +25,45 @@
     </v-card-actions>
   </v-card>
 </template>
-<script>
-export default {
-  name: "DialogEditMicro",
-  props: ["micro"],
-  data: () => ({
-    microID: "",
-    microIP: "",
-    et: "",
-    purpose: "",
-    sensorLoc: "",
-    status: "",
-  }),
-  computed: {
-    microEditDataInvalid() {
-      let result = false;
-      return result;
-    },
+<script setup>
+import { ref, onMounted } from "vue";
+import { useMicrosStore } from "@/stores/micros";
+
+const microID = ref("");
+const microIP = ref("");
+const _id = ref("");
+const et = ref("");
+const purpose = ref("");
+const sensorLoc = ref("");
+const status = ref("");
+const microEditDataInvalid = ref(false);
+const microStore = useMicrosStore();
+const emit = defineEmits(["closeEditMicroDialog"]);
+const props = defineProps({
+  micro: {
+    type: Object,
+    required: true,
   },
-  mounted() {
-    this.microID = this.micro.microID;
-    this.microIP = this.micro.microIP;
-    this.et = this.micro.et;
-    this.purpose = this.micro.purpose;
-    this.sensorLoc = this.micro.sensorLoc;
-    this.status = this.micro.status;
-  },
-  methods: {
-    editMicro() {
-      this.$store.dispatch("updateMicro", {
-        _id: this.micro._id,
-        microID: this.microID,
-        microIP: this.microIP,
-        et: this.et,
-        purpose: this.purpose,
-        sensorLoc: this.sensorLoc,
-        status: this.status,
-      });
-      this.$emit("closeEditMicroDialog");
-    },
-  },
+});
+const editMicro = () => {
+  microStore.UPDATE_MICRO({
+    _id: _id.value,
+    microID: microID.value,
+    microIP: microIP.value,
+    et: et.value,
+    purpose: purpose.value,
+    sensorLoc: sensorLoc.value,
+    status: status.value,
+  });
+  emit("closeEditMicroDialog");
 };
+onMounted(() => {
+  _id.value = props.micro._id;
+  microID.value = props.micro.microID;
+  microIP.value = props.micro.microIP;
+  et.value = props.micro.et;
+  purpose.value = props.micro.purpose;
+  sensorLoc.value = props.micro.sensorLoc;
+  status.value = props.micro.status;
+});
 </script>

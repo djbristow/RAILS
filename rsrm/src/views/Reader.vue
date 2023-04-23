@@ -2,7 +2,7 @@
   <v-app>
     <div class="xx">
       <h1>RFID Tags Read</h1>
-      <div v-if="connStatus === 'Connected'">
+      <div v-if="connStatusStore.connStatus === 'Connected'">
         <v-icon color="green">mdi-cast-connected</v-icon>
       </div>
       <div v-else>
@@ -22,72 +22,54 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="rs in rsRfid" :key="rs.rfid">
-            <td>{{ rs.time }}</td>
-            <td>{{ rs.sensor }}</td>
-            <td>{{ rs.reader }}</td>
-            <td>{{ rs.rfid }}</td>
+          <tr v-for="item in rsStore.rfid" :key="item.rfid">
+            <td>{{ item.time }}</td>
+            <td>{{ item.sensor }}</td>
+            <td>{{ item.reader }}</td>
+            <td>{{ item.rfid }}</td>
             <td>
-              <div v-if="rs.roadNameNumber === 'Not Registered'">
-                <span style="color: red">{{ rs.roadNameNumber }}</span>
+              <div v-if="item.roadNameNumber === 'Not Registered'">
+                <span style="color: red">{{ item.roadNameNumber }}</span>
               </div>
-              <div v-else>{{ rs.roadNameNumber }}</div>
+              <div v-else>{{ item.roadNameNumber }}</div>
             </td>
-            <td>{{ rs.aarCode }}</td>
-            <td>{{ rs.color }}</td>
+            <td>{{ item.aarCode }}</td>
+            <td>{{ item.color }}</td>
             <td>
-              <div v-if="rs.roadNameNumber === 'Not Registered'">
-                <v-btn @click="dialogRegister(rs.rfid)" icon>
-                  <v-icon color="red">mdi-checkbox-marked-circle-outline</v-icon>
+              <div v-if="item.roadNameNumber === 'Not Registered'">
+                <v-btn @click="dialogRegister(item)" icon>
+                  <v-icon color="red"
+                    >mdi-checkbox-marked-circle-outline</v-icon
+                  >
                 </v-btn>
               </div>
             </td>
           </tr>
         </tbody>
       </v-table>
-      <dialog-register v-if="registerDialog" @close="registerDialog = false" :rfid="dialogRfid" />
+      <v-dialog v-model="registerDialog">
+        <dialog-register-tag :rfid="dialogRfid" @closeRegisterDialog="registerDialog = false" />
+      </v-dialog>
     </div>
   </v-app>
 </template>
 
-<script>
-import DialogRegister from "../components/dialogs/DialogRegister.vue";
-export default {
-  name: "Manager",
-  data() {
-    return {
-      dialogRfid: "",
-      rfid: "",
-      updateRfid: "",
-      newRoadNameNumber: "",
-      newRoadName: "",
-      newRoadNumber: "",
-      name: "",
-      number: "",
-      foundRs: null,
-      registerDialog: false,
+<script setup>
+import { ref } from "vue";
+import DialogRegisterTag from "@/components/dialogs/DialogRegisterTag.vue";
+import { useConnStatusStore } from "@/stores/connStatus";
+import { useRSStore } from "@/stores/rs";
+
+const rsStore = useRSStore();
+const connStatusStore = useConnStatusStore();
+const dialogRfid = ref("");
+const registerDialog = ref(false);
+    const dialogRegister = (item) => {
+      dialogRfid.value = item.rfid;
+      registerDialog.value = true;
     };
-  },
-  components: {
-    DialogRegister,
-  },
-  computed: {
-    rsRfid() {
-      return this.$store.state.rsRfid
-    },
-    connStatus() {
-      return this.$store.state.connStatus
-    },
-  },
-  methods: {
-    async dialogRegister(rfid) {
-      console.log(rfid);
-      this.registerDialog = true;
-      this.dialogRfid = rfid;
-    },
-  },
-};
 </script>
+
 <style>
 .xx {
   margin-left: 50px;

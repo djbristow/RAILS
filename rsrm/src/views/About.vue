@@ -1,7 +1,7 @@
 <template>
   <div class="xx">
     <h1>About RAILS RS RFID Manager</h1>
-    <h3>Version 3.2.8</h3>
+    <h3>Version 4.0.0</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) RFID
       Application is one of several applications in the RAILS family of
@@ -13,31 +13,23 @@
     </p>
     <p>The user guide is available at: tbd</p>
     <p>Waiting for Vuetify 3.2 to format and paginate tables</p>
-    <hr>
+    <hr />
     <p>The database has the following number of documents:</p>
-    <ul>
-      <li>Rollinkstock: {{ rslength }} of which {{ rfidlength }} have RFID tags.</li>
-      <li>Micro Controllers: {{ microslength }} of which {{ rfidReaders }} are RFID readers</li>
-    </ul>
+      <li>
+        Rollinkstock: {{ rsStore.RS_COUNT }} of which
+        {{ rsStore.RS_WITH_RFID_COUNT }} have RFID tags.
+      </li>
+      <li>
+        Micro Controllers: {{ microStore.MICRO_COUNT }} of which
+        {{ microStore.RFID_READER_COUNT }} are RFID readers
+      </li>
   </div>
 </template>
 
-<script>
-export default {
-  name: "About",
-  computed: {
-    rslength() {
-      return this.$store.state.rs.length;
-    },
-    rfidlength() {
-      return this.$store.getters.listRsWithRfids.length
-    },
-    microslength() {
-            return this.$store.state.micros.length;
-        },
-        rfidReaders() {
-          return this.$store.getters.listRfidReaders.length
-        }
-  }
-};
+<script setup>
+import { useMicrosStore } from "@/stores/micros";
+import { useRSStore } from "@/stores/rs";
+
+const microStore = useMicrosStore();
+const rsStore = useRSStore();
 </script>

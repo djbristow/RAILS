@@ -7,7 +7,10 @@
         <v-text-field v-model="microIP" label="IP"></v-text-field>
         <v-text-field v-model="et" label="Time"></v-text-field>
         <v-text-field v-model="purpose" label="Purpose"></v-text-field>
-        <v-text-field v-model="sensorLoc" label="Sensor Location"></v-text-field>
+        <v-text-field
+          v-model="sensorLoc"
+          label="Sensor Location"
+        ></v-text-field>
         <v-text-field v-model="status" label="Status"></v-text-field>
       </v-container>
     </v-card-text>
@@ -22,35 +25,28 @@
     </v-card-actions>
   </v-card>
 </template>
-<script>
-export default {
-  name: "DialogAddMicro",
-  data: () => ({
-    microID: "",
-    microIP: "",
-    et: "",
-    purpose: "",
-    sensorLoc: "",
-    status: "",
-  }),
-  computed: {
-    microAddDataInvalid() {
-      let result = false;
-      return result;
-    },
-  },
-  methods: {
-    addMicro() {
-      this.$store.dispatch("addNewMicro", {
-        microID: this.microID,
-        microIP: this.microIP,
-        et: this.et,
-        purpose: this.purpose,
-        sensorLoc: this.sensorLoc,
-        status: this.status,
-      });
-      this.$emit("closeAddMicroDialog");
-    },
-  },
+<script setup>
+import { ref } from "vue";
+import { useMicrosStore } from "@/stores/micros";
+
+const microID = ref("");
+const microIP = ref("");
+const et = ref("");
+const purpose = ref("");
+const sensorLoc = ref("");
+const status = ref("");
+const microAddDataInvalid = ref(false);
+const microStore = useMicrosStore();
+const emit = defineEmits(["closeAddMicroDialog"]);
+const addMicro = () => {
+  microStore.ADD_NEW_MICRO({
+    microID: microID.value,
+    microIP: microIP.value,
+    et: et.value,
+    purpose: purpose.value,
+    sensorLoc: sensorLoc.value,
+    status: status.value,
+  });
+  emit("closeAddMicroDialog");
 };
 </script>

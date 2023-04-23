@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in aarCodes" :key="item.id">
+        <tr v-for="item in aarCodesStore.aarCodes" :key="item.id">
           <td>{{ item.aarCode }}</td>
           <td>{{ item.rollingstockType }}</td>
           <td>{{ item.description }}</td>
@@ -38,39 +38,28 @@
   </div>
 </template>
 
-<script>
-import DialogEditAarCode from "../components/dialogs/DialogEditAarCode.vue";
-import DialogDeleteAarCode from "../components/dialogs/DialogDeleteAarCode.vue";
-import DialogAddAarCode from "../components/dialogs/DialogAddAarCode.vue";
-export default {
-  components: {
-    DialogEditAarCode,
-    DialogDeleteAarCode,
-    DialogAddAarCode,
-  },
-  data: () => ({
-    editAarCodeDialog: false,
-    deleteAarCodeDialog: false,
-    addAarCodeDialog: false,
-    editableAarCode: null,
-  }),
-  computed: {
-    aarCodes() {
-      return this.$store.state.aarCodes;
-    },
-  },
-  methods: {
-    addAarCode() {
-      this.addAarCodeDialog = true;
-    },
-    deleteAarCode(item) {
-      this.editableAarCode = item;
-      this.deleteAarCodeDialog = true;
-    },
-    editAarCode(item) {
-      this.editableAarCode = item;
-      this.editAarCodeDialog = true;
-    },
-  },
+<script setup>
+import { ref } from 'vue';
+import DialogEditAarCode from "@/components/dialogs/DialogEditAarCode.vue";
+import DialogDeleteAarCode from "@/components/dialogs/DialogDeleteAarCode.vue";
+import DialogAddAarCode from "@/components/dialogs/DialogAddAarCode.vue";
+import { useAarCodesStore } from "@/stores/aarCodes";
+
+const aarCodesStore = useAarCodesStore();
+const editAarCodeDialog = ref(false);
+const deleteAarCodeDialog = ref(false);
+const addAarCodeDialog = ref(false);
+const editableAarCode = ref(null);
+
+const addAarCode = () => {
+  addAarCodeDialog.value = true;
+};
+const editAarCode = (item) => {
+  editableAarCode.value = item;
+  editAarCodeDialog.value = true;
+};
+const deleteAarCode = (item) => {
+  editableAarCode.value = item;
+  deleteAarCodeDialog.value = true;
 };
 </script>

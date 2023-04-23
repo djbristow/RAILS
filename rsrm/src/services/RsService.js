@@ -13,7 +13,7 @@ export default {
     return ApiRs().get('rs_rfid/' + rfid)
   },
   getRs (params) {
-    return ApiRs().get('rs/' + params.id)
+    return ApiRs().get('' + params.id)
   },
   getRsRoad (params) {
     return ApiRs().get('rs_road/' + params)
@@ -28,11 +28,13 @@ export default {
   fetchAarlist() {
     return ApiRs().get('aarlist')
   },
+  getAarByCode(code) {
+    return ApiRs().get("aar_code/" + code);
+  },
   deleteAarCode(id) {
     return ApiRs().delete('aar/' + id)
   },
   updateAar(params) {
-    console.log(params)
     return ApiRs().put('update_aar/' + params.id, params)
   },
   addAar(params) {

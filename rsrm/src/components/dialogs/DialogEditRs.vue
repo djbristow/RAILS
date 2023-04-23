@@ -10,28 +10,49 @@
           <v-text-field v-model="color" label="Color"></v-text-field>
         </v-row>
         <v-row dense>
-          <v-text-field v-model="description" label="Description"></v-text-field>
+          <v-text-field
+            v-model="description"
+            label="Description"
+          ></v-text-field>
         </v-row>
         <v-row dense>
           <v-text-field v-model="numberBlt" label="Number Built"></v-text-field>
           <v-text-field v-model="bldr" label="Builder"></v-text-field>
           <v-text-field v-model="bltDate" label="Built Date"></v-text-field>
-          <v-text-field v-model="inSvcDate" label="In Service Date"></v-text-field>
+          <v-text-field
+            v-model="inSvcDate"
+            label="In Service Date"
+          ></v-text-field>
         </v-row>
         <v-row dense>
-          <v-text-field v-model="insideLength" label="Inside Length"></v-text-field>
-          <v-text-field v-model="insideHeight" label="Inside Height"></v-text-field>
-          <v-text-field v-model="insideWidth" label="Inside Width"></v-text-field>
+          <v-text-field
+            v-model="insideLength"
+            label="Inside Length"
+          ></v-text-field>
+          <v-text-field
+            v-model="insideHeight"
+            label="Inside Height"
+          ></v-text-field>
+          <v-text-field
+            v-model="insideWidth"
+            label="Inside Width"
+          ></v-text-field>
           <v-text-field v-model="ltWeight" label="Lt Weight"></v-text-field>
         </v-row>
         <v-row dense>
           <v-text-field v-model="loadLimit" label="Load Limit"></v-text-field>
           <v-text-field v-model="loadTypes" label="Load Types"></v-text-field>
           <v-text-field v-model="capacity" label="Capacity"></v-text-field>
-          <v-text-field v-model="homeLocation" label="Home Location"></v-text-field>
+          <v-text-field
+            v-model="homeLocation"
+            label="Home Location"
+          ></v-text-field>
         </v-row>
         <v-row dense>
-          <v-text-field v-model="lastMaintDate" label="Last Maintenance"></v-text-field>
+          <v-text-field
+            v-model="lastMaintDate"
+            label="Last Maintenance"
+          ></v-text-field>
           <v-text-field v-model="rsStatus" label="Status"></v-text-field>
         </v-row>
         <v-card-subtitle>Model Details</v-card-subtitle>
@@ -57,111 +78,109 @@
     </v-card-actions>
   </v-card>
 </template>
-<script>
+<script setup>
+import { ref, onMounted } from "vue";
+import { useRSStore } from "@/stores/rs";
 import { format } from "date-fns";
-export default {
-  name: "DialogEditRs",
-  props: ["rollingstock"],
-  data: () => ({
-    roadName: "",
-    roadNumber: "",
-    color: "",
-    aarCode: "",
-    description: "",
-    numberBlt: "",
-    inSvcDate: "",
-    insideLength: "",
-    insideHeight: "",
-    insideWidth: "",
-    loadTypes: "",
-    capacity: "",
-    bldr: "",
-    bltDate: "",
-    notes: "",
-    ltWeight: "",
-    loadLimit: "",
-    lastMaintDate: "",
-    locationNow: "",
-    homeLocation: "",
-    rsStatus: "",
-    imageID: "",
-    modelWeight: "",
-    modelLength: "",
-    rfid: "",
-  }),
-  computed: {
-    rsEditDataInvalid() {
-      let result = false;
-      return result;
-    },
+
+const _id = ref("");
+const roadName = ref("");
+const roadNumber = ref("");
+const color = ref("");
+const aarCode = ref("");
+const description = ref("");
+const numberBlt = ref("");
+const inSvcDate = ref("");
+const insideLength = ref("");
+const insideHeight = ref("");
+const insideWidth = ref("");
+const loadTypes = ref("");
+const capacity = ref("");
+const bldr = ref("");
+const bltDate = ref("");
+const notes = ref("");
+const ltWeight = ref("");
+const loadLimit = ref("");
+const lastMaintDate = ref("");
+const locationNow = ref("");
+const homeLocation = ref("");
+const rsStatus = ref("");
+const imageID = ref("");
+const modelWeight = ref("");
+const modelLength = ref("");
+const rfid = ref("");
+const rsEditDataInvalid = ref(false);
+const emit = defineEmits(["closeEditRsDialog"]);
+const rsStore = useRSStore();
+const props = defineProps({
+  rollingstock: {
+    type: Object,
+    required: true,
   },
-  mounted() {
-    this.roadName = this.rollingstock.roadName;
-    this.roadNumber = this.rollingstock.roadNumber;
-    this.rfid = this.rollingstock.rfid;
-    this.color = this.rollingstock.color;
-    this.aarCode = this.rollingstock.aarCode;
-    this.description = this.rollingstock.description;
-    this.numberBlt = this.rollingstock.numberBlt;
-    this.inSvcDate = format(
-      new Date(this.rollingstock.inSvcDate),
-      "MMM d, yyyy"
-    );
-    this.insideLength = this.rollingstock.insideLength;
-    this.insideHeight = this.rollingstock.insideHeight;
-    this.insideWidth = this.rollingstock.insideWidth;
-    this.loadTypes = this.rollingstock.loadTypes;
-    this.capacity = this.rollingstock.capacity;
-    this.bldr = this.rollingstock.bldr;
-    this.bltDate = format(new Date(this.rollingstock.bltDate), "MMM d, yyyy");
-    this.notes = this.rollingstock.notes;
-    this.ltWeight = this.rollingstock.ltWeight;
-    this.loadLimit = this.rollingstock.loadLimit;
-    this.lastMaintDate = format(
-      new Date(this.rollingstock.lastMaintDate),
-      "MMM d, yyyy"
-    );
-    this.locationNow = this.rollingstock.locationNow;
-    this.homeLocation = this.rollingstock.homeLocation;
-    this.rsStatus = this.rollingstock.rsStatus;
-    this.imageID = this.rollingstock.imageID;
-    this.modelWeight = this.rollingstock.modelWeight;
-    this.modelLength = this.rollingstock.modelLength;
-    console.log("mounted the rolling stock from the base page " + this.rfid);
-  },
-  methods: {
-    editRsUpdate() {
-      this.$store.dispatch("updateRs", {
-        _id: this.rollingstock._id,
-        roadName: this.roadName,
-        roadNumber: this.roadNumber,
-        color: this.color,
-        aarCode: this.aarCode,
-        description: this.description,
-        numberBlt: this.numberBlt,
-        inSvcDate: this.inSvcDate,
-        insideLength: this.insideLength,
-        insideHeight: this.insideHeight,
-        insideWidth: this.insideWidth,
-        loadTypes: this.loadTypes,
-        capacity: this.capacity,
-        bldr: this.bldr,
-        bltDate: this.bltDate,
-        notes: this.notes,
-        ltWeight: this.ltWeight,
-        loadLimit: this.loadLimit,
-        lastMaintDate: this.lastMaintDate,
-        locationNow: this.locationNow,
-        homeLocation: this.homeLocation,
-        rsStatus: this.rsStatus,
-        imageID: this.imageID,
-        modelWeight: this.modelWeight,
-        modelLength: this.modelLength,
-        rfid: this.rfid,
-      });
-      console.log(this.roadNumber + " " + this.lastMaintDate + " " + this.rfid);
-      this.$emit('closeEditRsDialog');
-    },
-  },
+});
+const editRsUpdate = () => {
+  rsStore.UPDATE_RS({
+    _id: _id.value,
+    roadName: roadName.value,
+    roadNumber: roadNumber.value,
+    color: color.value,
+    aarCode: aarCode.value,
+    description: description.value,
+    numberBlt: numberBlt.value,
+    inSvcDate: inSvcDate.value,
+    insideLength: insideLength.value,
+    insideHeight: insideHeight.value,
+    insideWidth: insideWidth.value,
+    loadTypes: loadTypes.value,
+    capacity: capacity.value,
+    bldr: bldr.value,
+    bltDate: bltDate.value,
+    notes: notes.value,
+    ltWeight: ltWeight.value,
+    loadLimit: loadLimit.value,
+    lastMaintDate: lastMaintDate.value,
+    locationNow: locationNow.value,
+    homeLocation: homeLocation.value,
+    rsStatus: rsStatus.value,
+    imageID: imageID.value,
+    modelWeight: modelWeight.value,
+    modelLength: modelLength.value,
+    rfid: rfid.value,
+  });
+  emit("closeEditRsDialog");
 };
+onMounted(() => {
+  _id.value = props.rollingstock._id;
+  roadName.value = props.rollingstock.roadName;
+  roadNumber.value = props.rollingstock.roadNumber;
+  color.value = props.rollingstock.color;
+  aarCode.value = props.rollingstock.aarCode;
+  description.value = props.rollingstock.description;
+  numberBlt.value = props.rollingstock.numberBlt;
+  inSvcDate.value = format(
+    new Date(props.rollingstock.inSvcDate),
+    "MMM d, yyyy"
+  );
+  insideLength.value = props.rollingstock.insideLength;
+  insideHeight.value = props.rollingstock.insideHeight;
+  insideWidth.value = props.rollingstock.insideWidth;
+  loadTypes.value = props.rollingstock.loadTypes;
+  capacity.value = props.rollingstock.capacity;
+  bldr.value = props.rollingstock.bldr;
+  bltDate.value = format(new Date(props.rollingstock.bltDate), "MMM d, yyyy");
+  notes.value = props.rollingstock.notes;
+  ltWeight.value = props.rollingstock.ltWeight;
+  loadLimit.value = props.rollingstock.loadLimit;
+  lastMaintDate.value = format(
+      new Date(props.rollingstock.lastMaintDate),
+      "MMM d, yyyy"
+    );
+  locationNow.value = props.rollingstock.locationNow;
+  homeLocation.value = props.rollingstock.homeLocation;
+  rsStatus.value = props.rollingstock.rsStatus;
+  imageID.value = props.rollingstock.imageID;
+  modelWeight.value = props.rollingstock.modelWeight;
+  modelLength.value = props.rollingstock.modelLength;
+  rfid.value = props.rollingstock.rfid;
+});
 </script>

@@ -15,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in rs" :key="item.id">
+          <tr v-for="item in rsStore.rs" :key="item.id">
             <td>{{ item.roadName }}</td>
             <td>{{ item.roadNumber }}</td>
             <td>{{ item.aarCode }}</td>
@@ -42,42 +42,28 @@
     </div>
   </v-app>
 </template>
-<script>
-import DialogEditRs from "../components/dialogs/DialogEditRs.vue";
-import DialogDeleteRs from "../components/dialogs/DialogDeleteRs.vue";
-import DialogAddRs from "../components/dialogs/DialogAddRs.vue";
-export default {
-  components: {
-    DialogEditRs,
-    DialogDeleteRs,
-    DialogAddRs,
-  },
-  data: () => ({
-    editRsDialog: false,
-    deleteRsDialog: false,
-    addRsDialog: false,
-    editableRs: null,
-    rollingstock: null,
-  }),
-  computed: {
-    rs() {
-      return this.$store.state.rs;
-    },
-  },
-  methods: {
-    editRollingstock(item) {
-      this.editableRs = item;
-      this.editRsDialog = true;
-    },
-    deleteRollingstock(item) {
-      this.editableRs = item;
-      this.deleteRsDialog = true;
-    },
-    addRollingstock() {
-      this.addRsDialog = true;
-    },
-  },
+<script setup>
+import { ref } from 'vue';
+import DialogEditRs from "@/components/dialogs/DialogEditRs.vue";
+import DialogDeleteRs from "@/components/dialogs/DialogDeleteRs.vue";
+import DialogAddRs from "@/components/dialogs/DialogAddRs.vue";
+import { useRSStore } from "@/stores/rs";
+
+const rsStore = useRSStore();
+const editRsDialog = ref(false);
+const deleteRsDialog = ref(false);
+const addRsDialog = ref(false);
+const editableRs = ref(null);
+
+const addRollingstock = () => {
+  addRsDialog.value = true;
+};
+const editRollingstock = (item) => {
+  editableRs.value = item;
+  editRsDialog.value = true;
+};
+const deleteRollingstock = (item) => {
+  editableRs.value = item;
+  deleteRsDialog.value = true;
 };
 </script>
-<style lang="">
-</style>

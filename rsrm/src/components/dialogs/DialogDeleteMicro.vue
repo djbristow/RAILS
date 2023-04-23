@@ -11,15 +11,19 @@
     </v-card-actions>
   </v-card>
 </template>
-<script>
-export default {
-  name: "DialogDeleteMicro",
-  props: ["micro"],
-  methods: {
-    deleteMicro(id) {
-      this.$store.dispatch("deleteMicro", id);
-      this.$emit("closeDeleteMicroDialog");
-    },
+<script setup>
+import { useMicrosStore } from "@/stores/micros";
+
+const props = defineProps({
+  micro: {
+    type: Object,
+    required: true,
   },
+});
+const emit = defineEmits(["closeDeleteMicroDialog"]);
+const microStore = useMicrosStore();
+const deleteMicro = (id) => {
+  microStore.DELETE_MICRO(id);
+  emit("closeDeleteMicroDialog");
 };
 </script>
