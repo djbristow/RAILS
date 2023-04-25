@@ -28,7 +28,6 @@
 
 ## Run Setup
 
-``` bash
 # install dependencies
 npm install
 
@@ -36,5 +35,5 @@ npm install
 export RSRM_TCP_PORT='3002'
 export MQTT_PORT_1883_TCP_ADDR='127.0.0.1'
 export MQTT_PORT_1883_TCP_PORT='1883'
-node app
-```
+node src/app
+`'''
