@@ -16,20 +16,18 @@ var Project = require("../models/Project");
 var Purchase = require("../models/Purchase");
 
 // The following CRUD functions handle data in the companies collection
-app.get("/mcolist", (req, res) => {
-  MrCompany.find({}, function (error, mrcompanies) {
-    if (error) {
-      console.error(error);
-    }
-    res.send({
-      mrcompanies: mrcompanies,
-    });
-  }).sort({
+app.get("/mcolist", async (req, res) => {
+  const mrcompanies = await MrCompany.find().sort({
     _id: -1,
   });
+  res.send({ mrcompanies });
 });
-app.post("/add_mco", (req, res) => {
-  var new_MrCompany = new MrCompany({
+app.get("/mco_name/:id", async (req, res) => {
+  const mrcompany = await MrCompany.findOne({ name: req.params.id });
+  res.send(mrcompany);
+});
+app.post("/add_mco", async (req, res) => {
+  await MrCompany.create({
     name: req.body.name,
     type: req.body.type,
     website: req.body.website,
@@ -37,105 +35,40 @@ app.post("/add_mco", (req, res) => {
     address: req.body.address,
     notes: req.body.notes,
   });
-  new_MrCompany.save(function (error) {
-    if (error) {
-      console.log(error);
-    }
-    res.send({
-      success: true,
-    });
-  });
+  res.send();
 });
-app.get("/mco_name/:id", (req, res) => {
-  MrCompany.findOne({ name: req.params.id }, "_id", function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post);
-  });
+app.put("/update_mco/:id", async (req, res) => {
+  const mrcompany = await MrCompany.findById(req.body._id);
+  mrcompany.name = req.body.name;
+  mrcompany.type = req.body.type;
+  mrcompany.website = req.body.website;
+  mrcompany.email = req.body.email;
+  mrcompany.phone = req.body.phone;
+  mrcompany.address = req.body.address;
+  mrcompany.notes = req.body.notes;
+  await mrcompany.save();
+  res.send();
 });
-app.put("/update_mco/:id", (req, res) => {
-  MrCompany.findById(req.body._id, function (error, mrcompany) {
-    if (error) {
-      console.error(error);
-    }
-    mrcompany.name = req.body.name;
-    mrcompany.type = req.body.type;
-    mrcompany.website = req.body.website;
-    mrcompany.email = req.body.email;
-    mrcompany.phone = req.body.phone;
-    mrcompany.address = req.body.address;
-    mrcompany.notes = req.body.notes;
-    mrcompany.save(function (error) {
-      if (error) {
-        console.log(error);
-      }
-      res.send({
-        success: true,
-      });
-    });
+app.delete("/mco/:id", async (req, res) => {
+  await MrCompany.deleteOne({
+    _id: req.params.id,
   });
-});
-app.delete("/mco/:id", (req, res) => {
-  MrCompany.deleteOne(
-    {
-      _id: req.params.id,
-    },
-    function (err, post) {
-      if (err) res.send(err);
-      res.send({
-        success: true,
-      });
-    }
-  );
+  res.send();
 });
 
 // The following CRUD functions handle data in the projects collection
-app.get("/projlist", (req, res) => {
-  Project.find({}, function (error, projects) {
-    if (error) {
-      console.error(error);
-    }
-    res.send({
-      projects: projects,
-    });
-  }).sort({
+app.get("/projlist", async (req, res) => {
+  const projects = await Project.find().sort({
     startdate: 1,
   });
+  res.send({ projects });
 });
-app.get("/proj_title/:id", (req, res) => {
-  Project.findOne({title: req.params.id}, "_id", function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post);
-  });
+app.get("/proj_title/:id", async (req, res) => {
+  const project = await Project.findOne({ title: req.params.id });
+  res.send(project);
 });
-app.put("/update_proj/:id", (req, res) => {
-  Project.findById(req.body._id, function (error, project) {
-    if (error) {
-      console.error(error);
-    }
-    project.title = req.body.title;
-    project.type = req.body.type;
-    project.description = req.body.description;
-    project.startdate = req.body.startdate;
-    project.enddate = req.body.enddate;
-    project.roadname = req.body.roadname;
-    project.roadnumbers = req.body.roadnumbers;
-    project.notes = req.body.notes;
-    project.save(function (error) {
-      if (error) {
-        console.log(error);
-      }
-      res.send({
-        success: true,
-      });
-    });
-  });
-});
-app.post("/add_proj", (req, res) => {
-  var new_project = new Project({
+app.post("/add_proj", async (req, res) => {
+  await Project.create({
     title: req.body.title,
     type: req.body.type,
     description: req.body.description,
@@ -145,52 +78,41 @@ app.post("/add_proj", (req, res) => {
     roadnumbers: req.body.roadnumbers,
     notes: req.body.notes,
   });
-  new_project.save(function (error) {
-    if (error) {
-      console.log(error);
-    }
-    res.send({
-      success: true,
-    });
-  });
+  res.send();
 });
-app.delete("/proj/:id", (req, res) => {
-  Project.deleteOne(
-    {
-      _id: req.params.id,
-    },
-    function (err, post) {
-      if (err) res.send(err);
-      res.send({
-        success: true,
-      });
-    }
-  );
+app.put("/update_proj/:id", async (req, res) => {
+  const project = await Project.findById(req.body._id);
+  project.title = req.body.title;
+  project.type = req.body.type;
+  project.description = req.body.description;
+  project.startdate = req.body.startdate;
+  project.enddate = req.body.enddate;
+  project.roadname = req.body.roadname;
+  project.roadnumbers = req.body.roadnumbers;
+  project.notes = req.body.notes;
+  await project.save();
+  res.send();
+});
+app.delete("/proj/:id", async (req, res) => {
+  await Project.deleteOne({
+    _id: req.params.id,
+  });
+  res.send();
 });
 
 // The following CRUD functions handle data in the purchases collection
-app.get("/purlist", (req, res) => {
-  Purchase.find({}, function (error, purchases) {
-    if (error) {
-      console.error(error);
-    }
-    res.send({
-      purchases: purchases,
-    });
-  }).sort({
+app.get("/purlist", async (req, res) => {
+  const purchases = await Purchase.find().sort({
     num: 1,
   });
+  res.send(purchases);
 });
-app.get("/pur_number/:id", (req, res) => {
-  Purchase.findOne({num: req.params.id}, "_id", function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post);
-  });
+app.get("/pur_number/:id", async (req, res) => {
+  const purchase = await Purchase.findOne({ num: req.params.id });
+  res.send(purchase);
 });
-app.post("/add_pur", (req, res) => {
-  var new_purchase = new Purchase({
+app.post("/add_pur", async (req, res) => {
+  await Purchase.create({
     num: req.body.num,
     date: req.body.date,
     store: req.body.store,
@@ -204,56 +126,30 @@ app.post("/add_pur", (req, res) => {
     roadnumbers: req.body.roadnumbers,
     notes: req.body.notes,
   });
-  new_purchase.save(function (error) {
-    if (error) {
-      console.log(error);
-    }
-    res.send({
-      success: true,
-    });
+  res.send();
+});
+app.put("/update_pur/:id", async (req, res) => {
+  const purchase = await Purchase.findById(req.body._id);
+  purchase.num = req.body.num;
+  purchase.date = req.body.date;
+  purchase.store = req.body.store;
+  purchase.item = req.body.item;
+  purchase.desciption = req.body.desciption;
+  purchase.manufacturer = req.body.manufacturer;
+  purchase.unitcost = req.body.unitcost;
+  purchase.qty = req.body.qty;
+  purchase.project = req.body.project;
+  purchase.roadname = req.body.roadname;
+  purchase.roadnumbers = req.body.roadnumbers;
+  purchase.notes = req.body.notes;
+  await purchase.save();
+  res.send();
+});
+app.delete("/pur/:id", async (req, res) => {
+  await Purchase.deleteOne({
+    _id: req.params.id,
   });
+  res.send();
 });
-app.put("/update_pur/:id", (req, res) => {
-  Purchase.findById(req.body._id, function (error, purchase) {
-    if (error) {
-      console.error(error);
-    }
-    purchase.num = req.body.num;
-    purchase.date = req.body.date;
-    purchase.store = req.body.store;
-    purchase.item = req.body.item;
-    purchase.desciption = req.body.desciption;
-    purchase.manufacturer = req.body.manufacturer;
-    purchase.unitcost = req.body.unitcost;
-    purchase.qty = req.body.qty;
-    purchase.project = req.body.project;
-    purchase.roadname = req.body.roadname;
-    purchase.roadnumbers = req.body.roadnumbers;
-    purchase.notes = req.body.notes;
-    purchase.save(function (error) {
-      if (error) {
-        console.log(error);
-      }
-      res.send({
-        success: true,
-      });
-    });
-  });
-});
-app.delete("/pur/:id", (req, res) => {
-  var db = req.db;
-  Purchase.deleteOne(
-    {
-      _id: req.params.id,
-    },
-    function (err, post) {
-      if (err) res.send(err);
-      res.send({
-        success: true,
-      });
-    }
-  );
-});
-
 
 app.listen(process.env.PORT || 3007);
