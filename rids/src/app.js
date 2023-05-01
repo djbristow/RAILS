@@ -106,6 +106,7 @@ app.get("/struct_title/:id", async (req, res) => {
   res.send(structure);
 });
 app.post("/add_struct", async (req, res) => {
+console.log(req.body)
   await Structure.create({
     title: req.body.title,
     structureUse: req.body.structureUse,
@@ -161,6 +162,7 @@ app.put("/update_struct/:id", async (req, res) => {
   structure.sidingCap = req.body.sidingCap;
   structure.notes = req.body.notes;
   await structure.save();
+  res.send();
 });
 app.delete("/struct/:id", async (req, res) => {
   await Structure.deleteOne({
