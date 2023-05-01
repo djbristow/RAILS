@@ -1,9 +1,13 @@
-import store from "../store";
+import { useAarCodesStore } from "@/stores/aarCodes";
+import { useCompaniesStore } from "@/stores/companies";
+import { useImagesStore } from "@/stores/images";
+import { useRSStore } from "@/stores/rs";
+import { mapActions } from "pinia";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import moment from "moment";
 export default {
-  printAarCodes() {
+  printAarCodes(documents) {
     class Aarrow {
       constructor(aarCode, rollingstockType, description) {
         this.aarCode = aarCode;
@@ -12,7 +16,6 @@ export default {
       }
     }
     var i = 0;
-    let documents = store.state.aarCodes;
     var aarrows = [];
     for (i = 0; i < documents.length; i++) {
       aarrows[i] = new Aarrow(
@@ -42,7 +45,7 @@ export default {
     });
     doc.save("aarcodes.pdf");
   },
-  printCompanies() {
+  printCompanies(documents) {
     class Corow {
       constructor(shortName, longName, industryType, industryLocation) {
         this.shortName = shortName;
@@ -52,7 +55,6 @@ export default {
       }
     }
     var i = 0;
-    let documents = store.state.companies;
     var corows = [];
     for (i = 0; i < documents.length; i++) {
       corows[i] = new Corow(
@@ -101,10 +103,9 @@ export default {
       reader.readAsDataURL(blob);
     });
   },
-  async printImages() {
+  async printImages(images, uniqueCatImage, rs) {
     var i = 0;
-    let images = store.state.images;
-    let categories = store.getters.getUniqueCatImage;
+    let categories = uniqueCatImage;
     var doc = new jsPDF("p", "pt");
     let pageHeight = doc.internal.pageSize.height;
     let pageWidth = doc.internal.pageSize.width;
@@ -113,7 +114,12 @@ export default {
     doc.text("Images Report", 225, 35);
     doc.setFontSize(10);
     doc.text("Page " + pageCount, 35, pageHeight - 10);
-    let imageRoot = "http://"+ import.meta.env.VITE_MRFM_TCP_ADDR +':'+ import.meta.env.VITE_MRFM_TCP_PORT + "/";
+    let imageRoot =
+      "http://" +
+      import.meta.env.VITE_MRFM_TCP_ADDR +
+      ":" +
+      import.meta.env.VITE_MRFM_TCP_PORT +
+      "/";
     for (let k = 0; k < categories.length; k++) {
       if (k > 0) {
         doc.addPage();
@@ -135,7 +141,9 @@ export default {
           let imgData = imageData.replace(/^data:.+;base64,/, "");
           let imgW = pageWidth / 2 - 35;
           let imgH = imgHeight * (imgW / imgWidth);
-          let rollingstock = store.getters.getRsForImage(images[i].fileName);
+          let rollingstock = rs.filter(
+            (rs) => rs.imageID === images[i].fileName
+          );
           let rsText = "";
           let rsLines = [];
           let notesLines = [];
@@ -194,7 +202,14 @@ export default {
     }
     doc.save("images.pdf");
   },
-  printRollingstock(sortBy, breakType) {
+  printRollingstock(
+    sortBy,
+    breakType,
+    documents,
+    uniqueRsRoadName,
+    uniqueRsAarCode,
+    uniqueRsStatus
+  ) {
     console.log("Sorted " + sortBy + " Break " + breakType);
     class Rsrow {
       constructor(
@@ -231,7 +246,6 @@ export default {
     var byTitle = "Road Name";
     var uniques = null;
     var somerows = [];
-    let documents = store.state.rs;
     var rsrows = [];
     for (i = 0; i < documents.length; i++) {
       rsrows[i] = new Rsrow(
@@ -329,11 +343,11 @@ export default {
       });
     } else {
       if (sortBy === "Road Names") {
-        uniques = store.getters.getUniqueRsRoadName;
+        uniques = uniqueRsRoadName;
       } else if (sortBy === "AAR Codes") {
-        uniques = store.getters.getUniqueRsAarCode;
+        uniques = uniqueRsAarCode;
       } else {
-        uniques = store.getters.getUniqueRsStatus;
+        uniques = uniqueRsStatus;
       }
       var k = 0;
       for (i = 0; i < uniques.length; i++) {
@@ -400,7 +414,7 @@ export default {
     }
     doc.save("rollingstock.pdf");
   },
-  printRfids() {
+  printRfids(documents) {
     class Rsrow {
       constructor(roadName, roadNumber, color, aarCode, description, rfid) {
         this.roadName = roadName;
@@ -412,7 +426,6 @@ export default {
       }
     }
     var i = 0;
-    let documents = store.state.rs;
     var rsrows = [];
     for (i = 0; i < documents.length; i++) {
       rsrows[i] = new Rsrow(
@@ -457,7 +470,7 @@ export default {
     });
     doc.save("rfid.pdf");
   },
-  printStructures() {
+  printStructures(documents) {
     class StructureRow {
       constructor(
         title,
@@ -480,18 +493,17 @@ export default {
       }
     }
     var i = 0;
-    let documents = store.state.structures;
     var structureRows = [];
     for (i = 0; i < documents.length; i++) {
       structureRows[i] = new StructureRow(
         documents[i].title,
         documents[i].structureUse,
         documents[i].description,
-        documents[i].owner,       
+        documents[i].owner,
         documents[i].location,
         documents[i].construction,
         documents[i].builtDate,
-        documents[i].size,
+        documents[i].size
       );
     }
     var columns = [

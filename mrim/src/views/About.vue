@@ -1,7 +1,7 @@
 <template>
   <div class="xx">
     <h1>About Model Railroad Inventory Manager</h1>
-    <h3>Version 3.0.7</h3>
+    <h3>Version 4.0.0</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) MRIM
       Application is one of several single page applications (SPAs) in the RAILS family of
@@ -17,39 +17,30 @@
     <br>
     <hr>
     <p>The database has the following number of documents:</p>
-    <ul>
-      <li>Rollinkstock: {{ rslength }}</li>
-      <li>Decoders: {{ decoderslength }}</li>
-      <li>AAR Codes: {{ aarCodeslength }}</li>
-      <li>Structures: {{ structureslength }}</li>
-      <li>Companies: {{ companieslength }}</li>
-      <li>Images: {{ imageslength }}</li>
-    </ul>
+
+      <li>Rollinkstock: {{ rsStore.RS_COUNT }}</li>
+      <li>Decoders: {{ decodersStore.DECODERS_COUNT }}</li>
+      <li>AAR Codes: {{ aarCodesStore.AARCODES_COUNT }}</li>
+      <li>Structures: {{ structuresStore.STRUCTURES_COUNT }}</li>
+      <li>Companies: {{ companiesStore.COMPANIES_COUNT }}</li>
+      <li>Images: {{ imagesStore.IMAGES_COUNT }}</li>
+
   </div>
 </template>
 
-<script>
-export default {
-  name: "About",
-  computed: {
-    rslength() {
-      return this.$store.state.rs.length;
-    },
-    aarCodeslength() {
-      return this.$store.state.aarCodes.length;
-    },
-    structureslength() {
-      return this.$store.state.structures.length;
-    },
-    companieslength() {
-      return this.$store.state.companies.length;
-    },
-    decoderslength() {
-      return this.$store.state.decoders.length;
-    },
-    imageslength() {
-      return this.$store.state.images.length;
-    },
-  },
-};
+<script setup>
+import { useRSStore } from "@/stores/rs";
+import { useAarCodesStore } from "@/stores/aarCodes";
+import { useDecodersStore } from "@/stores/decoders";
+import { useStructuresStore } from "@/stores/structures";
+import { useCompaniesStore } from "@/stores/companies";
+import { useImagesStore } from "@/stores/images";
+
+const rsStore = useRSStore();
+const aarCodesStore = useAarCodesStore();
+const decodersStore = useDecodersStore();
+const structuresStore = useStructuresStore();
+const companiesStore = useCompaniesStore();
+const imagesStore = useImagesStore();
+
 </script>

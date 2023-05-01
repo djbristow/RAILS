@@ -11,15 +11,19 @@
     </v-card-actions>
   </v-card>
 </template>
-<script>
-export default {
-  name: "DialogDeleteAarCode",
-  props: ["aarCode"],
-  methods: {
-    deleteAarCode(id) {
-      this.$store.dispatch("deleteAarCode", id);
-      this.$emit("closeDeleteAarCodeDialog");
-    },
+<script setup>
+import { useAarCodesStore } from "@/stores/aarCodes";
+
+const props = defineProps({
+  aarCode: {
+    type: Object,
+    required: true,
   },
+});
+const emit = defineEmits(["closeDeleteAarCodeDialog"]);
+const aarCodeStore = useAarCodesStore();
+const deleteAarCode = (id) => {
+  aarCodeStore.DELETE_AARCODE(id);
+  emit("closeDeleteAarCodeDialog");
 };
 </script>

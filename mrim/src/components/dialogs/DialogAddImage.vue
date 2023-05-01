@@ -19,46 +19,42 @@
     </v-card-actions>
   </v-card>
 </template>
-<script>
+<script setup>
 import axios from 'axios'
-export default {
-  name: "DialogAddImage",
-  data: () => ({
-    title: "",
-    fileName: [],
-    name: "",
-    notes: "",
-    file: null,
-  }),
-  computed: {
-    imageAddDataInvalid() {
-      let result = false;
-      return result;
-    },
-  },
-  methods: {
-    onFileChange(e) {
-      this.file = e.target.files[0]
-    },
-    addImage() {
-      let formData = new FormData();
-      this.name = this.file.name
-      formData.append('file', this.file);
-      axios.post('http://localhost:3030/uploadimg',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }
-      ).then(async response => {
-        console.log('SUCCESS!!' + response.data);
-        this.$emit('closeAddImageDialog');
-        this.$store.dispatch("addNewImage", { title: this.title, fileName: this.name, notes: this.notes });
-      }).catch(error => {
-        console.log('FAILURE!!' + error);
-      });
-    },
-  }
+import { ref } from "vue";
+import { useImagesStore } from "@/stores/images";
+
+const title = ref("");
+const fileName = ref([]);
+const notes = ref("");
+const file = ref(null);
+const imageAddDataInvalid = ref(false);
+const emit = defineEmits(['closeAddImageDialog']);
+const imagesStore = useImagesStore();
+const onFileChange = (e) => {
+  file.value = e.target.files[0]
+}
+const addImage = () => {
+  let formData = new FormData();
+  title.value = file.value.name
+  formData.append('file', file.value);
+  axios.post('http://localhost:3030/uploadimg',
+    formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }
+  ).then(async response => {
+    console.log('SUCCESS!!' + response.data);
+    emit('closeAddImageDialog');
+    imagesStore.ADD_NEW_IMAGE({
+      title: title.value,
+      fileName: file.value.name,
+      notes: notes.value,
+    });
+  }).catch(error => {
+    console.log('FAILURE!!' + error);
+  });
 }
 </script>

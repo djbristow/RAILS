@@ -19,29 +19,22 @@
     </v-card-actions>
   </v-card>
 </template>
-<script>
-export default {
-  name: "DialogAddAarCode",
-  data: () => ({
-    aarCode: "",
-    rollingstockType: "",
-    description: "",
-  }),
-  computed: {
-    aarCodeAddDataInvalid() {
-      let result = false;
-      return result;
-    },
-  },
-  methods: {
-    addAarCode() {
-      this.$store.dispatch("addNewAarCode", {
-        aarCode: this.aarCode,
-        rollingstockType: this.rollingstockType,
-        description: this.description,
-      });
-      this.$emit("closeAddAarCodeDialog");
-    },
-  },
-};
+<script setup>
+import { ref } from "vue";
+import { useAarCodesStore } from "@/stores/aarCodes";
+
+const aarCode = ref('');
+const rollingstockType = ref('');
+const description = ref('');
+const aarCodeAddDataInvalid = ref(false);
+const emit = defineEmits(['closeAddAarCodeDialog']);
+const aarCodeStore = useAarCodesStore();
+const addAarCode = () => {
+  aarCodeStore.ADD_NEW_AARCODE({
+    aarCode: aarCode.value,
+    rollingstockType: rollingstockType.value,
+    description: description.value,
+  });
+  emit('closeAddAarCodeDialog');
+}
 </script>

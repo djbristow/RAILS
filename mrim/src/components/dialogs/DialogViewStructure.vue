@@ -21,15 +21,19 @@
         <v-btn @click="$emit('closeViewStructureDialog')" text> Close </v-btn>
     </v-card>
 </template>
-<script>
-export default {
-  name: "DialogViewStructure",
-  props: ["structure"],
-  data: () => ({
-    imageServer: "",
-  }),
-  mounted: function () {
-    this.imageServer = 'http://' + import.meta.env.VITE_MRFM_TCP_ADDR +':'+ import.meta.env.VITE_MRFM_TCP_PORT +'/'+ this.structure.image;
+<script setup>
+import { ref, onMounted } from "vue";
+import { useStructuresStore } from "@/stores/structures";
+const props = defineProps({
+  structure: {
+    type: Object,
+    required: true,
   },
-};
+});
+const emit = defineEmits(['closeViewStructureDialog']);
+const structuresStore = useStructuresStore();
+const imageServer = ref("");
+onMounted(() => {
+  imageServer.value = 'http://' + import.meta.env.VITE_MRFM_TCP_ADDR +':'+ import.meta.env.VITE_MRFM_TCP_PORT +'/'+ props.structure.image;
+});
 </script>

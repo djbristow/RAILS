@@ -1,13 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Admin from '../views/Admin.vue'
-import About from '../views/About.vue'
-import Rollingstock from '../views/Rollingstock.vue'
-import AarCodes from '../views/AarCodes.vue'
-import Structures from '../views/Structures.vue'
-import Companies from '../views/Companies.vue'
-import Locomotives from '../views/Locomotives.vue'
-import Decoders from '../views/Decoders.vue'
-import Images from '../views/Images.vue'
+import Admin from '@/views/Admin.vue'
+import About from '@/views/About.vue'
+import Rollingstock from '@/views/Rollingstock.vue'
+import AarCodes from '@/views/AarCodes.vue'
+import Structures from '@/views/Structures.vue'
+import Companies from '@/views/Companies.vue'
+import Locomotives from '@/views/Locomotives.vue'
+import Decoders from '@/views/Decoders.vue'
+import Images from '@/views/Images.vue'
 const routes = [
   {
     path: '/admin',

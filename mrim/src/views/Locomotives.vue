@@ -1,8 +1,8 @@
 <template>
-    <v-app>
-      <div class="xx">
+  <v-app>
+    <div class="xx">
       <h1>Inventory of Locomotives</h1>
-            <v-table density="compact">
+      <v-table density="compact">
         <thead>
           <tr>
             <th class="text-left">Road Name</th>
@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in locos" :key="item.id">
+          <tr v-for="item in rsStore.LOCOMOTIVE_LIST" :key="item.id">
             <td>{{ item.roadName }}</td>
             <td>{{ item.roadNumber }}</td>
             <td>{{ item.aarCode }}</td>
@@ -22,15 +22,10 @@
           </tr>
         </tbody>
       </v-table>
-      </div>
-    </v-app>
-  </template>
-  <script>
-export default {
-    computed: {
-    locos() {
-      return this.$store.getters.listLocomotives;
-    },
-  },
-}
+    </div>
+  </v-app>
+</template>
+<script setup>
+import { useRSStore } from "@/stores/rs";
+const rsStore = useRSStore();
 </script>

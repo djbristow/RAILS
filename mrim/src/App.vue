@@ -31,33 +31,42 @@
   </v-app>
 </template>
   
-<script>
-export default {
-  data: () => ({
-    name: "App",
-    drawer: false,
-    items: [
-      { title: "Rollingstock", icon: "mdi-train-car-box", to: "/rollingstock" },
-      { title: "Locomotives", icon: "mdi-train", to: "/locomotives"},
-      { title: "Decoders", icon: "mdi-chip", to: "/decoders"},
-      { title: "Images", icon: "mdi-file-image", to: "/images" },
-      { title: "AAR Codes", icon: "mdi-code-array", to: "/aarcodes" },
-      { title: "Structures", icon: "mdi-office-building-marker", to: "/structures" },
-      { title: "Companies", icon: "mdi-cog", to: "/companies" },
-      { title: "Admin", icon: "mdi-format-list-checks", to: "/admin" },
-      { title: "About", icon: "mdi-help-box", to: "/" },
-    ],
-  }),
-  mounted() {
-    this.$store.dispatch("getRollingstocks");
-    this.$store.dispatch("getAarCodes");
-    this.$store.dispatch("getStructures");
-    this.$store.dispatch("getCompanies");
-    this.$store.dispatch("getDecoders");
-    this.$store.dispatch("getImages");
-  },
-  methods: {},
-};
+<script setup>
+import { ref, onMounted } from "vue";
+import { useRSStore } from "@/stores/rs";
+import { useAarCodesStore } from "@/stores/aarCodes";
+import { useStructuresStore } from "@/stores/structures";
+import { useCompaniesStore } from "@/stores/companies";
+import { useDecodersStore } from "@/stores/decoders";
+import { useImagesStore } from "@/stores/images";
+
+const drawer = ref(false);
+const items = [
+  { title: "Rollingstock", icon: "mdi-train-car-box", to: "/rollingstock" },
+  { title: "Locomotives", icon: "mdi-train", to: "/locomotives"},
+  { title: "Decoders", icon: "mdi-chip", to: "/decoders"},
+  { title: "Images", icon: "mdi-file-image", to: "/images" },
+  { title: "AAR Codes", icon: "mdi-code-array", to: "/aarcodes" },
+  { title: "Structures", icon: "mdi-office-building-marker", to: "/structures" },
+  { title: "Companies", icon: "mdi-cog", to: "/companies" },
+  { title: "Admin", icon: "mdi-format-list-checks", to: "/admin" },
+  { title: "About", icon: "mdi-help-box", to: "/" },
+];
+const aarCodesStore = useAarCodesStore();
+const structuresStore = useStructuresStore();
+const companiesStore = useCompaniesStore();
+const decodersStore = useDecodersStore();
+const imagesStore = useImagesStore();
+const rsStore = useRSStore();
+
+onMounted(() => {
+  rsStore.GET_RS();
+  aarCodesStore.GET_AARCODES();
+  structuresStore.GET_STRUCTURES();
+  companiesStore.GET_COMPANIES();
+  decodersStore.GET_DECODERS();
+  imagesStore.GET_IMAGES();
+});
 </script>
 <style>
 .xx {

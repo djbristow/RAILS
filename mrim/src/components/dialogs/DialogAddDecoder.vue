@@ -26,43 +26,38 @@
     </v-card-actions>
   </v-card>
 </template>
-<script>
-export default {
-  name: "DialogAddDecoder",
-  data: () => ({
-    roadName: "",
-    roadNumber: "",
-    mfg: "",
-    family: "",
-    model: "",
-    address: "",
-    noLoco: false,
-  }),
-  computed: {
-    decoderAddDataInvalid() {
-      let result = false;
-      return result;
-    },
-  },
-  methods: {
-    addDecoder() {
-      let loco = this.$store.getters.checkLoco(this.roadName, this.roadNumber);
-      if (loco == undefined) {
-        this.noLoco = true;
-      } else {
-        this.noLoco = false;
-        this.$store.dispatch("addNewDecoder", {
-          locomotiveID: loco._id,
-          roadName: this.roadName,
-          roadNumber: this.roadNumber,
-          mfg: this.mfg,
-          family: this.family,
-          model: this.model,
-          address: this.address,
-        });
-        this.$emit("closeAddDecoderDialog");
-      }
-    },
-  },
+<script setup>
+import { ref } from "vue";
+import { useDecodersStore } from "@/stores/decoders";
+import { useRSStore } from "@/stores/rs";
+
+const roadName = ref("");
+const roadNumber = ref("");
+const mfg = ref("");
+const family = ref("");
+const model = ref("");
+const address = ref("");
+const noLoco = ref(false);
+const emit = defineEmits(["closeAddDecoderDialog"]);
+const decoderStore = useDecodersStore();
+const rssStore = useRSStore();
+const decoderAddDataInvalid = ref(false);
+const addDecoder = () => {
+  let loco = rssStore.CHECK_LOCO(roadName.value, roadNumber.value);
+  if (loco == undefined) {
+    noLoco.value = true;
+  } else {
+    noLoco.value = false;
+    decoderStore.ADD_NEW_DECODER({
+      locomotiveID: loco._id,
+      roadName: roadName.value,
+      roadNumber: roadNumber.value,
+      mfg: mfg.value,
+      family: family.value,
+      model: model.value,
+      address: address.value,
+    });
+    emit("closeAddDecoderDialog");
+  }
 };
 </script>

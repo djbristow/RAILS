@@ -11,15 +11,19 @@
     </v-card-actions>
   </v-card>
 </template>
-<script>
-export default {
-  name: "DialogDeleteDecoder",
-  props: ["decoderLoco"],
-  methods: {
-    deleteDecoder(id) {
-      this.$store.dispatch("deleteDecoder", id);
-      this.$emit("closeDeleteDecoderDialog");
-    },
+<script setup>
+import { useDecodersStore } from "@/stores/decoders";
+
+const props = defineProps({
+  decoderLoco: {
+    type: Object,
+    required: true,
   },
+});
+const emit = defineEmits(["closeDeleteDecoderDialog"]);
+const decoderStore = useDecodersStore();
+const deleteDecoder = (id) => {
+  decoderStore.DELETE_DECODER(id);
+  emit("closeDeleteDecoderDialog");
 };
 </script>

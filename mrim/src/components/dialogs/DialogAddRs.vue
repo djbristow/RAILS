@@ -85,73 +85,66 @@
     </v-card>
 </template>
 
-<script>
-export default {
-  name: "DialogAddRs",
-  data: () => ({
-    roadName: "",
-    roadNumber: "",
-    color: "",
-    aarCode: "",
-    description: "",
-    numberBlt: "",
-    inSvcDate: "",
-    insideLength: "",
-    insideHeight: "",
-    insideWidth: "",
-    loadTypes: "",
-    capacity: "",
-    bldr: "",
-    bltDate: "",
-    notes: "",
-    ltWeight: "",
-    loadLimit: "",
-    lastMaintDate: "",
-    locationNow: "",
-    homeLocation: "",
-    rsStatus: "",
-    imageID: "",
-    modelWeight: "",
-    modelLength: "",
-    rfid: "",
-  }),
-  computed: {
-    rsAddDataInvalid() {
-      let result = false;
-      return result;
-    },
-  },
-  methods: {
-    addRs() {
-      this.$store.dispatch("addNewRs", {
-        roadName: this.roadName,
-        roadNumber: this.roadNumber,
-        color: this.color,
-        aarCode: this.aarCode,
-        description: this.description,
-        numberBlt: this.numberBlt,
-        inSvcDate: this.inSvcDate,
-        insideLength: this.insideLength,
-        insideHeight: this.insideHeight,
-        insideWidth: this.insideWidth,
-        loadTypes: this.loadTypes,
-        capacity: this.capacity,
-        bldr: this.bldr,
-        bltDate: this.bltDate,
-        notes: this.notes,
-        ltWeight: this.ltWeight,
-        loadLimit: this.loadLimit,
-        lastMaintDate: this.lastMaintDate,
-        locationNow: this.locationNow,
-        homeLocation: this.homeLocation,
-        rsStatus: this.rsStatus,
-        imageID: this.imageID,
-        modelWeight: this.modelWeight,
-        modelLength: this.modelLength,
-        rfid: this.rfid,
-      });
-      this.$emit('closeAddRsDialog');
-    },
-  },
+<script setup>
+import { ref } from 'vue';
+import { useRSStore, ADD_NEW_RS } from "@/stores/rs";
+
+const roadName = ref("");
+const roadNumber = ref("");
+const color = ref("");
+const aarCode = ref("");
+const description = ref("");
+const numberBlt = ref("");
+const inSvcDate = ref("");
+const insideLength = ref("");
+const insideHeight = ref("");
+const insideWidth = ref("");
+const loadTypes = ref("");
+const capacity = ref("");
+const bldr = ref("");
+const bltDate = ref("");
+const notes = ref("");
+const ltWeight = ref("");
+const loadLimit = ref("");
+const lastMaintDate = ref("");
+const locationNow = ref("");
+const homeLocation = ref("");
+const rsStatus = ref("");
+const imageID = ref("");
+const modelWeight = ref("");
+const modelLength = ref("");
+const rfid = ref("");
+const rsAddDataInvalid = ref(false);
+const rsStore = useRSStore();
+const emit = defineEmits(['closeAddRsDialog']);
+const addRs = () => {
+  rsStore.ADD_NEW_RS({
+    roadName: roadName.value,
+    roadNumber: roadNumber.value,
+    color: color.value,
+    aarCode: aarCode.value,
+    description: description.value,
+    numberBlt: numberBlt.value,
+    inSvcDate: (Date(inSvcDate.value)),
+    insideLength: insideLength.value,
+    insideHeight: insideHeight.value,
+    insideWidth: insideWidth.value,
+    loadTypes: loadTypes.value,
+    capacity: capacity.value,
+    bldr: bldr.value,
+    bltDate: (Date(bltDate.value)),
+    notes: notes.value,
+    ltWeight: ltWeight.value,
+    loadLimit: loadLimit.value,
+    lastMaintDate: (Date(lastMaintDate.value)),
+    locationNow: locationNow.value,
+    homeLocation: homeLocation.value,
+    rsStatus: rsStatus.value,
+    imageID: imageID.value,
+    modelWeight: modelWeight.value,
+    modelLength: modelLength.value,
+    rfid: rfid.value,
+  });
+  emit('closeAddRsDialog');
 };
 </script>

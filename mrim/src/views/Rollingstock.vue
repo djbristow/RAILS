@@ -15,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in rs" :key="item.id">
+          <tr v-for="item in rsStore.rs" :key="item.id">
             <td>{{ item.roadName }}</td>
             <td>{{ item.roadNumber }}</td>
             <td>{{ item.aarCode }}</td>
@@ -48,47 +48,33 @@
     </div>
   </v-app>
 </template>
-<script>
+<script setup>
+import { ref } from 'vue';
 import DialogEditRs from "../components/dialogs/DialogEditRs.vue";
 import DialogDeleteRs from "../components/dialogs/DialogDeleteRs.vue";
 import DialogAddRs from "../components/dialogs/DialogAddRs.vue";
 import DialogViewRs from "../components/dialogs/DialogViewRs.vue";
-export default {
-  components: {
-    DialogEditRs,
-    DialogDeleteRs,
-    DialogAddRs,
-    DialogViewRs,
-  },
-  data: () => ({
-    editRsDialog: false,
-    deleteRsDialog: false,
-    addRsDialog: false,
-    viewRsDialog: false,
-    editableRs: null,
-    rollingstock: null,
-  }),
-  computed: {
-    rs() {
-      return this.$store.state.rs;
-    },
-  },
-  methods: {
-    editRollingstock(item) {
-      this.editableRs = item;
-      this.editRsDialog = true;
-    },
-    deleteRollingstock(item) {
-      this.editableRs = item;
-      this.deleteRsDialog = true;
-    },
-    addRollingstock() {
-      this.addRsDialog = true;
-    },
-    viewRollingstock(item) {
-      this.editableRs = item;
-      this.viewRsDialog = true;
-    },
-  },
+import { useRSStore } from "@/stores/rs";
+
+const rsStore = useRSStore();
+const editRsDialog = ref(false);
+const deleteRsDialog = ref(false);
+const addRsDialog = ref(false);
+const viewRsDialog = ref(false);
+const editableRs = ref(null);
+const addRollingstock = () => {
+  addRsDialog.value = true;
+};
+const editRollingstock = (item) => {
+  editableRs.value = item;
+  editRsDialog.value = true;
+};
+const deleteRollingstock = (item) => {
+  editableRs.value = item;
+  deleteRsDialog.value = true;
+};
+const viewRollingstock = (item) => {
+  editableRs.value = item;
+  viewRsDialog.value = true;
 };
 </script>

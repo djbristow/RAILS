@@ -3,42 +3,50 @@
     <h1>Admin</h1>
     <br />
     <div>
-      <v-container fluid>
-        <v-row>
-          <v-col cols="4">
-            <v-select :items="items" label="Collection" v-model="selectedExpt"></v-select>
-          </v-col>
-          <v-col cols="6">
-            <v-btn @click="downloadFile"> Export </v-btn>
-          </v-col>
-        </v-row>
+      <VContainer fluid>
+        <VRow>
+          <VCol cols="4">
+            <VSelect
+              :items="items"
+              label="Collection"
+              v-model="selectedExpt"
+            ></VSelect>
+          </VCol>
+          <VCol cols="6">
+            <VBtn @click="downloadFile"> Export </VBtn>
+          </VCol>
+        </VRow>
         <p v-if="exprtError" style="color: #ff0000">
           An error has ocurred, select a collection.
         </p>
-        <v-row>
-          <v-col cols="4">
-            <v-file-input
+        <VRow>
+          <VCol cols="4">
+            <VFileInput
               v-model="inFilename"
               accept="txt"
               label="File input"
               @change="onFileChange"
-            ></v-file-input>
-          </v-col>
-          <v-col cols="4">
-            <v-select :items="items" label="Collection" v-model="selectedInpt"></v-select>
-          </v-col>
-          <v-col cols="4">
-            <v-btn @click="uploadFile"> Import </v-btn>
-          </v-col>
-        </v-row>
-        <v-row>
+            ></VFileInput>
+          </VCol>
+          <VCol cols="4">
+            <VSelect
+              :items="items"
+              label="Collection"
+              v-model="selectedInpt"
+            ></VSelect>
+          </VCol>
+          <VCol cols="4">
+            <VBtn @click="uploadFile"> Import </VBtn>
+          </VCol>
+        </VRow>
+        <VRow>
           <p v-if="inptError" style="color: #ff0000">
             {{ error }}
           </p>
-        </v-row>
-        <v-row>
-          <v-col cols="3">
-            <v-select
+        </VRow>
+        <VRow>
+          <VCol cols="3">
+            <VSelect
               label="Report"
               v-model="printCollection"
               :items="[
@@ -49,220 +57,307 @@
                 'RFID',
                 'Structures',
               ]"
-            ></v-select>
-          </v-col>
-          <v-col cols="3">
-            <v-select
+            ></VSelect>
+          </VCol>
+          <VCol cols="3">
+            <VSelect
               v-if="printCollection === 'Rolling Stock'"
               label="Sorted By"
               v-model="sortBy"
               :items="['Road Names', 'AAR Codes', 'Status']"
-            ></v-select>
-          </v-col>
-          <v-col cols="3">
-            <v-select
+            ></VSelect>
+          </VCol>
+          <VCol cols="3">
+            <VSelect
               v-if="printCollection === 'Rolling Stock'"
               label="Break"
               v-model="breakType"
               :items="['Continuous', 'Table', 'Page']"
-            ></v-select>
-          </v-col>
-          <v-col cols="3">
-            <v-btn @click="printFile"> Print </v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
+            ></VSelect>
+          </VCol>
+          <VCol cols="3">
+            <VBtn @click="printFile"> Print </VBtn>
+          </VCol>
+        </VRow>
+      </VContainer>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from "vue";
+import { useRSStore } from "@/stores/rs";
+import { useAarCodesStore } from "@/stores/aarCodes";
+import { useCompaniesStore } from "@/stores/companies";
+import { useImagesStore } from "@/stores/images";
+import { useStructuresStore } from "@/stores/structures";
+import { useDecodersStore } from "@/stores/decoders";
 import exportFromJSON from "export-from-json";
 import FileService from "../services/FileService";
 import PrintServices from "../services/PrintServices";
 
-export default {
-  data: () => ({
-    items: [
-      "AAR Codes",
-      "Companies",
-      "Images",
-      "Rolling Stock",
-      "Decoders",
-      "Structures",
-    ],
-    selectedExpt: null,
-    selectedInpt: null,
-    chosenFile: null,
-    exprtError: false,
-    inptError: false,
-    content: null,
-    error: null,
-    inFilename: [],
-    row: null,
-    printCollection: null,
-    sortBy: null,
-    breakType: null,
-  }),
-  computed: {
-    rs() {
-      return this.$store.state.rs;
-    },
-    structures() {
-      return this.$store.state.structures;
-    },
-    aarCodes() {
-      return this.$store.state.aarCodes;
-    },
-    companies() {
-      return this.$store.state.companies;
-    },
-    decoders() {
-      return this.$store.state.decoders;
-    },
-    images() {
-      return this.$store.state.images;
-    },
-  },
-  methods: {
-    downloadFile() {
-      let data = null;
-      if (this.selectedExpt == null) {
-        this.exprtError = true;
+const rsStore = useRSStore();
+const aarCodesStore = useAarCodesStore();
+const companiesStore = useCompaniesStore();
+const imagesStore = useImagesStore();
+const structuresStore = useStructuresStore();
+const decodersStore = useDecodersStore();
+const items = [
+  "AAR Codes",
+  "Companies",
+  "Images",
+  "Rolling Stock",
+  "Decoders",
+  "Structures",
+];
+const selectedExpt = ref(null);
+const selectedInpt = ref(null);
+const chosenFile = ref(null);
+const exprtError = ref(false);
+const inptError = ref(false);
+const content = ref(null);
+const error = ref(null);
+const inFilename = ref([]);
+const printCollection = ref(null);
+const sortBy = ref(null);
+const breakType = ref(null);
+const downloadFile = () => {
+  let data = null;
+  if (selectedExpt.value == null) {
+    exprtError.value = true;
+  } else {
+    exprtError.value = false;
+    switch (selectedExpt.value) {
+      case "AAR Codes":
+        data = aarCodesStore.aarCodes;
+        break;
+      case "Companies":
+        data = companiesStore.companies;
+        break;
+      case "Images":
+        data = imagesStore.images;
+        break;
+      case "Rolling Stock":
+        data = rsStore.rs;
+        break;
+      case "Decoders":
+        data = decodersStore.decoders;
+        break;
+      case "Structures":
+        data = structuresStore.structures;
+        break;
+    }
+    let fileName = selectedExpt.value;
+    let exportType = exportFromJSON.types.csv;
+    if (data) exportFromJSON({ data, fileName, exportType });
+    selectedExpt.value = null;
+  }
+};
+const onFileChange = (e) => {
+  let files = e.target.files || e.dataTransfer.files;
+  if (!files.length) return;
+  chosenFile.value = files[0];
+};
+const splitWithParser = (input) => {
+  let tokens = [];
+  let startPosition = 0;
+  let endPosition = 0;
+  let isInQuotes = false;
+  let line = Array.from(input);
+  for (
+    let currentPosition = 0;
+    currentPosition < input.length;
+    currentPosition++
+  ) {
+    if (line[currentPosition] == '"') {
+      isInQuotes = !isInQuotes;
+    } else if (line[currentPosition] == "," && !isInQuotes) {
+      if (line[startPosition] == '"') {
+        startPosition++;
+        endPosition = currentPosition - 1;
       } else {
-        this.exprtError = false;
-        switch (this.selectedExpt) {
-          case "AAR Codes":
-            data = this.aarCodes;
-            break;
-          case "Companies":
-            data = this.companies;
-            break;
-          case "Images":
-            data = this.images;
-            break;
-          case "Rolling Stock":
-            data = this.rs;
-            break;
-          case "Decoders":
-            data = this.decoders;
-            break;
-          case "Structures":
-            data = this.structures;
-            break;
-        }
-        const fileName = this.selectedExpt;
-        const exportType = exportFromJSON.types.csv;
-        if (data) exportFromJSON({ data, fileName, exportType });
-        this.selectedExpt = null;
+        endPosition = currentPosition;
       }
-    },
-    onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      this.chosenFile = files[0];
-    },
-    splitWithParser(input) {
-      let tokens = [];
-      let startPosition = 0;
-      let endPosition = 0;
-      let isInQuotes = false;
-      let line = Array.from(input);
-      for (let currentPosition = 0; currentPosition < input.length; currentPosition++) {
-        if (line[currentPosition] == '"') {
-          isInQuotes = !isInQuotes;
-        } else if (line[currentPosition] == "," && !isInQuotes) {
-          if (line[startPosition] == '"') {
-            startPosition++;
-            endPosition = currentPosition - 1;
+      tokens.push(input.substring(startPosition, endPosition));
+      startPosition = currentPosition + 1;
+    }
+  }
+  let lastToken = input.substring(startPosition);
+  if (lastToken == ",") {
+    tokens.push("");
+  } else {
+    tokens.push(lastToken);
+  }
+  return tokens;
+};
+const handleDataStore = (item, type) => {
+  let action = item.action;
+  delete item.action;
+  if (action == "a" && item._id !== "") {
+    delete item._id;
+  }
+  if (action !== "") {
+    switch (type) {
+      case "AAR Codes":
+        if (action == "a" || action == "u") {
+          if (action == "a") {
+            aarCodesStore.ADD_NEW_AARCODE(item);
           } else {
-            endPosition = currentPosition;
+            aarCodesStore.UPDATE_AARCODE(item);
           }
-          tokens.push(input.substring(startPosition, endPosition));
-          startPosition = currentPosition + 1;
+        } else if (action == "d") {
+          aarCodesStore.DELETE_AARCODE(item._id);
+        } else {
+          console.log("There is a problem");
         }
+        break;
+      case "Companies":
+        if (action == "a" || action == "u") {
+          if (action == "a") {
+            companiesStore.ADD_NEW_COMPANY(item);
+          } else {
+            companiesStore.UPDATE_COMPANY(item);
+          }
+        } else if (action == "d") {
+          companiesStore.DELETE_COMPANY(item._id);
+        } else {
+          console.log("There is a problem");
+        }
+        break;
+      case "Images":
+        if (action == "a" || action == "u") {
+          if (action == "a") {
+            imagesStore.ADD_NEW_IMAGE(item);
+          } else {
+            imagesStore.UPDATE_IMAGE(item);
+          }
+        } else if (action == "d") {
+          imagesStore.DELETE_IMAGE(item._id);
+        } else {
+          console.log("There is a problem");
+        }
+        break;
+      case "Rolling Stock":
+        console.log(item);
+        if (action == "a" || action == "u") {
+          if (action == "a") {
+            rsStore.ADD_NEW_RS(item);
+          } else {
+            rsStore.UPDATE_RS(item);
+          }
+        } else if (action == "d") {
+          rsStore.DELETE_RS(item._id);
+        } else {
+          console.log("There is a problem");
+        }
+        break;
+      case "Decoders":
+        if (action == "a") {
+          decodersStore.ADD_NEW_DECODER(item);
+        } else if ((action = "u")) {
+          decodersStore.UPDATE_DECODER(item);
+        } else if (action == "d") {
+          decodersStore.DELETE_DECODER(item._id);
+        } else {
+          console.log("There is a problem");
+        }
+        break;
+      case "Structures":
+        if (action == "a" || action == "u") {
+          if (action == "a") {
+            structuresStore.ADD_NEW_STRUCTURE(item);
+          } else {
+            structuresStore.UPDATE_STRUCTURE(item);
+          }
+        } else if (action == "d") {
+          structuresStore.DELETE_STRUCTURE(item._id);
+        } else {
+          console.log("There is a problem");
+        }
+        break;
+    }
+  }
+};
+const uploadFile = () => {
+  let msLineEnd = false;
+  let data = [];
+  inptError.value = false;
+  var reader = new FileReader();
+  reader.readAsText(chosenFile.value);
+  reader.onload = () => {
+    content.value = reader.result;
+    if (content.value.includes("\r")) {
+      msLineEnd = true;
+    }
+    reader.onloadend = () => {
+      let headers = content.value
+        .slice(0, content.value.indexOf("\n"))
+        .split(",");
+      if (msLineEnd) {
+        let lastHeader = headers[headers.length - 1].slice(0, -1);
+        headers[headers.length - 1] = lastHeader;
       }
-      let lastToken = input.substring(startPosition);
-      if (lastToken == ",") {
-        tokens.push("");
+      let fileValidation = FileService.valFileType(selectedInpt.value, headers);
+      let rows = [];
+      if (fileValidation == "OK") {
+        if (msLineEnd) {
+          rows = content.value.split("\r\n");
+        } else {
+          rows = content.value.split("\n");
+        }
+        for (let i = 1; i < rows.length; i++) {
+          let row = splitWithParser(rows[i]);
+          let obj = {};
+          for (let j = 0; j < headers.length; j++) {
+            obj[headers[j]] = row[j];
+          }
+          if (obj.action !== "i") {
+            handleDataStore(obj, selectedInpt.value);
+          }
+        }
+        selectedInpt.value = null;
+        chosenFile.value = null;
       } else {
-        tokens.push(lastToken);
+        inptError.value = true;
+        error.value = fileValidation;
       }
-      return tokens;
-    },
-    uploadFile() {
-      let msLineEnd = false;
-      this.inptError = false;
-      var reader = new FileReader();
-      reader.readAsText(this.chosenFile);
-      reader.onload = () => {
-        this.content = reader.result;
-        if (this.content.includes("\r")) {
-              msLineEnd = true;
-            }
-        reader.onloadend = () => {
-          let headers = this.content.slice(0, this.content.indexOf("\n")).split(",");
-          if (msLineEnd){
-            let lastHeader = headers[headers.length-1].slice(0, -1);
-            headers[headers.length-1] = lastHeader
-          }
-          let fileValidation = FileService.valFileType(this.selectedInpt, headers);
-          let rows = [];
-          if (fileValidation == "OK") {
-            if (msLineEnd){
-              rows = this.content.split("\r\n");
-            } else {
-              rows = this.content.split("\n");
-            }
-            let items = [];
-            for (let i = 1; i < rows.length - 1; i++) {
-              if (!rows[i].startsWith("i,")) {
-                let objValues = this.splitWithParser(rows[i]);
-                let rowObj = headers.reduce(function (obj, title, index) {
-                  obj[title] = objValues[index];
-                  return obj;
-                }, {});
-                items.push(rowObj);
-              }
-            }
-            FileService.importFileContent(items, this.selectedInpt);
-            this.selectedInpt = null;
-            this.inFilename = [];
-          } else if (fileValidation == "noAction") {
-            this.error = "Error: no action column in selected file";
-            this.inptError = true;
-          } else {
-            this.error = "Error: mismatch between file type and collection.";
-            this.inptError = true;
-          }
-        };
-      };
-    },
-    printFile() {
-      switch (this.printCollection) {
-        case "AAR Codes":
-          PrintServices.printAarCodes();
-          break;
-        case "Companies":
-          PrintServices.printCompanies();
-          break;
-        case "Images":
-          PrintServices.printImages();
-          break;
-        case "RFID":
-          PrintServices.printRfids();
-          break;
-        case "Rolling Stock":
-          PrintServices.printRollingstock(this.sortBy, this.breakType);
-          break;
-        case "Structures":
-          PrintServices.printStructures();
-          break;
-      }
-      this.printCollection = null;
-      this.sortBy = null;
-      this.breakType = null;
-    },
-  },
+    };
+  };
+}; // uploadFile
+const printFile = () => {
+  switch (printCollection.value) {
+    case "AAR Codes":
+      PrintServices.printAarCodes(aarCodesStore.aarCodes);
+      break;
+    case "Companies":
+      PrintServices.printCompanies(companiesStore.companies);
+      break;
+    case "Images":
+      PrintServices.printImages(
+        imagesStore.images,
+        imagesStore.GET_UNIQUE_IMAGE_CATEGORY,
+        rsStore.rs
+      );
+      break;
+    case "RFID":
+      PrintServices.printRfids(rsStore.rs);
+      break;
+    case "Rolling Stock":
+      PrintServices.printRollingstock(
+        sortBy.value,
+        breakType.value,
+        rsStore.rs,
+        rsStore.GET_UNIQUE_ROAD_NAMES,
+        rsStore.GET_UNIQUE_AARCODES,
+        rsStore.GET_UNIQUE_RS_STATUS
+      );
+      break;
+    case "Structures":
+      PrintServices.printStructures(structuresStore.structures);
+      break;
+  }
+  printCollection.value = null;
+  sortBy.value = null;
+  breakType.value = null;
 };
 </script>

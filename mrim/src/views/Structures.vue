@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in structures" :key="item.id">
+        <tr v-for="item in structuresStore.structures" :key="item.id">
           <td>{{ item.title }}</td>
           <td>{{ item.structureUse }}</td>
           <td>{{ item.owner }}</td>
@@ -48,46 +48,33 @@
   </div>
 </template>
 
-<script>
-import DialogAddStructure from "../components/dialogs/DialogAddStructure.vue";
-import DialogDeleteStructure from "../components/dialogs/DialogDeleteStructure.vue";
-import DialogEditStructure from "../components/dialogs/DialogEditStructure.vue";
-import DialogViewStructure from "../components/dialogs/DialogViewStructure.vue";
-export default {
-  components: {
-    DialogAddStructure,
-    DialogEditStructure,
-    DialogDeleteStructure,
-    DialogViewStructure,
-  },
-  data: () => ({
-    addStructureDialog: false,
-    deleteStructureDialog: false,
-    editStructureDialog: false,
-    viewStructureDialog: false,
-    editableStructure: null,
-  }),
-  computed: {
-    structures() {
-      return this.$store.state.structures;
-    },
-  },
-  methods: {
-    addStructure() {
-      this.addStructureDialog = true;
-    },
-    editStructure(item) {
-      this.editableStructure = item;
-      this.editStructureDialog = true;
-    },
-    deleteStructure(item) {
-      this.editableStructure = item;
-      this.deleteStructureDialog = true;
-    },
-    viewStructure(item) {
-      this.editableStructure = item;
-      this.viewStructureDialog = true;
-    }
-  },
+<script setup>
+import { ref } from 'vue';
+import DialogAddStructure from "@/components/dialogs/DialogAddStructure.vue";
+import DialogDeleteStructure from "@/components/dialogs/DialogDeleteStructure.vue";
+import DialogEditStructure from "@/components/dialogs/DialogEditStructure.vue";
+import DialogViewStructure from "@/components/dialogs/DialogViewStructure.vue";
+import { useStructuresStore } from "@/stores/structures";
+
+const structuresStore = useStructuresStore();
+const editStructureDialog = ref(false);
+const deleteStructureDialog = ref(false);
+const addStructureDialog = ref(false);
+const editableStructure = ref(null);
+const viewStructureDialog = ref(false);
+const addStructure = () => {
+  addStructureDialog.value = true;
+};
+const editStructure = (item) => {
+  editableStructure.value = item;
+  editStructureDialog.value = true;
+};
+const deleteStructure = (item) => {
+  editableStructure.value = item;
+  deleteStructureDialog.value = true;
+};
+const viewStructure = (item) => {
+  editableStructure.value = item;
+  viewStructureDialog.value = true;
 };
 </script>

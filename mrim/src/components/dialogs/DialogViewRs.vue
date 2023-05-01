@@ -50,15 +50,19 @@
     <v-btn @click="$emit('closeViewRsDialog')" text>Close</v-btn>
   </v-card>
 </template>
-<script>
-export default {
-  name: "DialogViewRs",
-  props: ["rollingstock"],
-  data: () => ({
-    imageServer: "",
-  }),
-  mounted: function () {
-    this.imageServer = 'http://' + import.meta.env.VITE_MRFM_TCP_ADDR +':'+ import.meta.env.VITE_MRFM_TCP_PORT +'/'+ this.rollingstock.imageID;
+<script setup>
+import { ref, onMounted } from "vue";
+import { useRSStore } from "@/stores/rs";
+const emit = defineEmits(['closeViewRsDialog']);
+const rsStore = useRSStore();
+const props = defineProps({
+  rollingstock: {
+    type: Object,
+    required: true,
   },
-};
+});
+const imageServer = ref("");
+onMounted(() =>{
+  imageServer.value = 'http://' + import.meta.env.VITE_MRFM_TCP_ADDR +':'+ import.meta.env.VITE_MRFM_TCP_PORT +'/'+ props.rollingstock.imageID;
+});
 </script>

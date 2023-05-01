@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in images" :key="item.id">
+        <tr v-for="item in imagesStore.images" :key="item.id">
           <td>{{ item.title }}</td>
           <td>{{ item.fileName }}</td>
           <td>{{ item.category }}</td>
@@ -42,46 +42,33 @@
   </div>
 </template>
 
-<script>
-import DialogEditImage from "../components/dialogs/DialogEditImage.vue";
-import DialogDeleteImage from "../components/dialogs/DialogDeleteImage.vue";
-import DialogAddImage from "../components/dialogs/DialogAddImage.vue";
-import DialogViewImage from "../components/dialogs/DialogViewImage.vue";
-export default {
-  components: {
-    DialogEditImage,
-    DialogDeleteImage,
-    DialogAddImage,
-    DialogViewImage,
-  },
-  data: () => ({
-    editImageDialog: false,
-    deleteImageDialog: false,
-    addImageDialog: false,
-    viewImageDialog: false,
-    editableImage: null,
-  }),
-  computed: {
-    images() {
-      return this.$store.state.images;
-    },
-  },
-  methods: {
-    addImage() {
-      this.addImageDialog = true;
-    },
-    deleteImage(item) {
-      this.editableImage = item;
-      this.deleteImageDialog = true;
-    },
-    editImage(item) {
-      this.editableImage = item;
-      this.editImageDialog = true;
-    },
-    viewImage(item) {
-      this.editableImage = item;
-      this.viewImageDialog = true;
-    },
-  },
+<script setup>
+import { ref } from 'vue';
+import DialogEditImage from "@/components/dialogs/DialogEditImage.vue";
+import DialogDeleteImage from "@/components/dialogs/DialogDeleteImage.vue";
+import DialogAddImage from "@/components/dialogs/DialogAddImage.vue";
+import DialogViewImage from "@/components/dialogs/DialogViewImage.vue";
+import { useImagesStore } from "@/stores/images";
+
+const imagesStore = useImagesStore();
+const editImageDialog = ref(false);
+const deleteImageDialog = ref(false);
+const addImageDialog = ref(false);
+const editableImage = ref(null);
+const viewImageDialog = ref(false);
+const addImage = () => {
+  addImageDialog.value = true;
+};
+const editImage = (item) => {
+  editableImage.value = item;
+  editImageDialog.value = true;
+};
+const deleteImage = (item) => {
+  editableImage.value = item;
+  deleteImageDialog.value = true;
+};
+const viewImage = (item) => {
+  editableImage.value = item;
+  viewImageDialog.value = true;
 };
 </script>

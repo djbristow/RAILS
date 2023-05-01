@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in decoderLocos" :key="item.id">
+        <tr v-for="item in decodersStore.DECODER_LOCOS" :key="item.id">
           <td>{{ item.roadName }}</td>
           <td>{{ item.roadNumber }}</td>
           <td>{{ item.mfg }}</td>
@@ -51,70 +51,29 @@
     <br />
   </div>
 </template>
-  
-  <script>
-import DialogEditDecoder from "../components/dialogs/DialogEditDecoder.vue";
-import DialogDeleteDecoder from "../components/dialogs/DialogDeleteDecoder.vue";
-import DialogAddDecoder from "../components/dialogs/DialogAddDecoder.vue";
-export default {
-  components: {
-    DialogEditDecoder,
-    DialogDeleteDecoder,
-    DialogAddDecoder,
-  },
-  data: () => ({
-    editDecoderDialog: false,
-    deleteDecoderDialog: false,
-    addDecoderDialog: false,
-    editableDecoder: null,
-  }),
-  computed: {
-    decoders() {
-      return this.$store.state.decoders;
-    },
-    locos() {
-      return this.$store.getters.listLocomotives;
-    },
-    decoderLocos() {
-      let decoderLocos = [];
-      for (let i = 0; i < this.decoders.length; i++) {
-        var decoderLoco = {
-          _id: null,
-          locomotiveID: null,
-          roadName: "",
-          roadNumber: "",
-          mfg: "",
-          family: "",
-          model: "",
-          address: "",
-        };
-        decoderLoco._id = this.decoders[i]._id;
-        decoderLoco.mfg = this.decoders[i].mfg;
-        decoderLoco.family = this.decoders[i].family;
-        decoderLoco.model = this.decoders[i].model;
-        decoderLoco.address = this.decoders[i].address;
-        decoderLoco.locomotiveID = this.decoders[i].locomotiveID;
-        let loco = this.locos.find((l) => l._id === decoderLoco.locomotiveID);
-        decoderLoco.roadName = loco.roadName;
-        decoderLoco.roadNumber = loco.roadNumber;
-        decoderLocos.push(decoderLoco);
-      }
-      return decoderLocos;
-    },
-  },
-  methods: {
-    addDecoder() {
-      this.addDecoderDialog = true;
-    },
-    deleteDecoder(item) {
-      this.editableDecoder = item;
-      this.deleteDecoderDialog = true;
-    },
-    editDecoder(item) {
-      this.editableDecoder = item;
-      this.editDecoderDialog = true;
-    },
-  },
+
+<script setup>
+import { onMounted, ref } from "vue";
+import DialogEditDecoder from "@/components/dialogs/DialogEditDecoder.vue";
+import DialogDeleteDecoder from "@/components/dialogs/DialogDeleteDecoder.vue";
+import DialogAddDecoder from "@/components/dialogs/DialogAddDecoder.vue";
+import { useDecodersStore } from "@/stores/decoders";
+
+const decodersStore = useDecodersStore();
+const editDecoderDialog = ref(false);
+const deleteDecoderDialog = ref(false);
+const addDecoderDialog = ref(false);
+const editableDecoder = ref(null);
+
+const addDecoder = () => {
+  addDecoderDialog.value = true;
+};
+const editDecoder = (item) => {
+  editableDecoder.value = item;
+  editDecoderDialog.value = true;
+};
+const deleteDecoder = (item) => {
+  editableDecoder.value = item;
+  deleteDecoderDialog.value = true;
 };
 </script>
-  

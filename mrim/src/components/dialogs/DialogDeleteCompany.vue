@@ -11,15 +11,19 @@
     </v-card-actions>
   </v-card>
 </template>
-<script>
-export default {
-  name: "DialogDeleteCompany",
-  props: ["company"],
-  methods: {
-    deleteCompany(id) {
-      this.$store.dispatch("deleteCompany", id);
-      this.$emit("closeDeleteCompanyDialog");
-    },
+<script setup>
+import { useCompaniesStore } from "@/stores/companies";
+
+const props = defineProps({
+  company: {
+    type: Object,
+    required: true,
   },
+});
+const emit = defineEmits(["closeDeleteCompanyDialog"]);
+const companyStore = useCompaniesStore();
+const deleteCompany = (id) => {
+  companyStore.DELETE_COMPANY(id);
+  emit("closeDeleteCompanyDialog");
 };
 </script>

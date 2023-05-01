@@ -17,15 +17,19 @@
       <v-btn @click="$emit('closeViewImageDialog')" text> Close </v-btn>
   </v-card>
 </template>
-<script>
-export default {
-  name: "DialogViewImage",
-  props: ["image"],
-  data: () => ({
-    imageServer: "",
-  }),
-  mounted: function () {
-    this.imageServer = 'http://' + import.meta.env.VITE_MRFM_TCP_ADDR +':'+ import.meta.env.VITE_MRFM_TCP_PORT +'/'+ this.image.fileName;
+<script setup>
+import { ref, onMounted } from "vue";
+import { useImagesStore } from "@/stores/images";
+const props = defineProps({
+  image: {
+    type: Object,
+    required: true,
   },
-};
+});
+const emit = defineEmits(['closeViewImageDialog']);
+const imagesStore = useImagesStore();
+const imageServer = ref("");
+onMounted(() => {
+  imageServer.value = 'http://' + import.meta.env.VITE_MRFM_TCP_ADDR +':'+ import.meta.env.VITE_MRFM_TCP_PORT +'/'+ props.image.fileName;
+});
 </script>

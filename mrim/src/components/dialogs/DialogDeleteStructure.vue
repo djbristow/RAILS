@@ -11,15 +11,19 @@
     </v-card-actions>
   </v-card>
 </template>
-<script>
-export default {
-  name: "DialogDeleteStructure",
-  props: ["structure"],
-  methods: {
-    deleteStructure(id) {
-      this.$store.dispatch("deleteStructure", id);
-      this.$emit("closeDeleteStructureDialog");
-    },
+<script setup>
+import { useStructuresStore } from "@/stores/structures";
+
+const props = defineProps({
+  structure: {
+    type: Object,
+    required: true,
   },
+});
+const emit = defineEmits(["closeDeleteStructureDialog"]);
+const structureStore = useStructuresStore();
+const deleteStructure = (id) => {
+  structureStore.DELETE_STRUCTURE(id);
+  emit("closeDeleteStructureDialog");
 };
 </script>

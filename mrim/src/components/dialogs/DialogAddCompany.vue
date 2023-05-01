@@ -20,31 +20,24 @@
     </v-card-actions>
   </v-card>
 </template>
-<script>
-export default {
-  name: "DialogAddCompany",
-  data: () => ({
-    shortName: "",
-    longName: "",
-    industryType: "",
-    industryLocation: "",
-  }),
-  computed: {
-    companyAddDataInvalid() {
-      let result = false;
-      return result;
-    },
-  },
-  methods: {
-    addCompany() {
-      this.$store.dispatch("addNewCompany", {
-        shortName: this.shortName,
-        longName: this.longName,
-        industryType: this.industryType,
-        industryLocation: this.industryLocation,
-      });
-      this.$emit("closeAddCompanyDialog");
-    },
-  },
+<script setup>
+import { ref } from "vue";
+import { useCompaniesStore } from "@/stores/companies";
+
+const shortName = ref("");
+const longName = ref("");
+const industryType = ref("");
+const industryLocation = ref("");
+const companyAddDataInvalid = ref(false);
+const emit = defineEmits(["closeAddCompanyDialog"]);
+const companyStore = useCompaniesStore();
+const addCompany = () => {
+  companyStore.ADD_NEW_COMPANY({
+    shortName: shortName.value,
+    longName: longName.value,
+    industryType: industryType.value,
+    industryLocation: industryLocation.value,
+  });
+  emit("closeAddCompanyDialog");
 };
 </script>

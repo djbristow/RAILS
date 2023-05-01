@@ -20,40 +20,39 @@
     </v-card-actions>
   </v-card>
 </template>
-  <script>
-export default {
-  name: "DialogEditImage",
-  props: ["image"],
-  data: () => ({
-    title: "",
-    fileName: "",
-    notes: "",
-    category: "",
-  }),
-  computed: {
-    imageEditDataInvalid() {
-      let result = false;
-      return result;
-    },
+<script setup>
+import { ref, onMounted } from "vue";
+import { useImagesStore } from "@/stores/images";
+
+const props = defineProps({
+  image: {
+    type: Object,
+    required: true,
   },
-  mounted() {
-    this.title = this.image.title;
-    this.fileName = this.image.fileName;
-    this.category = this.image.category;
-    this.notes = this.image.notes;
-  },
-  methods: {
-    editImage() {
-      let updatedImage = {
-        _id: this.image._id,
-        title: this.title,
-        fileName: this.fileName,
-        category: this.category,
-        notes: this.notes,
-      };
-      this.$store.dispatch("updateImage", updatedImage);
-      this.$emit("closeEditImageDialog");
-    },
-  },
+});
+const title = ref("");
+const fileName = ref("");
+const category = ref("");
+const notes = ref("");
+const id = ref("");
+const imageEditDataInvalid = ref(false);
+const emit = defineEmits(["closeEditImageDialog"]);
+const imageStore = useImagesStore();
+const editImage = () => {
+  imageStore.UPDATE_IMAGE({
+    _id: id.value,
+    title: title.value,
+    fileName: fileName.value,
+    category: category.value,
+    notes: notes.value,
+  });
+  emit("closeEditImageDialog");
 };
+onMounted(() => {
+  id.value = props.image._id;
+  title.value = props.image.title;
+  fileName.value = props.image.fileName;
+  category.value = props.image.category;
+  notes.value = props.image.notes;
+});
 </script>

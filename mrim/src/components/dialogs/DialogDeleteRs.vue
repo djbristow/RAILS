@@ -14,15 +14,19 @@
       </v-card-actions>
     </v-card>
 </template>
-<script>
-export default {
-  name: "DialogDeleteRs",
-  props: ["rollingstock"],
-  methods: {
-    deleteRs(id) {
-      this.$store.dispatch("deleteRs", id);
-      this.$emit("closeDeleteRsDialog");
-    },
+<script setup>
+import { useRSStore } from "@/stores/rs";
+
+const props = defineProps({
+  rollingstock: {
+    type: Object,
+    required: true,
   },
+});
+const emit = defineEmits(["closeDeleteRsDialog"]);
+const rsStore = useRSStore();
+const deleteRs = (id) => {
+  rsStore.DELETE_RS(id);
+  emit("closeDeleteRsDialog");
 };
 </script>

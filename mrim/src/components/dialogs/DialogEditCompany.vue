@@ -1,6 +1,6 @@
 <template>
   <v-card width="800">
-    <v-card-title class="headline"> AAR Code </v-card-title>
+    <v-card-title class="headline"> Company </v-card-title>
     <v-card-text>
       <v-container>
         <v-text-field v-model="shortName" label="Name"></v-text-field>
@@ -20,40 +20,37 @@
     </v-card-actions>
   </v-card>
 </template>
-  <script>
-export default {
-  name: "DialogEditCompany",
-  props: ["company"],
-  data: () => ({
-    shortName: "",
-    longName: "",
-    industryType: "",
-    industryLocation: "",
-  }),
-  computed: {
-    companyEditDataInvalid() {
-      let result = false;
-      return result;
-    },
+  <script setup>
+import { ref, onMounted } from "vue";
+import { useCompaniesStore } from "@/stores/companies";
+
+const props = defineProps({
+  company: {
+    type: Object,
+    required: true,
   },
-  mounted() {
-        this.shortName = this.company.shortName
-        this.longName = this.company.longName;
-        this.industryType = this.company.industryType;
-        this.industryLocation = this.company.industryLocation;
-  },
-  methods: {
-    editCompany() {
-      let updatedCompany = {
-        _id: this.company._id,
-           shortName: this.shortName,
-    longName: this.longName,
-    industryType: this.industryType,
-    industryLocation: this.industryLocation,
-      };
-      this.$store.dispatch("updateCompany", updatedCompany);
-      this.$emit("closeEditCompanyDialog");
-    },
-  },
+});
+const shortName = ref("");
+const longName = ref("");
+const industryType = ref("");
+const industryLocation = ref("");
+const companyEditDataInvalid = ref(false);
+const emit = defineEmits(["closeEditCompanyDialog"]);
+const companyStore = useCompaniesStore();
+const editCompany = () => {
+  companyStore.UPDATE_COMPANY({
+    _id: props.company._id,
+    shortName: shortName.value,
+    longName: longName.value,
+    industryType: industryType.value,
+    industryLocation: industryLocation.value,
+  });
+  emit("closeEditCompanyDialog");
 };
+onMounted(() => {
+  shortName.value = props.company.shortName;
+  longName.value = props.company.longName;
+  industryType.value = props.company.industryType;
+  industryLocation.value = props.company.industryLocation;
+});
 </script>

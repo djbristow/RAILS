@@ -8,9 +8,6 @@ export default {
   updateRs(params) {
     return ApiRs().put("rs/" + params._id, params);
   },
-  getRs(params) {
-    return ApiRs().get("rs/" + params.id);
-  },
   getRsRoad(params) {
     return ApiRs().get("rs_road/" + params);
   },
@@ -38,10 +35,8 @@ export default {
   },
   // Structures Services
   addStruct(params) {
+    console.log("params: ", params)
     return ApiRs().post("add_struct", params);
-  },
-  getStruct(params) {
-    return ApiRs().get("struct/" + params.id);
   },
   deleteStruct(id) {
     return ApiRs().delete("struct/" + id);
@@ -91,13 +86,7 @@ export default {
   fetchImglist() {
     return ApiRs().get("imglist");
   },
-  getImg(params) {
-    return ApiRs().get("img/" + params.id);
-  },
-  getImgById(id) {
-    return ApiRs().get("img/" + id);
-  },
-  getImgByFile(fileName) {
+   getImgByFile(fileName) {
     return ApiRs().get("img_file/" + fileName);
   },
   deleteImg(id) {

@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in companies" :key="item.id">
+        <tr v-for="item in companiesStore.companies" :key="item.id">
           <td>{{ item.shortName }}</td>
           <td>{{ item.longName }}</td>
           <td>{{ item.industryType }}</td>
@@ -48,39 +48,28 @@
   </div>
 </template>
 
-<script>
-import DialogEditCompany from "../components/dialogs/DialogEditCompany.vue";
-import DialogDeleteCompany from "../components/dialogs/DialogDeleteCompany.vue";
-import DialogAddCompany from "../components/dialogs/DialogAddCompany.vue";
-export default {
-  components: {
-    DialogEditCompany,
-    DialogDeleteCompany,
-    DialogAddCompany,
-  },
-  data: () => ({
-    editCompanyDialog: false,
-    deleteCompanyDialog: false,
-    addCompanyDialog: false,
-    editableCompany: null,
-  }),
-  computed: {
-    companies() {
-      return this.$store.state.companies;
-    },
-  },
-  methods: {
-    addCompany() {
-      this.addCompanyDialog = true;
-    },
-    deleteCompany(item) {
-      this.editableCompany = item;
-      this.deleteCompanyDialog = true;
-    },
-    editCompany(item) {
-      this.editableCompany = item;
-      this.editCompanyDialog = true;
-    },
-  },
+<script setup>
+import { ref } from 'vue';
+import DialogEditCompany from "@/components/dialogs/DialogEditCompany.vue";
+import DialogDeleteCompany from "@/components/dialogs/DialogDeleteCompany.vue";
+import DialogAddCompany from "@/components/dialogs/DialogAddCompany.vue";
+import { useCompaniesStore } from "@/stores/companies";
+
+const companiesStore = useCompaniesStore();
+const editCompanyDialog = ref(false);
+const deleteCompanyDialog = ref(false);
+const addCompanyDialog = ref(false);
+const editableCompany = ref(null);
+
+const addCompany = () => {
+  addCompanyDialog.value = true;
+};
+const editCompany = (item) => {
+  editableCompany.value = item;
+  editCompanyDialog.value = true;
+};
+const deleteCompany = (item) => {
+  editableCompany.value = item;
+  deleteCompanyDialog.value = true;
 };
 </script>

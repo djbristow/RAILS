@@ -26,52 +26,53 @@
     </v-card-actions>
   </v-card>
 </template>
-  <script>
-export default {
-  name: "DialogEditDecoder",
-  props: ["decoderLoco"],
-  data: () => ({
-    roadName: "",
-    roadNumber: "",
-    mfg: "",
-    family: "",
-    model: "",
-    address: "",
-    noLoco: false,
-  }),
-  computed: {
-    decoderEditDataInvalid() {
-      let result = false;
-      return result;
-    },
+<script setup>
+import { ref, onMounted } from "vue";
+import { useDecodersStore } from "@/stores/decoders";
+import { useRSStore } from "@/stores/rs";
+
+const props = defineProps({
+  decoderLoco: {
+    type: Object,
+    required: true,
   },
-  mounted() {
-    this.roadName = this.decoderLoco.roadName;
-    this.roadNumber = this.decoderLoco.roadNumber;
-    this.mfg = this.decoderLoco.mfg;
-    this.family = this.decoderLoco.family;
-    this.model = this.decoderLoco.model;
-    this.address = this.decoderLoco.address;
-  },
-  methods: {
-    editDecoder() {
-      let loco = this.$store.getters.checkLoco(this.roadName, this.roadNumber);
-      if (loco == undefined) {
-        this.noLoco = true;
-      } else {
-        let updatedDecoder = {
-          _id: this.decoderLoco._id,
-          locomotiveID: loco._id,
-          mfg: this.mfg,
-          family: this.family,
-          model: this.model,
-          address: this.address,
-        };
-        this.noLoco = false;
-        this.$store.dispatch("updateDecoder", updatedDecoder);
-        this.$emit("closeEditDecoderDialog");
-      }
-    },
-  },
+});
+const roadName = ref("");
+const roadNumber = ref("");
+const mfg = ref("");
+const family = ref("");
+const model = ref("");
+const address = ref("");
+const noLoco = ref(false);
+const emit = defineEmits(["closeEditDecoderDialog"]);
+const decoderStore = useDecodersStore();
+const rssStore = useRSStore();
+const decoderEditDataInvalid = ref(false);
+const editDecoder = () => {
+  let loco = rssStore.CHECK_LOCO(roadName.value, roadNumber.value);
+  if (loco == undefined) {
+    noLoco.value = true;
+  } else {
+    noLoco.value = false;
+    decoderStore.UPDATE_DECODER({
+      _id: props.decoderLoco._id,
+      locomotiveID: loco._id,
+      roadName: roadName.value,
+      roadNumber: roadNumber.value,
+      mfg: mfg.value,
+      family: family.value,
+      model: model.value,
+      address: address.value,
+    });
+    emit("closeEditDecoderDialog");
+  }
 };
+onMounted(() => {
+  roadName.value = props.decoderLoco.roadName;
+  roadNumber.value = props.decoderLoco.roadNumber;
+  mfg.value = props.decoderLoco.mfg;
+  family.value = props.decoderLoco.family;
+  model.value = props.decoderLoco.model;
+  address.value = props.decoderLoco.address;
+});
 </script>

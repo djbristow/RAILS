@@ -11,15 +11,19 @@
     </v-card-actions>
   </v-card>
 </template>
-<script>
-export default {
-  name: "DialogDeleteImage",
-  props: ["image"],
-  methods: {
-    deleteImage(id) {
-      this.$store.dispatch("deleteImage", id);
-      this.$emit("closeDeleteImageDialog");
-    },
+<script setup>
+import { useImagesStore } from "@/stores/images";
+
+const props = defineProps({
+  image: {
+    type: Object,
+    required: true,
   },
+});
+const emit = defineEmits(["closeDeleteImageDialog"]);
+const imageStore = useImagesStore();
+const deleteImage = (id) => {
+  imageStore.DELETE_IMAGE(id);
+  emit("closeDeleteImageDialog");
 };
 </script>
