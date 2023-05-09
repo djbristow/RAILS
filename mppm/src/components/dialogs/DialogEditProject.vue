@@ -34,52 +34,49 @@
         </v-card-actions>
     </v-card>
 </template>
-<script>
-export default {
-    name: "DialogEditProject",
-    props: ["project"],
-    data: () => ({
-        title: "",
-        type: "",
-        description: "",
-        startdate: "",
-        enddate: "",
-        roadname: "",
-        roadnumbers: "",
-        notes: "",
-    }),
-    computed: {
-        projectEditDataInvalid() {
-            let result = false;
-            return result;
-        },
+<script setup>
+import { ref, onMounted } from "vue";
+import { useProjectsStore } from "@/stores/projects";
+const props = defineProps({
+    project: {
+        type: Object,
+        required: true,
     },
-    mounted() {
-        this.title = this.project.title;
-        this.type = this.project.type;
-        this.description = this.project.description;
-        this.startdate = this.project.startdate;
-        this.enddate = this.project.enddate;
-        this.roadname = this.project.roadname;
-        this.roadnumbers = this.project.roadnumbers;
-        this.notes = this.project.notes;
-    },
-    methods: {
-        editProject() {
-            let updatedProject = {
-                _id: this.project._id,
-                title: this.title,
-                type: this.type,
-                description: this.description,
-                startdate: this.startdate,
-                enddate: this.enddate,
-                roadname: this.roadname,
-                roadnumbers: this.roadnumbers,
-                notes: this.notes,
-            };
-            this.$store.dispatch("updateProject", updatedProject);
-            this.$emit("closeEditProjectDialog");
-        },
-    },
+});
+const projectsStore = useProjectsStore();
+const emit = defineEmits(["closeEditProjectDialog"]);
+const projectEditDataInvalid = ref(false);
+const title = ref("");
+const type = ref("");
+const description = ref("");
+const startdate = ref(null);
+const enddate = ref(null);
+const roadname = ref("");
+const roadnumbers = ref("");
+const notes = ref("");
+onMounted(() => {
+    title.value = props.project.title;
+    type.value = props.project.type;
+    description.value = props.project.description;
+    startdate.value = props.project.startdate;
+    enddate.value = props.project.enddate;
+    roadname.value = props.project.roadname;
+    roadnumbers.value = props.project.roadnumbers;
+    notes.value = props.project.notes;
+});
+const editProject = () => {
+    let updatedProject = {
+        _id: props.project._id,
+        title: title.value,
+        type: type.value,
+        description: description.value,
+        startdate: startdate.value,
+        enddate: enddate.value,
+        roadname: roadname.value,
+        roadnumbers: roadnumbers.value,
+        notes: notes.value,
+    };
+    projectsStore.UPDATE_PROJECT(updatedProject);
+    emit("closeEditProjectDialog");
 };
 </script>

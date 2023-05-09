@@ -1,7 +1,7 @@
 <template>
   <div class="xx">
     <h1>About Model Project & Purchase Manager</h1>
-    <h3>Version 2.0.6</h3>
+    <h3>Version 3.0.0</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) Model Railroad Purchases
       and Projects Manager is one of several applications in the RAILS family of applications.
@@ -15,27 +15,18 @@
     <br>
     <hr>
     <p>The database has the following number of documents:</p>
-    <ul>
-      <li>Model Railroad Companies: {{ mrcoslength }}</li>
-      <li>Purchases: {{ purchaseslength }}</li>
-      <li>Projects: {{ projectslength }}</li>
-    </ul>
+      <li>Model Railroad Companies: {{ mrcosStore.MRCOS_COUNT }}</li>
+      <li>Purchases: {{ purchasesStore.PURCHASES_COUNT }}</li>
+      <li>Projects: {{ projectsStore.PROJECTS_COUNT }}</li>
   </div>
 </template>
 
-<script>
-export default {
-  name: "About",
-  computed: {
-    mrcoslength() {
-      return this.$store.state.mrcos.length;
-    },
-    purchaseslength() {
-      return this.$store.state.purchases.length;
-    },
-    projectslength() {
-      return this.$store.state.projects.length;
-    },
-  },
-};
+<script setup>
+import { usePurchasesStore } from '@/stores/purchases';
+import { useProjectsStore } from '@/stores/projects';
+import { useMrcosStore } from '@/stores/mrcos';
+
+const purchasesStore = usePurchasesStore();
+const projectsStore = useProjectsStore();
+const mrcosStore = useMrcosStore();
 </script>

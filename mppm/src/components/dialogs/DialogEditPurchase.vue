@@ -38,64 +38,61 @@
         </v-card-actions>
     </v-card>
 </template>
-<script>
-export default {
-    name: "DialogEditPurchase",
-    props: ["purchase"],
-    data: () => ({
-        num: "",
-        date: null,
-        store: "",
-        item: "",
-        desciption: "",
-        manufacturer: "",
-        unitcost: "",
-        qty: "",
-        project: "",
-        roadname: "",
-        roadnumbers: "",
-        notes: ""
-    }),
-    computed: {
-        purchaseEditDataInvalid() {
-            let result = false;
-            return result;
-        },
+<script setup>
+import { ref, onMounted } from "vue";
+import { usePurchasesStore } from "@/stores/purchases";
+const props = defineProps({
+    purchase: {
+        type: Object,
+        required: true,
     },
-    mounted() {
-        this.num = this.purchase.num;
-        this.date = this.purchase.date;
-        this.store = this.purchase.store;
-        this.item = this.purchase.item;
-        this.desciption = this.purchase.desciption;
-        this.manufacturer = this.purchase.manufacturer;
-        this.unitcost = this.purchase.unitcost;
-        this.qty = this.purchase.qty;
-        this.project = this.purchase.project;
-        this.roadname = this.purchase.roadname;
-        this.roadnumbers = this.purchase.roadnumbers;
-        this.notes = this.purchase.notes;
-    },
-    methods: {
-        editPurchase() {
-            let updatedPurchase = {
-                _id: this.purchase._id,
-                num: this.num,
-                date: this.date,
-                store: this.store,
-                item: this.item,
-                desciption: this.desciption,
-                manufacturer: this.manufacturer,
-                unitcost: this.unitcost,
-                qty: this.qty,
-                project: (this.project === '') ? 'u' : this.project,
-                roadname: this.roadname,
-                roadnumbers: this.roadnumbers,
-                notes: this.notes
-            };
-            this.$store.dispatch("updatePurchase", updatedPurchase);
-            this.$emit("closeEditPurchaseDialog");
-        },
-    },
+});
+const purchasesStore = usePurchasesStore();
+const emit = defineEmits(["closeEditPurchaseDialog"]);
+const purchaseEditDataInvalid = ref(false);
+const num = ref("");
+const date = ref(null);
+const store = ref("");
+const item = ref("");
+const desciption = ref("");
+const manufacturer = ref("");
+const unitcost = ref("");
+const qty = ref("");
+const project = ref("");
+const roadname = ref("");
+const roadnumbers = ref("");
+const notes = ref("");
+onMounted (() => {
+    num.value = props.purchase.num;
+    date.value = props.purchase.date;
+    store.value = props.purchase.store;
+    item.value = props.purchase.item;
+    desciption.value = props.purchase.desciption;
+    manufacturer.value = props.purchase.manufacturer;
+    unitcost.value = props.purchase.unitcost;
+    qty.value = props.purchase.qty;
+    project.value = props.purchase.project;
+    roadname.value = props.purchase.roadname;
+    roadnumbers.value = props.purchase.roadnumbers;
+    notes.value = props.purchase.notes;
+});
+const editPurchase = () => {
+    let updatedPurchase = {
+        _id: props.purchase._id,
+        num: num.value,
+        date: date.value,
+        store: store.value,
+        item: item.value,
+        desciption: desciption.value,
+        manufacturer: manufacturer.value,
+        unitcost: unitcost.value,
+        qty: qty.value,
+        project: project.value,
+        roadname: roadname.value,
+        roadnumbers: roadnumbers.value,
+        notes: notes.value,
+    };
+    purchasesStore.UPDATE_PURCHASE(updatedPurchase);
+    emit("closeEditPurchaseDialog");
 };
 </script>

@@ -23,49 +23,46 @@
         </v-card-actions>
     </v-card>
 </template>
-<script>
-export default {
-    name: "DialogEditMrCompany",
-    props: ["mrco"],
-    data: () => ({
-        name: "",
-        type: "",
-        website: "",
-        email: "",
-        phone: "",
-        address: "",
-        notes: "",
-    }),
-    computed: {
-        mrCompanyEditDataInvalid() {
-            let result = false;
-            return result;
-        },
+<script setup>
+import { ref, onMounted } from "vue";
+import { useMrcosStore } from "@/stores/mrcos";
+const props = defineProps({
+    mrco: {
+        type: Object,
+        required: true,
     },
-    mounted() {
-        this.name = this.mrco.name;
-        this.type = this.mrco.type;
-        this.website = this.mrco.website;
-        this.email = this.mrco.email;
-        this.phone = this.mrco.phone;
-        this.address = this.mrco.address;
-        this.notes = this.mrco.notes;
-    },
-    methods: {
-        editMrCompany() {
-            let updatedMrCompany = {
-                _id: this.mrco._id,
-                name: this.name,
-                type: this.type,
-                website: this.website,
-                email: this.email,
-                phone: this.phone,
-                address: this.address,
-                notes: this.notes,
-            };
-            this.$store.dispatch("updateMrco", updatedMrCompany);
-            this.$emit("closeEditMrCompanyDialog");
-        },
-    },
+});
+const mrcosStore = useMrcosStore();
+const emit = defineEmits(["closeEditMrCompanyDialog"]);
+const mrCompanyEditDataInvalid = ref(false);
+const name = ref("");
+const type = ref("");
+const website = ref("");
+const email = ref("");
+const phone = ref("");
+const address = ref("");
+const notes = ref("");
+onMounted(() => {
+    name.value = props.mrco.name;
+    type.value = props.mrco.type;
+    website.value = props.mrco.website;
+    email.value = props.mrco.email;
+    phone.value = props.mrco.phone;
+    address.value = props.mrco.address;
+    notes.value = props.mrco.notes;
+});
+const editMrCompany = () => {
+    let updatedMrCompany = {
+        _id: props.mrco._id,
+        name: name.value,
+        type: type.value,
+        website: website.value,
+        email: email.value,
+        phone: phone.value,
+        address: address.value,
+        notes: notes.value,
+    };
+    mrcosStore.UPDATE_MRCO(updatedMrCompany);
+    emit("closeEditMrCompanyDialog");
 };
 </script>

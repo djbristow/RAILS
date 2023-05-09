@@ -8,18 +8,18 @@
           <th class="text-left">Title</th>
           <th class="text-left">Type</th>
           <th class="text-left">Description</th>
-          <th class="text-left">Start</th>
-          <th class="text-left">End</th>
+          <th class="text-left" style="width: 150px;">Start</th>
+          <th class="text-left" style="width: 150px;">End</th>
           <th class="text-left">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in projects" :key="item.id">
+        <tr v-for="item in projectsStore.projects" :key="item.id">
           <td>{{ item.title }}</td>
           <td>{{ item.type }}</td>
           <td>{{ item.description }}</td>
-          <td>{{ item.startdate }}</td>
-          <td>{{ item.enddate }}</td>
+          <td>{{ formatDate(item.startdate) }}</td>
+          <td>{{ formatDate(item.enddate) }}</td>
           <td>
             <v-icon color="blue darken-1" @click="editProject(item)">
               mdi-pencil
@@ -42,54 +42,35 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from "vue";
+import { useProjectsStore } from "@/stores/projects";
 import moment from 'moment'
-import DialogEditProject from "../components/dialogs/DialogEditProject.vue";
-import DialogDeleteProject from "../components/dialogs/DialogDeleteProject.vue";
-import DialogAddProject from "../components/dialogs/DialogAddProject.vue";
-export default {
-  components: {
-    DialogEditProject,
-    DialogDeleteProject,
-    DialogAddProject,
-  },
-  data: () => ({
-    editProjectDialog: false,
-    deleteProjectDialog: false,
-    addProjectDialog: false,
-    editableProject: null,
-  }),
-  computed: {
-    projects() {
-      function formatDate(unformatDate) {
-        if (unformatDate === null || unformatDate === '') {
-          return ''
-        } else {
-          return moment.utc(unformatDate).format('YYYY-MM-DD')
-        }
-      }
-      let projects = this.$store.state.projects;
-      projects.forEach((project) => {
-        project.startdate = formatDate(project.startdate);
-        project.enddate = formatDate(project.enddate);
-      });
-      return projects;
-    },
-  },
+import DialogEditProject from "@/components/dialogs/DialogEditProject.vue";
+import DialogDeleteProject from "@/components/dialogs/DialogDeleteProject.vue";
+import DialogAddProject from "@/components/dialogs/DialogAddProject.vue";
 
-  methods: {
-    addProject() {
-      this.addProjectDialog = true;
-    },
-    deleteProject(item) {
-      this.editableProject = item;
-      this.deleteProjectDialog = true;
-    },
-    editProject(item) {
-      this.editableProject = item;
-      this.editProjectDialog = true;
-    },
-  },
-
+const editProjectDialog = ref(false);
+const deleteProjectDialog = ref(false);
+const addProjectDialog = ref(false);
+const editableProject = ref(null);
+const projectsStore = useProjectsStore();
+const formatDate = (unformatDate) => {
+  if (unformatDate === null || unformatDate === '') {
+    return ''
+  } else {
+    return moment.utc(unformatDate).format('YYYY-MM-DD')
+  }
+}
+const addProject = () => {
+  addProjectDialog.value = true;
+};
+const editProject = (project) => {
+  editableProject.value = project;
+  editProjectDialog.value = true;
+};
+const deleteProject = (project) => {
+  editableProject.value = project;
+  deleteProjectDialog.value = true;
 };
 </script>

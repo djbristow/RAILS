@@ -34,39 +34,31 @@
         </v-card-actions>
     </v-card>
 </template>
-<script>
-export default {
-    name: "DialogAddProject",
-    data: () => ({
-        title: "",
-        type: "",
-        description: "",
-        startdate: "",
-        enddate: "",
-        roadname: "",
-        roadnumbers: "",
-        notes: "",
-    }),
-    computed: {
-        projectAddDataInvalid() {
-            let result = false;
-            return result;
-        },
-    },
-    methods: {
-        addProject() {
-            this.$store.dispatch("addNewProject", {
-                title: this.title,
-                type: this.type,
-                description: this.description,
-                startdate: this.startdate,
-                enddate: this.enddate,
-                roadname: this.roadname,
-                roadnumbers: this.roadnumbers,
-                notes: this.notes,
-            });
-            this.$emit("closeAddProjectDialog");
-        },
-    },
+<script setup>
+import { ref } from "vue";
+import { useProjectsStore } from "@/stores/projects";
+const projectsStore = useProjectsStore();
+const title = ref("");
+const type = ref("");
+const description = ref("");
+const startdate = ref(null);
+const enddate = ref(null);
+const roadname = ref("");
+const roadnumbers = ref("");
+const notes = ref("");
+const projectAddDataInvalid = ref(false);
+const emit = defineEmits(["closeAddProjectDialog"]);
+const addProject = () => {
+    projectsStore.ADD_PROJECT({
+        title: title.value,
+        type: type.value,
+        description: description.value,
+        startdate: startdate.value,
+        enddate: enddate.value,
+        roadname: roadname.value,
+        roadnumbers: roadnumbers.value,
+        notes: notes.value,
+    });
+    emit("closeAddProjectDialog");
 };
 </script>

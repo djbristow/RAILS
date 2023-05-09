@@ -1,9 +1,8 @@
-import store from "../store";
 import moment from "moment";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 export default {
-  async printProjects(projSortType, projBreakType) {
+  async printProjects(projSortType, projBreakType, documents) {
     class Projrow {
       constructor(title, type, startdate, enddate, description, notes) {
         this.title = title;
@@ -20,7 +19,6 @@ export default {
     var byTitle = "Name";
     var uniques = [];
     var somerows = [];
-    var documents = store.state.projects;
     var projrows = [];
     for (i = 0; i < documents.length; i++) {
       projrows[i] = new Projrow(
@@ -154,7 +152,14 @@ export default {
     }
     doc.save("projects.pdf");
   },
-  async printPurchases(purSortType, purBreakType) {
+  async printPurchases(
+    purSortType,
+    purBreakType,
+    documents,
+    uniquePurStore,
+    uniquePurProjects,
+    uniquePurManufacturer
+  ) {
     class Purrow {
       constructor(
         num,
@@ -167,7 +172,7 @@ export default {
         qty,
         notes,
         extendcost,
-        project,
+        project
       ) {
         this.num = num;
         this.date = date;
@@ -213,11 +218,10 @@ export default {
       { dataKey: "notes", header: "Notes" },
     ];
     var doc = new jsPDF("l", "pt");
-    var documents = store.state.purchases;
     for (i = 0; i < documents.length; i++) {
       extendcost = documents[i].unitcost * documents[i].qty;
       totalcost += extendcost;
-      let purrow = new Purrow(
+      purrows[i] = new Purrow(
         documents[i].num,
         this.formatDate(documents[i].date),
         documents[i].store,
@@ -228,9 +232,8 @@ export default {
         documents[i].qty,
         documents[i].notes,
         (documents[i].extendcost = formatter.format(extendcost)),
-        documents[i].project,
+        documents[i].project
       );
-      purrows.push(purrow);
     }
     switch (purSortType) {
       case "Date":
@@ -245,12 +248,9 @@ export default {
           }
           return 0;
         });
-        purBreakType = "Continuous";
-        var byTitle = "Date";
-        startRow[0] = 0;
         break;
       case "Project":
-        uniques = store.getters.getUniquePurProjects;
+        uniques = uniquePurProjects;
         var byTitle = "Project";
         purrows.sort(function (a, b) {
           var purTypeA = a.project.toLowerCase();
@@ -263,15 +263,9 @@ export default {
           }
           return 0;
         });
-        for (i = 0; i < uniques.length - 1; i++) {
-          increment = store.getters.getPurListByProject(uniques[i]).length;
-          startRow[i] = rowcount + increment;
-          rowcount += increment;
-        }
-        startRow[uniques.length - 1] = purrows.length;
         break;
       case "Manufacturer":
-        uniques = store.getters.getUniquePurManufacturer;
+        uniques = uniquePurManufacturer;
         byTitle = "Manufacturer";
         purrows.sort(function (a, b) {
           var purTypeA = a.manufacturer.toLowerCase();
@@ -284,15 +278,9 @@ export default {
           }
           return 0;
         });
-        for (i = 0; i < uniques.length - 1; i++) {
-          increment = store.getters.getPurListByManufacturer(uniques[i]).length;
-          startRow[i] = rowcount + increment;
-          rowcount += increment;
-        }
-        startRow[uniques.length - 1] = purrows.length;
         break;
       case "Store":
-        uniques = store.getters.getUniquePurStore;
+        uniques = uniquePurStore;
         byTitle = "Store";
         purrows.sort(function (a, b) {
           var purTypeA = a.store.toLowerCase();
@@ -305,12 +293,6 @@ export default {
           }
           return 0;
         });
-        for (i = 0; i < uniques.length - 1; i++) {
-          increment = store.getters.getPurListByStore(uniques[i]).length;
-          startRow[i] = rowcount + increment;
-          rowcount += increment;
-        }
-        startRow[uniques.length - 1] = purrows.length;
         break;
     } // end switch
     var newTitle = title + byTitle;
@@ -321,15 +303,15 @@ export default {
         body: purrows,
         styles: { cellPadding: 3, fontSize: 8 },
         columnStyles: {
-          0: { halign: 'right', cellWidth: 30 }, // num
+          0: { halign: "right", cellWidth: 30 }, // num
           1: { cellWidth: 60 }, // date
           2: { cellWidth: 110 }, // store
           3: { cellWidth: 60 }, // item
           4: { cellWidth: 120 }, // description
           5: { cellWidth: 70 }, // manufacturer
-          6: { halign: 'right', cellWidth: 35 }, // unitcost
-          7: { halign: 'right', cellWidth: 20 }, // qty
-          8: { halign: 'right', cellWidth: 40 }, // extendcost  
+          6: { halign: "right", cellWidth: 35 }, // unitcost
+          7: { halign: "right", cellWidth: 20 }, // qty
+          8: { halign: "right", cellWidth: 40 }, // extendcost
           9: { cellWidth: "auto" }, // notes
         },
         theme: "striped",
@@ -356,20 +338,27 @@ export default {
     } else {
       k = 0;
       for (i = 0; i < uniques.length; i++) {
-        somerows = [];
-        while (k < startRow[i]) {
-          somerows.push(purrows[k]);
-          k++;
-        }
-        doc.setFontSize(10);
-        if (purBreakType === "Page" || i === 0) {
-          doc.text(uniques[i], 50, 40);
-        } else if (i !== 0) {
-          finalY = doc.previousAutoTable.finalY;
-          if (uniques[i] === "u") {
-            doc.text("Project Unassigned", 50, finalY + 18);
-          } else {
-            doc.text(uniques[i], 50, finalY + 18);
+        for (j = 0; j < purrows.length; j++) {
+          if (
+            (purSortType === "Project" && purrows[j].project === uniques[i]) ||
+            (purSortType === "Store" && purrows[j].store === uniques[i]) ||
+            (purSortType === "Manufacturer" &&
+              purrows[j].manufacturer === uniques[i])
+          ) {
+            somerows[k] = new Purrow(
+              purrows[j].num,
+              purrows[j].date,
+              purrows[j].store,
+              purrows[j].item,
+              purrows[j].desciption,
+              purrows[j].manufacturer,
+              purrows[j].unitcost,
+              purrows[j].qty,
+              purrows[j].notes,
+              purrows[j].extendcost,
+              purrows[j].project
+            );
+            k++;
           }
         }
         doc.autoTable({
@@ -377,15 +366,15 @@ export default {
           body: somerows,
           styles: { cellPadding: 3, fontSize: 8 },
           columnStyles: {
-            0: { halign: 'right', cellWidth: 30 }, // num
+            0: { halign: "right", cellWidth: 30 }, // num
             1: { cellWidth: 60 }, // date
             2: { cellWidth: 110 }, // store
             3: { cellWidth: 60 }, // item
-            4: { cellWidth: 120 }, // description
+            4: { cellWidth: 200 }, // description
             5: { cellWidth: 70 }, // manufacturer
-            6: { halign: 'right', cellWidth: 35 }, // unitcost
-            7: { halign: 'right', cellWidth: 20 }, // qty
-            8: { halign: 'right', cellWidth: 40 }, // extendcost  
+            6: { halign: "right", cellWidth: 35 }, // unitcost
+            7: { halign: "right", cellWidth: 20 }, // qty
+            8: { halign: "right", cellWidth: 40 }, // extendcost
             9: { cellWidth: "auto" }, // notes
           },
           theme: "striped",
@@ -404,11 +393,13 @@ export default {
         if (purBreakType === "Page" && i < uniques.length - 1) {
           doc.addPage();
         }
+        k = 0;
+        somerows = [];
       }
     }
     doc.save("purchases.pdf");
   },
-  printMrCompanies() {
+  printMrCompanies(documents) {
     class Mrco {
       constructor(name, type, website, email, phone, address, notes) {
         this.name = name;
@@ -429,7 +420,6 @@ export default {
       { dataKey: "address", header: "Address" },
       { dataKey: "notes", header: "Notes" },
     ];
-    var documents = store.state.mrcos;
     var doc = new jsPDF("l", "pt");
     var title = "Model Railroad Companies";
     doc.text(title, 350, 30);
@@ -456,10 +446,9 @@ export default {
           ? pageSize.height
           : pageSize.getHeight();
         doc.text(str, data.settings.margin.left, pageHeight - 10);
-      }
+      },
     });
     doc.save("mrcos.pdf");
-
   },
   formatDate(unformatDate) {
     if (unformatDate === null || unformatDate === "") {

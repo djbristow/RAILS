@@ -23,37 +23,29 @@
         </v-card-actions>
     </v-card>
 </template>
-<script>
-export default {
-    name: "DialogAddMrCompany",
-    data: () => ({
-        name: "",
-        type: "",
-        website: "",
-        email: "",
-        phone: "",
-        address: "",
-        notes: "",
-    }),
-    computed: {
-        mrCompanyAddDataInvalid() {
-            let result = false;
-            return result;
-        },
-    },
-    methods: {
-        addMrCompany() {
-            this.$store.dispatch("addNewMrco", {
-                name: this.name,
-                type: this.type,
-                website: this.website,
-                email: this.email,
-                phone: this.phone,
-                address: this.address,
-                notes: this.notes,
-            });
-            this.$emit("closeAddMrCompanyDialog");
-        },
-    },
+<script setup>
+import { ref } from "vue";
+import { useMrcosStore } from "@/stores/mrcos";
+const mrcosStore = useMrcosStore();
+const name = ref("");
+const type = ref("");
+const website = ref("");
+const email = ref("");
+const phone = ref("");
+const address = ref("");
+const notes = ref("");
+const mrCompanyAddDataInvalid = ref(false);
+const emit = defineEmits(["closeAddMrCompanyDialog"]);
+const addMrCompany = () => {
+    mrcosStore.ADD_MRCO({
+        name: name.value,
+        type: type.value,
+        website: website.value,
+        email: email.value,
+        phone: phone.value,
+        address: address.value,
+        notes: notes.value,
+    });
+    emit("closeAddMrCompanyDialog");
 };
 </script>

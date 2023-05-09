@@ -11,15 +11,18 @@
       </v-card-actions>
     </v-card>
   </template>
-  <script>
-  export default {
-    name: "DialogDeleteMrCompany",
-    props: ["mrco"],
-    methods: {
-      deleteMrCompany(id) {
-        this.$store.dispatch("deleteMrco", id);
-        this.$emit("closeDeleteMrCompanyDialog");
-      },
+  <script setup>
+  import { useMrcosStore } from "@/stores/mrcos";
+  const props = defineProps({
+    mrco: {
+      type: Object,
+      required: true,
     },
+  });
+  const mrcosStore = useMrcosStore();
+  const emit = defineEmits(["closeDeleteMrCompanyDialog"]);
+  const deleteMrCompany = (id) => {
+    mrcosStore.DELETE_MRCO(id);
+    emit("closeDeleteMrCompanyDialog");
   };
   </script>

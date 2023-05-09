@@ -31,26 +31,28 @@
   </v-app>
 </template>
   
-<script>
-export default {
-  data: () => ({
-    name: "App",
-    drawer: false,
-    items: [
-      { title: "Purchases", icon: "mdi-currency-usd", to: "/purchases" },
-      { title: "Projects", icon: "mdi-notebook-outline", to: "/projects"},
-      { title: "MR Companies", icon: "mdi-cog", to: "/mrcompanies" },
-      { title: "Admin", icon: "mdi-format-list-checks", to: "/admin" },
-      { title: "About", icon: "mdi-help-box", to: "/" },
-    ],
-  }),
-  mounted() {
-    this.$store.dispatch("getPurchases");
-    this.$store.dispatch("getProjects");
-    this.$store.dispatch("getMrcos");
-  },
-  methods: {},
-};
+<script setup>
+import { ref, onMounted } from 'vue';
+import { usePurchasesStore } from '@/stores/purchases';
+import { useProjectsStore } from '@/stores/projects';
+import { useMrcosStore } from '@/stores/mrcos';
+
+const drawer = ref(false);
+const purchasesStore = usePurchasesStore();
+const projectsStore = useProjectsStore();
+const mrcosStore = useMrcosStore();
+const items = [
+  { title: "Purchases", icon: "mdi-currency-usd", to: "/purchases" },
+  { title: "Projects", icon: "mdi-notebook-outline", to: "/projects"},
+  { title: "MR Companies", icon: "mdi-cog", to: "/mrcompanies" },
+  { title: "Admin", icon: "mdi-format-list-checks", to: "/admin" },
+  { title: "About", icon: "mdi-help-box", to: "/" },
+];
+onMounted(() => {
+  purchasesStore.GET_PURCHASES();
+  projectsStore.GET_PROJECTS();
+  mrcosStore.GET_MRCOS();
+});
 </script>
 <style>
 .xx {

@@ -1,6 +1,6 @@
 <template>
-    <div class="xx">
-        <h1>Model Railroad Companies</h1>
+  <div class="xx">
+    <h1>Model Railroad Companies</h1>
     <v-btn @click="addMrCompany()" width="200">Add MR Companies</v-btn>
     <v-table density="compact">
       <thead>
@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in mrcos" :key="item.id">
+        <tr v-for="item in mrcosStore.mrcos" :key="item.id">
           <td>{{ item.name }}</td>
           <td>{{ item.type }}</td>
           <td>{{ item.website }}</td>
@@ -39,46 +39,36 @@
         />
       </v-dialog>
       <v-dialog v-model="addMrCompanyDialog">
-        <dialog-add-mr-company @closeAddMrCompanyDialog="addMrCompanyDialog = false" />
+        <dialog-add-mr-company
+          @closeAddMrCompanyDialog="addMrCompanyDialog = false"
+        />
       </v-dialog>
     </v-table>
     <br />
   </div>
 </template>
 
-<script>
-import DialogEditMrCompany from "../components/dialogs/DialogEditMrCompany.vue";
-import DialogDeleteMrCompany from "../components/dialogs/DialogDeleteMrCompany.vue";
-import DialogAddMrCompany from "../components/dialogs/DialogAddMrCompany.vue";
-export default {
-  components: {
-    DialogEditMrCompany,
-    DialogDeleteMrCompany,
-    DialogAddMrCompany,
-  },
-  data: () => ({
-    editMrCompanyDialog: false,
-    deleteMrCompanyDialog: false,
-    addMrCompanyDialog: false,
-    editableMrCompany: null,
-  }),
-  computed: {
-    mrcos() {
-      return this.$store.state.mrcos;
-    },
-  },
-  methods: {
-    addMrCompany() {
-      this.addMrCompanyDialog = true;
-    },
-    deleteMrCompany(item) {
-      this.editableMrCompany = item;
-      this.deleteMrCompanyDialog = true;
-    },
-    editMrCompany(item) {
-      this.editableMrCompany = item;
-      this.editMrCompanyDialog = true;
-    },
-  },
+<script setup>
+import { ref } from "vue";
+import { useMrcosStore } from "@/stores/mrcos";
+import DialogEditMrCompany from "@/components/dialogs/DialogEditMrCompany.vue";
+import DialogDeleteMrCompany from "@/components/dialogs/DialogDeleteMrCompany.vue";
+import DialogAddMrCompany from "@/components/dialogs/DialogAddMrCompany.vue";
+
+const mrcosStore = useMrcosStore();
+const editMrCompanyDialog = ref(false);
+const deleteMrCompanyDialog = ref(false);
+const addMrCompanyDialog = ref(false);
+const editableMrCompany = ref(null);
+const addMrCompany = () => {
+  addMrCompanyDialog.value = true;
+};
+const deleteMrCompany = (item) => {
+  editableMrCompany.value = item;
+  deleteMrCompanyDialog.value = true;
+};
+const editMrCompany = (item) => {
+  editableMrCompany.value = item;
+  editMrCompanyDialog.value = true;
 };
 </script>
