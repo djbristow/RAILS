@@ -62,6 +62,7 @@ export const useRSStore = defineStore("rs", {
       });
       return uniqueRsStatus.sort();
     }, */
+    },
   },
   actions: {
     [GET_RS_FOR_IMAGE](imageId) {
