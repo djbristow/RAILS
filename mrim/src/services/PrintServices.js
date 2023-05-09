@@ -210,7 +210,6 @@ export default {
     uniqueRsAarCode,
     uniqueRsStatus
   ) {
-    console.log("Sorted " + sortBy + " Break " + breakType);
     class Rsrow {
       constructor(
         roadName,

@@ -4,7 +4,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var MrCompanySchema = new Schema({
+var MrCompany = new Schema({
     name: {
         type: String,
         required: true,
@@ -38,5 +38,4 @@ var MrCompanySchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('MrCompany', MrCompanySchema);
-
+module.exports = mongoose.model('MrCompany', MrCompany);

@@ -17,10 +17,8 @@ var Purchase = require("../models/Purchase");
 
 // The following CRUD functions handle data in the companies collection
 app.get("/mcolist", async (req, res) => {
-  const mrcompanies = await MrCompany.find().sort({
-    _id: -1,
-  });
-  res.send({ mrcompanies });
+  const mrcos = await MrCompany.find({}).sort({ name: 1 });
+  res.send({ mrcos });
 });
 app.get("/mco_name/:id", async (req, res) => {
   const mrcompany = await MrCompany.findOne({ name: req.params.id });
@@ -58,7 +56,7 @@ app.delete("/mco/:id", async (req, res) => {
 
 // The following CRUD functions handle data in the projects collection
 app.get("/projlist", async (req, res) => {
-  const projects = await Project.find().sort({
+  const projects = await Project.find({}).sort({
     startdate: 1,
   });
   res.send({ projects });
@@ -102,7 +100,7 @@ app.delete("/proj/:id", async (req, res) => {
 
 // The following CRUD functions handle data in the purchases collection
 app.get("/purlist", async (req, res) => {
-  const purchases = await Purchase.find().sort({
+  const purchases = await Purchase.find({}).sort({
     num: 1,
   });
   res.send(purchases);

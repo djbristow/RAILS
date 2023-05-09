@@ -30,37 +30,38 @@ export const useRSStore = defineStore("rs", {
       return state.rs.length;
     },
     [LOCOMOTIVE_LIST](state) {
-      return state.rs.filter(
+      let locos = state.rs.filter(
         (rs) => rs.aarCode === "DE" || rs.aarCode === "SE"
       );
+      return locos.sort();
     },
     [GET_UNIQUE_ROAD_NAMES](state) {
-      let uniqueRoadNames = [];
-      state.rs.forEach((rs) => {
+      let uniqueRoadNames = [...new Set(state.rs.map((rs) => rs.roadName))];
+      /*  state.rs.forEach((rs) => {
         if (!uniqueRoadNames.includes(rs.roadName)) {
           uniqueRoadNames.push(rs.roadName);
         }
-      });
+      }); */
       return uniqueRoadNames.sort();
     },
     [GET_UNIQUE_AARCODES](state) {
-      let uniqueAarCodes = [];
-      state.rs.forEach((rs) => {
+      let uniqueAarCodes = [...new Set(state.rs.map((rs) => rs.aarCode))];
+      /*       state.rs.forEach((rs) => {
         if (!uniqueAarCodes.includes(rs.aarCode)) {
           uniqueAarCodes.push(rs.aarCode);
         }
-      });
+      }); */
       return uniqueAarCodes.sort();
     },
     [GET_UNIQUE_RS_STATUS](state) {
-      let uniqueRsStatus = [];
-      state.rs.forEach((rs) => {
+      let uniqueRsStatus = [...new Set(state.rs.map((rs) => rs.rsStatus))];
+      /* state.rs.forEach((rs) => {
         if (!uniqueRsStatus.includes(rs.rsStatus)) {
           uniqueRsStatus.push(rs.rsStatus);
         }
       });
       return uniqueRsStatus.sort();
-    },
+    }, */
   },
   actions: {
     [GET_RS_FOR_IMAGE](imageId) {
@@ -71,7 +72,7 @@ export const useRSStore = defineStore("rs", {
         (rs) => rs.roadName === name && rs.roadNumber === number
       );
     },
-      async [GET_RS]() {
+    async [GET_RS]() {
       let response = await RsService.fetchAllRslist();
       this.rs = response.data;
     },
