@@ -28,92 +28,55 @@ app.post("/add_to", async (req, res) => {
     success: true,
   });
 });
-app.get("/to_id/:id", (req, res) => {
-  Turnout.findById(req.params.id, function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post);
+app.get("/to_id/:id", async (req, res) => {
+  let to = await Turnout.findById(req.params.id);
+  res.send(to);
+});
+app.get("/to/:id", async (req, res) => {
+  let to = await Turnout.findOne({
+    toID: req.params.id,
   });
+  res.send(to);
 });
-app.get("/to/:id", (req, res) => {
-  Turnout.findOne(
-    {
-      toID: req.params.id,
-    },
-    "_id",
-    function (error, post) {
-      if (error) {
-        console.error(error);
-      }
-      res.send(post);
-    }
-  );
-});
-app.get("/to_ident/:id", (req, res) => {
+app.get("/to_ident/:id", async (req, res) => {
   let to = req.params.id.split("-");
-  Turnout.findOne(
-    {
-      controller: to[0],
-      toNum: to[1],
-    },
-    function (error, post) {
-      if (error) {
-        console.error(error);
-      }
-      res.send(post);
-    }
-  );
+  let turnout = await Turnout.findOne({
+    controller: to[0],
+    toNum: to[1],
+  });
+  res.send(turnout);
 });
-app.get("/to_name/:id", (req, res) => {
-  Turnout.findOne(
-    {
-      toID: req.params.id,
-    },
-    function (error, post) {
-      if (error) {
-        console.error(error);
-      }
-      res.send(post);
-    }
-  );
+app.get("/to_name/:id", async (req, res) => {
+  let to = await Turnout.findOne({
+    toID: req.params.id,
+  });
+  res.send(to);
 });
-app.put("/update_to/:id", (req, res) => {
-  Turnout.findById(req.body._id, function (error, turnout) {
-    if (error) {
-      console.error(error);
-    }
-    turnout._id = req.body._id;
-    turnout.toID = req.body.toID;
-    turnout.toNum = req.body.toNum;
-    turnout.controller = req.body.controller;
-    turnout.state = req.body.state;
-    turnout.type = req.body.type;
-    turnout.lock = req.body.lock;
-    turnout.notes = req.body.notes;
-    turnout.lastUpdate = req.body.lastUpdate;
-    turnout.save(function (error) {
-      if (error) {
-        console.log(error);
-      }
-      res.send({
-        success: true,
-      });
-    });
+app.put("/update_to/:id", async (req, res) => {
+  let turnout = await Turnout.findById(req.body._id);
+  turnout._id = req.body._id;
+  turnout.toID = req.body.toID;
+  turnout.toNum = req.body.toNum;
+  turnout.controller = req.body.controller;
+  turnout.state = req.body.state;
+  turnout.type = req.body.type;
+  turnout.lock = req.body.lock;
+  turnout.notes = req.body.notes;
+  turnout.lastUpdate = req.body.lastUpdate;
+  turnout.save();
+  res.send({
+    success: true,
   });
 });
-app.delete("/to/:id", (req, res) => {
-  Turnout.deleteOne(
-    {
-      _id: req.params.id,
-    },
-    function (err, post) {
-      if (err) res.send(err);
-      res.send({
-        success: true,
-      });
-    }
-  );
+app.delete("/to/:id", async (req, res) => {
+  console.log("Deleting " + req.params.id);
+  await Turnout.deleteOne({
+    _id: req.params.id,
+  });
+  console.log("Deleted");
+  res.send({
+    success: true,
+  });
 });
 
 // The following CRUD functions handle data in the micros collection
@@ -124,12 +87,12 @@ app.get("/microlist", async (req, res) => {
   res.send(micros);
 });
 app.get("/micro/:id", async (req, res) => {
-  const micro = Micro.findById(req.params.id)
-    res.send(micro);
+  const micro = Micro.findById(req.params.id);
+  res.send(micro);
 });
 app.get("/micro_name/:id", async (req, res) => {
-  const micro = Micro.findOne({ microID: req.params.id })
-    res.send(micro);
+  const micro = Micro.findOne({ microID: req.params.id });
+  res.send(micro);
 });
 app.get("/micro_id/:id", async (req, res) => {
   const micro = await Micro.findOne({
@@ -176,27 +139,15 @@ app.get("/tpllist", async (req, res) => {
   });
   res.send(tplights);
 });
-app.get("/tpl_id/:id", (req, res) => {
-  TPLight.findById(req.params.id, function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post);
-  });
+app.get("/tpl_id/:id", async (req, res) => {
+  let tpl = await TPLight.findById(req.params.id);
+  res.send(tpl);
 });
-app.get("/tpl_num/:id", (req, res) => {
-  TPLight.findOne(
-    {
-      tplNum: req.params.id,
-    },
-    "_id",
-    function (error, post) {
-      if (error) {
-        console.error(error);
-      }
-      res.send(post);
-    }
-  );
+app.get("/tpl_num/:id", async (req, res) => {
+  let tpl = await TPLight.findOne({
+    tplNum: req.params.id,
+  });
+  res.send(tpl);
 });
 app.post("/add_tpl", async (req, res) => {
   await TPLight.create(req.body);
@@ -204,39 +155,26 @@ app.post("/add_tpl", async (req, res) => {
     success: true,
   });
 });
-app.put("/update_tpl/:id", (req, res) => {
-  TPLight.findById(req.body._id, function (error, tpl) {
-    if (error) {
-      console.error(error);
-    }
-    tpl.to_id = req.body.to_id;
-    tpl.tplNum = req.body.tplNum;
-    tpl.controller = req.body.controller;
-    tpl.panelName = req.body.panelName;
-    tpl.panelNum = req.body.panelNum;
-    tpl.lightNum = req.body.lightNum;
-    tpl.save(function (error) {
-      if (error) {
-        console.log(error);
-      }
-      res.send({
-        success: true,
-      });
-    });
+app.put("/update_tpl/:id", async (req, res) => {
+  let tpl = await TPLight.findById(req.body._id);
+  tpl.to_id = req.body.to_id;
+  tpl.tplNum = req.body.tplNum;
+  tpl.controller = req.body.controller;
+  tpl.panelName = req.body.panelName;
+  tpl.panelNum = req.body.panelNum;
+  tpl.lightNum = req.body.lightNum;
+  tpl.save();
+  res.send({
+    success: true,
   });
 });
-app.delete("/tpl/:id", (req, res) => {
-  TPLight.deleteOne(
-    {
-      _id: req.params.id,
-    },
-    function (err, post) {
-      if (err) res.send(err);
-      res.send({
-        success: true,
-      });
-    }
-  );
+app.delete("/tpl/:id", async (req, res) => {
+  TPLight.deleteOne({
+    _id: req.params.id,
+  });
+  res.send({
+    success: true,
+  });
 });
 
 app.listen(process.env.PORT || 3006);

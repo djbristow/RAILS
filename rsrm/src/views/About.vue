@@ -1,7 +1,7 @@
 <template>
   <div class="xx">
     <h1>About RAILS RS RFID Manager</h1>
-    <h3>Version 4.0.3</h3>
+    <h3>Version 4.0.4</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) RFID
       Application is one of several applications in the RAILS family of
@@ -12,7 +12,7 @@
       are provided to allow the user to enter the road name and number.
     </p>
     <p>The user guide is available at: tbd</p>
-    <p>Waiting for Vuetify 3.2 to format and paginate tables</p>
+    <p>Waiting for Vuetify 3.3 to format and paginate tables</p>
     <hr />
     <p>The database has the following number of documents:</p>
       <li>
