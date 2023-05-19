@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in tplights" :key="item.id">
+                <tr v-for="item in tplightsStore.TO_TPLIGHTS" :key="item.id">
                     <td>{{ item.turnout }}</td>
                     <td>{{ item.panelNum }}</td>
                     <td>{{ item.panelName }}</td>
@@ -55,78 +55,30 @@
     </div>
 </template>
 
-<script>
-import DialogEditTPLight from "../components/dialogs/DialogEditTPLight.vue";
-import DialogDeleteTPLight from "../components/dialogs/DialogDeleteTPLight.vue";
-import DialogAddTPLight from "../components/dialogs/DialogAddTPLight.vue";
-export default {
-    components: {
-        DialogEditTPLight,
-        DialogDeleteTPLight,
-        DialogAddTPLight,
-    },
-    data: () => ({
-        editTPLightDialog: false,
-        deleteTPLightDialog: false,
-        addTPLightDialog: false,
-        editableTPLight: null,
-    }),
-    computed: {
-        tplights() {
-            class TPLight {
-                constructor(_id, turnout, panelNum, panelName, controller, tplNum, color, to_id) {
-                    this._id = _id;
-                    this.turnout = turnout;
-                    this.panelNum = panelNum;
-                    this.panelName = panelName;
-                    this.controller = controller;
-                    this.tplNum = tplNum;
-                    this.color = color;
-                    this.to_id = to_id
-                }
-            }
-            let lights = this.$store.state.tplights;
-            let tplights = [];
-            for (let i = 0; i < lights.length; i++) {
-                let light = lights[i];
-                let color = "";
-                let to = this.$store.getters['getTurnoutBy_Id'](light.to_id);
-                if (to.lock !== "") {
-                    color = "red";
-                } else {
-                    if (to.state === "CLOSED") {
-                        color = "green";
-                    } else {
-                        color = "blue";
-                    }
-                }
-                let tplight = new TPLight(
-                    light._id,
-                    to.toID,
-                    light.panelNum,
-                    light.panelName,
-                    light.controller,
-                    light.tplNum,
-                    color,
-                    to._id
-                );
-                tplights.push(tplight);
-            }
-            return tplights;
-        },
-    },
-    methods: {
-        addTPLight() {
-            this.addTPLightDialog = true;
-        },
-        deleteTPLight(item) {
-            this.editableTPLight = item;
-            this.deleteTPLightDialog = true;
-        },
-        editTPLight(item) {
-            this.editableTPLight = item;
-            this.editTPLightDialog = true;
-        },
-    },
+<script setup>
+import { ref } from "vue";
+import DialogEditTPLight from "@/components/dialogs/DialogEditTPLight.vue";
+import DialogDeleteTPLight from "@/components/dialogs/DialogDeleteTPLight.vue";
+import DialogAddTPLight from "@/components/dialogs/DialogAddTPLight.vue";
+import { useTplightsStore } from "@/stores/tplights";
+import { useTurnoutsStore } from "@/stores/turnouts";
+
+const turnoutsStore = useTurnoutsStore();
+const tplightsStore = useTplightsStore();
+const tplghts = ref([])
+const editableTPLight = ref(null);
+const editTPLightDialog = ref(false);
+const deleteTPLightDialog = ref(false);
+const addTPLightDialog = ref(false);
+const addTPLight = () => {
+    addTPLightDialog.value = true;
+};
+const deleteTPLight = (item) => {
+    editableTPLight.value = item;
+    deleteTPLightDialog.value = true;
+};
+const editTPLight = (item) => {
+    editableTPLight.value = item;
+    editTPLightDialog.value = true;
 };
 </script>

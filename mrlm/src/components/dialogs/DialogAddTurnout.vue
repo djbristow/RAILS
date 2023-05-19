@@ -25,41 +25,40 @@
         </v-card-actions>
     </v-card>
 </template>
-<script>
-export default {
-    name: "DialogAddTurnout",
-    data: () => ({
-        toID: "",
-        controller: "",
-        toNum: "",
-        type: "",
-        lastUpdate: "",
-        state: "",
-        lock: "",
-        toLoc: "",
-        notes: "",
-    }),
-    computed: {
-        turnoutAddDataInvalid() {
-            let result = false;
-            return result;
-        },
-    },
-    methods: {
-        addTurnout() {
-            this.$store.dispatch("addNewTurnout", {
-                toID: this.toID,
-                controller: this.controller,
-                toNum: this.toNum,
-                type: this.type,
-                lastUpdate: this.lastUpdate,
-                state: this.state,
-                lock: this.lock,
-                toLoc: this.toLoc,
-                notes: this.notes,
-            });
-            this.$emit("closeAddTurnoutDialog");
-        },
-    },
+<script setup>
+import { ref, computed } from "vue";
+import { useTurnoutsStore } from "@/stores/turnouts";
+
+const turnoutsStore = useTurnoutsStore();
+const toID = ref("");
+const controller = ref("");
+const toNum = ref("");
+const type = ref("");
+const lastUpdate = ref("");
+const state = ref("");
+const lock = ref("");
+const toLoc = ref("");
+const notes = ref("");
+const emit = defineEmits(["closeAddTurnoutDialog"]);
+const turnoutAddDataInvalid = computed(() => {
+    if ((toID.value !== "" && controller.value !== "" && toNum.value !== "") ) {
+        return false;
+    } else {
+        return true;
+    }
+});
+const addTurnout = () => {
+    turnoutsStore.ADD_NEW_TURNOUT({
+        toID: toID.value,
+        controller: controller.value,
+        toNum: toNum.value,
+        type: type.value,
+        lastUpdate: lastUpdate.value,
+        state: state.value,
+        lock: lock.value,
+        toLoc: toLoc.value,
+        notes: notes.value,
+    });
+    emit("closeAddTurnoutDialog");
 };
 </script>

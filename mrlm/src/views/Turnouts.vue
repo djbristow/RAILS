@@ -16,12 +16,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in turnouts" :key="item.id">
+                <tr v-for="item in turnoutsStore.turnouts" :key="item.id">
                     <td>{{ item.toID }}</td>
                     <td>{{ item.controller }}</td>
                     <td>{{ item.toNum }}</td>
                     <td>{{ item.type }}</td>
-                    <td>{{ item.lastUpdate }}</td>
+                    <td>{{ formatDate(item.lastUpdate) }}</td>
                     <td>{{ item.state }}</td>
                     <td>
                         <div v-if="item.lock !== ''">
@@ -61,86 +61,74 @@
     </div>
 </template>
 
-<script>
-import DialogEditTurnout from "../components/dialogs/DialogEditTurnout.vue";
-import DialogDeleteTurnout from "../components/dialogs/DialogDeleteTurnout.vue";
-import DialogAddTurnout from "../components/dialogs/DialogAddTurnout.vue";
-import RlService from "../services/RlService";
-export default {
-    components: {
-        DialogEditTurnout,
-        DialogDeleteTurnout,
-        DialogAddTurnout,
-    },
-    data: () => ({
-        editTurnoutDialog: false,
-        deleteTurnoutDialog: false,
-        addTurnoutDialog: false,
-        editableTurnout: null,
-    }),
-    computed: {
-        turnouts() {
-            return this.$store.state.turnouts;
-        },
-    },
-    methods: {
-        addTurnout() {
-            this.addTurnoutDialog = true;
-        },
-        deleteTurnout(item) {
-            this.editableTurnout = item;
-            this.deleteTurnoutDialog = true;
-        },
-        editTurnout(item) {
-            this.editableTurnout = item;
-            this.editTurnoutDialog = true;
-        },
-        async throwTo(item) {
-            item.lock = "MRLM";
-            this.$store.dispatch("updateTurnout", item);
-            this.pubToMsg(item.toID, "THROW");
-            this.pubLightMsg(item);
-        },
-        async closeTo(item) {
-            item.lock = "MRLM";
-            this.$store.dispatch("updateTurnout", item);
-            this.pubToMsg(item.toID, "CLOSE");
-            this.pubLightMsg(item);
-        },
-        async pubToMsg(id, cmd) {
-            const turnout = this.turnouts.find((turnout) => turnout.toID === id);
-            const msg = {
-                topic: turnout.controller,
-                to: turnout.toNum,
-                cmd: cmd,
-            };
-            console.log(msg);
-            await RlService.postToMsg(msg);
-        },
-        pubLightMsg(item) {
-            let tpl = this.$store.getters['getTplightByTo_Id'](item._id);
-            console.log(tpl);
-            if (tpl !== null) {
-                const msg = {
-                    topic: tpl.controller,
-                    tplNum: tpl.tplNum,
-                    color: "RED",
-                };
-                console.log(msg);
-                RlService.postTplMsg(msg);
-            }
-            this.$store.dispatch("updateTurnout", item);
-        },
-        formatDate(epochTime) {
-            if (epochTime === null || epochTime === "") {
-                return "";
-            } else {
-                return moment
-                    .utc(epochTime * 1000)
-                    .local()
-                    .format("DD MM YY hh:mm:ss");
-            }
-        },
-    },
+<script setup>
+import { ref } from "vue";
+import DialogEditTurnout from "@/components/dialogs/DialogEditTurnout.vue";
+import DialogDeleteTurnout from "@/components/dialogs/DialogDeleteTurnout.vue";
+import DialogAddTurnout from "@/components/dialogs/DialogAddTurnout.vue";
+import moment from "moment";
+import { useTurnoutsStore } from "@/stores/turnouts";
+
+const turnoutsStore = useTurnoutsStore();
+import RlService from "@/services/RlService";
+const editTurnoutDialog = ref(false);
+const deleteTurnoutDialog = ref(false);
+const addTurnoutDialog = ref(false);
+const editableTurnout = ref(null);
+const formatDate = (epochTime) => {
+    if (epochTime === null || epochTime === "") {
+        return "";
+    } else {
+        return moment
+            .utc(epochTime * 1000)
+            .local()
+            .format("YYYY-MM-DD hh:mm:ss");
+    }
+};
+const addTurnout = () => {
+    addTurnoutDialog.value = true;
+};
+const deleteTurnout = (item) => {
+    editableTurnout.value = item;
+    deleteTurnoutDialog.value = true;
+};
+const editTurnout = (item) => {
+    editableTurnout.value = item;
+    editTurnoutDialog.value = true;
+};
+const throwTo = async (item) => {
+    item.lock = "MRLM";
+    turnoutsStore.UPDATE_TURNOUT(item);
+    pubToMsg(item.toID, "THROW");
+    pubLightMsg(item);
+};
+const closeTo = async (item) => {
+    item.lock = "MRLM";
+    turnoutsStore.UPDATE_TURNOUT(item);
+    pubToMsg(item.toID, "CLOSE");
+    pubLightMsg(item);
+};
+const pubToMsg = async (id, cmd) => {
+    const turnout = turnoutsStore.GET_TURNOUT_BY_ID(id);
+    const msg = {
+        topic: turnout.controller,
+        to: turnout.toNum,
+        cmd: cmd,
+    };
+    console.log(msg);
+    await RlService.postToMsg(msg);
+};
+const pubLightMsg = (item) => {
+    let tpl = turnoutsStore.GET_TURNOUT(item._id);
+    console.log(tpl);
+    if (tpl !== null) {
+        const msg = {
+            topic: tpl.controller,
+            tplNum: tpl.tplNum,
+            cmd: item.state,
+        };
+        console.log(msg);
+        RlService.postTplMsg(msg);
+    }
 };
 </script>

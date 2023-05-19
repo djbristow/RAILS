@@ -22,45 +22,40 @@
         </v-card-actions>
     </v-card>
 </template>
-<script>
-export default {
-    name: "DialogAddTPLight",
-    data: () => ({
-        turnout: "",
-        tplNum: "",
-        controller: "",
-        panelName: "",
-        panelNum: "",
-        to_id: "",
-        error: "",
-    }),
-    computed: {
-        tpLightAddDataInvalid() {
-            if ((this.turnout !== "" && this.controller !== "" && this.tplNum !== "") || this.error){
-                return false;
-            } else {
-                return true;
-            }
-        },
-    },
-    methods: {
-        addTPLight() {
-            let to = this.$store.getters['getTurnoutById'](this.turnout);
-            if (to == undefined) {
-                this.error = "Turnout not found";
-                return;
-            } else {
-                this.to_id = to._id;
-                this.$store.dispatch("addNewTplight", {
-                    to_id: this.to_id,
-                    tplNum: this.tplNum,
-                    controller: this.controller,
-                    panelName: this.panelName,
-                    panelNum: this.panelNum,
-                });
-                this.$emit("closeAddTPLightDialog");
-            }
-        },
-    },
+<script setup>
+import { ref, computed } from "vue";
+import { useTurnoutsStore } from "@/stores/turnouts";
+import { useTplightsStore } from "@/stores/tplights";
+const turnoutsStore = useTurnoutsStore();
+const tplightsStore = useTplightsStore();
+const turnout = ref("");
+const tplNum = ref("");
+const controller = ref("");
+const panelName = ref("");
+const panelNum = ref("");
+const emit = defineEmits(["closeAddTPLightDialog"]);
+const error = ref("");
+const tpLightAddDataInvalid = computed(() => {
+    if ((turnout.value !== "" && controller.value !== "" && tplNum.value !== "") || error.value) {
+        return false;
+    } else {
+        return true;
+    }
+});
+const addTPLight = () => {
+    let to = turnoutsStore.GET_TURNOUT_BY_ID(turnout.value);
+    if (to == undefined) {
+        error.value = "Turnout not found";
+        return;
+    } else {
+        tplightsStore.ADD_NEW_TPLIGHT({
+            to_id: to._id,
+            tplNum: tplNum.value,
+            controller: controller.value,
+            panelName: panelName.value,
+            panelNum: panelNum.value,
+        });
+        emit("closeAddTPLightDialog");
+    }
 };
 </script>

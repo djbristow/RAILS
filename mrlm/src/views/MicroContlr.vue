@@ -14,11 +14,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in micros" :key="item.id">
+                <tr v-for="item in microsStore.micros" :key="item.id">
                     <td>{{ item.microID }}</td>
                     <td>{{ item.microIP }}</td>
                     <td>{{ item.purpose }}</td>
-                    <td>{{ item.et }}</td>
+                    <td>{{ formatDate(item.et) }}</td>
                     <td>
                         <div v-if="item.status === 'Up'">
                             <v-icon color="green">mdi-server</v-icon>
@@ -54,39 +54,38 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from "vue";
+import moment from "moment";
 import DialogEditMicroContlr from "../components/dialogs/DialogEditMicroContlr.vue";
 import DialogDeleteMicroContlr from "../components/dialogs/DialogDeleteMicroContlr.vue";
 import DialogAddMicroContlr from "../components/dialogs/DialogAddMicroContlr.vue";
-export default {
-    components: {
-        DialogEditMicroContlr,
-        DialogDeleteMicroContlr,
-        DialogAddMicroContlr,
-    },
-    data: () => ({
-        editMicroContlrDialog: false,
-        deleteMicroContlrDialog: false,
-        addMicroContlrDialog: false,
-        editableMicroContlr: null,
-    }),
-    computed: {
-        micros() {
-            return this.$store.state.micros;
-        },
-    },
-    methods: {
-        addMicroContlr() {
-            this.addMicroContlrDialog = true;
-        },
-        deleteMicroContlr(item) {
-            this.editableMicroContlr = item;
-            this.deleteMicroContlrDialog = true;
-        },
-        editMicroContlr(item) {
-            this.editableMicroContlr = item;
-            this.editMicroContlrDialog = true;
-        },
-    },
+import { useMicrosStore } from "@/stores/micros";
+
+const microsStore = useMicrosStore();
+const addMicroContlrDialog = ref(false);
+const deleteMicroContlrDialog = ref(false);
+const editMicroContlrDialog = ref(false);
+const editableMicroContlr = ref(null);
+const formatDate = (epochTime) => {
+    if (epochTime === null || epochTime === "") {
+        return "";
+    } else {
+        return moment
+            .utc(epochTime * 1000)
+            .local()
+            .format("YYYY-MM-DD hh:mm:ss");
+    }
+};
+const addMicroContlr = () => {
+    addMicroContlrDialog.value = true;
+};
+const deleteMicroContlr = (item) => {
+    editableMicroContlr.value = item;
+    deleteMicroContlrDialog.value = true;
+};
+const editMicroContlr = (item) => {
+    editableMicroContlr.value = item;
+    editMicroContlrDialog.value = true;
 };
 </script>

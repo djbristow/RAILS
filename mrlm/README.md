@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020-2023
 
 ## Version
-* 2.0.3 - 3/2/2023
+* 3.0.0 - 3/2/2023
 
 Model Railway Layout Manager is a Vue application that provides a user with a web application to show layout information.  This web application uses port 3004.
 
@@ -26,26 +26,15 @@ Model Railway Layout Manager is a Vue application that provides a user with a we
 * ISTS IoT Subscriber running on port 3010
 * RLDS Railroad Layout Data Services running on port 3006
 * IPTS IoT Publisher running on port 3011
+* ISBS IOT Subscriber running on port 3012
 
 ## Project setup
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+

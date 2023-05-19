@@ -25,55 +25,54 @@
         </v-card-actions>
     </v-card>
 </template>
-<script>
-export default {
-    name: "DialogEditTurnout",
-    props: ["turnout"],
-    data: () => ({
-        toID: "",
-        controller: "",
-        toNum: "",
-        type: "",
-        lastUpdate: "",
-        state: "",
-        lock: "",
-        toLoc: "",
-        notes: "",
-    }),
-    computed: {
-        turnoutEditDataInvalid() {
-            let result = false;
-            return result;
-        },
+<script setup>
+import { ref, onMounted } from "vue";
+import { useTurnoutsStore } from "@/stores/turnouts";
+
+const props = defineProps({
+    turnout: {
+        type: Object,
+        required: true,
     },
-    mounted() {
-        this.toID = this.turnout.toID;
-        this.controller = this.turnout.controller;
-        this.toNum = this.turnout.toNum;
-        this.type = this.turnout.type;
-        this.lastUpdate = this.turnout.lastUpdate;
-        this.state = this.turnout.state;
-        this.lock = this.turnout.lock;
-        this.toLoc = this.turnout.toLoc;
-        this.notes = this.turnout.notes;
-    },
-    methods: {
-        editTurnout() {
-            let updatedTurnout = {
-                _id: this.turnout._id,
-                toID: this.toID,
-                controller: this.controller,
-                toNum: this.toNum,
-                type: this.type,
-                lastUpdate: this.lastUpdate,
-                state: this.state,
-                lock: this.lock,
-                toLoc: this.toLoc,
-                notes: this.notes,
-            };
-            this.$store.dispatch("updateTurnout", updatedTurnout);
-            this.$emit("closeEditTurnoutDialog");
-        },
-    },
+});
+const emit = defineEmits(["closeEditTurnoutDialog"]);
+const turnoutStore = useTurnoutsStore();
+const turnoutEditDataInvalid = ref(false);
+const _id = ref("");
+const toID = ref("");
+const controller = ref("");
+const toNum = ref("");
+const type = ref("");
+const lastUpdate = ref("");
+const state = ref("");
+const lock = ref("");
+const toLoc = ref("");
+const notes = ref("");
+const editTurnout = () => {
+    turnoutStore.UPDATE_TURNOUT({
+        _id: _id.value,
+        toID: toID.value,
+        controller: controller.value,
+        toNum: toNum.value,
+        type: type.value,
+        lastUpdate: lastUpdate.value,
+        state: state.value,
+        lock: lock.value,
+        toLoc: toLoc.value,
+        notes: notes.value,
+    });
+    emit("closeEditTurnoutDialog");
 };
+onMounted(() => {
+    _id.value = props.turnout._id;
+    toID.value = props.turnout.toID;
+    controller.value = props.turnout.controller;
+    toNum.value = props.turnout.toNum;
+    type.value = props.turnout.type;
+    lastUpdate.value = props.turnout.lastUpdate;
+    state.value = props.turnout.state;
+    lock.value = props.turnout.lock;
+    toLoc.value = props.turnout.toLoc;
+    notes.value = props.turnout.notes;
+});
 </script>

@@ -1,4 +1,3 @@
-import store from "../store";
 export default {
   valFileType(inptType, header) {
     let fileValid = "bad";

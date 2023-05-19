@@ -37,6 +37,7 @@ export default {
     return ApiRl().put('update_to/' + params.id, params)
   },
   deleteTo (id) {
+    console.log(id);
     return ApiRl().delete('to/' + id)
   },
   fetchMicroList () {

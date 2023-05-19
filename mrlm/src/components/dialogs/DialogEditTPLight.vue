@@ -21,48 +21,46 @@
         </v-card-actions>
     </v-card>
 </template>
-<script>
-export default {
-    name: "DialogEditTPLight",
-    props: ["tplight"],
-    data: () => ({
-        turnout: "",
-        tplNum: "",
-        controller: "",
-        panelName: "",
-        panelNum: "",
-        to_id: "",
-        error: "",
-    }),
-    computed: {
-        tpLightEditDataInvalid() {
-            let result = false;
-            return result;
-        },
+<script setup>
+import { ref, onMounted, computed } from "vue";
+import { useTplightsStore } from "@/stores/tplights";
+
+const props = defineProps({
+    tplight: {
+        type: Object,
+        required: true,
     },
-    mounted() {
-        console.log(this.tplight)
-        this.turnout = this.tplight.turnout;
-        this.tplNum = this.tplight.tplNum;
-        this.controller = this.tplight.controller;
-        this.panelName = this.tplight.panelName;
-        this.panelNum = this.tplight.panelNum;
-        this.to_id = this.tplight.to_id;
-        this._id = this.tplight._id;
-    },
-    methods: {
-        editTPLight() {
-            let updatedTPLight = {
-                _id: this._id,
-                controller: this.controller,
-                panelName: this.panelName,
-                panelNum: this.panelNum,
-                to_id: this.to_id,
-                tplNum: this.tplNum,
-            };
-            this.$store.dispatch("updateTplight", updatedTPLight);
-            this.$emit("closeEditTPLightDialog");
-        },
-    },
+});
+const emit = defineEmits(["closeEditTPLightDialog"]);
+const tplightStore = useTplightsStore();
+const _id = ref("");
+const to_id = ref("");
+const tplNum = ref("");
+const controller = ref("");
+const panelName = ref("");
+const panelNum = ref("");
+const editTPLight = (id) => {
+    tplightStore.UPDATE_TPLIGHT({
+        _id: _id.value,
+        to_id: to_id.value,
+        tplNum: tplNum.value,
+        controller: controller.value,
+        panelName: panelName.value,
+        panelNum: panelNum.value,
+    });
+    emit("closeEditTPLightDialog");
 };
+onMounted(() => {
+    _id.value = props.tplight._id;
+    to_id.value = props.tplight.to_id;
+    tplNum.value = props.tplight.tplNum;
+    controller.value = props.tplight.controller;
+    panelName.value = props.tplight.panelName;
+    panelNum.value = props.tplight.panelNum;
+    _id.value = props.tplight._id;
+});
+const tpLightEditDataInvalid = computed(() => {
+    let result = false;
+    return result;
+});
 </script>

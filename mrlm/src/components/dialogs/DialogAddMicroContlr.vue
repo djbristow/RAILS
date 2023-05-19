@@ -21,36 +21,31 @@
         </v-card-actions>
     </v-card>
 </template>
-<script>
-export default {
-    name: "DialogAddMicroContlr",
-    data: () => ({
-        microID: "",
-        microIP: "",
-        purpose: "",
-        et: "",
-        status: "",
-    }),
-    computed: {
-        microContlrAddDataInvalid() {
-            if (this.microID !== "" && this.microIP !== "") {
-                return false;
-            } else {
-                return true;
-            }
-        },
-    },
-    methods: {
-        addMicroContlr() {
-            this.$store.dispatch("addNewMicro", {
-                microID: this.microID,
-                microIP: this.microIP,
-                purpose: this.purpose,
-                et: this.et,
-                status: this.status,
-            });
-            this.$emit("closeAddMicroContlrDialog");
-        },
-    },
+<script setup>
+import { ref, computed } from "vue";
+import { useMicrosStore } from "@/stores/micros";
+const microsStore = useMicrosStore();
+const microID = ref("");
+const microIP = ref("");
+const purpose = ref("");
+const et = ref("");
+const status = ref("");
+const emit = defineEmits(["closeAddMicroContlrDialog"]);
+const microContlrAddDataInvalid = computed(() => {
+    if (microID.value !== "" && microIP.value !== "") {
+        return false;
+    } else {
+        return true;
+    }
+});
+const addMicroContlr = () => {
+    microsStore.ADD_NEW_MICRO({
+        microID: microID.value,
+        microIP: microIP.value,
+        purpose: purpose.value,
+        et: et.value,
+        status: status.value,
+    });
+    emit("closeAddMicroContlrDialog");
 };
 </script>
