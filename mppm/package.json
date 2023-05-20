@@ -1,6 +1,6 @@
 {
   "name": "mppm",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Model Project and Purchase Manager",
   "author": "dbristow <dave@bristow-family.org>",
   "private": true,
@@ -27,7 +27,7 @@
     "roboto-fontface": "*",
     "vue": "^3.3.2",
     "vue-router": "^4.2.0",
-    "vuetify": "^3.2.5",
+    "vuetify": "^3.3.0",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {

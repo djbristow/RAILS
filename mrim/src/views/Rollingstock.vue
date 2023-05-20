@@ -3,7 +3,7 @@
     <div class="xx">
       <h1>Inventory of Rollingstock</h1>
       <v-btn @click="addRollingstock()" width="175">New Rollingstock</v-btn>
-      <v-table density="compact">
+      <v-table density="compact" fixed-header height="800px">
         <thead>
           <tr>
             <th class="text-left">Road Name</th>

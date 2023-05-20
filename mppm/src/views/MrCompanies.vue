@@ -2,7 +2,7 @@
   <div class="xx">
     <h1>Model Railroad Companies</h1>
     <v-btn @click="addMrCompany()" width="200">Add MR Companies</v-btn>
-    <v-table density="compact">
+    <v-table density="compact" fixed-header height="800px">
       <thead>
         <tr>
           <th class="text-left">Name</th>

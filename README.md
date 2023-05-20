@@ -2,7 +2,7 @@
 &copy; David Bristow, 2019-2023
 
 # Version
-* 2.5.5 - 5/18/2023
+* 2.6.0 - 5/19/2023
  
 RAILS is a software model and implemenation of an automated system to assist the model railroader achieve realism in the operation of a model railroad. The model then drives the development of software.
 For further information see http://kjcrr.org/rails
@@ -40,10 +40,10 @@ The components of this design are:
 |Name |Title                                  |Port |Version|Date     |
 |-----|----------------------------------------------------------|-----|-------|---------|
 |SPAs|----------------------------------------------------------|
-|MPPM|**M**odel **P**rojects and **P**urchase **M**anager allows a user to enter information about their projects and purchases|3008|3.0.1|5/18/2023|
-|MRIM|**M**odel **R**ailroad **I**nventory **M**anager allows a user to create, update and delete model railroad assets, such as rolling stock|3001|4.0.3|5/18/2023|
+|MPPM|**M**odel **P**rojects and **P**urchase **M**anager allows a user to enter information about their projects and purchases|3008|3.1.0|5/19/2023|
+|MRIM|**M**odel **R**ailroad **I**nventory **M**anager allows a user to create, update and delete model railroad assets, such as rolling stock|3001|4.1.0|5/19/2023|
 |MRLM|**M**odel **R**ailroad **L**ayout **M**anager allows a user to enter information about their layout and control elements of it|3004|3.0.0|5/19/2023|
-|RSRM|**R**olling**s**tock **R**FID **M**anager allows a user to match a RFID value to a rolling stock road name and number|3002|4.0.4|5/18/2023|
+|RSRM|**R**olling**s**tock **R**FID **M**anager allows a user to match a RFID value to a rolling stock road name and number|3002|4.1.0|5/19/2023|
 |Data Services|----------------------------------------------------------|
 |MRFM|**M**odel **R**ailroad **F**ile **M**anager  allows the user to upload image files for the use by the MRIM component|3030|2.0.5|4/24/2023|
 |PPDS|**P**lans and **P**urchases **D**ata **S**ervices  provides REST access to model railroad projects and purchases documents|3007|2.1.2|5/19/2023|
@@ -56,8 +56,3 @@ The components of this design are:
 |ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices subscribes to micros and adds or updates micros collection in RAILS||2.1.5|4/30/2023|
 |ISRS|**I**oT **S**ubscriber **R**FID **S**ervices subscribes to RFID tags and pushes them via a web-socket to the RSRM component |3005|1.2.2|3/1/2023|
 |ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component |3010|1.3.2|3/1/2023|
-
-
-
-
-

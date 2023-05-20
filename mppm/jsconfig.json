@@ -12,7 +12,7 @@
     }
   },
   "vueCompilerOptions": {
-    "experimentalDisableTemplateSupport": true
+    
   },
   "include": [
     "src/**/*.js",

@@ -2,7 +2,7 @@
   <div class="xx">
     <h1>Companies</h1>
     <v-btn @click="addCompany()" width="200">Add Company</v-btn>
-    <v-table density="compact">
+    <v-table density="compact" fixed-header height="800px">
       <thead>
         <tr>
           <th class="text-left">Name</th>

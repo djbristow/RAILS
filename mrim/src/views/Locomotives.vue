@@ -2,7 +2,7 @@
   <v-app>
     <div class="xx">
       <h1>Inventory of Locomotives</h1>
-      <v-table density="compact">
+      <v-table density="compact" fixed-header height="800px">
         <thead>
           <tr>
             <th class="text-left">Road Name</th>

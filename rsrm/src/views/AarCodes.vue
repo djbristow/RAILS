@@ -2,7 +2,7 @@
   <div class="xx">
     <h1>AAR Codes</h1>
     <v-btn @click="addAarCode()" width="200">Add AAR Code</v-btn>
-    <v-table density="compact">
+    <v-table density="compact" fixed-header height="800px">
       <thead>
         <tr>
           <th class="text-left">AAR</th>

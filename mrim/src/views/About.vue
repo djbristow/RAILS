@@ -1,28 +1,28 @@
 <template>
   <div class="xx">
     <h1>About Model Railroad Inventory Manager</h1>
-    <h3>Version 4.0.3</h3>
+    <h3>Version 4.1.0</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) MRIM
-      Application is one of several single page applications (SPAs) in the RAILS family of
-      applications. It uses MongoDB, Vue 3, Vuetify and Node to construct the SPA. MRIM
-      provides a user with a web SPA to show inventories of modeled railroad elements,
-      such as rolling stock, AAR codes, structures, images, and companies.
-      Rolling stock has a sub collections of locomotives along with DCC
-      decoders. MRIM provides reports on the various elements as well
-      as the ability to export and import CSV files.
+      Application is one of several single page applications (SPAs) in the RAILS
+      family of applications. It uses MongoDB, Vue 3, Vuetify and Node to
+      construct the SPA. MRIM provides a user with a web SPA to show inventories
+      of modeled railroad elements, such as rolling stock, AAR codes,
+      structures, images, and companies. Rolling stock has a sub collections of
+      locomotives along with DCC decoders. MRIM provides reports on the various
+      elements as well as the ability to export and import CSV files.
     </p>
     <p>The user guide is available at: tbd</p>
-    <p>Waiting for Vuetify 3.3 to format and paginate tables</p>
-    <br>
-    <hr>
+    <p>Waiting for Vuetify 3.4 to format and paginate tables</p>
+    <br />
+    <hr />
     <p>The database has the following number of documents:</p>
-      <li>Rollinkstock: {{ rsStore.RS_COUNT }}</li>
-      <li>Decoders: {{ decodersStore.DECODERS_COUNT }}</li>
-      <li>AAR Codes: {{ aarCodesStore.AARCODES_COUNT }}</li>
-      <li>Structures: {{ structuresStore.STRUCTURES_COUNT }}</li>
-      <li>Companies: {{ companiesStore.COMPANIES_COUNT }}</li>
-      <li>Images: {{ imagesStore.IMAGES_COUNT }}</li>
+    <li>Rollinkstock: {{ rsStore.RS_COUNT }}</li>
+    <li>Decoders: {{ decodersStore.DECODERS_COUNT }}</li>
+    <li>AAR Codes: {{ aarCodesStore.AARCODES_COUNT }}</li>
+    <li>Structures: {{ structuresStore.STRUCTURES_COUNT }}</li>
+    <li>Companies: {{ companiesStore.COMPANIES_COUNT }}</li>
+    <li>Images: {{ imagesStore.IMAGES_COUNT }}</li>
   </div>
 </template>
 

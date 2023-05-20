@@ -2,7 +2,7 @@
   <div class="xx">
     <h1>Decoders</h1>
     <v-btn @click="addDecoder()" width="200">Add Decoder</v-btn>
-    <v-table density="compact">
+    <v-table density="compact" fixed-header height="800px">
       <thead>
         <tr>
           <th class="text-left">Road Name</th>

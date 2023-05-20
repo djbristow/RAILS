@@ -1,7 +1,7 @@
 <template>
   <div class="xx">
     <h1>About Model Project & Purchase Manager</h1>
-    <h3>Version 3.0.1</h3>
+    <h3>Version 3.1.0</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) Model Railroad Purchases
       and Projects Manager is one of several applications in the RAILS family of applications.
@@ -11,7 +11,7 @@
       ability to export and import CSV files.</p>
     <br>
     <p>The user guide is available at: tbd</p>
-    <p>Waiting for Vuetify 3.3 to format and paginate tables</p>
+    <p>Waiting for Vuetify 3.4 to format and paginate tables</p>
     <br>
     <hr>
     <p>The database has the following number of documents:</p>

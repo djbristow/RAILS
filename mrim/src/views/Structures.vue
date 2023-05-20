@@ -2,7 +2,7 @@
   <div class="xx">
     <h1>Inventory of Structures</h1>
     <v-btn @click="addStructure()" width="200">Add Structure</v-btn>
-    <v-table density="compact">
+    <v-table density="compact" fixed-header height="800px">
       <thead>
         <tr>
           <th class="text-left">Title</th>

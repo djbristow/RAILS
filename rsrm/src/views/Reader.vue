@@ -8,7 +8,7 @@
       <div v-else>
         <v-icon color="red">mdi-cast-connected</v-icon>
       </div>
-      <v-table density="compact">
+      <v-table density="compact" fixed-header height="300px">
         <thead>
           <tr>
             <th class="text-left">Time</th>
