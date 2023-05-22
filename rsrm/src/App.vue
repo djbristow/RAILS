@@ -79,7 +79,7 @@ onMounted(() => {
     color: "",
     aarCode: "",
   };
-  let foundRs = null;
+  var foundRs = null;
   var myDate = new Date(message.et * 1000);
   rs.time = myDate.toLocaleString();
   rs.rfid = message.rfid;
@@ -89,9 +89,9 @@ onMounted(() => {
   if (foundRs === undefined) {
     rsStore.ADD_NEW_RFID(rs);
   } else {
-    rs.roadNameNumber = this.foundRs.roadName + " " + this.foundRs.roadNumber;
-    rs.color = this.foundRs.color;
-    rs.aarCode = this.foundRs.aarCode;
+    rs.roadNameNumber = foundRs.roadName + " " + foundRs.roadNumber;
+    rs.color = foundRs.color;
+    rs.aarCode = foundRs.aarCode;
     rsStore.ADD_NEW_RFID(rs);
   }
 };
