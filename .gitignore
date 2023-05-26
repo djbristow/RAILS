@@ -31,3 +31,4 @@ rsrm/.vscode/
 rsrm/dist/
 mrfm/src/uploads/
 .vscode/
+docker-update-rep.sh

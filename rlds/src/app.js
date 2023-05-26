@@ -91,12 +91,12 @@ app.get("/micro/:id", async (req, res) => {
   res.send(micro);
 });
 app.get("/micro_name/:id", async (req, res) => {
-  const micro = Micro.findOne({ microID: req.params.id });
+  const micro = await Micro.findOne().where("microID").equals(req.params.id);
   res.send(micro);
 });
 app.get("/micro_id/:id", async (req, res) => {
   const micro = await Micro.findOne({
-    microID: req.params.id,
+    _id: req.params.id,
   });
   res.send(micro);
 });

@@ -6,7 +6,7 @@ const mqtt = require('mqtt'),
   axios = require('axios');
 
 var client = mqtt.connect('mqtt://' + process.env.MQTT_PORT_1883_TCP_ADDR + ':' + process.env.MQTT_PORT_1883_TCP_PORT, { clientId: "mqttjs02" });
-console.log("ISMS v2.1.5, Started")
+console.log("ISMS v2.1.6, Started")
 setTimeout(checkStatus, 6000);
 
 function rlds() {
@@ -16,7 +16,6 @@ function rlds() {
 }
 
 client.on('connect', function () {
-  console.log("MQTT Connected")
   client.subscribe('micros')
 })
 
@@ -27,10 +26,9 @@ client.on('message', function (topic, message) {
 
 async function checkStatus() {
   const cet = Math.round(Date.now()/1000);
-  // console.log(cet);
   let status = "";
   let response = await fetchMicroList();
-  let micros = response.data.micros
+  let micros = response.data
   micros.forEach(micro => {
     if ((cet - micro.et) < 300) {
       status = "Up"
@@ -51,30 +49,25 @@ function fetchMicroList() {
   return rlds().get('microlist/')
 }
 
-function getMicroID(params) {
-  console.log(params)
-  return rlds().get('micro_id/' + params.id)
+function getMicroByName(name) {
+  console.log(name)
+  return rlds().get('micro_name/' + name)
 }
 
 function addMicro(params) {
+  console.log("addMicro")
   return rlds().post('add_micro', params)
 }
 
-function getMicro(id) {
-  return rlds().get('micro/' + id)
-}
-
 async function updateMicro(params) {
-  return rlds().put('update_micro/' + params._id, params)
+  return await rlds().put('update_micro/' + params._id, params)
 }
 
 async function handleMicroMsg(message) {
   let parsedMsg = JSON.parse(message);
-  let response = await getMicroID({
-    id: parsedMsg.sensor
-  });
-  let key = response.data._id
-  if (key == undefined) {
+  let response = await getMicroByName(parsedMsg.sensor);
+  var micro = response.data;
+  if (micro._id == undefined) {
     addMicro({
       microID: parsedMsg.sensor,
       microIP: parsedMsg.ip,
@@ -84,18 +77,18 @@ async function handleMicroMsg(message) {
       status: "Up"
     });
   } else {
-    let response = await getMicro(key);
-    let purpose = response.data.purpose;
-    let sensorLoc = response.data.sensorLoc;
-    let status = "Up";
+    var ip = micro.microIP;
+    if (micro.msgType === "initial"){
+      ip = parsedMsg.ip;
+    }
     updateMicro({
-      _id: key,
+      _id: micro._id,
       microID: parsedMsg.sensor,
-      microIP: parsedMsg.ip,
+      microIP: ip,
       et: parsedMsg.et,
-      purpose: purpose,
-      sensorLoc: sensorLoc,
-      status: status
+      purpose: micro.purpose,
+      sensorLoc: micro.sensorLoc,
+      status: "Up"
     });
   }
 }
