@@ -4,7 +4,7 @@
 # Version
 * 1.0.0 - 6/7/2023
  
-IoT Services provide the mechanisms to move mqtt messages. The custom designed and devloped micro-services are shown in the following table.
+IoT Services provide the mechanisms to move mqtt messages. The custom designed and developed micro-services are shown in the following table.
 
 |Name |Title                                  |Port |
 |-----|----------------------------------------------------------|-----|
