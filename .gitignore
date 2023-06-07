@@ -11,11 +11,16 @@
 'Docker Based/IoT Services/ists/node_modules/'
 'Docker Based/SPAs/mppm/dist/'
 'Docker Based/SPAs/mppm/node_modules/'
+'Docker Based/SPAs/mppm/.vscode/'
 'Docker Based/SPAs/mrim/dist/'
 'Docker Based/SPAs/mrim/node_modules/'
+'Docker Based/SPAs/mrim/.vscode/'
 'Docker Based/SPAs/mrlm/dist/'
 'Docker Based/SPAs/mrlm/node_modules/'
+'Docker Based/SPAs/mrlm/.vscode/'
 'Docker Based/SPAs/rsrm/dist/'
+'Docker Based/SPAs/rsrm/node_modules/'
+'Docker Based/SPAs/rsrm/.vscode/'
 *.vscode/
 *.pdf
 *.aux
