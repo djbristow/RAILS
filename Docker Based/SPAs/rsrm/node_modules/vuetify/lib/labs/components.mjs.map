@@ -1,1 +1,0 @@
-{"version":3,"file":"components.mjs","names":[],"sources":["../../src/labs/components.ts"],"sourcesContent":["export * from './VBottomSheet'\nexport * from './VDataIterator'\nexport * from './VDataTable'\nexport * from './VInfiniteScroll'\nexport * from './VSkeletonLoader'\n"],"mappings":""}
