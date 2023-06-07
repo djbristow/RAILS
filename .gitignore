@@ -1,38 +1,27 @@
-rids/node_modules/
-rids/rids.code-workspace
-rids/.vscode/
-rlds/node_modules/
-rlds/rids.code-workspace
-rlds/.vscode/
-ppds/node_modules/
-ppds/.vscode/
-ipts/node_modules/
-isrs/node_modules/
-isms/node_modules/
-ists/node_modules/
-isbs/node_modules/
-ipls/node_modules/
-mppm/.vscode/
-mppm/dist/
-mppm/node_modules/
-mrfm/.vscode/
-mrfm/node_modules/
-mrim/.vscode/
-mrim/dist/
-mrim/node_modules/
-mrim/public/static/
-mrlm/.vscode/
-mrlm/node_modules/
-mrlm/dist/
-mrlm/.vscode/
-rsrm/node_modules/
-rsrm/.vscode/
-rsrm/dist/
-mrfm/src/uploads/
-.vscode/
-docker-update-rep.sh
+'Docker Based/Data Services/mrfm/node_modules/'
+'Docker Based/Data Services/mrfm/src/uploads/'
+'Docker Based/Data Services/ppds/node_modules/'
+'Docker Based/Data Services/rids/node_modules/'
+'Docker Based/Data Services/rlds/node_modules/'
+'Docker Based/IoT Services/ipls/node_modules/'
+'Docker Based/IoT Services/ipts/node_modules/'
+'Docker Based/IoT Services/isbs/node_modules/'
+'Docker Based/IoT Services/isms/node_modules/'
+'Docker Based/IoT Services/isrs/node_modules/'
+'Docker Based/IoT Services/ists/node_modules/'
+'Docker Based/SPAs/mppm/dist/'
+'Docker Based/SPAs/mppm/node_modules/'
+'Docker Based/SPAs/mrim/dist/'
+'Docker Based/SPAs/mrim/node_modules/'
+'Docker Based/SPAs/mrim/public/static/'
+'Docker Based/SPAs/mrlm/dist/'
+'Docker Based/SPAs/mrlm/node_modules/'
+'Docker Based/SPAs/rsrm/dist/'
+'Docker Based/SPAs/rsrm/node_modules/'
+*.vscode/
 *.pdf
 *.aux
 *.log
 *.toc
 *.out
+docker-update-rep.sh
