@@ -13,11 +13,9 @@
 'Docker Based/SPAs/mppm/node_modules/'
 'Docker Based/SPAs/mrim/dist/'
 'Docker Based/SPAs/mrim/node_modules/'
-'Docker Based/SPAs/mrim/public/static/'
 'Docker Based/SPAs/mrlm/dist/'
 'Docker Based/SPAs/mrlm/node_modules/'
 'Docker Based/SPAs/rsrm/dist/'
-'Docker Based/SPAs/rsrm/node_modules/'
 *.vscode/
 *.pdf
 *.aux
