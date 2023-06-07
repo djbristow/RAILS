@@ -1,0 +1,56 @@
+\documentclass[letterpaper, oneside, 11pt]{book}
+\usepackage[left=1in, right=1in, top=0.75in]{geometry}
+\usepackage[svgnames]{xcolor}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{acronym}
+\usepackage[sfdefault]{roboto}
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage[colorlinks=true, linkcolor=gray]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\definecolor{MyBlue}{rgb}{0.03, 0.27, 0.49}
+\chapterfont{\color{MyBlue}}
+\sectionfont{\color{MyBlue}}
+\subsectionfont{\color{MyBlue}}
+
+\begin{document}
+%%========================================================================
+\begin{titlepage}
+	\raggedleft
+	\begin{figure}[H]
+	\centering
+		\includegraphics[scale=1.53]{railway_track.jpg}
+	\label{fig:track}
+\end{figure}
+	\vspace*{0.167\textheight}
+	\textbf{\LARGE System Design and Implementation}\\[\baselineskip]
+    \textbf{\textcolor{MyBlue}{\Huge R\Large ailway \Huge A\Large dministration and \Huge I\Large nformation \Huge L\Large ogical \Huge S\Large ystem}}\\[\baselineskip]
+	{\Large \textit{RAILS for Model Railroads}}
+	\vfill
+    \vspace*{\baselineskip}
+	{\small David Bristow}
+
+	{\small Version 2.0.0}
+	
+	{\small Jan 18, 2023}
+	\vspace*{3\baselineskip}
+\end{titlepage}
+%%========================================================================
+\tableofcontents
+%% copyright notice
+%%========================================================================
+\input{intro}
+\input{usecase}
+\input{microservicesdesign}
+\input{IoTdesign}
+\input{tools}
+
+%%========================================================================
+\backmatter
+
+\include{acros}
+
+\end{document}

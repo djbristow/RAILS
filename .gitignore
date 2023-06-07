@@ -25,10 +25,13 @@ mrlm/.vscode/
 mrlm/node_modules/
 mrlm/dist/
 mrlm/.vscode/
-mrlm/.*
 rsrm/node_modules/
 rsrm/.vscode/
 rsrm/dist/
 mrfm/src/uploads/
 .vscode/
 docker-update-rep.sh
+*.pdf
+*.aux
+*.log
+*.toc
