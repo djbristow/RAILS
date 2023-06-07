@@ -35,3 +35,4 @@ docker-update-rep.sh
 *.aux
 *.log
 *.toc
+*.out

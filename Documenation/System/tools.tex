@@ -1,6 +1,12 @@
-\chapter{Software Development Environment}
-
-\section{Visual Studio Code}
+\subsection{Software Development Environment}
+Software development is accomplished using several tools (more details are discussed in ):
+\begin{itemize}
+\item \ac{VS Code} with the PlatformIO extension is used for c, c++ code for the Arduino platforms, including the ESP8266.
+\item \ac{VS Code} is used for JavaScript for Node.js.
+\item \ac{VS Code} is used for LaTex.
+\item Git is used for version control. The source code is stored on \href{https://github.com/djbristow/RAILS}{GitHub}.
+\end{itemize}
+\subsubsection{Visual Studio Code}
 A development environment, also known as an \ac{IDE}, is a software tool or a set of tools that provides a comprehensive environment for developers to create, edit, test, and debug software applications. It encompasses various components, features, and functionalities that aid in the software development process.\vspace{5mm} \\
 A development environment typically includes the following key elements:
 \begin{itemize}
@@ -46,7 +52,18 @@ Overall, a development environment provides a unified and streamlined workflow f
   \item \ac{VS Code} has built-in support for code formatting and linting. It is possible to configure any project's formatting and linting rules using tools like Prettier and ESLint.
   \item \ac{VS Code} has an integrated terminal that allows the ability to run Node.js commands and scripts without switching to an external terminal.
 \end{itemize}
-\section{MQTTX}
+For additional features, \ac{VS Code} has a rich ecosystem of extensions that can be installed to enhance the development experience. The following are some useful extensions for Node.js and web development: 
+\begin{itemize}
+  \item Volar - This extension provides advanced features for Vue development, including syntax highlighting, IntelliSense, code snippets, and error checking.
+  \item Prettier - This extension provides code formatting for JavaScript, TypeScript, and CSS.
+  \item ESLint - This extension provides linting for JavaScript and TypeScript.
+  \item Debugger for Chrome - This extension allows the user to debug JavaScript and TypeScript code in the Google Chrome browser.
+  \item ive Server - This extension provides a live preview of the user's web application in the browser.
+  \item GitLens - This extension provides Git integration and allows the user to view and manage Git repositories within \ac{VS Code}.
+  \item Code Spell Checker - This extension provides spell checking for the user's code.
+\end{itemize}
+For additional information about \ac{VS Code} and its features, visit the \href{https://code.visualstudio.com/}{official website} and \href{https://code.visualstudio.com/docs}{Getting Started with Visual Studio Code}. For more information about PlatformIO, visit the \href{https://platformio.org/}{official website}.
+\subsubsection{MQTTX}
 MQTTX is a free and open-source \ac{MQTT} client tool that provides a graphical user interface (GUI) for working with \ac{MQTT}. It is designed to facilitate the testing, debugging, and monitoring of \ac{MQTT}-based applications. \ac{MQTT} is a lightweight messaging protocol commonly used in \ac{IoT} and other applications that require efficient, reliable, and real-time communication between devices or clients and a server.\vspace{5mm} \\
 MQTTX offers the following features:
 \begin{itemize}
@@ -58,7 +75,8 @@ MQTTX offers the following features:
   \item  MQTTX supports secure communication using TLS/SSL encryption. It allows the user to configure and connect to MQTT brokers that require secure connections, providing an additional layer of data protection.
 \end{itemize}
 MQTTX is available for different operating systems, including Windows, macOS, and Linux. Its user-friendly interface and feature-rich environment make it a valuable tool for developers working with MQTT-based applications, enabling efficient testing, debugging, and monitoring of MQTT communications.
-\section{MongoDB Compass}
+For more information about MQTTX, visit the \href{https://mqttx.app/}{official website}.
+\subsubsection{MongoDB Compass}
 MongoDB Compass is a graphical user interface \ac{GUI} tool provided by MongoDB Inc. It is designed to simplify the process of working with MongoDB databases. Compass allows users to interact with their MongoDB databases visually, providing an intuitive way to explore, analyze, and manipulate data.\vspace{5mm} \\
 Some key features of MongoDB Compass include:
 \begin{itemize}
@@ -70,37 +88,4 @@ Some key features of MongoDB Compass include:
   \item Compass supports importing and exporting data to and from MongoDB databases. Users can import data from various file formats, such as JSON or CSV, and export data to these formats as well.
 \end{itemize}
 Overall, MongoDB Compass is a powerful tool that simplifies the management and interaction with MongoDB databases, providing a visual and user-friendly interface for developers, database administrators, and data analysts.
-\section{Git \& GitHub}
-Git is a distributed \ac{VCS} used for tracking changes in source code during software development. It was created by Linus Torvalds, the creator of the Linux operating system, in 2005. Git allows multiple developers to collaborate on a project by providing a mechanism to manage and merge their code changes efficiently.\vspace{5mm} \\
-GitHub is a web-based hosting service and collaboration platform for Git repositories. It provides a centralized location where developers can store, manage, and collaborate on their Git repositories. GitHub offers a variety of features and tools that enhance the functionality of Git and facilitate collaboration among developers and teams.\vspace{5mm} \\
-Microsoft acquired GitHub in June 2018 in a deal worth \$7.5 billion. Following the acquisition, GitHub continues to operate as an independent platform, maintaining its brand, services, and user base while also benefiting from Microsoft's resources and support.\vspace{5mm} \\
-GitHub provides the following features:
-\begin{itemize}
-  \item GitHub allows users to host their Git repositories on its servers. Developers can create repositories to store their code and version history.
-  \item GitHub promotes social collaboration and networking among developers. Users can follow other developers, star and fork repositories, and contribute to open-source projects.
-  \item GitHub includes an issue tracking system where users can create, assign, and track issues related to their projects. Issues can be used to report bugs, suggest enhancements, or discuss project-related topics.
-  \item GitHub provides features such as wikis, project boards, and discussions to help teams collaborate effectively. Wikis allow for documentation and knowledge sharing, project boards help manage tasks and workflows, and discussions provide a platform for team communication.
-  \item GitHub Pages is a feature that enables users to host static websites directly from their repositories. It simplifies the process of publishing and sharing web content.
-\end{itemize}
-GitHub offers both free and paid plans, with additional features and storage available in the paid tiers. It has become a popular choice for individual developers, open-source projects, and large organizations due to its user-friendly interface, strong community, and extensive features for code collaboration and project management.
-\section{Docker}
-Docker is an open-source platform that enables developers to automate the deployment, scaling, and management of applications using containerization. Containers are lightweight, isolated environments that encapsulate an application and all its dependencies, including libraries, frameworks, and other runtime components. Docker allows the user to package an application into a container image, which can then be run consistently across different environments, such as development, testing, and production.\vspace{5mm} \\
-Docker provides the following features:
-\begin{itemize}
-  \item Docker containers are portable and can run on any system that supports Docker, regardless of the underlying operating system or infrastructure. This eliminates the "works on my machine" problem and ensures consistent behavior across different environments.
-  \item Containers provide a high level of isolation, ensuring that applications and their dependencies are encapsulated and do not interfere with each other. This isolation improves security, as well as prevents conflicts between different software components.
-  \item Docker containers are lightweight and share the host system's operating system kernel. This means they require fewer resources compared to traditional virtual machines (VMs). Multiple containers can run on the same host without significant performance overhead.
-  \item Docker makes it easy to scale applications horizontally by running multiple instances of containers across different hosts or a cluster of machines. This enables efficient utilization of resources and helps handle increased workload demands.
-  \item Docker allows versioning of container images, making it easier to track changes and roll back to a previous version if needed. This simplifies the deployment and update process, reducing the risk of application downtime.
-  \item Docker has a large and active community, resulting in a vast ecosystem of pre-built container images available from Docker Hub and other registries. These images can be easily pulled and used as a base for building and deploying applications, saving development time.
-\end{itemize}
-
- \href{https://www.emqx.com/en/blog/the-easiest-guide-to-getting-started-with-mqtt}{MQTT Protocol Explained: The Basics and a Quick Tutorial}
-
-\href{https://mqttx.app/?utm_source=mqttx&utm_medium=referral&utm_campaign=logo-to-homepage}{MQTTX}
-
- \href{https://code.visualstudio.com/docs}{Getting Started with Visual Studio Code}
-
- \href{https://www.docker.com/}{Docker}
-
-
+For more information about MongoDB Compass, visit the \href{https://www.mongodb.com/products/compass}{official website}.
