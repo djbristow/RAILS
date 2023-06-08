@@ -1,4 +1,4 @@
-cd ./ipls
+cd './Docker Based/IoT Services/ipls'
 echo "IPLS Outdated Packages"
 cat package.json | grep "version"
 npm outdated
@@ -28,23 +28,28 @@ echo "ISTS Outdated Packages"
 cat package.json | grep "version"
 npm outdated
 echo "==========================================="
+cd ../../SPAs/mrim
+echo "MRIM Outdated Packages"
+cat package.json | grep "version"
+npm outdated
+echo "==========================================="
 cd ../mppm
 echo "MPPM Outdated Packages"
 cat package.json | grep "version"
 npm outdated
 echo "==========================================="
-cd ../mrfm
-echo "MRFM Outdated Packages"
-cat package.json | grep "version"
-npm outdated
-echo "==========================================="
-cd ../mrim
-echo "MRIM Outdated Packages"
-cat package.json | grep "version"
-npm outdated
-echo "==========================================="
 cd ../mrlm
 echo "MRLM Outdated Packages"
+cat package.json | grep "version"
+npm outdated
+echo "==========================================="
+cd ../rsrm
+echo "RSRM Outdated Packages"
+cat package.json | grep "version"
+npm outdated
+echo "==========================================="
+cd '../../Data Services/mrfm'
+echo "MRFM Outdated Packages"
 cat package.json | grep "version"
 npm outdated
 echo "==========================================="
@@ -60,11 +65,6 @@ npm outdated
 echo "==========================================="
 cd ../rlds
 echo "RLDS Outdated Packages"
-cat package.json | grep "version"
-npm outdated
-echo "==========================================="
-cd ../rsrm
-echo "RSRM Outdated Packages"
 cat package.json | grep "version"
 npm outdated
 echo "==========================================="

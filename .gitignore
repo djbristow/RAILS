@@ -21,6 +21,7 @@
 'Docker Based/SPAs/rsrm/dist/'
 'Docker Based/SPAs/rsrm/node_modules/'
 'Docker Based/SPAs/rsrm/.vscode/'
+node_modules/
 *.vscode/
 *.pdf
 *.aux
