@@ -2,9 +2,12 @@
 &copy; David Bristow, 2019-2023
 
 # Version
-* 1.0.0 - 6/7/2023
+* 1.0.1 - 6/7/2023
  
-IoT Services provide the mechanisms to move mqtt messages. The custom designed and developed micro-services are shown in the following table.
+IoT Services provide the mechanisms to move mqtt messages. The custom designed and developed micro-services are shown in the following table.  The IoT services are highlighted with the light green colored background in the following figure.
+
+![System Design](https://github.com/djbristow/RAILS/blob/master/Docker%20Based/IoT%20Services/IoT-ms.svg)
+
 
 |Name |Title                                  |Port |
 |-----|----------------------------------------------------------|-----|

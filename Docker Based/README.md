@@ -2,13 +2,13 @@
 &copy; David Bristow, 2019-2023
 
 # Version
-* 1.0.1 - 6/7/2023
+* 1.0.2 - 6/7/2023
  
 Docker based components are the partial realization of RAILS software model of an automated system to assist the model railroader achieve realism in the operation of a model railroad. These components are the micro-services that are conatinerized and typically run on a PC (Linux, Mac, or Windows) or Single Board Computer running Linux.
 
-There three groups of docker components: IoT Services, Data Services, and Single Page Applications(SPAs) as defined in the table below. All of the Docker components shown in the following figure are to the right of and include the MQTT Broker.
+The three groups of docker components are: IoT Services, Data Services, and Single Page Applications(SPAs) as defined in the table below. All the Docker based components are highlighted with the rose colored background in the following figure.
 
-![System Design](https://github.com/djbristow/RAILS/blob/master/sysdesign.svg)
+![System Design](https://github.com/djbristow/RAILS/blob/master/Docker%20Based/docker-based-ms.svg)
 
 |Name |Title                                  |Port |Version|Date     |
 |-----|----------------------------------------------------------|-----|-------|---------|
