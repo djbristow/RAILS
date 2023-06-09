@@ -24,11 +24,17 @@ For further information see http://kjcrr.org/rails
 **NOTE**: This software depends on other packages that may be licensed under different open source licenses.
 
 This repository is organized as follows:
+
 Docker Based
+
   IoT Services
+
   Data Services
+
   SPAs
+
 Documenation
+
 Microcontrollers
 
 
