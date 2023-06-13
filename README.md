@@ -2,9 +2,9 @@
 &copy; David Bristow, 2019-2023
 
 # Version
-* 2.6.4 - 6/4/2023
+* 3.0.0 - 6/10/2023
  
-RAILS is a software model and implemenation of an automated system to assist the model railroader achieve realism in the operation of a model railroad. The model then drives the development of software.
+RAILS is a software model and implementation of an automated system to assist the model railroader achieve realism in the operation of a model railroad. The model then drives the development of software.
 For further information see http://kjcrr.org/rails
 
 ## License
@@ -23,18 +23,14 @@ For further information see http://kjcrr.org/rails
 
 **NOTE**: This software depends on other packages that may be licensed under different open source licenses.
 
+# Repository
+
 This repository is organized as follows:
-
-Docker Based
-
-  IoT Services
-
-  Data Services
-
-  SPAs
-
-Documenation
-
-Microcontrollers
+* Docker Based - this directory and sub-directories contain microservices that are made into docker images.
+    * IoT Services - this directory contains microservices code to process MQTT messages.
+    * Data Services - this directory contains microservices code to handle data.
+    * SPAs - this directory contains microservices code to create single page applications providing users RAILS functions.
+ * Documentation - this directory and sub-directories contain TeX files that are compiled into PDF documents using LaTex
+ * Microcontrollers - this directory and sub-directories contain code and information for the construction of microcontrollers used to fulfilling RAILS subsystem roles.
 
 
