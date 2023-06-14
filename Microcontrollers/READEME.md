@@ -1,10 +1,10 @@
-# RFID Microcontrollers
+# Microcontrollers
 &copy; David Bristow, 2019-2023
 
 # Version
-* 1.0.1 - 6/14/2023
+* 1.0.0 - 6/12/2023
 
-This directory contains the RFID microcontrollers designs both software and hardware.
+This directory contains the microcontrollers employed as subsystems with RAILS interfacing with physical sensors and actuators used in a model railroad.
 
 ## License
 
@@ -22,7 +22,6 @@ This directory contains the RFID microcontrollers designs both software and hard
 
 
 # Directory
-This directory contains the following RFID Microntrollers:
- * WiFi-RFID - software for ESP8266 with a web interface to set paramters.
- * WiFi-RFID-MS - software for ESP8266 using params.h file to enter paramters at compile time.
+This directory contains teh following sensors and actuators:
 
+* RFID - a number of microcontollers that use RFID readers to publish RFID tags read from rolling stock
