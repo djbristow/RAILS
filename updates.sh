@@ -1,71 +1,98 @@
+#!/bin/bash
+
+check_and_update ()
+{
+    # Check for outdated packages
+    current_version=$(cat package.json | jq -r '.version' )
+    outdated_packages=$(npm outdated --json)
+    if [ "$outdated_packages" == "{}" ]; then
+        echo "All npm packages are up to date, current version $current_version"
+    else
+        npm update > /dev/null
+        # Update version of microservice in package.json
+        version_number=$(npm version patch)
+        echo "Version number updated from $current_version to $version_number"
+        # Update version in README.md
+        line_number=$(grep -n "## Version" README.md | cut -d ':' -f 1)
+        next_line_number=$((line_number + 1))
+        current_date=$(date +"%Y-%m-%d")
+        new_line="$version_number $current_date"
+        sed -i "${next_line_number}s/.*/$new_line/" README.md
+        # Update version in execution file
+        file_dir="$PWD"
+        if [[ "$file_dir" == *"SPAs"* ]]; then
+            file_name="./src/views/About.vue"
+        fi
+        if [[ "$file_dir" == *"Data Services"* ]]; then
+            file_name="./src/mongodbConnModule.js"
+        fi
+        if [[ "$file_dir" == *"IoT Services"* ]]; then
+            file_name="./src/apps.js"
+        fi
+        sed -i "s/$current_version/${version_number:1}/" $file_name
+        # Update version of each changed package
+        updated_packages=$(echo "$outdated_packages" | jq -r '. | keys[]')
+        while IFS= read -r package; do
+            version_number=$(npm show "$package" version)
+            npm install --save-exact "$package@$version_number"  > /dev/null
+            echo "Version number updated for $package to $version_number"
+        done <<< "$updated_packages"
+    fi
+}
 cd './Docker Based/IoT Services/ipls'
-echo "IPLS Outdated Packages"
-cat package.json | grep "version"
-npm outdated
+echo "IPLS Packages"
+check_and_update
 echo "==========================================="
 cd ../ipts
-echo "IPTS Outdated Packages"
-cat package.json | grep "version"
-npm outdated
+echo "IPTS Packages"
+check_and_update
 echo "==========================================="
 cd ../isbs
-echo "ISBS Outdated Packages"
-cat package.json | grep "version"
-npm outdated
+echo "ISBS Packages"
+check_and_update
 echo "==========================================="
 cd ../isms
-echo "ISMS Outdated Packages"
-cat package.json | grep "version"
-npm outdated
+echo "ISMS Packages"
+check_and_update
 echo "==========================================="
 cd ../isrs
-echo "ISRS Outdated Packages"
-cat package.json | grep "version"
-npm outdated
+echo "ISRS Packages"
+check_and_update
 echo "==========================================="
 cd ../ists
-echo "ISTS Outdated Packages"
-cat package.json | grep "version"
-npm outdated
+echo "ISTS Packages"
+check_and_update
 echo "==========================================="
 cd ../../SPAs/mrim
-echo "MRIM Outdated Packages"
-cat package.json | grep "version"
-npm outdated
+echo "MRIM Packages"
+check_and_update
 echo "==========================================="
 cd ../mppm
-echo "MPPM Outdated Packages"
-cat package.json | grep "version"
-npm outdated
+echo "MPPM Packages"
+check_and_update
 echo "==========================================="
 cd ../mrlm
-echo "MRLM Outdated Packages"
-cat package.json | grep "version"
-npm outdated
+echo "MRLM Packages"
+check_and_update
 echo "==========================================="
 cd ../rsrm
-echo "RSRM Outdated Packages"
-cat package.json | grep "version"
-npm outdated
+echo "RSRM Packages"
+check_and_update
 echo "==========================================="
 cd '../../Data Services/mrfm'
-echo "MRFM Outdated Packages"
-cat package.json | grep "version"
-npm outdated
+echo "MRFM Packages"
+check_and_update
 echo "==========================================="
 cd ../ppds
-echo "PPDS Outdated Packages"
-cat package.json | grep "version"
-npm outdated
+echo "PPDS Packages"
+check_and_update
 echo "==========================================="
 cd ../rids
-echo "RIDS Outdated Packages"
-cat package.json | grep "version"
-npm outdated
+echo "RIDS Packages"
+check_and_update
 echo "==========================================="
 cd ../rlds
-echo "RLDS Outdated Packages"
-cat package.json | grep "version"
-npm outdated
+echo "RLDS Packages"
+check_and_update
 echo "==========================================="
 

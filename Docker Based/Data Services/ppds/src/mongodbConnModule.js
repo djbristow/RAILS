@@ -12,7 +12,7 @@ module.exports.connect = function () {
 	db.on("error", console.error.bind(console, "connection error"));
 	db.once("open", function (callback) {
 		console.log("Connection Succeeded");
-        console.log("PPDS v2.1.5");
+        console.log("PPDS v2.1.6");
 		return db;
 	})
 }
