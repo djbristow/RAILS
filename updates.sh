@@ -27,7 +27,7 @@ check_and_update ()
             file_name="./src/mongodbConnModule.js"
         fi
         if [[ "$file_dir" == *"IoT Services"* ]]; then
-            file_name="./src/apps.js"
+            file_name="./src/app.js"
         fi
         sed -i "s/$current_version/${version_number:1}/" $file_name
         # Update version of each changed package
