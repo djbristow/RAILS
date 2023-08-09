@@ -27,7 +27,7 @@ export const useImagesStore = defineStore("images", {
     },
     async [ADD_NEW_IMAGE](newImage) {
       await RsService.addImg(newImage);
-      let response = await RsService.getDccByAddr(newImage.fileName);
+      let response = await RsService.getImgByFile(newImage.fileName);
       this.images.unshift(response.data);
     },
     async [DELETE_IMAGE](id) {
@@ -35,7 +35,7 @@ export const useImagesStore = defineStore("images", {
       this.images = this.images.filter((images) => images._id !== id);
     },
     async [UPDATE_IMAGE](image) {
-      await RsService.updateDImg(image);
+      await RsService.updateImg(image);
       this.images = this.images.filter((images) => images._id !== image._id);
       this.images.unshift(image);
     },

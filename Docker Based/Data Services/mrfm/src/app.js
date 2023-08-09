@@ -46,7 +46,7 @@ const init = async () => {
         let file = data.file;
         let path = file.path;
         let newPath = path.slice(path.indexOf("tmp") - 1, path.length);
-        fs.rename(
+        fs.copyFile(
           __dirname + newPath,
           __dirname + "/uploads/" + name,
           function (err) {
@@ -57,6 +57,7 @@ const init = async () => {
             }
           }
         );
+        
         return "File uploaded successfully";
       } else {
         return "No file uploaded";
@@ -64,7 +65,7 @@ const init = async () => {
     },
   });
   await server.start();
-  console.log("MRFM v2.0.7, Started")
+  console.log("MRFM v2.1.0, Started")
   console.log("MRFM running on %s", server.info.uri);
 };
 process.on("unhandledRejection", (err) => {

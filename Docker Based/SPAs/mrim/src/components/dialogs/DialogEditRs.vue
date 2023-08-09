@@ -82,6 +82,7 @@
 import { ref, onMounted } from "vue";
 import { useRSStore } from "@/stores/rs";
 import { format } from "date-fns";
+import { defineEmits } from "vue";
 
 const _id = ref("");
 const roadName = ref("");
@@ -149,6 +150,16 @@ const editRsUpdate = () => {
   });
   emit("closeEditRsDialog");
 };
+const formatDate = (unformatDate) => {
+  if (unformatDate === null || unformatDate === "") {
+    return "";
+  } else {
+    let pdate = new Date(unformatDate.toString().substring(0, 10));
+    let day = pdate.getDate() + 1;
+    pdate = pdate.setDate(day);
+    return format(pdate, "MMM d, yyyy");
+  }
+};
 onMounted(() => {
   _id.value = props.rollingstock._id;
   roadName.value = props.rollingstock.roadName;
@@ -157,24 +168,18 @@ onMounted(() => {
   aarCode.value = props.rollingstock.aarCode;
   description.value = props.rollingstock.description;
   numberBlt.value = props.rollingstock.numberBlt;
-  inSvcDate.value = format(
-    new Date(props.rollingstock.inSvcDate),
-    "MMM d, yyyy"
-  );
+  inSvcDate.value = formatDate(props.rollingstock.inSvcDate);
   insideLength.value = props.rollingstock.insideLength;
   insideHeight.value = props.rollingstock.insideHeight;
   insideWidth.value = props.rollingstock.insideWidth;
   loadTypes.value = props.rollingstock.loadTypes;
   capacity.value = props.rollingstock.capacity;
   bldr.value = props.rollingstock.bldr;
-  bltDate.value = format(new Date(props.rollingstock.bltDate), "MMM d, yyyy");
+  bltDate.value = formatDate(props.rollingstock.bltDate);
   notes.value = props.rollingstock.notes;
   ltWeight.value = props.rollingstock.ltWeight;
   loadLimit.value = props.rollingstock.loadLimit;
-  lastMaintDate.value = format(
-      new Date(props.rollingstock.lastMaintDate),
-      "MMM d, yyyy"
-    );
+  lastMaintDate.value = formatDate(props.rollingstock.lastMaintDate);
   locationNow.value = props.rollingstock.locationNow;
   homeLocation.value = props.rollingstock.homeLocation;
   rsStatus.value = props.rollingstock.rsStatus;

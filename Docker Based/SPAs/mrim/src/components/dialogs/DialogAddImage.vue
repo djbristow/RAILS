@@ -5,6 +5,7 @@
       <v-container>
         <v-text-field v-model="title" label="Title"></v-text-field>
         <v-file-input v-model="fileName" accept="txt" label="File input" @change="onFileChange"></v-file-input>
+        <v-text-field v-model="category" label="Category"></v-text-field>
         <v-textarea v-model="notes" label="Notes"></v-textarea>
       </v-container>
     </v-card-text>
@@ -26,6 +27,7 @@ import { useImagesStore } from "@/stores/images";
 
 const title = ref("");
 const fileName = ref([]);
+const category = ref("");
 const notes = ref("");
 const file = ref(null);
 const imageAddDataInvalid = ref(false);
@@ -36,7 +38,7 @@ const onFileChange = (e) => {
 }
 const addImage = () => {
   let formData = new FormData();
-  title.value = file.value.name
+  //title.value = file.value.name
   formData.append('file', file.value);
   axios.post('http://localhost:3030/uploadimg',
     formData,
@@ -51,6 +53,7 @@ const addImage = () => {
     imagesStore.ADD_NEW_IMAGE({
       title: title.value,
       fileName: file.value.name,
+      category: category.value,
       notes: notes.value,
     });
   }).catch(error => {

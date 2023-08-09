@@ -17,8 +17,8 @@
       <v-row dense>
         <v-text-field>Number Built: {{ rollingstock.numberBlt }}</v-text-field>
         <v-text-field>Builder: {{ rollingstock.bldr }}</v-text-field>
-        <v-text-field>Built Date: {{ rollingstock.bltDate }}</v-text-field>
-        <v-text-field>In Service Date: {{ rollingstock.inSvcDate }}</v-text-field>
+        <v-text-field>Built Date: {{ formatDate(rollingstock.bltDate) }}</v-text-field>
+        <v-text-field>In Service Date: {{ formatDate(rollingstock.inSvcDate) }}</v-text-field>
       </v-row>
       <v-row dense>
         <v-text-field>Inside Length: {{ rollingstock.insideLength }}</v-text-field>
@@ -33,7 +33,7 @@
         <v-text-field>Home Location: {{ rollingstock.homeLocation }}</v-text-field>
       </v-row>
       <v-row dense>
-        <v-text-field>Last Maintenance: {{ rollingstock.lastMaintDate }}</v-text-field>
+        <v-text-field>Last Maintenance: {{ formatDate(rollingstock.lastMaintDate) }}</v-text-field>
         <v-text-field>Status: {{ rollingstock.rsStatus }}</v-text-field>
       </v-row>
       <v-card-subtitle>Model Details</v-card-subtitle>
@@ -52,15 +52,24 @@
 </template>
 <script setup>
 import { ref, onMounted } from "vue";
-import { useRSStore } from "@/stores/rs";
+import { format } from "date-fns";
 const emit = defineEmits(['closeViewRsDialog']);
-const rsStore = useRSStore();
 const props = defineProps({
   rollingstock: {
     type: Object,
     required: true,
   },
 });
+const formatDate = (unformatDate) => {
+  if (unformatDate === null || unformatDate === "") {
+    return "";
+  } else {
+    let pdate = new Date(unformatDate.toString().substring(0, 10));
+    let day = pdate.getDate() + 1;
+    pdate = pdate.setDate(day);
+    return format(pdate, "MMM d, yyyy");
+  }
+};
 const imageServer = ref("");
 onMounted(() =>{
   imageServer.value = 'http://' + import.meta.env.VITE_MRFM_TCP_ADDR +':'+ import.meta.env.VITE_MRFM_TCP_PORT +'/'+ props.rollingstock.imageID;
