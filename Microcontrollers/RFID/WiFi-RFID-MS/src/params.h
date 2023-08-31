@@ -1,4 +1,4 @@
-#define MQTTSERVER "192.168.0.80";
+#define MQTTSERVER "192.168.4.39";
 #define MQTTPORT 1883;
 #define MQTTID "RfidRdr01"
 #define NUMBERREADERS 1;

@@ -11,6 +11,13 @@
 \usepackage[colorlinks=true, linkcolor=gray]{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
+\usepackage{tabularx}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+\setcounter{secnumdepth}{3}
 \definecolor{MyBlue}{rgb}{0.03, 0.27, 0.49}
 \chapterfont{\color{MyBlue}}
 \sectionfont{\color{MyBlue}}
@@ -33,9 +40,9 @@
     \vspace*{\baselineskip}
 	{\small David Bristow}
 
-	{\small Version 1.0.1}
+	{\small Version 1.0.2}
 	
-	{\small Jun 8, 2023}
+	{\small Aug 11, 2023}
 	\vspace*{3\baselineskip}
 \end{titlepage}
 %%========================================================================
@@ -46,7 +53,7 @@
 \input{usecase}
 \input{microservicesdesign}
 \input{IoTdesign}
-
+\input{data-design}
 
 %%========================================================================
 \backmatter

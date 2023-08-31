@@ -1,0 +1,236 @@
+\chapter{Data Design}
+MongoDB is a popular NoSQL database that is widely used for various types of applications. A non-SQL database, often referred to as a NoSQL (which stands for "not only SQL") database, is a type of database management system that provides an alternative approach to storing and retrieving data compared to traditional relational databases that use \ac{SQL}. NoSQL databases are designed to handle large volumes of unstructured or semi-structured data, and they offer more flexibility and scalability for certain types of applications.\vspace{5mm} \\
+MongoDB was choosen for the data repository for \ac{RAILS} for the following factors:
+\begin{itemize}
+\item  Model railroad systems often involve a variety of data types and relationships. NoSQL databases, especially document-oriented ones like MongoDB, allow you to store data in a more flexible and schema-less manner. This is beneficial when dealing with diverse information such as train schedules, routes, stations, user preferences, and more.
+\item  As the model railroad system expands, it might need to accommodate a larger volume of data and potentially more users. NoSQL databases are designed to scale out horizontally, making it easier to handle increased workloads and data growth.
+\item  Model railroad systems often involve real-time operations, such as tracking train locations, monitoring schedules, and responding to user interactions. NoSQL databases are optimized for low-latency operations, allowing you to retrieve and update data quickly.
+\item  MongoDB offers geospatial capabilities. This can be highly beneficial for a model railroad system, as you could store and query data related to train positions, routes, and geographic locations.
+\item  Model railroad systems may include various types of data, some of which might not fit neatly into a structured format. NoSQL databases excel at handling semi-structured and unstructured data, allowing you to store and retrieve information like images, sensor data, and user-generated content.
+\item  NoSQL databases often use formats like JSON, which are more intuitive and familiar to developers. This can streamline development and reduce the need for complex data transformations.
+\item  Model railroad systems might undergo changes in data requirements as the system evolves or new features are added. NoSQL databases make it easier to adapt to these changes without requiring a rigid schema.
+\item  MongoDB has a wide range of libraries, drivers, and tools available, which can facilitate development and integration with other components of your system.
+\item  If a developer encounters challenges or has questions while developing the model railroad system, NoSQL databases often have active communities and extensive documentation that can provide assistance.
+\end{itemize}
+MongoDB stores data in a flexible, semi-structured document format, using JSON.
+\section{Document Collections}
+MongoDB stores data in a flexible, semi-structured document format, using JSON. \ac{RAILS} organizes the data in three\footnote{The current design has only three but as additional functionality is added additional groups may be added} groupings, which correspond to the three data microservices; \ac{RIDS}, \ac{PPDS} and \ac{RLDS}.
+\subsection{Railroad Inventory}
+\subsubsection{aarcodes}\label{aarcode}
+An \ac{AAR} code refers to a classification code used by the \ac{AAR} to identify different types of equipment and rolling stock used in the North American railway industry. The AAR codes are a standardized way of categorizing and labeling various railway vehicles, making it easier to identify and track equipment across different railways and organizations.
+\begin{table}[H]
+    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+    \hline
+        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
+        aarCode & String & A classification code used by the \ac{AAR} to identify different types of rolling stock & Yes \\ \hline
+        rollingstockType & String & & No\\ \hline
+        description & String & & No \\ \hline
+    \end{tabular}
+    \caption{\label{aarcode-table}AarCodes Collection Fields Table}
+    \end{table}
+\subsubsection{dccs}
+\ac{DCC} is a system used in model railroading to control and operate model trains and their accessories. It is a standardized method of transmitting control signals digitally to locomotives and other rollingstock. \ac{DCC} allows for more precise and independent control of multiple trains on the same track.
+\begin{table}[H]
+    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+    \hline
+        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
+        locomotiveID & ObjecctId &  & Yes \\ \hline
+        mfg & String & & No\\ \hline
+        family & String & & No \\ \hline
+        model &  String & & No \\ \hline
+        address & String & A \ac{DCC} address is a unique identifier assigned to each locomotive, which is a numerical or digital label that distinguishes one rollingstock from another in the \ac{DCC} system. \ac{DCC} addresses range from 1 to 9999. & No \\ \hline
+    \end{tabular}
+    \caption{\label{dcc-table}\ac{DCC}s Collection Fields Table}
+\end{table}
+\subsubsection{images}
+\begin{table}[H]
+    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+    \hline
+        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
+        fileName & String &  & Yes \\ \hline
+        title & String & & No\\ \hline
+        notes & String & & No \\ \hline
+        category &  String & & No \\ \hline
+    \end{tabular}
+    \caption{\label{image-table}Images Collection Fields Table}
+    \end{table}
+\subsubsection{industries}
+\begin{table}[H]
+    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+    \hline
+        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
+        shortName & String &  & Yes \\ \hline
+        longName & String & & No\\ \hline
+        industryType & String & & No \\ \hline
+        industryLocation &  String & & No \\ \hline
+    \end{tabular}
+    \caption{\label{industry-table}Industries Collection Fields Table}
+    \end{table}
+\subsubsection{rollingstocks}
+Rolling stock refers to the vehicles that move on a railway track. These vehicles are an essential part of any railway system and include various types of vehicles used for transporting goods and passengers. Rolling stock can be broadly categorized into two main types: passenger rolling stock and freight rolling stock. Locomotives are considered a type of rolling stock in the context of railway transportation.
+\begin{table}[H]
+    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+    \hline
+        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
+	roadName & String & The road name also reffered to as reporting marks are a set of letters used to identify the owner or operator of a railcar or locomotive. & Yes \\ \hline
+	roadNumber & String & The road number is an identifier for a railcar or a locomotive and is numerical. & Yes \\ \hline
+	color & String &  & No \\ \hline
+	aarCode & String & See paragraph \ref{aarcode}  & No \\ \hline
+	description & String &  & No \\ \hline
+	numberBlt & String &  & No \\ \hline
+	inSvcDate & Date &  & No \\ \hline
+	insideLength & String &  & No \\ \hline
+	insideHeight & String &  & No \\ \hline
+	insideWidth & String &  & No \\ \hline
+	loadTypes & String &  & No \\ \hline
+	capacity & String & Capacity refers to the maximum amount of cargo, typically measured in weight or volume, that it can safely and efficiently transport. & No \\ \hline
+	bldr & String &  & No \\ \hline
+	bltDate & Date &  & No \\ \hline
+	notes & String &  & No \\ \hline
+	ltWeight & String &  & No \\ \hline
+	loadLimit & String &  & No \\ \hline
+	lastMaintDate & Date &  & No \\ \hline
+	locationNow & String &  & No \\ \hline
+	homeLocation & String &  & No \\ \hline
+	rsStatus & String &  & No \\ \hline
+	imageID & String &  & No \\ \hline
+	modelWeight & String & The mass of the model rollingstock in either grams or ounces. & No \\ \hline
+	modelLength & String & The distance measure between the middle of the front coupler knuckle to the middle of the rear coupler knuckle of the model rollingstock. & No \\ \hline
+	rfid & String & The 10 character identifier emitted by the RFID tag attached to the model rollingstock. & No \\ \hline
+    \end{tabular}
+    \caption{\label{rollingstock-table}Rollingstock Collection Fields Table}
+    \end{table}
+\subsubsection{structures}
+\begin{table}[H]
+    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+    \hline
+        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
+	title & String &  & Yes \\ \hline
+	structureUse & String &  & Yes \\ \hline
+	description & String &  & No \\ \hline
+	owner & String &  & No \\ \hline
+	location & String &  & No \\ \hline
+	construction & String &  & No \\ \hline
+	builtDate & String &  & No \\ \hline
+	size & String &  & No \\ \hline
+	image & String &  & No \\ \hline
+	isIndustrial & Boolean &  & No \\ \hline
+	rawMaterials & String &  & No \\ \hline
+	rMCapacity & String &  & No \\ \hline
+	conRate & String &  & No \\ \hline
+	priority & String &  & No \\ \hline
+	aarCodeIn & String &  & No \\ \hline
+	product & String &  & No \\ \hline
+	productCap & String &  & No \\ \hline
+	prodRate & String &  & No \\ \hline
+	aarCodeOut & String &  & No \\ \hline
+	unloadDuration & String &  & No \\ \hline
+	loadDuration & String &  & No \\ \hline
+	sidingCap & String &  & No \\ \hline
+	notes & String &  & No \\ \hline
+    \end{tabular}
+    \caption{\label{structure-table}Structures Collection Fields Table}
+    \end{table}
+\subsection{Railroad Projects and Purchases}
+\subsubsection{mrcompanies}
+\begin{table}[H]
+    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+    \hline
+        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
+	name & String &  & Yes \\ \hline
+	type & String &  & Yes \\ \hline
+	website & String &  & No \\ \hline
+	email & String &  & No \\ \hline
+	phone & String &  & No \\ \hline
+	address & String &  & No \\ \hline
+	notes & String &  & No \\ \hline
+    \end{tabular}
+    \caption{\label{mrcompany-table}MrCompanies Collection Fields Table}
+    \end{table}
+\subsubsection{projects}
+\begin{table}[H]
+    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+    \hline
+        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
+	title & String &  & Yes \\ \hline
+	type & String &  & Yes \\ \hline
+	description & String &  & No \\ \hline
+	startdate & Date &  & No \\ \hline
+	enddate & Date &  & No \\ \hline
+	roadname & String &  & No \\ \hline
+	roadnumbers & String &  & No \\ \hline
+	notes & String &  & No \\ \hline
+    \end{tabular}
+    \caption{\label{project-table}Projects Collection Fields Table}
+    \end{table}
+\subsubsection{purchases}
+\begin{table}[H]
+    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+    \hline
+        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
+	num & String &  & No \\ \hline
+	date & String &  & No \\ \hline
+	store & String &  & Yes \\ \hline
+	item & String &  & No \\ \hline
+	desciption & String &  & Yes \\ \hline
+	manufacturer & String &  & No \\ \hline
+	unitcost & Number &  & No \\ \hline
+	qty & Number &  & No \\ \hline
+	project & String &  & No \\ \hline
+	roadname & String &  & No \\ \hline
+	roadnumbers & String &  & No \\ \hline
+	notes & String &  & No \\ \hline
+    \end{tabular}
+    \caption{\label{structure-table}Projects Collection Fields Table}
+    \end{table}
+\subsection{Railroad Layout}
+\subsubsection{micros}
+\begin{table}[H]
+    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+    \hline
+        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
+	microID & String &  & Yes \\ \hline
+	microIP & String &  & Yes \\ \hline
+	et & String &  & No \\ \hline
+	purpose & String &  & No \\ \hline
+	status & String &  & No \\ \hline
+	sensorLoc & String &  & No \\ \hline
+    \end{tabular}
+    \caption{\label{micro-table}Micros Collection Fields Table}
+    \end{table}
+
+\subsubsection{tplights}
+\begin{table}[H]
+    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+    \hline
+        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
+	id & String &  & Yes \\ \hline
+	tplNum & String &  & Yes \\ \hline
+	controller & String &  & Yes \\ \hline
+	panelName & String &  & No \\ \hline
+	panelNum & String &  & No \\ \hline
+    \end{tabular}
+    \caption{\label{tplight-table}TPLights Collection Fields Table}
+    \end{table}
+
+\subsubsection{turnouts}
+\begin{table}[H]
+    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+    \hline
+        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
+	toID & String &  & Yes \\ \hline	
+	toNum & String &  & Yes \\ \hline	
+	controller & String &  & Yes \\ \hline	
+	state & String &  & Yes \\ \hline
+	type & String &  & No \\ \hline	
+	lock & String &  & No \\ \hline	
+	notes & String &  & No \\ \hline	
+	lastUpdate & String &  & No \\ \hline	
+	toLoc & String &  & No \\ \hline
+    \end{tabular}
+    \caption{\label{turnout-table}Turnouts Collection Fields Table}
+    \end{table}
+
+
+
+

@@ -10,11 +10,11 @@ Table \ref{iot-table} identifies functions excuted by microcontrollers and the \
     \hline
         \textbf{Micro Function} & \textbf{Pub/Sub} & \textbf{Topic} & \textbf{Message} \\ \hline
         RFID Reader & Pub & sensors/rfid & RFID \\ \hline
-        Turnout Contacts & Pub & sensors/toc & Turnout\\ \hline
-        Turnout Panel Push Button & Pub & sensors/pb & \\ \hline
+        Turnout Contacts & Pub & sensors/toc & Turnout Position\\ \hline
+        Turnout Panel Push Button & Pub & sensors/pb & TP Button \\ \hline
         Heartbeat & Pub & micros & Micro Info\\ \hline
-        Turnout & Sub & acts/to/cntrlr id &  \\ \hline
-        Turnout Panel Light & Sub & acts/tpl/cntrlr id &\\ \hline
+        Turnout & Sub & acts/to/cntrlr id &  Turnout Cmd\\ \hline
+        Turnout Panel Light & Sub & acts/tpl/cntrlr id & TP Light Cmd\\ \hline
         Micro Info & Pub & micros & Micro Info\\ \hline
     \end{tabular}
     \caption{\label{iot-table}IoT Micro Function Table}
@@ -32,15 +32,15 @@ Figure \ref{fig:iotdesign} depicts the flow of \ac{MQTT} messages through the \a
 
 \section{Message Definitions}
 \begin{itemize}
-\item \ac{RFID} message format: \{“et”:“epoch time",”sensor”:”sensor id“,”rfid”:”rfid tag value“\}
+\item \textbf {\ac{RFID}} message format: \{“et”:“epoch time",”sensor”:”sensor id“,”rfid”:”rfid tag value“\}
 \begin{itemize}
 \item example \{"et":"1590463450","sensor":"rfidRdr01","reader":"1","rfid":"1C0044CF23"\}
 \end{itemize}
-\item\{“et”:”epoch time“,”cntrlr”:”turnout controller id“,”to”:”turnout number“,”state”:”THROWN|CLOSED|ERROR“\}
-\item\{“et”:”epoch time“,”cntrlr”:”turnout panel controller id“,”pb”:”push button number“\} 
-\item\{“cntrlr”:”turnout controller id“,”to”:”turnout number“,”cmd”:”THROW|CLOSE|STATUS“\}
-\item\{“cntrlr”:”turnout panel controller id“,”tpl”:”light number“,”color”:”RED|GREEN|BLUE“,”type”:”BUTTON”\}
-\item Micro Info message format: \{“et”:”epoch time“,”sensor”:”sensor id“,"msgType":"initial|heartbeat","ip":"Address of Micro"\}
+\item \textbf {Turnout Position} message format: \{“et”:”epoch time“,”cntrlr”:”turnout controller id“, \\”to”:”turnout number“,”state”:”THROWN|CLOSED|ERROR“\}
+\item \textbf {Turnout Panel Button} message format: \{“et”:”epoch time“,”cntrlr”:”tp controller id“, \\”pb”:”push button number“\} 
+\item \textbf {Turnout Command} message format: \{“cntrlr”:”turnout controller id“,”to”:”turnout number“, \\”cmd”:”THROW|CLOSE|STATUS“\}
+\item \textbf {Turnout Panel Light Command} message format: \{“cntrlr”:”turnout panel controller id“, \\”tpl”:”light number“,”color”:”RED|GREEN|BLUE“,”type”:”BUTTON”\}
+\item \textbf {Micro Info} message format: \{“et”:”epoch time“,”sensor”:”sensor id“, \\"msgType":"initial|heartbeat","ip":"Address of Micro"\}
 \begin{itemize}
 \item 'heartbeat' example: \{"et":"1590462747","sensor":"rfidRdr01","msgType":"heartbeat"\} 
 \item 'initial' example: \{"et":"1590462747","sensor":"rfidRdr01","msgType":"initial","ip":"192.168.0.19"\}
