@@ -106,7 +106,7 @@ app.get("/struct_title/:id", async (req, res) => {
   res.send(structure);
 });
 app.post("/add_struct", async (req, res) => {
-console.log(req.body)
+  console.log(req.body);
   await Structure.create({
     title: req.body.title,
     structureUse: req.body.structureUse,
@@ -271,24 +271,13 @@ app.get("/rslistall", async (req, res) => {
   });
   res.send(rollingstocks);
 });
-/* app.get("/rslist", (req, res) => {
-  Rollingstock.find(
-    {},
-    "roadName roadNumber color aarCode description",
-    function (error, rollingstocks) {
-      if (error) {
-        console.error(error);
-      }
-      res.send({
-        rollingstocks: rollingstocks,
-      });
-    }
-  ).sort({
-    roadName: 1,
-    roadNumber: 1,
-  });
+app.get("/rsopslist", async (req, res) => {
+  const rollingstocks = await Rollingstock.find(
+    {},"roadName roadNumber color aarCode description");
+    console.log(rollingstocks.length);
+  res.send(rollingstocks);
 });
-app.get("/rslistroadnames", (req, res) => {
+/*app.get("/rslistroadnames", (req, res) => {
   Rollingstock.distinct("roadName", function (error, roadnames) {
     if (error) {
       console.error(error);
@@ -338,16 +327,25 @@ app.get("/rslocomotives", (req, res) => {
     roadNumber: 1,
   });
 }); */
+app.get("/resetstatusoperational", async (req, res) => {
+  const rollingstocks = await Rollingstock.find({
+    rsStatus: { $ne: "Operational" },
+  });
+  for (let i = 0; i < rollingstocks.length; i++) {
+    rollingstocks[i].rsStatus = "Operational";
+    await rollingstocks[i].save();
+  }
+  res.send();
+});
 app.get("/rs/:id", async (req, res) => {
   const rs = await Rollingstock.findById(req.params.id);
   res.send(rs);
 });
 app.get("/rs_rfid/:id", async (req, res) => {
-  const rs = await Rollingstock.findOne(
-    {
-      rfid: req.params.id,
-    })
-      res.send(rs);
+  const rs = await Rollingstock.findOne({
+    rfid: req.params.id,
+  });
+  res.send(rs);
 });
 app.get("/rs_road/:id", async (req, res) => {
   let rn = req.params.id.split("-");
