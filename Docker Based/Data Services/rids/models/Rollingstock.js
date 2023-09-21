@@ -70,7 +70,17 @@ var RollingstockSchema = new Schema({
     homeLocation: {
         type: String
     },
+    // operational elements
     rsStatus: {
+        type: String
+    },
+    issue: {
+        type: String
+    },
+    duration: {
+        type: Number
+    },
+    severity: {
         type: String
     },
     // model elements

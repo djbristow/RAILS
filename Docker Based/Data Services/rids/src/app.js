@@ -273,7 +273,7 @@ app.get("/rslistall", async (req, res) => {
 });
 app.get("/rsopslist", async (req, res) => {
   const rollingstocks = await Rollingstock.find(
-    {},"roadName roadNumber color aarCode description");
+    {},"roadName roadNumber color aarCode issue duration severity rsStatus");
     console.log(rollingstocks.length);
   res.send(rollingstocks);
 });
