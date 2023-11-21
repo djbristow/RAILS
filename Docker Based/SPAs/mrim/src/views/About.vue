@@ -1,7 +1,7 @@
 <template>
   <div class="xx">
     <h1>About Model Railroad Inventory Manager</h1>
-    <h3>Version 4.1.13</h3>
+    <h3>Version 4.2.0</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) MRIM
       Application is one of several single page applications (SPAs) in the RAILS
@@ -13,7 +13,6 @@
       elements as well as the ability to export and import CSV files.
     </p>
     <p>The user guide is available at: tbd</p>
-    <p>Waiting for Vuetify 3.4 to format and paginate tables</p>
     <br />
     <hr />
     <p>The database has the following number of documents:</p>

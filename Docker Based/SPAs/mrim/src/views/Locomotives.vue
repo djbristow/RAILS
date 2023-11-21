@@ -1,31 +1,27 @@
 <template>
   <v-app>
-    <div class="xx">
-      <h1>Inventory of Locomotives</h1>
-      <v-table density="compact" fixed-header height="800px">
-        <thead>
-          <tr>
-            <th class="text-left">Road Name</th>
-            <th class="text-left">Road Number</th>
-            <th class="text-left">AAR</th>
-            <th class="text-left">Description</th>
-            <th class="text-left">Color</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in rsStore.LOCOMOTIVE_LIST" :key="item.id">
-            <td>{{ item.roadName }}</td>
-            <td>{{ item.roadNumber }}</td>
-            <td>{{ item.aarCode }}</td>
-            <td>{{ item.description }}</td>
-            <td>{{ item.color }}</td>
-          </tr>
-        </tbody>
-      </v-table>
-    </div>
+    <v-container>
+      <v-card>
+        <v-card-title>Inventory of Locomotives</v-card-title>
+        <v-data-table
+          :headers="headers"
+          :items="rsStore.LOCOMOTIVE_LIST"
+          item-key="item.id"
+          density="compact"
+        >
+        </v-data-table>
+      </v-card>
+    </v-container>
   </v-app>
 </template>
 <script setup>
 import { useRSStore } from "@/stores/rs";
 const rsStore = useRSStore();
+const headers = [
+  { title: "Road Name", key: "roadName" },
+  { title: "Road Number", key: "roadNumber" },
+  { title: "AAR", key: "aarCode" },
+  { title: "Description", key: "description" },
+  { title: "Color", key: "color" },
+];
 </script>

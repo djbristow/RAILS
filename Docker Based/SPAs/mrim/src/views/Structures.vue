@@ -1,55 +1,62 @@
 <template>
-  <div class="xx">
-    <h1>Inventory of Structures</h1>
-    <v-btn @click="addStructure()" width="200">Add Structure</v-btn>
-    <v-table density="compact" fixed-header height="800px">
-      <thead>
-        <tr>
-          <th class="text-left">Title</th>
-          <th class="text-left">Use</th>
-          <th class="text-left">Owner</th>
-          <th class="text-left">Location</th>
-          <th class="text-left">Year Built</th>
-          <th class="text-left">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in structuresStore.structures" :key="item.id">
-          <td>{{ item.title }}</td>
-          <td>{{ item.structureUse }}</td>
-          <td>{{ item.owner }}</td>
-          <td>{{ item.location }}</td>
-          <td>{{ item.builtDate }}</td>
-          <td>
+  <v-app>
+    <v-container>
+      <v-card>
+        <v-card-title>Structures</v-card-title>
+        <v-card-actions>
+          <v-btn @click="addStructure()" width="200">Add Structure</v-btn>
+        </v-card-actions>
+        <v-data-table
+          :headers="headers"
+          :items="structuresStore.structures"
+          item-key="item.id"
+          density="compact"
+        >
+          <template v-slot:item.actions="{ item }">
             <v-icon color="blue darken-1" @click="editStructure(item)">
               mdi-pencil
             </v-icon>
-            <v-icon color="red darken-1" @click="deleteStructure(item)">mdi-delete</v-icon>
-            <div v-if="item.image">
-              <v-icon color="green darken-1" @click="viewStructure(item)">mdi-eye</v-icon>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </v-table>
-    <v-dialog v-model="editStructureDialog">
-      <dialog-edit-structure :structure="editableStructure" @closeEditStructureDialog="editStructureDialog = false" />
-    </v-dialog>
-    <v-dialog v-model="deleteStructureDialog">
-      <dialog-delete-structure :structure="editableStructure" @closeDeleteStructureDialog="deleteStructureDialog = false" />
-    </v-dialog>
-    <v-dialog v-model="addStructureDialog">
-      <dialog-add-structure @closeAddStructureDialog="addStructureDialog = false" />
-    </v-dialog>
-    <v-dialog v-model="viewStructureDialog">
-      <dialog-view-structure :structure="editableStructure" @closeViewStructureDialog="viewStructureDialog = false" />
-    </v-dialog>
-    <hr />
-  </div>
+            <v-icon color="red darken-1" @click="deleteStructure(item)"
+              >mdi-delete</v-icon
+            >
+            <v-icon
+              v-if="item.image"
+              color="green darken-1"
+              @click="viewStructure(item)"
+              >mdi-eye</v-icon
+            >
+          </template>
+        </v-data-table>
+        <v-dialog v-model="editStructureDialog">
+          <dialog-edit-structure
+            :structure="editableStructure"
+            @closeEditStructureDialog="editStructureDialog = false"
+          />
+        </v-dialog>
+        <v-dialog v-model="deleteStructureDialog">
+          <dialog-delete-structure
+            :structure="editableStructure"
+            @closeDeleteStructureDialog="deleteStructureDialog = false"
+          />
+        </v-dialog>
+        <v-dialog v-model="addStructureDialog">
+          <dialog-add-structure
+            @closeAddStructureDialog="addStructureDialog = false"
+          />
+        </v-dialog>
+        <v-dialog v-model="viewStructureDialog">
+          <dialog-view-structure
+            :structure="editableStructure"
+            @closeViewStructureDialog="viewStructureDialog = false"
+          />
+        </v-dialog>
+      </v-card>
+    </v-container>
+  </v-app>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 import DialogAddStructure from "@/components/dialogs/DialogAddStructure.vue";
 import DialogDeleteStructure from "@/components/dialogs/DialogDeleteStructure.vue";
 import DialogEditStructure from "@/components/dialogs/DialogEditStructure.vue";
@@ -62,6 +69,15 @@ const deleteStructureDialog = ref(false);
 const addStructureDialog = ref(false);
 const editableStructure = ref(null);
 const viewStructureDialog = ref(false);
+const headers = [
+  { title: "Title", key: "title" },
+  { title: "Use", key: "structureUse" },
+  { title: "Owner", key: "owner" },
+  { title: "Location", key: "location" },
+  { title: "Year Built", key: "builtDate" },
+  { title: "Actions", key: "actions", sortable: false },
+];
+
 const addStructure = () => {
   addStructureDialog.value = true;
 };
