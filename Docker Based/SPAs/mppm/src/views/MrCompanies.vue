@@ -1,51 +1,46 @@
 <template>
-  <div class="xx">
-    <h1>Model Railroad Companies</h1>
-    <v-btn @click="addMrCompany()" width="200">Add MR Companies</v-btn>
-    <v-table density="compact" fixed-header height="800px">
-      <thead>
-        <tr>
-          <th class="text-left">Name</th>
-          <th class="text-left">Type</th>
-          <th class="text-left">Website</th>
-          <th class="text-left">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in mrcosStore.mrcos" :key="item.id">
-          <td>{{ item.name }}</td>
-          <td>{{ item.type }}</td>
-          <td>{{ item.website }}</td>
-          <td>
+  <v-app>
+    <v-container>
+      <v-card>
+        <v-card-title>Model Railroad Companies</v-card-title>
+        <v-card-actions>
+          <v-btn @click="addMrCompany()" width="200">Add MR Companies</v-btn>
+        </v-card-actions>
+        <v-data-table
+          :headers="headers"
+          :items="mrcosStore.mrcos"
+          item-key="item.id"
+          density="compact"
+        >
+          <template v-slot:item.actions="{ item }">
             <v-icon color="blue darken-1" @click="editMrCompany(item)">
               mdi-pencil
             </v-icon>
             <v-icon color="red darken-1" @click="deleteMrCompany(item)"
               >mdi-delete</v-icon
             >
-          </td>
-        </tr>
-      </tbody>
-      <v-dialog v-model="editMrCompanyDialog">
-        <dialog-edit-mr-company
-          :mrco="editableMrCompany"
-          @closeEditMrCompanyDialog="editMrCompanyDialog = false"
-        />
-      </v-dialog>
-      <v-dialog v-model="deleteMrCompanyDialog">
-        <dialog-delete-mr-company
-          :mrco="editableMrCompany"
-          @closeDeleteMrCompanyDialog="deleteMrCompanyDialog = false"
-        />
-      </v-dialog>
-      <v-dialog v-model="addMrCompanyDialog">
-        <dialog-add-mr-company
-          @closeAddMrCompanyDialog="addMrCompanyDialog = false"
-        />
-      </v-dialog>
-    </v-table>
-    <br />
-  </div>
+          </template>
+        </v-data-table>
+        <v-dialog v-model="editMrCompanyDialog">
+          <dialog-edit-mr-company
+            :mrco="editableMrCompany"
+            @closeEditMrCompanyDialog="editMrCompanyDialog = false"
+          />
+        </v-dialog>
+        <v-dialog v-model="deleteMrCompanyDialog">
+          <dialog-delete-mr-company
+            :mrco="editableMrCompany"
+            @closeDeleteMrCompanyDialog="deleteMrCompanyDialog = false"
+          />
+        </v-dialog>
+        <v-dialog v-model="addMrCompanyDialog">
+          <dialog-add-mr-company
+            @closeAddMrCompanyDialog="addMrCompanyDialog = false"
+          />
+        </v-dialog>
+      </v-card>
+    </v-container>
+  </v-app>
 </template>
 
 <script setup>
@@ -60,6 +55,13 @@ const editMrCompanyDialog = ref(false);
 const deleteMrCompanyDialog = ref(false);
 const addMrCompanyDialog = ref(false);
 const editableMrCompany = ref(null);
+const headers = [
+  { title: "Name", key: "name" },
+  { title: "Type", key: "type" },
+  { title: "Website", key: "website" },
+  { title: "Actions", key: "actions", sortable: false },
+];
+
 const addMrCompany = () => {
   addMrCompanyDialog.value = true;
 };
