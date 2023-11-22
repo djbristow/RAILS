@@ -1,57 +1,60 @@
 <template>
-    <div class="xx">
-        <h1>Micro Controllers</h1>
-        <v-btn @click="addMicroContlr()" width="200">Add Micro Controller</v-btn>
-        <v-table density="compact">
-            <thead>
-                <tr>
-                    <th class="text-left">Name</th>
-                    <th class="text-left">IP</th>
-                    <th class="text-left">Purpose</th>
-                    <th class="text-left">Last Update</th>
-                    <th class="text-left">Status</th>
-                    <th class="text-left">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in microsStore.micros" :key="item.id">
-                    <td>{{ item.microID }}</td>
-                    <td>{{ item.microIP }}</td>
-                    <td>{{ item.purpose }}</td>
-                    <td>{{ formatDate(item.et) }}</td>
-                    <td>
-                        <div v-if="item.status === 'Up'">
-                            <v-icon color="green">mdi-server</v-icon>
-                        </div>
-                        <div v-else-if="item.status === 'Down'">
-                            <v-icon color="red">mdi-server </v-icon>
-                        </div>
-                        <div v-else>
-                            <v-icon color="yellow">mdi-server </v-icon>
-                        </div>
-                    </td>
-                    <td>
-                        <v-icon color="blue darken-1" @click="editMicroContlr(item)">
-                            mdi-pencil
-                        </v-icon>
-                        <v-icon color="red darken-1" @click="deleteMicroContlr(item)">mdi-delete</v-icon>
-                    </td>
-                </tr>
-            </tbody>
-            <v-dialog v-model="editMicroContlrDialog">
-                <dialog-edit-micro-contlr :micro="editableMicroContlr"
-                    @closeEditMicroContlrDialog="editMicroContlrDialog = false" />
-            </v-dialog>
-            <v-dialog v-model="deleteMicroContlrDialog">
-                <dialog-delete-micro-contlr :micro="editableMicroContlr"
-                    @closeDeleteMicroContlrDialog="deleteMicroContlrDialog = false" />
-            </v-dialog>
-            <v-dialog v-model="addMicroContlrDialog">
-                <dialog-add-micro-contlr @closeAddMicroContlrDialog="addMicroContlrDialog = false" />
-            </v-dialog>
-        </v-table>
-        <br />
-    </div>
+  <v-app>
+    <v-container>
+      <v-card>
+        <v-card-title>Micro Controllers</v-card-title>
+        <v-card-actions>
+          <v-btn @click="addMicroContlr()" width="200"
+            >Add Micro Controller</v-btn
+          >
+        </v-card-actions>
+        <v-data-table
+          :headers="headers"
+          :items="microsStore.micros"
+          item-key="item.id"
+          density="compact"
+        >
+          <template v-slot:item.et="{ item }">
+            {{ formatDate(item.et) }}
+          </template>
+          <template v-slot:item.status="{ item }">
+            <v-icon v-if="item.status === 'Up'" color="green"
+              >mdi-server</v-icon
+            >
+            <v-icon v-else-if="item.status === 'Down'" color="red"
+              >mdi-server
+            </v-icon>
+            <v-icon v-else color="yellow">mdi-server </v-icon>
+          </template>
+          <template v-slot:item.actions="{ item }">
+            <v-icon color="blue darken-1" @click="editMicroContlr(item)">
+              mdi-pencil
+            </v-icon>
+            <v-icon color="red darken-1" @click="deleteMicroContlr(item)"
+              >mdi-delete</v-icon
+            >
+          </template>
+        </v-data-table>
+        <v-dialog v-model="editMicroContlrDialog">
+          <dialog-edit-micro-contlr
+            :micro="editableMicroContlr"
+            @closeEditMicroContlrDialog="editMicroContlrDialog = false"
+          />
+        </v-dialog>
+        <v-dialog v-model="deleteMicroContlrDialog">
+          <dialog-delete-micro-contlr
+            :micro="editableMicroContlr"
+            @closeDeleteMicroContlrDialog="deleteMicroContlrDialog = false"
+          />
+        </v-dialog>
+        <v-dialog v-model="addMicroContlrDialog">
+          <dialog-add-micro-contlr
+            @closeAddMicroContlrDialog="addMicroContlrDialog = false"
+          />
+        </v-dialog>
+      </v-card>
+    </v-container>
+  </v-app>
 </template>
 
 <script setup>
@@ -67,25 +70,34 @@ const addMicroContlrDialog = ref(false);
 const deleteMicroContlrDialog = ref(false);
 const editMicroContlrDialog = ref(false);
 const editableMicroContlr = ref(null);
+const headers = [
+  { title: "Name", key: "microID" },
+  { title: "IP", key: "microIP" },
+  { title: "Purpose", key: "purpose" },
+  { title: "Last Update", key: "et" },
+  { title: "Status", key: "status" },
+  { title: "Actions", key: "actions", sortable: false },
+];
+
 const formatDate = (epochTime) => {
-    if (epochTime === null || epochTime === "") {
-        return "";
-    } else {
-        return moment
-            .utc(epochTime * 1000)
-            .local()
-            .format("YYYY-MM-DD hh:mm:ss");
-    }
+  if (epochTime === null || epochTime === "") {
+    return "";
+  } else {
+    return moment
+      .utc(epochTime * 1000)
+      .local()
+      .format("YYYY-MM-DD hh:mm:ss");
+  }
 };
 const addMicroContlr = () => {
-    addMicroContlrDialog.value = true;
+  addMicroContlrDialog.value = true;
 };
 const deleteMicroContlr = (item) => {
-    editableMicroContlr.value = item;
-    deleteMicroContlrDialog.value = true;
+  editableMicroContlr.value = item;
+  deleteMicroContlrDialog.value = true;
 };
 const editMicroContlr = (item) => {
-    editableMicroContlr.value = item;
-    editMicroContlrDialog.value = true;
+  editableMicroContlr.value = item;
+  editMicroContlrDialog.value = true;
 };
 </script>
