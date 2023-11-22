@@ -2,7 +2,7 @@
 &copy; David Bristow, 2019-2023
 
 # Version
-* 1.0.1 - 6/7/2023
+* 1.1.0 - 2023-11-22
  
 Single Page Applications for RAILS provides the user a GUI access to the function designed and developed for RAILS. The SPAs as micro-services are shown in the following table. The SPAs are highlighted with the buff colored background in the following figure.
 

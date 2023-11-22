@@ -80,8 +80,7 @@ onMounted(() => {
     aarCode: "",
   };
   var foundRs = null;
-  var myDate = new Date(message.et * 1000);
-  rs.time = myDate.toLocaleString();
+  rs.time = message.et;
   rs.rfid = message.rfid;
   rs.sensor = message.sensor;
   rs.reader = message.reader;
@@ -94,8 +93,10 @@ onMounted(() => {
     rs.aarCode = foundRs.aarCode;
     rsStore.ADD_NEW_RFID(rs);
   }
+  setTimeout(() => {  console.log('delayc'); }, 4000);
 };
 const refreshMicros = () => {
+  console.log("refreshMicros");
   microsStore.GET_MICROS();
   setTimeout(() => refreshMicros(), 60000);
 };

@@ -1,66 +1,70 @@
 <template>
-  <div class="xx">
-    <h1>Admin</h1>
-    <h2>RFID Micros</h2>
-    <v-btn @click="addMicro()" width="200">Add Micro</v-btn>
-    <v-table density="compact">
-      <thead>
-        <tr>
-          <th class="text-left">Name</th>
-          <th class="text-left">IP</th>
-          <th class="text-left">ET</th>
-          <th class="text-left">Location</th>
-          <th class="text-left">Status</th>
-          <th class="text-left">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in microsStore.micros" :key="item.id">
-          <td>{{ item.microID }}</td>
-          <td>{{ item.microIP }}</td>
-          <td>{{ item.et }}</td>
-          <td>{{ item.location }}</td>
-          <td>
-            <div v-if="item.status === 'Up'">
-              <v-icon color="green">mdi-server</v-icon>
-            </div>
-            <div v-else-if="item.status === 'Down'">
-              <v-icon color="red">mdi-server </v-icon>
-            </div>
-            <div v-else>
-              <v-icon color="yellow">mdi-server </v-icon>
-            </div>
-          </td>
-          <td>
+  <v-app>
+    <v-container class="xx">
+      <v-card>
+        <v-card-title>Admin RFID Micros</v-card-title>
+        <v-card-actions>
+          <v-btn @click="addMicro()" width="200">Add Micro</v-btn>
+        </v-card-actions>
+
+        <v-data-table
+          :headers="headers"
+          :items="microsStore.micros"
+          item-key="item.id"
+          density="dense"
+        >
+          <template v-slot:item.et="{ item }">
+            {{ formatDate(item.et) }}
+          </template>
+          <template v-slot:item.status="{ item }">
+            <v-icon v-if="item.status === 'Up'" color="green"
+              >mdi-server</v-icon
+            >
+            <v-icon v-else-if="item.status === 'Down'" color="red"
+              >mdi-server
+            </v-icon>
+            <v-icon v-else color="yellow">mdi-server </v-icon>
+          </template>
+          <template v-slot:item.actions="{ item }">
             <v-icon color="blue darken-1" @click="editMicro(item)">
               mdi-pencil
             </v-icon>
-            <v-icon color="red darken-1" @click="deleteMicro(item)">mdi-delete</v-icon>
-          </td>
-        </tr>
-      </tbody>
-      <v-dialog v-model="editMicroDialog">
-        <dialog-edit-micro :micro="editableMicro" @closeEditMicroDialog="editMicroDialog = false" />
-      </v-dialog>
-      <v-dialog v-model="deleteMicroDialog">
-        <dialog-delete-micro :micro="editableMicro" @closeDeleteMicroDialog="deleteMicroDialog = false" />
-      </v-dialog>
-      <v-dialog v-model="addMicroDialog">
-        <dialog-add-Micro @closeAddMicroDialog="addMicroDialog = false" />
-      </v-dialog>
-    </v-table>
-    <br />
-    <hr />
-    <JsonCSV :data="rsStore.rs">
-      <v-btn> Export RFID RS </v-btn>
-    </JsonCSV><br />
-    <v-btn @click="printRfids()" width="200">Print RFID Report</v-btn>
-  </div>
+            <v-icon color="red darken-1" @click="deleteMicro(item)"
+              >mdi-delete</v-icon
+            >
+          </template>
+        </v-data-table>
+        <v-dialog v-model="editMicroDialog">
+          <dialog-edit-micro
+            :micro="editableMicro"
+            @closeEditMicroDialog="editMicroDialog = false"
+          />
+        </v-dialog>
+        <v-dialog v-model="deleteMicroDialog">
+          <dialog-delete-micro
+            :micro="editableMicro"
+            @closeDeleteMicroDialog="deleteMicroDialog = false"
+          />
+        </v-dialog>
+        <v-dialog v-model="addMicroDialog">
+          <dialog-add-Micro @closeAddMicroDialog="addMicroDialog = false" />
+        </v-dialog>
+      </v-card>
+      <br />
+      <hr />
+      <v-card-actions>
+        <JsonCSV :data="rsStore.rs"> <v-btn> Export RFID RS </v-btn> </JsonCSV
+        ><br />
+        <v-btn @click="printRfids()" width="200">Print RFID Report</v-btn>
+      </v-card-actions>
+    </v-container>
+  </v-app>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import jsPDF from "jspdf";
+import moment from "moment";
 import "jspdf-autotable";
 import JsonCSV from "vue-json-csv";
 import DialogEditMicro from "../components/dialogs/DialogEditMicro.vue";
@@ -71,14 +75,29 @@ import { useRSStore } from "@/stores/rs";
 
 const rsStore = useRSStore();
 const microsStore = useMicrosStore();
-
 const editMicroDialog = ref(false);
 const deleteMicroDialog = ref(false);
 const addMicroDialog = ref(false);
 const editableMicro = ref(null);
-const micro = ref(null);
-const name = ref("rollingstock.csv");
+const headers = [
+  { title: "Name", key: "microID" },
+  { title: "IP", key: "microIP" },
+  { title: "Date Time", key: "et" },
+  { title: "Location", key: "location" },
+  { title: "Status", key: "status" },
+  { title: "Actions", key: "actions" },
+];
 
+const formatDate = (epochTime) => {
+  if (epochTime === null || epochTime === "") {
+    return "";
+  } else {
+    return moment
+      .utc(epochTime * 1000)
+      .local()
+      .format("YYYY-MM-DD hh:mm:ss");
+  }
+};
 const addMicro = () => {
   addMicroDialog.value = true;
 };
@@ -93,12 +112,12 @@ const editMicro = (item) => {
 const printRfids = () => {
   class Rsrow {
     constructor(roadName, roadNumber, color, aarCode, description, rfid) {
-      this.roadName=roadName;
-      this.roadNumber=roadNumber;
-      this.color=color;
-      this.aarCode=aarCode;
-      this.description=description;
-      this.rfid=rfid;
+      this.roadName = roadName;
+      this.roadNumber = roadNumber;
+      this.color = color;
+      this.aarCode = aarCode;
+      this.description = description;
+      this.rfid = rfid;
     }
   }
   var i = 0;
@@ -136,9 +155,7 @@ const printRfids = () => {
       var str = "Page " + doc.internal.getNumberOfPages();
       doc.setFontSize(9);
       var pageSize = doc.internal.pageSize;
-      var pageHeight = pageSize.height
-        ? pageSize.height
-        : pageSize.getHeight();
+      var pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight();
       doc.text(str, data.settings.margin.left, pageHeight - 10);
     },
     margin: { top: 50 },

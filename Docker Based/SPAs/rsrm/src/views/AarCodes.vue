@@ -1,45 +1,50 @@
 <template>
-  <div class="xx">
-    <h1>AAR Codes</h1>
-    <v-btn @click="addAarCode()" width="200">Add AAR Code</v-btn>
-    <v-table density="compact" fixed-header height="800px">
-      <thead>
-        <tr>
-          <th class="text-left">AAR</th>
-          <th class="text-left">RS Type</th>
-          <th class="text-left">Description</th>
-          <th class="text-left">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in aarCodesStore.aarCodes" :key="item.id">
-          <td>{{ item.aarCode }}</td>
-          <td>{{ item.rollingstockType }}</td>
-          <td>{{ item.description }}</td>
-          <td>
+  <v-app>
+    <v-container class="xx">
+      <v-card>
+        <v-card-title>AAR Codes</v-card-title>
+        <v-card-actions>
+          <v-btn @click="addAarCode">Add AAR Code</v-btn>
+        </v-card-actions>
+        <v-data-table
+          :headers="headers"
+          :items="aarCodesStore.aarCodes"
+          item-key="item.id"
+          density="dense"
+        >
+          <template v-slot:item.actions="{ item }">
             <v-icon color="blue darken-1" @click="editAarCode(item)">
               mdi-pencil
             </v-icon>
-            <v-icon color="red darken-1" @click="deleteAarCode(item)">mdi-delete</v-icon>
-          </td>
-        </tr>
-      </tbody>
-      <v-dialog v-model="editAarCodeDialog">
-        <dialog-edit-aar-code :aarCode="editableAarCode" @closeEditAarCodeDialog="editAarCodeDialog = false" />
-      </v-dialog>
-      <v-dialog v-model="deleteAarCodeDialog">
-        <dialog-delete-aar-code :aarCode="editableAarCode" @closeDeleteAarCodeDialog="deleteAarCodeDialog = false" />
-      </v-dialog>
-      <v-dialog v-model="addAarCodeDialog">
-        <dialog-add-aar-code @closeAddAarCodeDialog="addAarCodeDialog = false" />
-      </v-dialog>
-    </v-table>
-    <br />
-  </div>
+            <v-icon color="red darken-1" @click="deleteAarCode(item)"
+              >mdi-delete</v-icon
+            >
+          </template>
+        </v-data-table>
+        <v-dialog v-model="editAarCodeDialog">
+          <dialog-edit-aar-code
+            :aarCode="editableAarCode"
+            @closeEditAarCodeDialog="editAarCodeDialog = false"
+          />
+        </v-dialog>
+        <v-dialog v-model="deleteAarCodeDialog">
+          <dialog-delete-aar-code
+            :aarCode="editableAarCode"
+            @closeDeleteAarCodeDialog="deleteAarCodeDialog = false"
+          />
+        </v-dialog>
+        <v-dialog v-model="addAarCodeDialog">
+          <dialog-add-aar-code
+            @closeAddAarCodeDialog="addAarCodeDialog = false"
+          />
+        </v-dialog>
+      </v-card>
+    </v-container>
+  </v-app>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 import DialogEditAarCode from "@/components/dialogs/DialogEditAarCode.vue";
 import DialogDeleteAarCode from "@/components/dialogs/DialogDeleteAarCode.vue";
 import DialogAddAarCode from "@/components/dialogs/DialogAddAarCode.vue";
@@ -50,6 +55,12 @@ const editAarCodeDialog = ref(false);
 const deleteAarCodeDialog = ref(false);
 const addAarCodeDialog = ref(false);
 const editableAarCode = ref(null);
+const headers = [
+  { title: "AAR", key: "aarCode" },
+  { title: "RS Type", key: "rollingstockType" },
+  { title: "Description", key: "description" },
+  { title: "Actions", key: "actions", sortable: false },
+];
 
 const addAarCode = () => {
   addAarCodeDialog.value = true;
