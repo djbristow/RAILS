@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="xx">
     <v-container>
       <v-card>
         <v-card-title>Model Railroad Purchases</v-card-title>

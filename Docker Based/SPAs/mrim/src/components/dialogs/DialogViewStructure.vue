@@ -30,7 +30,6 @@ const props = defineProps({
     required: true,
   },
 });
-const emit = defineEmits(['closeViewStructureDialog']);
 const structuresStore = useStructuresStore();
 const imageServer = ref("");
 onMounted(() => {

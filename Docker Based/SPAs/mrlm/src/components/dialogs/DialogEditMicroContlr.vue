@@ -39,7 +39,6 @@ const props = defineProps({
     required: true,
   },
 });
-const emit = defineEmits(["closeEditMicroContlrDialog"]);
 const microStore = useMicrosStore();
 const _id = ref("");
 const microID = ref("");

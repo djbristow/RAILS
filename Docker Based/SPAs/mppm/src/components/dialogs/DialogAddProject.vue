@@ -47,7 +47,6 @@ const roadname = ref("");
 const roadnumbers = ref("");
 const notes = ref("");
 const projectAddDataInvalid = ref(false);
-const emit = defineEmits(["closeAddProjectDialog"]);
 const addProject = () => {
     projectsStore.ADD_PROJECT({
         title: title.value,

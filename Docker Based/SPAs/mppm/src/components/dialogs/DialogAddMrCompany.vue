@@ -35,7 +35,6 @@ const phone = ref("");
 const address = ref("");
 const notes = ref("");
 const mrCompanyAddDataInvalid = ref(false);
-const emit = defineEmits(["closeAddMrCompanyDialog"]);
 const addMrCompany = () => {
     mrcosStore.ADD_MRCO({
         name: name.value,

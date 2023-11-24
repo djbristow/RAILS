@@ -23,7 +23,6 @@ const props = defineProps({
     required: true,
   },
 });
-const emit = defineEmits(["closeDeleteTPLightDialog"]);
 const tplightStore = useTplightsStore();
 const deleteTPLight = (id) => {
   tplightStore.DELETE_TPLIGHT(id);

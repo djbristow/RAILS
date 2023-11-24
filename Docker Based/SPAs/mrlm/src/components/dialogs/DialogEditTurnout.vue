@@ -35,7 +35,6 @@ const props = defineProps({
         required: true,
     },
 });
-const emit = defineEmits(["closeEditTurnoutDialog"]);
 const turnoutStore = useTurnoutsStore();
 const turnoutEditDataInvalid = ref(false);
 const _id = ref("");

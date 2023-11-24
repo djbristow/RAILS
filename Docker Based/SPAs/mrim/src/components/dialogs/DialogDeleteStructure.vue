@@ -20,7 +20,6 @@ const props = defineProps({
     required: true,
   },
 });
-const emit = defineEmits(["closeDeleteStructureDialog"]);
 const structureStore = useStructuresStore();
 const deleteStructure = (id) => {
   structureStore.DELETE_STRUCTURE(id);

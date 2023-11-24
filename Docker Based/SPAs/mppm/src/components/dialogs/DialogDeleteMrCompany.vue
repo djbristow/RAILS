@@ -20,7 +20,6 @@
     },
   });
   const mrcosStore = useMrcosStore();
-  const emit = defineEmits(["closeDeleteMrCompanyDialog"]);
   const deleteMrCompany = (id) => {
     mrcosStore.DELETE_MRCO(id);
     emit("closeDeleteMrCompanyDialog");

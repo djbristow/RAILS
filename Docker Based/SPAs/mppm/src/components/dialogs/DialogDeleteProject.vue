@@ -23,7 +23,6 @@ const props = defineProps({
   },
 });
 const projectsStore = useProjectsStore();
-const emit = defineEmits(["closeDeleteProjectDialog"]);
 const deleteProject = (id) => {
   projectsStore.DELETE_PROJECT(id);
   emit("closeDeleteProjectDialog");

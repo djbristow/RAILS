@@ -77,7 +77,6 @@ const rsDataInvalid = computed(() => {
   }
   return result;
 });
-const emit = defineEmits(["closeRegisterDialog"]);
 const rsStore = useRSStore();
 const cancelUpdateRs = () => {
   emit("closeRegisterDialog");

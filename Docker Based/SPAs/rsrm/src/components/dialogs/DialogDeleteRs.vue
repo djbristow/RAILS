@@ -24,7 +24,6 @@ const props = defineProps({
     required: true,
   },
 });
-const emit = defineEmits(["closeDeleteRsDialog"]);
 const rsStore = useRSStore();
 const deleteRs = (id) => {
   rsStore.DELETE_RS(id);

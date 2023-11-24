@@ -44,7 +44,6 @@ const props = defineProps({
     },
 });
 const projectsStore = useProjectsStore();
-const emit = defineEmits(["closeEditProjectDialog"]);
 const projectEditDataInvalid = ref(false);
 const title = ref("");
 const type = ref("");

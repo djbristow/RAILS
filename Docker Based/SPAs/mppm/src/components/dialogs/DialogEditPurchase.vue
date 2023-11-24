@@ -48,7 +48,6 @@ const props = defineProps({
     },
 });
 const purchasesStore = usePurchasesStore();
-const emit = defineEmits(["closeEditPurchaseDialog"]);
 const purchaseEditDataInvalid = ref(false);
 const num = ref("");
 const date = ref(null);

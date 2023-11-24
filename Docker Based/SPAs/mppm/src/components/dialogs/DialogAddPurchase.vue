@@ -62,7 +62,6 @@ const roadname = ref("");
 const roadnumbers = ref("");
 const notes = ref("");
 const purchaseAddDataInvalid = ref(false);
-const emit = defineEmits(["closeAddPurchaseDialog"]);
 const addPurchase = () => {
   purchasesStore.ADD_PURCHASE({
     num: num.value,

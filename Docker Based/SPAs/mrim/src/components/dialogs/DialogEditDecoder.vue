@@ -44,7 +44,6 @@ const family = ref("");
 const model = ref("");
 const address = ref("");
 const noLoco = ref(false);
-const emit = defineEmits(["closeEditDecoderDialog"]);
 const decoderStore = useDecodersStore();
 const rssStore = useRSStore();
 const decoderEditDataInvalid = ref(false);

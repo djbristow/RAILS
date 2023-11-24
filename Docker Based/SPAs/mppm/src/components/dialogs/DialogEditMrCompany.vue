@@ -33,7 +33,6 @@ const props = defineProps({
     },
 });
 const mrcosStore = useMrcosStore();
-const emit = defineEmits(["closeEditMrCompanyDialog"]);
 const mrCompanyEditDataInvalid = ref(false);
 const name = ref("");
 const type = ref("");

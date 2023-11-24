@@ -91,7 +91,6 @@ const sidingCap = ref("");
 const notes = ref("");
 const structuresStore = useStructuresStore();
 const structureAddDataInvalid = ref(false);
-const emit = defineEmits(["closeAddStructureDialog"]);
 const addStructure = () => {
   structuresStore.ADD_NEW_STRUCTURE({
     title: title.value,

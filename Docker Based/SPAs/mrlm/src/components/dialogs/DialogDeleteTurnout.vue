@@ -23,7 +23,6 @@ const props = defineProps({
     required: true,
   },
 });
-const emit = defineEmits(["closeDeleteTurnoutDialog"]);
 const turnoutStore = useTurnoutsStore();
 const deleteTurnout = (id) => {
   console.log("deleteTurnout");

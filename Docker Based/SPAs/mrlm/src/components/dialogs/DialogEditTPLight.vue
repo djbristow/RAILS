@@ -31,7 +31,6 @@ const props = defineProps({
         required: true,
     },
 });
-const emit = defineEmits(["closeEditTPLightDialog"]);
 const tplightStore = useTplightsStore();
 const _id = ref("");
 const to_id = ref("");

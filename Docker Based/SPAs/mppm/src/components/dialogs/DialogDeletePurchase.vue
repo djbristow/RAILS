@@ -24,7 +24,6 @@ const props = defineProps({
   },
 });
 const purchasesStore = usePurchasesStore();
-const emit = defineEmits(["closeDeletePurchaseDialog"]);
 const deletePurchase = (id) => {
   purchasesStore.DELETE_PURCHASE(id);
   emit("closeDeletePurchaseDialog");

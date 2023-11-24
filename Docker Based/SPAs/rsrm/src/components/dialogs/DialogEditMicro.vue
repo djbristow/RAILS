@@ -38,7 +38,6 @@ const sensorLoc = ref("");
 const status = ref("");
 const microEditDataInvalid = ref(false);
 const microStore = useMicrosStore();
-const emit = defineEmits(["closeEditMicroDialog"]);
 const props = defineProps({
   micro: {
     type: Object,

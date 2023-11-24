@@ -53,7 +53,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { format } from "date-fns";
-const emit = defineEmits(['closeViewRsDialog']);
 const props = defineProps({
   rollingstock: {
     type: Object,

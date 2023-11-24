@@ -31,14 +31,12 @@ const category = ref("");
 const notes = ref("");
 const file = ref(null);
 const imageAddDataInvalid = ref(false);
-const emit = defineEmits(['closeAddImageDialog']);
 const imagesStore = useImagesStore();
 const onFileChange = (e) => {
   file.value = e.target.files[0]
 }
 const addImage = () => {
   let formData = new FormData();
-  //title.value = file.value.name
   formData.append('file', file.value);
   axios.post('http://localhost:3030/uploadimg',
     formData,

@@ -26,7 +26,6 @@ const props = defineProps({
     required: true,
   },
 });
-const emit = defineEmits(['closeViewImageDialog']);
 const imagesStore = useImagesStore();
 const imageServer = ref("");
 onMounted(() => {

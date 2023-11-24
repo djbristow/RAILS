@@ -34,7 +34,6 @@ const rsType = ref("");
 const description = ref("");
 const id = ref("");
 const aarCodeEditDataInvalid = ref(false);
-const emit = defineEmits(["closeEditAarCodeDialog"]);
 const aarCodeStore = useAarCodesStore();
 const editAarCode = () => {
   aarCodeStore.UPDATE_AARCODE({

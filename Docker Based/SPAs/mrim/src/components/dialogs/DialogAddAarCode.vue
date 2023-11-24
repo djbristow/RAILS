@@ -27,7 +27,6 @@ const aarCode = ref('');
 const rollingstockType = ref('');
 const description = ref('');
 const aarCodeAddDataInvalid = ref(false);
-const emit = defineEmits(['closeAddAarCodeDialog']);
 const aarCodeStore = useAarCodesStore();
 const addAarCode = () => {
   aarCodeStore.ADD_NEW_AARCODE({

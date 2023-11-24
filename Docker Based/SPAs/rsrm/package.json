@@ -1,6 +1,6 @@
 {
   "name": "rsrm",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "Rolling Stock RFID Manager",
   "author": "dbristow <dave@bristow-family.org>",
   "private": true,
@@ -24,7 +24,7 @@
     "vue": "3.3.8",
     "vue-json-csv": "^2.1.0",
     "vue-router": "4.2.5",
-    "vuetify": "3.4.2",
+    "vuetify": "3.4.3",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="xx">
     <v-container>
       <v-card>
         <v-card-title>Decoders</v-card-title>
@@ -56,7 +56,7 @@ const deleteDecoderDialog = ref(false);
 const addDecoderDialog = ref(false);
 const editableDecoder = ref(null);
 const headers = [
-  { title: "Road Name<", key: "roadName" },
+  { title: "Road Name", key: "roadName" },
   { title: "Road Number", key: "roadNumber" },
   { title: "Manufacturer", key: "mfg" },
   { title: "Family", key: "family" },

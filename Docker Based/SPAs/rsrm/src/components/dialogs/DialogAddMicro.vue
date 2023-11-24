@@ -37,7 +37,6 @@ const sensorLoc = ref("");
 const status = ref("");
 const microAddDataInvalid = ref(false);
 const microStore = useMicrosStore();
-const emit = defineEmits(["closeAddMicroDialog"]);
 const addMicro = () => {
   microStore.ADD_NEW_MICRO({
     microID: microID.value,

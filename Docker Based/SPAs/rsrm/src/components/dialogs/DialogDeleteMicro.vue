@@ -20,7 +20,6 @@ const props = defineProps({
     required: true,
   },
 });
-const emit = defineEmits(["closeDeleteMicroDialog"]);
 const microStore = useMicrosStore();
 const deleteMicro = (id) => {
   microStore.DELETE_MICRO(id);

@@ -20,7 +20,6 @@ const props = defineProps({
     required: true,
   },
 });
-const emit = defineEmits(["closeDeleteCompanyDialog"]);
 const companyStore = useCompaniesStore();
 const deleteCompany = (id) => {
   companyStore.DELETE_COMPANY(id);

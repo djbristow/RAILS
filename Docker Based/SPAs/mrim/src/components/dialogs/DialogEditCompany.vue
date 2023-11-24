@@ -35,7 +35,6 @@ const longName = ref("");
 const industryType = ref("");
 const industryLocation = ref("");
 const companyEditDataInvalid = ref(false);
-const emit = defineEmits(["closeEditCompanyDialog"]);
 const companyStore = useCompaniesStore();
 const editCompany = () => {
   companyStore.UPDATE_COMPANY({

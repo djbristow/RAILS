@@ -108,7 +108,6 @@ const modelLength = ref("");
 const rfid = ref("");
 const rsAddDataInvalid = ref(false);
 const rsStore = useRSStore();
-const emit = defineEmits(['closeAddRsDialog']);
 const addRs = () => {
   rsStore.ADD_NEW_RS({
     roadName: roadName.value,

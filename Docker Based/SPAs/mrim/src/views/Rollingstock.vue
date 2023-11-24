@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="xx">
     <v-container>
       <v-card>
         <v-card-title>Rollingstock</v-card-title>
@@ -10,7 +10,7 @@
           :headers="headers"
           :items="rsStore.rs"
           item-key="item.id"
-          density="compact"
+          density="dense"
         >
           <template v-slot:item.actions="{ item }">
             <v-icon color="blue darken-1" @click="editRollingstock(item)">

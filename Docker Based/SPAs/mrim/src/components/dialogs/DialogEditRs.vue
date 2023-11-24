@@ -82,7 +82,6 @@
 import { ref, onMounted } from "vue";
 import { useRSStore } from "@/stores/rs";
 import { format } from "date-fns";
-import { defineEmits } from "vue";
 
 const _id = ref("");
 const roadName = ref("");
@@ -111,7 +110,6 @@ const modelWeight = ref("");
 const modelLength = ref("");
 const rfid = ref("");
 const rsEditDataInvalid = ref(false);
-const emit = defineEmits(["closeEditRsDialog"]);
 const rsStore = useRSStore();
 const props = defineProps({
   rollingstock: {
