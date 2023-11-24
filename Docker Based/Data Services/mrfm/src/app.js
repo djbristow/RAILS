@@ -65,7 +65,7 @@ const init = async () => {
     },
   });
   await server.start();
-  console.log("MRFM v2.1.2, Started")
+  console.log("MRFM v2.1.3, Started")
   console.log("MRFM running on %s", server.info.uri);
 };
 process.on("unhandledRejection", (err) => {
