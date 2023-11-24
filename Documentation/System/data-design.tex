@@ -23,8 +23,8 @@ An \ac{AAR} code refers to a classification code used by the \ac{AAR} to identif
     \hline
         \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
         aarCode & String & A classification code used by the \ac{AAR} to identify different types of rolling stock & Yes \\ \hline
-        rollingstockType & String & & No\\ \hline
-        description & String & & No \\ \hline
+        rollingstockType & String & A category of rollingstock having common characteristics, such as; Auxiliary, Freight, Gondola, Hopper, Locomotive, Non Revenue, and Passenger. & No\\ \hline
+        description & String & A written representation that aims to make vivid the characteristics of the AAR Code. & No \\ \hline
     \end{tabular}
     \caption{\label{aarcode-table}AarCodes Collection Fields Table}
     \end{table}
@@ -34,11 +34,11 @@ An \ac{AAR} code refers to a classification code used by the \ac{AAR} to identif
     \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
     \hline
         \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
-        locomotiveID & ObjecctId &  & Yes \\ \hline
-        mfg & String & & No\\ \hline
-        family & String & & No \\ \hline
-        model &  String & & No \\ \hline
-        address & String & A \ac{DCC} address is a unique identifier assigned to each locomotive, which is a numerical or digital label that distinguishes one rollingstock from another in the \ac{DCC} system. \ac{DCC} addresses range from 1 to 9999. & No \\ \hline
+        locomotiveID & ObjecctId &  The identity object of the dccs document assigned by MongoDB at the time the rollingstock (locomotive) document is created.& Yes \\ \hline
+        mfg & String & The company that made the \ac{DCC} decoder installed in a rollingstock, typically a locomotive. & No\\ \hline
+        family & String & A group of DCC decoders produced by a specific manufacturer that share common features, specifications, and compatibility. & No \\ \hline
+        model &  String & A \ac{DCC} decoder offering specific features or specifications within the same product family& No \\ \hline
+        address & String & A unique identifier assigned to each \ac{DCC} decoder, which is a numerical or digital label that distinguishes one rollingstock from another in the \ac{DCC} system. \ac{DCC} addresses range from 1 to 9999. & No \\ \hline
     \end{tabular}
     \caption{\label{dcc-table}\ac{DCC}s Collection Fields Table}
 \end{table}

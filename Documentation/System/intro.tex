@@ -24,14 +24,11 @@ The original approach that was taken was use a standard software development met
 The result would be a web application that would provide multiple users access to the developed system.\vspace{5mm} \\
 That approach was undertaken almost two decades ago and based on expertise at hand. Since technology evolved and more options were made available the focus switched from Java to JavaScript and from a relational database to non-relational database. The use cases were still relevant as they speak to the user interactions with the system.
 \section{Approach Implemented}
-The revised client/server design pattern that is being implemented is based on using:
+The revised client/server design pattern that is being implemented is based on using (each of which is dicussed in the \ref{technologies} \nameref{technologies} subsection):
 \begin{itemize}
-\item Node.js is a JavaScript run-time built on Chrome's V8 JavaScript engine. It allows developers to run JavaScript on the server-side, and is commonly used for building web servers and APIs. Node.js is typically used to handle the server-side functionality.
-For more information about Node.js, visit the \href{https://nodejs.org/}{official website}.
-\item Vue.js is a JavaScript framework for building user interfaces. It is similar to other popular JavaScript frameworks such as React and Angular, but is often considered more lightweight and easy to learn. Vue.js allows developers to create reusable \ac{UI} components and manage the state of the application. Vue.js is used to handle the client-side functionality.
-For more information about Vue.js, visit the \href{https://vuejs.org/}{official website}.
-\item MongoDB, referred to as a non-relational or NoSQL database. It is a type of database that does not use the traditional table-based relational model. Instead, it uses a flexible schema model that allows for the storage of data in a variety of formats, such as key-value pairs, document-based, graph-based, or object-based.
-For more information about MongoDB, visit the \href{https://www.mongodb.com/}{official website}.
+\item Node.js see subsubsection \ref{nodejs}
+\item Vue.js see subsubsection \ref{vuejs}
+\item MongoDB see subsubsection \ref{mongodb}
 \end{itemize}
 \subsection{Architecture}
 Moving from a monolithic \ac{JEE} application to a distributed set of components requires a different architecture design pattern. One such pattern is microservices architecture. The microservices architectural style is an evolution of the \ac{SOA} architectural style.\vspace{5mm} \\
@@ -42,7 +39,7 @@ It is a method of developing software applications in which a large application 
 \item Flexibility: Services can be written in different languages, which makes it easy to use the best tool for the job.
 \item Ease of Deployment: Since each service can be deployed independently, the deployment process can be simplified.
 \end{itemize}
-\subsection{Technologies}
+\subsection{Technologies}\label{technologies}
 In designing and implementing \ac{RAILS} several technologies have been added to microservices architectural style that compliment it. They are:
 \subsubsection{Docker}
 In the context of microservices, containers are used to package the code, libraries, and configuration files needed for a microservice to run as a single, executable unit. This makes it easy to deploy and run microservices in different environments, such as on-premises servers or in the cloud. By packaging all the dependencies for a microservice in a container, it can be guaranteed to run the same way regardless of the environment it's deployed in. This helps to reduce issues caused by differences between development, testing, and production environments. Containers also make it easy to scale up or down the number of instances of a microservice running, and to update or rollback a microservice without affecting other services.\vspace{5mm} \\
@@ -71,7 +68,46 @@ GitHub provides the following features:
   \item GitHub Pages is a feature that enables users to host static websites directly from their repositories. It simplifies the process of publishing and sharing web content.
 \end{itemize}
 GitHub offers both free and paid plans, with additional features and storage available in the paid tiers. It has become a popular choice for individual developers, open-source projects, and large organizations due to its user-friendly interface, strong community, and extensive features for code collaboration and project management.
-For additional information on Git see the \href{https://git-scm.com/}{official website}.
+\subsubsection{Node.js}\label{nodejs}
+Node.js is an open-source, cross-platform JavaScript runtime environment that allows developers to build server-side and network applications. Node.js enables developers to use JavaScript for server-side scripting, allowing them to write server-side code using the same language as client-side code, which is typically executed in web browsers.
+Key features of Node.js are:
+\begin{itemize}
+  \item Node.js is designed to be non-blocking and event-driven. This means that it can handle many simultaneous connections efficiently, making it well-suited for applications with a large number of I/O operations, such as real-time web applications.
+  \item Node.js operates on a single-threaded event loop, which handles asynchronous I/O operations. This allows it to handle many connections concurrently without the need for multithreading, making it scalable and efficient.
+  \item Node.js comes with a package manager called npm, which is the largest ecosystem of open-source libraries and modules for JavaScript. Developers can easily install, manage, and share packages and dependencies using npm.
+  \item Node.js is cross-platform, meaning it can run on various operating systems, including Windows, macOS, and Linux.
+  \item Node.js has a vibrant and active community, and its ecosystem is rich with modules and frameworks that simplify the development of web and server applications. Popular frameworks like Express.js make it easier to build web applications with Node.js.
+\end{itemize}
+Node.js is commonly used to build server-side applications, APIs, and real-time applications. It has gained popularity for its performance, scalability, and the ability to use JavaScript throughout the entire web application stack, from front end to back end.\vspace{5mm} \\
+For additional information on Node.js see the \href{https://nodejs.org/en/about}{official website}.
+\subsubsection{MongoDB}\label{mongodb}
+MongoDB is a popular open-source NoSQL database management system that falls under the category of document-oriented databases. Developed by MongoDB Inc., MongoDB stores data in flexible, JSON-like documents with a dynamic schema. This means that the fields within a document can vary from one document to another, and data can be nested within sub-documents or arrays.\vspace{5mm} \\
+Key features of MongoDB include:
+\begin{itemize}
+  \item MongoDB stores data in BSON (Binary JSON) documents, which are binary representations of JSON-like documents. This flexible schema allows for the storage of data in a way that is more natural for certain types of applications, as it can accommodate changes in data structure over time.
+  \item MongoDB is classified as a NoSQL database, which means it does not rely on the traditional relational database management system (RDBMS) model. NoSQL databases are designed to handle large volumes of unstructured or semi-structured data and can provide better performance and scalability for certain use cases.
+  \item MongoDB is designed to scale horizontally by adding more servers to a database cluster, allowing it to handle increased load and larger datasets. It supports automatic sharding, a method of distributing data across multiple machines.
+  \item MongoDB provides a rich set of query capabilities, allowing developers to perform complex queries on their data. It supports a variety of query operators, indexing, and aggregation frameworks.
+  \item MongoDB is known for its high performance, especially for read and write-intensive applications. It uses memory-mapped files for storage, which can lead to faster read and write operations.
+  \item MongoDB supports the creation of indexes on fields to improve query performance. Indexes can be created on single fields or compound indexes on multiple fields.
+  \item MongoDB has a large and active community, and it is supported by a rich ecosystem of tools and libraries. It also provides official drivers for a variety of programming languages.
+\end{itemize}
+MongoDB is commonly used in a range of applications, including content management systems, real-time big data analytics, mobile applications, and more. Its flexibility, scalability, and ease of use make it a popular choice for developers working on projects with evolving or complex data structures.\vspace{5mm} \\
+For additional information on MongoDB see the \href{https://www.mongodb.com/}{official website}.
+\subsubsection{Vue.js}\label{vuejs}
+Vue.js, commonly referred to as Vue, is a progressive JavaScript framework used for building user interfaces. It is designed from the ground up to be incrementally adoptable, meaning that it can be easily integrated into existing projects and other libraries. Vue.js is often used for developing single-page applications (SPAs) where dynamic, responsive user interfaces are crucial.\vspace{5mm} \\
+Key features of Vue.js include:
+\begin{itemize}
+  \item Vue.js uses a declarative approach to describe the structure and behavior of the UI. Developers can use simple template syntax to bind data to the DOM (Document Object Model) and let Vue.js handle the underlying manipulations.
+  \item Vue.js promotes a modular and reusable architecture through components. Components encapsulate both the structure (HTML), behavior (JavaScript), and style (CSS) of a part of the UI. Components can be composed and reused throughout the application.
+  \item Vue.js provides a reactive data-binding system. When the underlying data changes, the associated DOM updates automatically, and vice versa. This allows developers to build dynamic and responsive applications without directly manipulating the DOM.
+  \item Vue.js includes a set of built-in directives that enable developers to add functionality to the DOM elements. For example, the `v-if` directive is used for conditional rendering, and `v-for` is used for rendering lists.
+  \item Vue Router is the official routing library for Vue.js, allowing developers to build single-page applications with navigation. It enables the creation of navigation between different views or components in a Vue.js application.
+  \item Pinia is the state management library for Vue.js applications. It provides a centralized state management pattern, helping manage the state of the application in a predictable and maintainable way, especially in larger applications.
+  \item Vue CLI (Command Line Interface) is a tool for scaffolding and managing Vue.js projects. It helps developers set up a new project with a sensible default configuration, manage dependencies, and build production-ready applications.
+\end{itemize}
+Vue.js is known for its simplicity and ease of integration, making it a popular choice for both beginners and experienced developers. It can be used for building small to large-scale applications and has a growing community and ecosystem of libraries and tools. Vue.js is often compared to other JavaScript frameworks like React and Angular, and its flexible and progressive nature makes it an attractive option for a variety of projects.\vspace{5mm} \\
+For more information about Vue.js, visit the \href{https://vuejs.org/}{official website}.
 \subsubsection{IoT}
 \ac{IoT} refers to the network of physical devices, vehicles, buildings, and other items embedded with electronics, software, sensors, and connectivity which enables these objects to connect and exchange data.
 \subsubsection{MQTT}
