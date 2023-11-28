@@ -21,6 +21,8 @@ const props = defineProps({
   },
 });
 const imageStore = useImagesStore();
+const emit = defineEmits(["closeDeleteImageDialog"]);
+
 const deleteImage = (id) => {
   imageStore.DELETE_IMAGE(id);
   emit("closeDeleteImageDialog");

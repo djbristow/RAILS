@@ -21,6 +21,8 @@ const props = defineProps({
   },
 });
 const companyStore = useCompaniesStore();
+const emit = defineEmits(["closeDeleteCompanyDialog"]);
+
 const deleteCompany = (id) => {
   companyStore.DELETE_COMPANY(id);
   emit("closeDeleteCompanyDialog");

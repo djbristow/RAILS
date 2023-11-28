@@ -6,9 +6,17 @@
         <v-card-actions>
           <v-btn @click="addRollingstock()" width="175">New Rollingstock</v-btn>
         </v-card-actions>
+        <v-text-field
+          v-model="search"
+          prepend-inner-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
         <v-data-table
           :headers="headers"
           :items="rsStore.rs"
+          :search="search"
           item-key="item.id"
           density="dense"
         >
@@ -71,10 +79,11 @@ const headers = [
   { title: "Road Name", key: "roadName" },
   { title: "Road Number", key: "roadNumber" },
   { title: "AAR", key: "aarCode" },
-  { title: "Description", key: "description" },
+  { title: "Description", key: "description"},
   { title: "Color", key: "color" },
   { title: "Actions", key: "actions", sortable: false },
 ];
+const search = ref([]);
 
 const addRollingstock = () => {
   addRsDialog.value = true;

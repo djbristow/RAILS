@@ -30,6 +30,8 @@ const industryType = ref("");
 const industryLocation = ref("");
 const companyAddDataInvalid = ref(false);
 const companyStore = useCompaniesStore();
+const emit = defineEmits(["closeAddCompanyDialog"]);
+
 const addCompany = () => {
   companyStore.ADD_NEW_COMPANY({
     shortName: shortName.value,

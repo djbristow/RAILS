@@ -32,6 +32,8 @@ const notes = ref("");
 const file = ref(null);
 const imageAddDataInvalid = ref(false);
 const imagesStore = useImagesStore();
+const emit = defineEmits(['closeAddImageDialog']);
+
 const onFileChange = (e) => {
   file.value = e.target.files[0]
 }

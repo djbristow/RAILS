@@ -36,6 +36,8 @@ const industryType = ref("");
 const industryLocation = ref("");
 const companyEditDataInvalid = ref(false);
 const companyStore = useCompaniesStore();
+const emit = defineEmits(["closeEditCompanyDialog"]);
+
 const editCompany = () => {
   companyStore.UPDATE_COMPANY({
     _id: props.company._id,

@@ -37,6 +37,8 @@ const notes = ref("");
 const id = ref("");
 const imageEditDataInvalid = ref(false);
 const imageStore = useImagesStore();
+const emit = defineEmits(["closeEditImageDialog"]);
+
 const editImage = () => {
   imageStore.UPDATE_IMAGE({
     _id: id.value,

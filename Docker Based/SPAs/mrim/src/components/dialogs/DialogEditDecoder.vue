@@ -47,6 +47,8 @@ const noLoco = ref(false);
 const decoderStore = useDecodersStore();
 const rssStore = useRSStore();
 const decoderEditDataInvalid = ref(false);
+const emit = defineEmits(["closeEditDecoderDialog"]);
+
 const editDecoder = () => {
   let loco = rssStore.CHECK_LOCO(roadName.value, roadNumber.value);
   if (loco == undefined) {

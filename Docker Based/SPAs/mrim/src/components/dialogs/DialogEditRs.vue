@@ -110,6 +110,7 @@ const modelWeight = ref("");
 const modelLength = ref("");
 const rfid = ref("");
 const rsEditDataInvalid = ref(false);
+const emit = defineEmits(['closeEditRsDialog']);
 const rsStore = useRSStore();
 const props = defineProps({
   rollingstock: {
@@ -117,6 +118,7 @@ const props = defineProps({
     required: true,
   },
 });
+
 const editRsUpdate = () => {
   rsStore.UPDATE_RS({
     _id: _id.value,

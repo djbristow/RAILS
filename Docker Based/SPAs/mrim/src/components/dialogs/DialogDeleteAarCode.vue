@@ -21,6 +21,8 @@ const props = defineProps({
   },
 });
 const aarCodeStore = useAarCodesStore();
+const emit = defineEmits(["closeDeleteAarCodeDialog"]);
+
 const deleteAarCode = (id) => {
   aarCodeStore.DELETE_AARCODE(id);
   emit("closeDeleteAarCodeDialog");

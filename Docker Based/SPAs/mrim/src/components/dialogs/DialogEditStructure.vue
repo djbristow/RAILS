@@ -124,6 +124,8 @@ const sidingCap = ref("");
 const notes = ref("");
 const structuresStore = useStructuresStore();
 const structureEditDataInvalid = ref(false);
+const emit = defineEmits(["closeEditStructureDialog"]);
+
 onMounted(() => {
   _id.value = props.structure._id;
   title.value = props.structure.title;

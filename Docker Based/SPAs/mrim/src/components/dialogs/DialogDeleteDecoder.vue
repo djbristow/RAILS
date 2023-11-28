@@ -21,6 +21,8 @@ const props = defineProps({
   },
 });
 const decoderStore = useDecodersStore();
+const emit = defineEmits(["closeDeleteDecoderDialog"]);
+
 const deleteDecoder = (id) => {
   decoderStore.DELETE_DECODER(id);
   emit("closeDeleteDecoderDialog");
