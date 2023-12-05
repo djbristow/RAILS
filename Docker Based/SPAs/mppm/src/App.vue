@@ -43,6 +43,7 @@ const projectsStore = useProjectsStore();
 const mrcosStore = useMrcosStore();
 const items = [
   { title: "Purchases", icon: "mdi-currency-usd", to: "/purchases" },
+  { title: "Grouped Purchases", icon: "mdi-currency-usd", to: "/groupedpurchases"},
   { title: "Projects", icon: "mdi-notebook-outline", to: "/projects"},
   { title: "MR Companies", icon: "mdi-cog", to: "/mrcompanies" },
   { title: "Admin", icon: "mdi-format-list-checks", to: "/admin" },

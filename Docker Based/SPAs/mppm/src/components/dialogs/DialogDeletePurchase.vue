@@ -15,8 +15,10 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script setup>
 import { usePurchasesStore } from "@/stores/purchases";
+
 const props = defineProps({
   purchase: {
     type: Object,
@@ -24,6 +26,8 @@ const props = defineProps({
   },
 });
 const purchasesStore = usePurchasesStore();
+const emit = defineEmits(["closeDeletePurchaseDialog"]);
+
 const deletePurchase = (id) => {
   purchasesStore.DELETE_PURCHASE(id);
   emit("closeDeletePurchaseDialog");

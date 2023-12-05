@@ -23,9 +23,11 @@
         </v-card-actions>
     </v-card>
 </template>
+
 <script setup>
 import { ref, onMounted } from "vue";
 import { useMrcosStore } from "@/stores/mrcos";
+
 const props = defineProps({
     mrco: {
         type: Object,
@@ -41,6 +43,8 @@ const email = ref("");
 const phone = ref("");
 const address = ref("");
 const notes = ref("");
+const emit = defineEmits(["closeEditMrCompanyDialog"]);
+
 onMounted(() => {
     name.value = props.mrco.name;
     type.value = props.mrco.type;

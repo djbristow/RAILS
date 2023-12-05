@@ -6,11 +6,19 @@
         <v-card-actions>
           <v-btn @click="addPurchase()" width="200">Add Purchase</v-btn>
         </v-card-actions>
+        <v-text-field
+          v-model="search"
+          prepend-inner-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
         <v-data-table
           :headers="headers"
           :items="purchasesStore.purchases"
+          :search="search"
           item-key="item.id"
-          density="dense"
+          density="compact"
         >
           <template v-slot:item.date="{ item }">
             <span>{{ formatDate(item.date) }}</span>
@@ -71,6 +79,7 @@ const headers = [
   { title: "Unit Cost", key: "unitcost", align: 'end' },
   { title: "Actions", key: "actions", sortable: false },
 ];
+const search = ref("");
 
 const cnvtMoney = (money) => {
   let USDollar = new Intl.NumberFormat("en-US", {

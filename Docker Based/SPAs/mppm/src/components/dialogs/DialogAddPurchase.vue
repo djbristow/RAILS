@@ -44,6 +44,7 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script setup>
 import { ref } from "vue";
 import { usePurchasesStore } from "@/stores/purchases";
@@ -62,6 +63,8 @@ const roadname = ref("");
 const roadnumbers = ref("");
 const notes = ref("");
 const purchaseAddDataInvalid = ref(false);
+const emit = defineEmits(["closeAddPurchaseDialog"]);
+
 const addPurchase = () => {
   purchasesStore.ADD_PURCHASE({
     num: num.value,

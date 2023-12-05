@@ -23,9 +23,11 @@
         </v-card-actions>
     </v-card>
 </template>
+
 <script setup>
 import { ref } from "vue";
 import { useMrcosStore } from "@/stores/mrcos";
+
 const mrcosStore = useMrcosStore();
 const name = ref("");
 const type = ref("");
@@ -35,6 +37,8 @@ const phone = ref("");
 const address = ref("");
 const notes = ref("");
 const mrCompanyAddDataInvalid = ref(false);
+const emit = defineEmits(["closeAddMrCompanyDialog"]);
+
 const addMrCompany = () => {
     mrcosStore.ADD_MRCO({
         name: name.value,

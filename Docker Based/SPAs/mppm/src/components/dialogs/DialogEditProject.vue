@@ -34,9 +34,11 @@
         </v-card-actions>
     </v-card>
 </template>
+
 <script setup>
 import { ref, onMounted } from "vue";
 import { useProjectsStore } from "@/stores/projects";
+
 const props = defineProps({
     project: {
         type: Object,
@@ -53,6 +55,8 @@ const enddate = ref(null);
 const roadname = ref("");
 const roadnumbers = ref("");
 const notes = ref("");
+const emit = defineEmits(["closeEditProjectDialog"]);
+
 onMounted(() => {
     title.value = props.project.title;
     type.value = props.project.type;

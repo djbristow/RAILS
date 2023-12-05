@@ -14,8 +14,10 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script setup>
 import { useProjectsStore } from "@/stores/projects";
+
 const props = defineProps({
   project: {
     type: Object,
@@ -23,6 +25,8 @@ const props = defineProps({
   },
 });
 const projectsStore = useProjectsStore();
+const emit = defineEmits(["closeDeleteProjectDialog"]);
+
 const deleteProject = (id) => {
   projectsStore.DELETE_PROJECT(id);
   emit("closeDeleteProjectDialog");

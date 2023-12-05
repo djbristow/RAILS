@@ -34,9 +34,11 @@
         </v-card-actions>
     </v-card>
 </template>
+
 <script setup>
 import { ref } from "vue";
 import { useProjectsStore } from "@/stores/projects";
+
 const projectsStore = useProjectsStore();
 const title = ref("");
 const type = ref("");
@@ -47,6 +49,8 @@ const roadname = ref("");
 const roadnumbers = ref("");
 const notes = ref("");
 const projectAddDataInvalid = ref(false);
+const emit = defineEmits(["closeAddProjectDialog"]);
+
 const addProject = () => {
     projectsStore.ADD_PROJECT({
         title: title.value,
