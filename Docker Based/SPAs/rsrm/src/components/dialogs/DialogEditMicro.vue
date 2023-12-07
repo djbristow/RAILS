@@ -25,6 +25,7 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script setup>
 import { ref, onMounted } from "vue";
 import { useMicrosStore } from "@/stores/micros";
@@ -44,6 +45,8 @@ const props = defineProps({
     required: true,
   },
 });
+const emit = defineEmits(["closeEditMicroDialog"]);
+
 const editMicro = () => {
   microStore.UPDATE_MICRO({
     _id: _id.value,

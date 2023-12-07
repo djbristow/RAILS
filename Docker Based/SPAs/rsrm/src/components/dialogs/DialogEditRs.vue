@@ -78,6 +78,7 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRSStore } from "@/stores/rs";
@@ -117,6 +118,8 @@ const props = defineProps({
     required: true,
   },
 });
+const emit = defineEmits(["closeEditRsDialog"]);
+
 const editRsUpdate = () => {
   rsStore.UPDATE_RS({
     _id: _id.value,

@@ -51,7 +51,6 @@
         </v-dialog>
       </v-card>
       <br />
-      <hr />
       <v-card-actions>
         <JsonCSV :data="rsStore.rs"> <v-btn> Export RFID RS </v-btn> </JsonCSV
         ><br />

@@ -25,6 +25,7 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script setup>
 import { ref } from "vue";
 import { useMicrosStore } from "@/stores/micros";
@@ -37,6 +38,8 @@ const sensorLoc = ref("");
 const status = ref("");
 const microAddDataInvalid = ref(false);
 const microStore = useMicrosStore();
+const emit = defineEmits(["closeAddMicroDialog"]);
+
 const addMicro = () => {
   microStore.ADD_NEW_MICRO({
     microID: microID.value,

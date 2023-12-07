@@ -11,6 +11,7 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script setup>
 import { useMicrosStore } from "@/stores/micros";
 
@@ -21,6 +22,8 @@ const props = defineProps({
   },
 });
 const microStore = useMicrosStore();
+const emit = defineEmits(["closeDeleteMicroDialog"]);
+
 const deleteMicro = (id) => {
   microStore.DELETE_MICRO(id);
   emit("closeDeleteMicroDialog");

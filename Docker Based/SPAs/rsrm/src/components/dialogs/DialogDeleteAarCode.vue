@@ -14,6 +14,7 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script setup>
 import { useAarCodesStore } from "@/stores/aarCodes";
 
@@ -24,6 +25,8 @@ const props = defineProps({
   },
 });
 const aarCodeStore = useAarCodesStore();
+const emit = defineEmits(["closeDeleteAarCodeDialog"]);
+
 const deleteAarCode = (id) => {
   aarCodeStore.DELETE_AARCODE(id);
   emit("closeDeleteAarCodeDialog");

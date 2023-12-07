@@ -19,6 +19,7 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script setup>
 import { ref, onMounted } from "vue";
 import { useAarCodesStore } from "@/stores/aarCodes";
@@ -35,6 +36,8 @@ const description = ref("");
 const id = ref("");
 const aarCodeEditDataInvalid = ref(false);
 const aarCodeStore = useAarCodesStore();
+const emit = defineEmits(["closeEditAarCodeDialog"]);
+
 const editAarCode = () => {
   aarCodeStore.UPDATE_AARCODE({
     _id: id.value,

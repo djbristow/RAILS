@@ -64,6 +64,9 @@ const props = defineProps({
     required: true,
   },
 });
+const emit = defineEmits(["closeRegisterDialog"]);
+const rsStore = useRSStore();
+
 const rsDataInvalid = computed(() => {
   let result = true;
   if (!newrs.value) {
@@ -77,11 +80,9 @@ const rsDataInvalid = computed(() => {
   }
   return result;
 });
-const rsStore = useRSStore();
 const cancelUpdateRs = () => {
   emit("closeRegisterDialog");
 };
-
 const checkUpdateRs = () => {
   new_rs.value.rfid = props.rfid;
   new_rs.value.roadName = roadname.value;

@@ -6,17 +6,25 @@
         <v-card-actions>
           <v-btn @click="addRollingstock()" width="175">New Rollingstock</v-btn>
         </v-card-actions>
+        <v-text-field
+          v-model="search"
+          prepend-inner-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
         <v-data-table
           :headers="headers"
           :items="rsStore.rs"
+          :search="search"
           item-key="item.id"
           density="dense"
         >
           <template v-slot:item.actions="{ item }">
-            <v-icon color="blue darken-1" @click="editAarCode(item)">
+            <v-icon color="blue darken-1" @click="editRollingstock(item)">
               mdi-pencil
             </v-icon>
-            <v-icon color="red darken-1" @click="deleteAarCode(item)"
+            <v-icon color="red darken-1" @click="deleteRollingstock(item)"
               >mdi-delete</v-icon
             >
           </template>
@@ -40,6 +48,7 @@
     </v-container>
   </v-app>
 </template>
+
 <script setup>
 import { ref } from "vue";
 import DialogEditRs from "@/components/dialogs/DialogEditRs.vue";
@@ -60,6 +69,7 @@ const headers = [
   { title: "RFID", key: "rfid" },
   { title: "Actions", key: "actions", sortable: false },
 ];
+const search = ref("");
 
 const addRollingstock = () => {
   addRsDialog.value = true;
