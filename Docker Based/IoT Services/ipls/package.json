@@ -1,6 +1,6 @@
 {
   "name": "ipls",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "IoT Publisher Turnout Light Services ",
   "author": "David Bristow",
   "license": "Apache-2.0",
@@ -11,6 +11,6 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "mqtt": "5.3.0"
+    "mqtt": "5.3.3"
   }
 }
