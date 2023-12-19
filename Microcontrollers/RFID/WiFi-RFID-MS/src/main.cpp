@@ -1,7 +1,8 @@
 /*****
  * MQTT IOT RFID Reader
  * Copyright 2020-2022 David J Bristow
- * Version 1.0.0 - 5/20/23
+ * Version 1.0.1- 20223-12-18
+ * - paramters to connect to the MQTT broker are kept in a params.h file
  * - connects to an MQTT broker via wifi
  * - publishes info about this reader to the topic "micros"
  *   {"et":"1590462747","sensor":"rfidRdr01","msgType":"initial",ip":"192.168.0.19"}
@@ -11,9 +12,7 @@
  *   the results as a JSON string, gets Epoch time from an NTP server
  *   and then publishes the JSON String to the topic "sensors/rfid"
  *   {"et":"1590463450","sensor":"rfidRdr01","reader":"1","rfid":"1C0044CF23"}
- * - subscribes to "micros/cmd/mqtt_id" where mqtt_id is the paramter
- *   defined at runtime as the sensor. When a RESET command is received the wifi and
- *   mqtt paramters are removed causing next reboot to require inputs of mqtt paramaters
+
  *****************************************************************************************
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
@@ -58,7 +57,8 @@ int reader = 0;
 int rfidLength = 10;
 int loopCount = 0;
 String readerNum = "";
-String mqttServer = MQTTSERVER int mqttPort = MQTTPORT;
+String mqttServer = MQTTSERVER;
+int mqttPort = MQTTPORT;
 String mqttId = MQTTID;
 int numberReaders = NUMBERREADERS;
 String readerType = READERTYPE;
@@ -79,20 +79,6 @@ String buildJson(String id, String sensor, String et, String reader)
     mqttMsg = mqttMsg + "\"}";
     return mqttMsg;
 }
-void callback(char *topic, byte *payload, unsigned int length)
-{
-    StaticJsonDocument<200> doc;
-    DeserializationError error = deserializeJson(doc, payload);
-    if (error)
-    {
-        Serial.print(F("deserializeJson() failed: "));
-        Serial.println(error.c_str());
-        return;
-    }
-    String command = doc["cmd"];
-    String micro = doc["micro"];
-    Serial.println("\nFailed to reset Wifi; micro did not match");
-}
 void reconnectMqtt()
 {
     while (!client.connected())
@@ -112,7 +98,6 @@ void reconnectMqtt()
 }
 void connectMqtt()
 {
-    client.setCallback(callback);
     if (!client.connected())
     {
         reconnectMqtt();

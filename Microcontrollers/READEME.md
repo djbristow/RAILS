@@ -2,7 +2,7 @@
 &copy; David Bristow, 2019-2023
 
 # Version
-* 1.0.0 - 6/12/2023
+* 1.0.1 - 2023-12-18
 
 This directory contains the microcontrollers employed as subsystems with RAILS interfacing with physical sensors and actuators used in a model railroad.
 

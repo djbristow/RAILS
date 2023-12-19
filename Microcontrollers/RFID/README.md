@@ -2,7 +2,7 @@
 &copy; David Bristow, 2019-2023
 
 # Version
-* 1.0.1 - 6/14/2023
+* 1.0.1 - 2023-12-18
 
 This directory contains the RFID microcontrollers designs both software and hardware.
 

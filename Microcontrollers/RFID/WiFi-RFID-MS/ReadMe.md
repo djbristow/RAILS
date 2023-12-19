@@ -2,7 +2,7 @@
 &copy; 2020-2023 David J Bristow
 
 # Version
-* 1.0.0 - 5/20/2022
+* 1.0.1 - 2023-12-18
 
 This software impmlemnts an IoT RFID reader using an ESP8266 micro controller.
 
@@ -16,7 +16,6 @@ The following actions are accomplished:
  - reads values from a single ID-12LA or 7491E RFID readerr, formats the results as a JSON string, 
    gets Epoch time from an NTP server and then publishes the JSON String to the topic "sensors/rfid"
  - published format: {"et":"1590463450","sensor":"rfidRdr01","reader":"1","rfid":"1C0044CF23"}
- - subscribes to "micros/cmd/mqtt_id" where mqtt_id is the paramter defined at runtime as the sensor
 
 ## License
 
