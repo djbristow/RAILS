@@ -17,89 +17,141 @@ MongoDB stores data in a flexible, semi-structured document format, using JSON.
 MongoDB stores data in a flexible, semi-structured document format, using JSON. \ac{RAILS} organizes the data in three\footnote{The current design has only three but as additional functionality is added additional groups may be added} groupings, which correspond to the three data microservices; \ac{RIDS}, \ac{PPDS} and \ac{RLDS}.
 \subsection{Railroad Inventory}
 \subsubsection{aarcodes}\label{aarcode}
-An \ac{AAR} code refers to a classification code used by the \ac{AAR} to identify different types of equipment and rolling stock used in the North American railway industry. The AAR codes are a standardized way of categorizing and labeling various railway vehicles, making it easier to identify and track equipment across different railways and organizations.
-\begin{table}[H]
-    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+An \ac{AAR} code refers to a classification code used by the \ac{AAR} to identify different types of equipment and rollingstock used in the North American railway industry. The AAR codes are a standardized way of categorizing and labeling various railway vehicles, making it easier to identify and track equipment across different railways and organizations.
+\begin{longtable}{|L{3cm}|L{1.7cm}|L{9.1cm}|L{1.0cm}|}
+	\caption{\label{aar-table}AarCode Collection Fields Table}\\
     \hline
-        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
-        aarCode & String & A classification code used by the \ac{AAR} to identify different types of rolling stock & Yes \\ \hline
+	\textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\
+	\hline
+	\endfirsthead
+	\multicolumn{4}{c}%
+	{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+	\hline
+	\textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\
+	\hline
+	\endhead
+	\hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
+	\endfoot
+	\hline
+	\endlastfoot
+        aarCode & String & A classification code used by the \ac{AAR} to identify different types of rollingstock & Yes \\ \hline
         rollingstockType & String & A category of rollingstock having common characteristics, such as; Auxiliary, Freight, Gondola, Hopper, Locomotive, Non Revenue, and Passenger. & No\\ \hline
         description & String & A written representation that aims to make vivid the characteristics of the AAR Code. & No \\ \hline
-    \end{tabular}
-    \caption{\label{aarcode-table}AarCodes Collection Fields Table}
-    \end{table}
+\end{longtable}
 \subsubsection{dccs}
 \ac{DCC} is a system used in model railroading to control and operate model trains and their accessories. It is a standardized method of transmitting control signals digitally to locomotives and other rollingstock. \ac{DCC} allows for more precise and independent control of multiple trains on the same track.
-\begin{table}[H]
-    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+\begin{longtable} { |L{3cm}|L{1.7cm}|L{9.1cm}|L{1.0cm}| }
+	\caption{\label{dcc-table}Dccs Collection Fields Table}\\
     \hline
-        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
+	\textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\
+	\hline
+	\endfirsthead
+	\multicolumn{4}{c}%
+	{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+	\hline
+	\textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\
+	\hline
+	\endhead
+	\hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
+	\endfoot
+	\hline
+	\endlastfoot
         locomotiveID & ObjecctId &  The identity object of the dccs document assigned by MongoDB at the time the rollingstock (locomotive) document is created.& Yes \\ \hline
         mfg & String & The company that made the \ac{DCC} decoder installed in a rollingstock, typically a locomotive. & No\\ \hline
         family & String & A group of DCC decoders produced by a specific manufacturer that share common features, specifications, and compatibility. & No \\ \hline
         model &  String & A \ac{DCC} decoder offering specific features or specifications within the same product family& No \\ \hline
-        address & String & A unique identifier assigned to each \ac{DCC} decoder, which is a numerical or digital label that distinguishes one rollingstock from another in the \ac{DCC} system. \ac{DCC} addresses range from 1 to 9999. & No \\ \hline
-    \end{tabular}
-    \caption{\label{dcc-table}\ac{DCC}s Collection Fields Table}
-\end{table}
+        address & String & A unique identifier assigned to each \ac{DCC} decoder, which is a numerical or digital label that distinguishes one rollingstock from another in the \ac{DCC} system. \ac{DCC} addresses range from 1 to 9999. & No \\ \hline  
+\end{longtable}
 \subsubsection{images}
-\begin{table}[H]
-    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
-    \hline
-        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
-        fileName & String &  & Yes \\ \hline
-        title & String & & No\\ \hline
-        notes & String & & No \\ \hline
-        category &  String & & No \\ \hline
-    \end{tabular}
-    \caption{\label{image-table}Images Collection Fields Table}
-    \end{table}
+A set of photographs or illustrations of the rollingstock and structures of the model railroad present in \ac{RAILS}. These images may capture different designs, configurations, and features of rollingstock, providing a visual representation of the diversity within the railway transportation system.
+\begin{longtable}{|L{3cm}|L{1.7cm}|L{9.1cm}|L{1.0cm}|}
+	\caption{\label{image-table}Images Collection Fields Table}\\
+	\hline
+    \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\
+	\hline
+	\endfirsthead
+	\multicolumn{4}{c}%
+	{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+	\hline
+	\textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\
+	\hline
+	\endhead
+	\hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
+	\endfoot
+	\hline
+	\endlastfoot
+        fileName & String & A unique identifier assigned to a computer file in order to distinguish it from other files within a file system. & Yes \\ \hline
+        title & String & The name or label given to the image to identify and distinguish it from others. & No\\ \hline
+        notes & String & A brief record of events or observations about the image. & No \\ \hline
+        category & String & A classification or group of images that share common characteristics, features, or attributes. & No \\ \hline
+\end{longtable}
 \subsubsection{industries}
-\begin{table}[H]
-    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
-    \hline
-        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
-        shortName & String &  & Yes \\ \hline
-        longName & String & & No\\ \hline
-        industryType & String & & No \\ \hline
-        industryLocation &  String & & No \\ \hline
-    \end{tabular}
-    \caption{\label{industry-table}Industries Collection Fields Table}
-    \end{table}
+Sectors of economic activity that involve the production of goods or the provision of services. These sectors are characterized by similar business activities and are often grouped together based on their common features. Railways service a wide range of industries, facilitating the transportation of goods and passengers. The industries collection is used to identify the industries that are present in the model railroad system.
+\begin{longtable}{|L{3cm}|L{1.7cm}|L{9.1cm}|L{1.0cm}|}
+	\caption{\label{industry-table}Industries Collection Fields Table}\\
+	\hline
+	\textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\
+	\hline
+	\endfirsthead
+	\multicolumn{4}{c}%
+	{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+	\hline
+	\textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\
+	\hline
+	\endhead
+	\hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
+	\endfoot
+	\hline
+	\endlastfoot
+        shortName & String & A concise or abbreviated version of a longer name. It could be a nickname, an acronym, or a shortened form that is used for convenience or brevity. & Yes \\ \hline
+        longName & String &  A word or set of words by which an industry is identified and distinguished from others, legal name. & No\\ \hline
+        industryType & String & The various categories or sectors of economic activity in which businesses and organizations engage. & No \\ \hline
+        industryLocation & String & A specific place or position in space, often designated by its geographical coordinates or described in relation to other landmarks. & No \\ \hline
+\end{longtable}
 \subsubsection{rollingstocks}
-Rolling stock refers to the vehicles that move on a railway track. These vehicles are an essential part of any railway system and include various types of vehicles used for transporting goods and passengers. Rolling stock can be broadly categorized into two main types: passenger rolling stock and freight rolling stock. Locomotives are considered a type of rolling stock in the context of railway transportation.
-\begin{table}[H]
-    \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
+rollingstock refers to the vehicles that move on a railway track. These vehicles are an essential part of any railway system and include various types of vehicles used for transporting goods and passengers. Rollingstock can be broadly categorized into two main types: passenger rollingstock and freight rollingstock. Locomotives are considered a type of rollingstock in the context of railway transportation.
+\begin{longtable}{|L{3cm}|L{1.7cm}|L{9.1cm}|L{1.0cm}|}
+	\caption{\label{rollingstock-table}Rollingstock Collection Fields Table}\\
     \hline
-        \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\ \hline
+    \textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\
+	\hline
+	\endfirsthead
+	\multicolumn{4}{c}%
+	{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+	\hline
+	\textbf{Field} & \textbf{Type} & \textbf{Description} & \textbf{Req'd} \\
+	\hline
+	\endhead
+	\hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
+	\endfoot
+	\hline
+	\endlastfoot
 	roadName & String & The road name also reffered to as reporting marks are a set of letters used to identify the owner or operator of a railcar or locomotive. & Yes \\ \hline
 	roadNumber & String & The road number is an identifier for a railcar or a locomotive and is numerical. & Yes \\ \hline
-	color & String &  & No \\ \hline
+	color & String & The exterior paint or livery applied to the rollingstock. The color of rollingstock serves several purposes, including identification, branding, and visibility. & No \\ \hline
 	aarCode & String & See paragraph \ref{aarcode}  & No \\ \hline
-	description & String &  & No \\ \hline
-	numberBlt & String &  & No \\ \hline
-	inSvcDate & Date &  & No \\ \hline
-	insideLength & String &  & No \\ \hline
+	description & String &  The informative account that provides information about the characteristics, features, qualities, or attributes of the rollingstock. & No \\ \hline
+	numberBlt & String & The total quantity or count of a particular rollingstock. & No \\ \hline
+	inSvcDate & Date & The specific date on which a peice of rollingstock is officially put into operation or use. It marks the beginning of its active service life, during which it is expected to perform its intended functions. & No \\ \hline
+	insideLength & String & For passenger cars it is measured from one end of the passenger compartment to the other. It defines the available space for seating and other passenger-related amenities. For freight cars it is measured from the inside faces of the end walls, excluding any bulkheads or projections that might reduce the usable length. It provides an indication of the space available for loading and transporting goods. & No \\ \hline
 	insideHeight & String &  & No \\ \hline
 	insideWidth & String &  & No \\ \hline
 	loadTypes & String &  & No \\ \hline
 	capacity & String & Capacity refers to the maximum amount of cargo, typically measured in weight or volume, that it can safely and efficiently transport. & No \\ \hline
 	bldr & String &  & No \\ \hline
 	bltDate & Date &  & No \\ \hline
-	notes & String &  & No \\ \hline
-	ltWeight & String &  & No \\ \hline
-	loadLimit & String &  & No \\ \hline
+	notes & String & A brief record of events or observations about the rollingstock. & No \\ \hline
+	ltWeight & String & The weight of the car itself without any cargo or load. & No \\ \hline
+	loadLimit & String & The maximum weight that a freight car can carry, including both the weight of the car itself (tare weight or lightweight) and the weight of the cargo (payload). & No \\ \hline
 	lastMaintDate & Date &  & No \\ \hline
 	locationNow & String &  & No \\ \hline
 	homeLocation & String &  & No \\ \hline
-	rsStatus & String &  & No \\ \hline
+	rsStatus & String & The current condition, availability, or operational state of the rollingstock used on a railway. & No \\ \hline
 	imageID & String &  & No \\ \hline
 	modelWeight & String & The mass of the model rollingstock in either grams or ounces. & No \\ \hline
 	modelLength & String & The distance measure between the middle of the front coupler knuckle to the middle of the rear coupler knuckle of the model rollingstock. & No \\ \hline
 	rfid & String & The 10 character identifier emitted by the RFID tag attached to the model rollingstock. & No \\ \hline
-    \end{tabular}
-    \caption{\label{rollingstock-table}Rollingstock Collection Fields Table}
-    \end{table}
+    \end{longtable}
 \subsubsection{structures}
 \begin{table}[H]
     \begin{tabular}{|L{3cm}|L{1.7cm}|L{8.8cm}|L{1.3cm}|}
