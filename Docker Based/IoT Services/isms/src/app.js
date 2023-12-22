@@ -6,7 +6,7 @@ const mqtt = require('mqtt'),
   axios = require('axios');
 
 var client = mqtt.connect('mqtt://' + process.env.MQTT_PORT_1883_TCP_ADDR + ':' + process.env.MQTT_PORT_1883_TCP_PORT, { clientId: "mqttjs02" });
-console.log("ISMS v2.1.16, Started")
+console.log("ISMS v2.1.17, Started")
 setTimeout(checkStatus, 6000);
 
 function rlds() {

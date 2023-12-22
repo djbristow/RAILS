@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020-2023
 
 ## Version
-v3.1.2 2023-12-10
+v3.1.3 2023-12-22
 
 Model Railway Layout Manager is a Vue application that provides a user with a web application to show layout information.  This web application uses port 3004.
 

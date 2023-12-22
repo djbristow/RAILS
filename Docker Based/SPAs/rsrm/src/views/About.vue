@@ -1,7 +1,7 @@
 <template>
   <div class="xx">
     <h1>About RAILS RS RFID Manager</h1>
-    <h3>Version 4.2.3</h3>
+    <h3>Version 4.2.4</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) RFID
       Application is one of several applications in the RAILS family of
