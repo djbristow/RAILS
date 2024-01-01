@@ -1,5 +1,5 @@
 # mrim
-&copy; David Bristow, 2020-2023
+David Bristow, 2020-2024
 
 ## Version
 v4.2.4 2023-12-22

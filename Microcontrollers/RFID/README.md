@@ -1,5 +1,5 @@
 # RFID Microcontrollers
-&copy; David Bristow, 2019-2023
+David Bristow, 2019-2024
 
 # Version
 * 1.0.1 - 2023-12-18

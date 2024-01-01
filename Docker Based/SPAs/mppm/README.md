@@ -1,5 +1,5 @@
 # mppm
-&copy; David Bristow, 2019-2023
+David Bristow, 2019-2024
 
 ## Version
 v3.3.2 2023-12-22

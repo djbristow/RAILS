@@ -1,8 +1,8 @@
 # Microcontrollers
-&copy; David Bristow, 2019-2023
+David Bristow, 2019-2024
 
 # Version
-* 1.0.0 - 6/12/2023
+* 1.2.0 - 2023-12-28
 
 This directory contains the microcontrollers employed as subsystems with RAILS interfacing with physical sensors and actuators used in a model railroad.
 
@@ -22,6 +22,7 @@ This directory contains the microcontrollers employed as subsystems with RAILS i
 
 
 # Directory
-This directory contains teh following sensors and actuators:
+This directory contains the following sensors and actuators:
 
-* RFID - a number of microcontollers that use RFID readers to publish RFID tags read from rolling stock
+* RFID - microcontollers that use RFID readers to publish RFID tags read from rolling stock
+* Turnout Controller - microcontollers that control turnouts and report turnout status

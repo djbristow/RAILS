@@ -1,5 +1,5 @@
 # RAILS
-&copy; David Bristow, 2019-2023
+David Bristow, 2019-2024
 
 # Version
 * 3.0.1 - 6/19/2023

@@ -1,5 +1,5 @@
 # mrlm
-&copy; David Bristow, 2020-2023
+David Bristow, 2020-2024
 
 ## Version
 v3.1.3 2023-12-22

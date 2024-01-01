@@ -1,5 +1,5 @@
 # MQTT IOT RFID Reader
-&copy; 2020-2022 David J Bristow
+&copy; 2020-2024 David J Bristow
 
 # Version
 * 2.0.0 - 1/23/2022

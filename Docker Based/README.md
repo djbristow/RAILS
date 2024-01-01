@@ -1,5 +1,5 @@
 # Docker Based Components
-&copy; David Bristow, 2019-2023
+David Bristow, 2019-2024
 
 # Version
 * 1.2.3 - 2023-12-22
