@@ -4,7 +4,7 @@ David Bristow, 2019-2024
 Railroad Inventory Data Services is an Express Mongoose aplication that connects to a MongoDB database containing inventory collections and provide data services to RSRM and MRIM components. This application uses port 3000.
 
 ## Version
-v2.0.19 2023-12-10
+v2.0.20 2024-01-13
 
 ## License
 
