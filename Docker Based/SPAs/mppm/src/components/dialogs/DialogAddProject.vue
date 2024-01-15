@@ -11,6 +11,7 @@
                     <v-text-field v-model="description" label="Description"></v-text-field>
                 </v-row>
                 <v-row>
+                    <v-text-field v-model="priority" label="Priority"></v-text-field>
                     <v-text-field v-model="startdate" label="Start"></v-text-field>
                     <v-text-field v-model="enddate" label="End"></v-text-field>
                 </v-row>
@@ -43,6 +44,7 @@ const projectsStore = useProjectsStore();
 const title = ref("");
 const type = ref("");
 const description = ref("");
+const priority = ref("");
 const startdate = ref(null);
 const enddate = ref(null);
 const roadname = ref("");
@@ -56,6 +58,7 @@ const addProject = () => {
         title: title.value,
         type: type.value,
         description: description.value,
+        priority: priority.value,
         startdate: startdate.value,
         enddate: enddate.value,
         roadname: roadname.value,

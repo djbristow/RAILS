@@ -11,6 +11,7 @@
                     <v-text-field v-model="description" label="Description"></v-text-field>
                 </v-row>
                 <v-row>
+                    <v-text-field v-model="priority" label="Priority"></v-text-field>
                     <v-text-field v-model="startdate" label="Start"></v-text-field>
                     <v-text-field v-model="enddate" label="End"></v-text-field>
                 </v-row>
@@ -50,6 +51,7 @@ const projectEditDataInvalid = ref(false);
 const title = ref("");
 const type = ref("");
 const description = ref("");
+const priority = ref("");
 const startdate = ref(null);
 const enddate = ref(null);
 const roadname = ref("");
@@ -61,6 +63,7 @@ onMounted(() => {
     title.value = props.project.title;
     type.value = props.project.type;
     description.value = props.project.description;
+    priority.value = props.project.priority;
     startdate.value = props.project.startdate;
     enddate.value = props.project.enddate;
     roadname.value = props.project.roadname;
@@ -68,11 +71,13 @@ onMounted(() => {
     notes.value = props.project.notes;
 });
 const editProject = () => {
+    console.log("editProject");
     let updatedProject = {
         _id: props.project._id,
         title: title.value,
         type: type.value,
         description: description.value,
+        priority: priority.value,
         startdate: startdate.value,
         enddate: enddate.value,
         roadname: roadname.value,

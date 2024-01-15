@@ -41,6 +41,7 @@ const headers = [
   { title: "Manufacturer", key: "manufacturer" },
   { title: "Description", key: "desciption" },
   { title: "Unit Cost", key: "unitcost", align: "end" },
+  { title: "Qty", key: "qty", align: "end" },
 ];
 const groups = [
   { key: "project", order: "asc" },

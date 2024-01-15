@@ -33,6 +33,7 @@ export const useProjectsStore = defineStore("projects", {
       this.projects.unshift(res.data);
     },
     async [UPDATE_PROJECT](project) {
+      console.log("store update project", project);
       await PpService.updateProj(project);
       this.projects = this.projects.filter(
         (projects) => projects._id !== project._id

@@ -70,6 +70,7 @@ app.post("/add_proj", async (req, res) => {
     title: req.body.title,
     type: req.body.type,
     description: req.body.description,
+    priority: req.body.priority,
     startdate: req.body.startdate,
     enddate: req.body.enddate,
     roadname: req.body.roadname,
@@ -83,6 +84,7 @@ app.put("/update_proj/:id", async (req, res) => {
   project.title = req.body.title;
   project.type = req.body.type;
   project.description = req.body.description;
+  project.priority = req.body.priority;
   project.startdate = req.body.startdate;
   project.enddate = req.body.enddate;
   project.roadname = req.body.roadname;

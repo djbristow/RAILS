@@ -64,6 +64,7 @@ const editableProject = ref(null);
 const projectsStore = useProjectsStore();
 const headers = [
   { title: "Title", key: "title" },
+  { title: "Priority", key: "priority", align: 'end' },
   { title: "Type", key: "type" },
   { title: "Description", key: "description" },
   { title: "Start", key: "startdate" },

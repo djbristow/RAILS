@@ -36,7 +36,12 @@ var Project = new Schema({
     notes: {
         type: String,
         trim: true
-    }
+    },
+    priority: {
+        type: Number,
+        min: 1,
+        max: 10
+    },
 });
 
 module.exports = mongoose.model('Project', Project);
