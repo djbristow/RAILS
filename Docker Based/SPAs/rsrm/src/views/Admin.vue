@@ -52,8 +52,8 @@
       </v-card>
       <br />
       <v-card-actions>
-        <JsonCSV :data="rsStore.rs"> <v-btn> Export RFID RS </v-btn> </JsonCSV
-        ><br />
+        <v-btn @click="downloadFile"> Export RFID RS </v-btn>
+        <br />
         <v-btn @click="printRfids()" width="200">Print RFID Report</v-btn>
       </v-card-actions>
     </v-container>
@@ -65,7 +65,7 @@ import { ref } from "vue";
 import jsPDF from "jspdf";
 import moment from "moment";
 import "jspdf-autotable";
-import JsonCSV from "vue-json-csv";
+import exportFromJSON from "export-from-json";
 import DialogEditMicro from "../components/dialogs/DialogEditMicro.vue";
 import DialogDeleteMicro from "../components/dialogs/DialogDeleteMicro.vue";
 import DialogAddMicro from "../components/dialogs/DialogAddMicro.vue";
@@ -96,6 +96,12 @@ const formatDate = (epochTime) => {
       .local()
       .format("YYYY-MM-DD hh:mm:ss");
   }
+};
+const downloadFile = () => {
+  let data = rsStore.rs;
+  let fileName = "rfid_rs";
+  let exportType = exportFromJSON.types.csv;
+  exportFromJSON({ data, fileName, exportType });
 };
 const addMicro = () => {
   addMicroDialog.value = true;
