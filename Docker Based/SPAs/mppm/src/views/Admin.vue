@@ -273,10 +273,14 @@ const printFile = () => {
       PrintServices.printProjects(
         projSortBy.value,
         breakType.value,
-        projectsStore.projects
+        projectsStore.projects,
+        projectsStore.GET_UNIQUE_PROJECT_TYPES,
       );
       break;
     case "Purchases":
+      if (purSortBy.value == "Date") {
+          breakType.value =  "Continuous";
+      }
       PrintServices.printPurchases(
         purSortBy.value,
         breakType.value,

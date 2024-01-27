@@ -2,7 +2,7 @@ import moment from "moment";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 export default {
-  async printProjects(projSortType, projBreakType, documents) {
+  async printProjects(projSortType, projBreakType, documents, uniqueProjectTypes) {
     class Projrow {
       constructor(title, type, startdate, enddate, description, notes) {
         this.title = title;
@@ -103,7 +103,7 @@ export default {
         margin: { top: 50 },
       });
     } else {
-      uniques = store.getters.getUniqueProjectTypes;
+      uniques = uniqueProjectTypes;
       var k = 0;
       for (i = 0; i < uniques.length; i++) {
         for (j = 0; j < projrows.length; j++) {
@@ -199,8 +199,6 @@ export default {
     startRow[0] = 0;
     var uniques = [];
     var somerows = [];
-    var rowcount = 0;
-    var increment = 0;
     var i = 0;
     var j = 0;
     var k = 0;
@@ -237,6 +235,7 @@ export default {
     }
     switch (purSortType) {
       case "Date":
+        var byTitle = "Date";
         purrows.sort(function (a, b) {
           var purTypeA = a.date;
           var purTypeB = b.date;
@@ -337,7 +336,19 @@ export default {
       doc.text(summary, 100, finalY + 20);
     } else {
       k = 0;
+      var headerY = 0;
+      doc.setFontSize(12);
       for (i = 0; i < uniques.length; i++) {
+        headerY = 50;
+        if (purBreakType !== "Page"){
+        if (i !== 0) {
+          headerY = doc.previousAutoTable.finalY + 15;
+        }
+        if (headerY + 50 > doc.internal.pageSize.height) {
+          doc.addPage();
+          headerY = 50;
+        }}
+        doc.text(uniques[i], 50, headerY);
         for (j = 0; j < purrows.length; j++) {
           if (
             (purSortType === "Project" && purrows[j].project === uniques[i]) ||
@@ -364,6 +375,7 @@ export default {
         doc.autoTable({
           columns: colDefinition,
           body: somerows,
+          startY : headerY + 10,
           styles: { cellPadding: 3, fontSize: 8 },
           columnStyles: {
             0: { halign: "right", cellWidth: 30 }, // num
@@ -391,6 +403,7 @@ export default {
           margin: { top: 50 },
         });
         if (purBreakType === "Page" && i < uniques.length - 1) {
+          headerY = 0;
           doc.addPage();
         }
         k = 0;
