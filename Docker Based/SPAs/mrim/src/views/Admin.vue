@@ -343,6 +343,7 @@ const printFile = () => {
       PrintServices.printRfids(rsStore.rs);
       break;
     case "Rolling Stock":
+    console.log("Status Types : " + rsStore.GET_UNIQUE_RS_STATUS);
       PrintServices.printRollingstock(
         sortBy.value,
         breakType.value,

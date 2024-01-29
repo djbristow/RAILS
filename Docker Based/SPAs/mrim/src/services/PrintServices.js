@@ -304,6 +304,8 @@ export default {
         return 0;
       });
     }
+    console.log("breakType: " + breakType);
+    console.log("length of RS: " + rsrows.length);
     var doc = new jsPDF("l", "pt");
     var newTitle = title + byTitle;
     doc.text(newTitle, 350, 30);
@@ -347,9 +349,22 @@ export default {
         uniques = uniqueRsAarCode;
       } else {
         uniques = uniqueRsStatus;
+        console.log("uniques: " + uniques);
       }
       var k = 0;
+      var headerY = 0;
+      doc.setFontSize(12);
       for (i = 0; i < uniques.length; i++) {
+        headerY = 50;
+        if (breakType !== "Page"){
+        if (i !== 0) {
+          headerY = doc.previousAutoTable.finalY + 15;
+        }
+        if (headerY + 50 > doc.internal.pageSize.height) {
+          doc.addPage();
+          headerY = 50;
+        }}
+        doc.text(uniques[i], 50, headerY);
         for (j = 0; j < rsrows.length; j++) {
           if (
             (sortBy === "Road Names" && rsrows[j].roadName === uniques[i]) ||
@@ -376,6 +391,7 @@ export default {
         doc.autoTable({
           columns: columns,
           body: somerows,
+          startY : headerY + 10,
           styles: { cellPadding: 3, fontSize: 9 },
           columnStyles: {
             0: { cellWidth: 50 },
@@ -405,6 +421,7 @@ export default {
           margin: { top: 50 },
         });
         if (breakType === "Page" && i < uniques.length - 1) {
+          headerY = 0;
           doc.addPage();
         }
         k = 0;

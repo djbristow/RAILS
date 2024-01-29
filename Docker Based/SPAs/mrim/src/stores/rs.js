@@ -37,31 +37,15 @@ export const useRSStore = defineStore("rs", {
     },
     [GET_UNIQUE_ROAD_NAMES](state) {
       let uniqueRoadNames = [...new Set(state.rs.map((rs) => rs.roadName))];
-      /*  state.rs.forEach((rs) => {
-        if (!uniqueRoadNames.includes(rs.roadName)) {
-          uniqueRoadNames.push(rs.roadName);
-        }
-      }); */
       return uniqueRoadNames.sort();
     },
     [GET_UNIQUE_AARCODES](state) {
       let uniqueAarCodes = [...new Set(state.rs.map((rs) => rs.aarCode))];
-      /*       state.rs.forEach((rs) => {
-        if (!uniqueAarCodes.includes(rs.aarCode)) {
-          uniqueAarCodes.push(rs.aarCode);
-        }
-      }); */
       return uniqueAarCodes.sort();
     },
     [GET_UNIQUE_RS_STATUS](state) {
       let uniqueRsStatus = [...new Set(state.rs.map((rs) => rs.rsStatus))];
-      /* state.rs.forEach((rs) => {
-        if (!uniqueRsStatus.includes(rs.rsStatus)) {
-          uniqueRsStatus.push(rs.rsStatus);
-        }
-      });
       return uniqueRsStatus.sort();
-    }, */
     },
   },
   actions: {
