@@ -1,6 +1,6 @@
 {
   "name": "rsrm",
-  "version": "4.2.8",
+  "version": "4.2.9",
   "description": "Rolling Stock RFID Manager",
   "author": "dbristow <dave@bristow-family.org>",
   "private": true,
@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@mdi/font": "7.4.47",
-    "axios": "1.6.5",
-    "date-fns": "3.3.0",
+    "axios": "1.6.7",
+    "date-fns": "3.3.1",
     "export-from-json": "^1.7.4",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "3.8.1",
