@@ -1,7 +1,7 @@
 <template>
   <div class="xx">
     <h1>About Model Railroad Inventory Manager</h1>
-    <h3>Version 4.2.9</h3>
+    <h3>Version 4.2.10</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) MRIM
       Application is one of several single page applications (SPAs) in the RAILS
