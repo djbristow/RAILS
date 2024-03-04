@@ -12,5 +12,6 @@ RUN npm install -g http-server
 RUN mkdir -p /usr/djb/dist
 WORKDIR /usr/djb/dist
 COPY --from=builder /usr/djb/dist .
+ENV VITE_MYPPDS_URI=myPpds:3007
 EXPOSE 8080
 CMD [ "http-server", "/usr/djb/dist" ]
