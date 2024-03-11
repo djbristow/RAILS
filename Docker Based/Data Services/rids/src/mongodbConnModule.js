@@ -7,12 +7,12 @@ const options = {
   }
 
 module.exports.connect = function () {
-	mongoose.connect('mongodb://' + process.env.MONGODB_PORT_27017_TCP_ADDR + ':' + process.env.MONGODB_PORT_27017_TCP_PORT + '/rails', options);
+	mongoose.connect('mongodb://' + process.env.MONGODB_URI + '/rails', options);
 	var db = mongoose.connection;
 	db.on("error", console.error.bind(console, "connection error"));
 	db.once("open", function (callback) {
 		console.log("Connection Succeeded");
-        console.log("RIDS v2.0.23");
+        console.log("RIDS v2.1.0");
 		return db;
 	})
 }

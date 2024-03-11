@@ -2,75 +2,68 @@
 // This is a Hapi application that stores files on the server (POST). The images stored on
 // the server are also available for reterival (GET).
 
-const Hapi = require("@hapi/hapi");
+const express = require("express");
+const cors = require("cors");
+const multer = require("multer");
 const fs = require("fs");
-const Path = require("path");
-const Inert = require("@hapi/inert");
 
-const init = async () => {
-  const server = Hapi.server({
-    port: process.env.MRFM_TCP_PORT,
-    host: process.env.MRFM_TCP_ADDR,
-    routes: {
-      cors: true,
-    },
-  });
+const app = express();
+app.use(express.static("src/uploads"));
+app.use(cors());
 
-  await server.register(require("@hapi/inert"));
-
-  server.route({
-    method: "GET",
-    path: "/{path*}",
-    handler: {
-      directory: {
-        path: __dirname + "/uploads/"
-      }
-    },
-  });
-  server.route({
-    method: "POST",
-    path: "/uploadimg",
-    options: {
-      payload: {
-        maxBytes: 209715200,
-        output: "file",
-        parse: true,
-        multipart: true,
-        uploads: "./src/tmp",
-      },
-    },
-    handler: async (request, h) => {
-      let data = request.payload;
-      if (data.file) {
-        let name = data.file.filename;
-        let file = data.file;
-        let path = file.path;
-        let newPath = path.slice(path.indexOf("tmp") - 1, path.length);
-        fs.copyFile(
-          __dirname + newPath,
-          __dirname + "/uploads/" + name,
-          function (err) {
-            if (err) {
-              throw err;
-            } else {
-              console.log("File Renamed.");
-            }
-          }
-        );
-        
-        return "File uploaded successfully";
-      } else {
-        return "No file uploaded";
-      }
-    },
-  });
-  await server.start();
-  console.log("MRFM v2.1.4, Started")
-  console.log("MRFM running on %s", server.info.uri);
+const fileFilter = (req, file, cb) => {
+  const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+  if (!allowedTypes.includes(file.mimetype)) {
+    const error = new Error("Incorrect file");
+    error.code = "INCORRECT_FILETYPE";
+    return cb(error, false);
+  }
+  cb(null, true);
 };
-process.on("unhandledRejection", (err) => {
-  console.log(err);
-  process.exit(1);
+
+const upload = multer({
+  dest: "./src/tmp",
+  fileFilter,
+  limits: {
+    fileSize: 1000000,
+  },
 });
 
-init();
+const PORT = "3030" || process.env.PORT;
+
+app.get("/", function (req, res) {
+  res.sendFile('index.html');
+});
+
+app.post("/upload", upload.single("file"), (req, res) => {
+  let fileName = req.file.originalname;
+  let filePath = req.file.path;
+  let newPath = filePath.slice(filePath.indexOf("tmp") - 1, filePath.length);
+  console.log("File name: ", fileName + " File path: ", filePath + " New path: ", newPath);
+  console.log(__dirname);
+  fs.copyFile(
+    __dirname + newPath,
+    __dirname + "/uploads/" + fileName,
+    function (err) {
+      if (err) {
+        throw err;
+      } else {
+        console.log("File Renamed.");
+      }
+    }
+  );
+  res.json({ file: req.file });
+});
+
+app.use((err, req, res) => {
+  if (err.code === "INCORRECT_FILETYPE") {
+    res.status(422).json({ error: "Only images are allowed" });
+    return;
+  }
+  if (err.code === "LIMIT_FILE_SIZE") {
+    res.status(422).json({ error: "Allowed file size is 1000KB" });
+    return;
+  }
+});
+
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));

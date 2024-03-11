@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 
-const baseurl =  'http://' + import.meta.env.VITE_MYRIDS_TCP_ADDR + ':' + import.meta.env.VITE_MYRIDS_TCP_PORT;
+const baseurl =  'http://' + import.meta.env.VITE_MYRIDS_URI;
 const ApiRs = axios.create({  
   baseURL: baseurl,
   headers: {

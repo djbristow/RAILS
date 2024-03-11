@@ -96,6 +96,7 @@ export default {
     return ApiRs().put("update_img/" + params.id, params);
   },
   addImg(params) {
+    console.log("params: ", params);
     return ApiRs().post("add_img", params);
   },
 };

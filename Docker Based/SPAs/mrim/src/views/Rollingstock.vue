@@ -18,7 +18,7 @@
           :items="rsStore.rs"
           :search="search"
           item-key="item.id"
-          density="dense"
+          density="compact"
         >
           <template v-slot:item.actions="{ item }">
             <v-icon color="blue darken-1" @click="editRollingstock(item)">
@@ -83,7 +83,7 @@ const headers = [
   { title: "Color", key: "color" },
   { title: "Actions", key: "actions", sortable: false },
 ];
-const search = ref([]);
+const search = ref("");
 
 const addRollingstock = () => {
   addRsDialog.value = true;
