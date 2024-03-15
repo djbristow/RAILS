@@ -1,4 +1,4 @@
-FROM node:21-alpine3.18
+FROM node:21-alpine3.19
 RUN mkdir -p /usr/djb
 RUN mkdir -p /usr/djb/src/uploads
 WORKDIR /usr/djb

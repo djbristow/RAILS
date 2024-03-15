@@ -4,7 +4,7 @@
 **I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices is a node application that subscribes to turnout panel button (sensors/pb) from the MQTT Broker. 
 
 ## Version
-v1.0.20 2024-01-30
+v1.0.21 2024-03-14
 
 ## License
 
