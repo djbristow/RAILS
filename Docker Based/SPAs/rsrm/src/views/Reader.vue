@@ -13,7 +13,7 @@
           :headers="headers"
           :items="rsStore.rfid"
           item-key="item.id"
-          density="dense"
+          density="compact"
         >
           <template v-slot:item.time="{ item }">
             {{ formatDate(item.time) }}

@@ -1,0 +1,106 @@
+version: "3.8"
+services:
+  myMongo:
+    image: 'mongo'
+    container_name: myMongo
+    networks:
+      - myRailsNet
+    ports:
+      - '27017:27017'
+    volumes: 
+      - myRailsDb:/data/db
+  myPpds:
+     image: 'dbristow/ppds'
+     container_name: myPpds
+     networks:
+      - myRailsNet
+     ports: 
+      - '3007:3007'
+     depends_on:
+      - myMongo
+  myMppm:
+    image: 'dbristow/mppm'
+    container_name: myMppm
+    ports:
+       - '3008:8080'
+    depends_on:
+       - myPpds
+  myRids:
+    image: 'dbristow/rids'
+    container_name: myRids
+    networks:
+      - myRailsNet
+    ports:
+      - '3000:3000'
+    depends_on:
+      - myMongo
+  myMrfm:
+    image: 'dbristow/mrfm'
+    container_name: myMrfm
+    ports: 
+      - '3030:3030'
+    volumes:
+      - myRailsImages:/usr/djb/src/uploads
+  myMrim:
+   image: 'dbristow/mrim'
+   container_name: myMrim
+   networks:
+      - myRailsNet
+   ports:
+      - '3001:8080'
+   depends_on:
+      - myRids
+      - myMrfm
+  myMqttBrkr:
+    image: 'eclipse-mosquitto'
+    container_name: myMqttBrkr
+    networks:
+      - myRailsNet
+    ports:
+      - '1883:1883'
+      - '9001:9001'
+    volumes:
+      - mosquitto:/mosquitto
+  myRlds:
+    image: 'dbristow/rlds'
+    container_name: myRlds
+    networks:
+      - myRailsNet
+    ports:
+      - '3006:3006'
+    depends_on:
+      - myMongo
+  myIsrs:
+    image: 'dbristow/isrs'
+    container_name: myIsrs
+    networks:
+      - myRailsNet
+    ports:
+      - '3005:3005'
+    environment:
+      - MQTT_TCP_URI=myMqttBrkr:1883
+      - RSRM_TCP_URI=localhost:3002
+    depends_on:
+      - myMqttBrkr
+  myRsrm:
+    image: 'dbristow/rsrm'
+    container_name: myRsrm
+    networks:
+      - myRailsNet
+    ports:
+      - '3002:8080'
+    depends_on:
+      - myRids
+      - myRlds
+      - myIsrs
+networks:
+  myRailsNet:
+    external: true
+volumes:
+  myRailsDb:
+    external: true
+  myRailsImages:
+    external: true
+  mosquitto:
+    external: true
+  

@@ -2,7 +2,7 @@
 &copy; David Bristow, 2020-2024
 
 ## Version
-v4.2.11 2024-03-14
+v4.3.0 2024-03-22
 
 Rollingstock RFID Manager is a Mongo Express Vue Node (MEVN) application that provides a user with a web application to show, when an RFID tag is read, the road name and number of the rolling stock associated with that tag. If there is no association with a peice of rolling stock input fields are provided to allow the user to enter the road name and number. This web application uses port 3002.
 
@@ -28,8 +28,7 @@ Rollingstock RFID Manager is a Mongo Express Vue Node (MEVN) application that pr
 * RIDS: Railroad Inventory Data Services running on port 3000
 * RLDS: Railroad Layout Data Services on port 3006
 
-# Vue 3 + Vite
-The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-## Recommended IDE Setup
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+Environment Variables
+export VITE_MYISRS_URI='127.0.0.1:3005'
+export VITE_MYRIDS_URI='127.0.0.1:3000'
+export VITE_MYRLDS_URI='127.0.0.1:3006'

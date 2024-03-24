@@ -3,6 +3,6 @@ import axios from 'axios'
 
 export default () => {
   return axios.create({
-    baseURL: `http://localhost:3006`
+    baseURL: 'http://' + import.meta.env.VITE_MYRLDS_URI
   })
 }

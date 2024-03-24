@@ -4,7 +4,7 @@ David Bristow, 2020-2024
 |**I**oT **S**ubscriber **R**FID **S**ervices is an Express application that subscribes to RFID messages from the MQTT Broker and sends them to a MEVN web application using web sockets. This application uses port 3005.
 
 ## Version
-v1.2.20 2024-03-14
+v1.3.0 2024-03-22
 
 ## License
 
@@ -32,8 +32,7 @@ v1.2.20 2024-03-14
 npm install
 
 # start NB-RSRM port is 3002 if running on Docker, in dev port is likely 8080
-export RSRM_TCP_PORT='3002'
-export MQTT_PORT_1883_TCP_ADDR='127.0.0.1'
-export MQTT_PORT_1883_TCP_PORT='1883'
+export RSRM_TCP_URI='http://localhost:3002'
+export MQTT_TCP_URI='127.0.0.1:1883'
 node src/app
 `'''

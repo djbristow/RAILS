@@ -5,5 +5,7 @@ COPY package.json /usr/djb
 RUN npm install -g npm@10.5.0
 RUN npm install
 COPY . /usr/djb
+ENV RSRM_TCP_URI=localhost:3002
+ENV MQTT_TCP_URI=myMqttBrkr:1883
 EXPOSE 3005
 CMD node ./src/app.js

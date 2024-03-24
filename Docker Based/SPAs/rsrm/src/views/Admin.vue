@@ -11,7 +11,7 @@
           :headers="headers"
           :items="microsStore.micros"
           item-key="item.id"
-          density="dense"
+          density="compact"
         >
           <template v-slot:item.et="{ item }">
             {{ formatDate(item.et) }}

@@ -49,7 +49,7 @@ const items = ref([
   { title: "AAR Codes", icon: "mdi-code-array", to: "/aarcodes" },
   { title: "About", icon: "mdi-help-box", to: "/" },
 ]);
-const socket = io.connect("http://localhost:3005");
+const socket = io.connect("http://" + import.meta.env.VITE_MYISRS_URI);
 const opensocketListener = () => {
   socket.on("connect", () => {
     connStatusStore.SET_CONN_STATUS("Connected");

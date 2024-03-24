@@ -2,20 +2,22 @@
 // This is an Express application that subscribes to RFID messages from the MQTT Broker 
 // and sends them to a web application using web sockets.
 
-const mqtt = require('mqtt'),     
-      app = require('express')(),
-      cors = require('cors');
-      app.use(cors());
+const mqtt = require('mqtt');
+const express = require('express');
+const cors = require('cors');
+const app = express();
+app.use(express.json());
+app.use(cors());
 
 var httpServer = require('http').createServer(app);
 var io = require('socket.io')(httpServer, {
   cors: {
-    origin: "http://localhost:" + process.env.RSRM_TCP_PORT,
+    origin:  "http://" + process.env.RSRM_TCP_URI,
     methods: ["GET", "POST"]
   }
 })
 
-var client = mqtt.connect('mqtt://' + process.env.MQTT_PORT_1883_TCP_ADDR + ':' + process.env.MQTT_PORT_1883_TCP_PORT);
+var client = mqtt.connect('mqtt://' + process.env.MQTT_TCP_URI);
 
 client.on('connect', function() {
      console.log("MQTT Connected")
@@ -34,6 +36,6 @@ function handleRfid(message){
 }
 
 httpServer.listen(3005, function() {
-      console.log("ISRS v1.2.20, Started")
+      console.log("ISRS v1.3.0, Started")
       console.log("ISRS listening on port 3005")
 });

@@ -2,7 +2,7 @@
 David Bristow, 2019-2024
 
 # Version
-* 1.0.1 - 6/8/2023
+* 1.1.0 - 2024-03-20
 
 Documentation like code is under continual development and only portrays a snapshot in time. The directories in this directory contain documentation about various aspects of RAILS and are developed using Latex technologies.
 
