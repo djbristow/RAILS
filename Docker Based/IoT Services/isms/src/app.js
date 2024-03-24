@@ -5,17 +5,18 @@
 const mqtt = require('mqtt'),
   axios = require('axios');
 
-var client = mqtt.connect('mqtt://' + process.env.MQTT_PORT_1883_TCP_ADDR + ':' + process.env.MQTT_PORT_1883_TCP_PORT, { clientId: "mqttjs02" });
-console.log("ISMS v2.1.22, Started")
+var client = mqtt.connect('mqtt://' + process.env.MQTT_TCP_URI, { clientId: "mqtt-isms" });
+console.log("ISMS v2.2.0, Started")
 setTimeout(checkStatus, 6000);
 
 function rlds() {
   return axios.create({
-    baseURL: 'http://' + process.env.RLDS_PORT_3006_TCP_ADDR + ':' + process.env.RLDS_PORT_3006_TCP_PORT
+    baseURL: 'http://' + process.env.RLDS_TCP_URI
   })
 }
 
 client.on('connect', function () {
+  console.log("MQTT Connected")
   client.subscribe('micros')
 })
 

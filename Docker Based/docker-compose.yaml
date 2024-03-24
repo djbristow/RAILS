@@ -77,9 +77,6 @@ services:
       - myRailsNet
     ports:
       - '3005:3005'
-    environment:
-      - MQTT_TCP_URI=myMqttBrkr:1883
-      - RSRM_TCP_URI=localhost:3002
     depends_on:
       - myMqttBrkr
   myRsrm:
@@ -93,6 +90,14 @@ services:
       - myRids
       - myRlds
       - myIsrs
+  myIsms:
+    image: 'dbristow/isms'
+    container_name: myIsms
+    networks:
+      - myRailsNet
+    depends_on:
+      - myMqttBrkr
+      - myRlds
 networks:
   myRailsNet:
     external: true

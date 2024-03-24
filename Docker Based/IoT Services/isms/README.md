@@ -4,7 +4,7 @@ David Bristow, 2020-2024
 **I**oT **S**ubscriber **M**icro-controller **S**ervices is an application that subscribes to micro messages from the MQTT Broker and adds or updates the micros collection via RLDS services. If a heartbeat message is not received within 5 minutes the status of the micro is down graded to "Late" and if it is longer than 10 minutes the status is updated to "Down".
 
 ## Version
-v2.1.22 2024-03-23
+v2.2.0 2024-03-24
 
 ## License
 
@@ -34,9 +34,7 @@ v2.1.22 2024-03-23
 npm install
 
 # start
-export MQTT_PORT_1883_TCP_ADDR='127.0.0.1'
-export MQTT_PORT_1883_TCP_PORT='1883'
-export RLDS_PORT_3006_TCP_ADDR='127.0.0.1'
-export RLDS_PORT_3006_TCP_PORT='3006'
+export MQTT_TCP_URI='127.0.0.1:1883'
+export RLDS_TCP_URI='127.0.0.1:3006'
 node ./src/app
 ```

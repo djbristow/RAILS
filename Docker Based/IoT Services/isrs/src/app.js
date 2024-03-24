@@ -17,7 +17,7 @@ var io = require('socket.io')(httpServer, {
   }
 })
 
-var client = mqtt.connect('mqtt://' + process.env.MQTT_TCP_URI);
+var client = mqtt.connect('mqtt://' + process.env.MQTT_TCP_URI, { clientId: "mqtt-isrs" });
 
 client.on('connect', function() {
      console.log("MQTT Connected")
@@ -36,6 +36,6 @@ function handleRfid(message){
 }
 
 httpServer.listen(3005, function() {
-      console.log("ISRS v1.3.0, Started")
+      console.log("ISRS v1.3.1, Started")
       console.log("ISRS listening on port 3005")
 });
