@@ -1,6 +1,6 @@
 {
   "name": "mrim",
-  "version": "4.3.1",
+  "version": "4.3.2",
   "description": "Model Railroad Inventory Manager",
   "author": "dbristow <dave@bristow-family.org>",
   "private": true,
@@ -17,8 +17,8 @@
   },
   "dependencies": {
     "@mdi/font": "7.4.47",
-    "axios": "1.6.7",
-    "date-fns": "3.5.0",
+    "axios": "1.6.8",
+    "date-fns": "3.6.0",
     "export-from-json": "1.7.4",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "3.8.2",
@@ -28,12 +28,12 @@
     "socket.io-client": "4.7.5",
     "vue": "3.4.21",
     "vue-router": "4.3.0",
-    "vuetify": "3.5.9",
+    "vuetify": "3.5.11",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "5.0.4",
-    "vite": "5.1.6",
+    "vite": "5.2.4",
     "vite-plugin-vuetify": "2.0.3"
   },
   "type": "module"

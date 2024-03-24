@@ -34,6 +34,6 @@ client.on('message', function (topic, message) {
 })
 
 httpServer.listen(3010, function () {
-     console.log("ISTS v1.3.18, started")
+     console.log("ISTS v1.3.19, started")
      console.log("ISTS listening on port 3010")
 });

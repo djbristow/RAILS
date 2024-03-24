@@ -2,7 +2,7 @@
 David Bristow, 2020-2024
 
 ## Version
-v4.3.1 2024-03-14
+v4.3.2 2024-03-23
 
 **M**odel **R**ailroad **I**nventory **M**anager is a MEVN application that provides a user with a web application to display, create and update information of the inventoried items. This web application uses port 3001.
 
