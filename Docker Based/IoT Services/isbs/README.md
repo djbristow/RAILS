@@ -4,7 +4,7 @@
 **I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices is a node application that subscribes to turnout panel button (sensors/pb) from the MQTT Broker. 
 
 ## Version
-v1.0.22 2024-03-23
+v1.1.0 2024-03-25
 
 ## License
 
@@ -33,9 +33,8 @@ v1.0.22 2024-03-23
 npm install
 
 # start
-export MQTT_PORT_1883_TCP_ADDR='127.0.0.1'
-export MQTT_PORT_1883_TCP_PORT='1883'
-export MRLM_TCP_PORT='3004'
+export MQTT_TCP_URI='127.0.0.1:1883'
+export MRLM_TCP_URI='localhost:3004'
 node ./src/app
 ```
 
