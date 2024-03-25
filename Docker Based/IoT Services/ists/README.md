@@ -4,7 +4,7 @@ David Bristow, 2020-2024
 **I**oT **S**ubscriber **T**urnout **S**ervices is a Express application that subscribes to turnout contact switch messages from the MQTT Broker and sends them to a Vue application using a web socket. This application uses port 3010.
 
 ## Version
-v1.3.19 2024-03-23
+v1.4.0 2024-03-25
 
 ## License
 
@@ -33,8 +33,7 @@ v1.3.19 2024-03-23
 npm install
 
 # start
-export MQTT_PORT_1883_TCP_ADDR='127.0.0.1'
-export MQTT_PORT_1883_TCP_PORT='1883'
-export MRLM_TCP_PORT='3004'
+export MQTT_TCP_URI='127.0.0.1:1883'
+export MRLM_TCP_URI='localhost:3004'
 node ./src/app
 ```

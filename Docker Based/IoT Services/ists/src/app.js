@@ -11,12 +11,12 @@ app.use(cors());
 var httpServer = require('http').createServer(app);
 var io = require('socket.io')(httpServer, {
      cors: {
-          origin: "http://localhost:" + process.env.MRLM_TCP_PORT,
+          origin: "http://" + process.env.MRLM_TCP_URI,
           methods: ["GET", "POST"]
      }
 })
 
-var client = mqtt.connect('mqtt://' + process.env.MQTT_PORT_1883_TCP_ADDR + ':' + process.env.MQTT_PORT_1883_TCP_PORT);
+var client = mqtt.connect('mqtt://' + process.env.MQTT_TCP_URI, { clientId: "mqtt-ists" });
 
 function handleMqtt(message) {
      let parsedMsg = JSON.parse(message);
@@ -34,6 +34,6 @@ client.on('message', function (topic, message) {
 })
 
 httpServer.listen(3010, function () {
-     console.log("ISTS v1.3.19, started")
+     console.log("ISTS v1.4.0, started")
      console.log("ISTS listening on port 3010")
 });
