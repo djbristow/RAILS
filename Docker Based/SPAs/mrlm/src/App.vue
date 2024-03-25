@@ -41,8 +41,8 @@ const turnoutsStore = useTurnoutsStore();
 const tplightsStore = useTplightsStore();
 const microsStore = useMicrosStore();
 const connStatsStore = useConnStatsStore();
-const socketTo = io("http://localhost:3010");
-const socketBtn = io("http://127.0.0.1:3012");
+const socketTo = io('http://' + import.meta.env.VITE_MYISTS_TCP_URI);
+const socketBtn = io('http://' + import.meta.env.VITE_MYISBS_TCP_URI);
 const drawer = ref(false);
 const items = [
   { title: "Turnouts", icon: "mdi-electric-switch", to: "/turnouts" },
