@@ -4,7 +4,7 @@ David Bristow, 2020-2024
 **I**oT **P**ublish **T**urnout **S**ervices is an Express aplication that publishes mqtt turnout messages to the MQTT Broker. This application uses port 3011.
 
 ## Version
-v2.0.16 2024-03-23
+v2.1.0 2024-03-25
 
 ## License
 
@@ -33,7 +33,6 @@ v2.0.16 2024-03-23
 npm install
 
 # start
-export MQTT_PORT_1883_TCP_ADDR='127.0.0.1'
-export MQTT_PORT_1883_TCP_PORT='1883'
+export MQTT_TCP_URI='127.0.0.1:1883'
 node ./src/app
 ```

@@ -5,7 +5,7 @@ const cors = require('cors'),
       express = require('express'),
       mqtt = require('mqtt');
 
-var client = mqtt.connect('mqtt://' + process.env.MQTT_PORT_1883_TCP_ADDR + ':' + process.env.MQTT_PORT_1883_TCP_PORT, { clientId: "mqttjs02" });
+var client = mqtt.connect('mqtt://' + process.env.MQTT_TCP_URI, { clientId: "mqtt-ipts" });
 var app = express();
     app.use(cors())
     app.use(express.json())
@@ -28,5 +28,5 @@ app.post('/to', (req, res) => {
 })
 
 app.listen(process.env.PORT || 3011)
-    console.log("IPTS started v2.0.16")
+    console.log("IPTS started v2.1.0")
     console.log("App listening on port 3011")
