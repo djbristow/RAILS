@@ -2,10 +2,11 @@
 // This express app subscribes to turnout contacts (sensors/toc) from the MQTT Broker and
 // pushes them to a Vue application socket.
 
-const mqtt = require('mqtt'),
-     app = require('express')(),
-     cors = require('cors');
-
+const mqtt = require('mqtt');
+const express = require('express');
+const cors = require('cors');
+const app = express();
+app.use(express.json());
 app.use(cors());
 
 var httpServer = require('http').createServer(app);
@@ -33,7 +34,7 @@ client.on('message', function (topic, message) {
      client.end();
 })
 
-httpServer.listen(3012, function () {
-     console.log("ISBS v1.1.0, Started")
+httpServer.listen(3014, function () {
+     console.log("ISBS v1.1.1, Started")
      console.log("ISBS listening on port 3012")
 });
