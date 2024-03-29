@@ -1,6 +1,6 @@
 {
   "name": "mrim",
-  "version": "4.3.2",
+  "version": "4.3.3",
   "description": "Model Railroad Inventory Manager",
   "author": "dbristow <dave@bristow-family.org>",
   "private": true,
@@ -28,12 +28,12 @@
     "socket.io-client": "4.7.5",
     "vue": "3.4.21",
     "vue-router": "4.3.0",
-    "vuetify": "3.5.11",
+    "vuetify": "3.5.13",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "5.0.4",
-    "vite": "5.2.4",
+    "vite": "5.2.6",
     "vite-plugin-vuetify": "2.0.3"
   },
   "type": "module"

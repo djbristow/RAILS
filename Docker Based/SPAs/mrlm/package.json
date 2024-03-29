@@ -1,6 +1,6 @@
 {
   "name": "mrlm",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Model Railroad Layout Manager",
   "private": true,
   "author": "DJ Bristow <dave@bristow-family.org>",
@@ -25,12 +25,12 @@
     "socket.io-client": "4.7.5",
     "vue": "3.4.21",
     "vue-router": "4.3.0",
-    "vuetify": "3.5.11",
+    "vuetify": "3.5.13",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "5.0.4",
-    "vite": "5.2.4",
+    "vite": "5.2.6",
     "vite-plugin-vuetify": "2.0.3"
   },
   "type": "module"

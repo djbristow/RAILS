@@ -66,4 +66,4 @@ app.use((err, req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`Server v2.2.1 listening on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server v2.2.2 listening on port ${PORT}`));

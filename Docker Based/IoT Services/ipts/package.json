@@ -1,6 +1,6 @@
 {
   "name": "ipts",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "IoT Publisher Turnout Services",
   "author": "David Bristow",
   "license": "Apache-2.0",
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "4.19.1",
+    "express": "4.19.2",
     "mqtt": "5.5.0"
   }
 }
