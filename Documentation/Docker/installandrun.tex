@@ -1,0 +1,82 @@
+\chapter{Setup and Run}
+\label{ch:installandrun}
+\section{Docker Installation}
+\label{sec:dockerinstall}
+The \ac{RAILS} \acp{SPA} are implemented as Docker containers. The Docker containers are built and pushed to Docker Hub. The Docker containers are then pulled from Docker Hub and run on the host machine. 
+The host machine must have Docker installed. Docker is a platform for developing, shipping, and running applications in containers. Docker can be installed on Windows, macOS, and Linux. 
+The installation instructions for Docker can be found at \href{https://docs.docker.com/get-docker/}{https://docs.docker.com/get-docker/}.
+\section{Docker Compose Installation}
+\label{sec:dockercomposeinstall}
+Docker Compose is a tool for defining and running multi-container Docker applications. Docker Compose uses a YAML file to configure the application's services. The installation instructions\footnote{Note that for Microsoft Windows the installation of the \ac{GUI} Docker Desktop automatically installs Docker Compose.} for Docker Compose can be found at \href{https://docs.docker.com/compose/install/}{https://docs.docker.com/compose/install/}.  The Docker Compose file for the \ac{RAILS} \acp{SPA} is shown in Appendix \ref{app:yamlfile}.
+\section{Broker Configuration}
+\label{sec:brokerconfig}
+The \ac{RAILS} \acp{SPA} use the Mosquitto broker to communicate with each other. The Mosquitto broker is an open-source message broker that implements the \ac{MQTT} protocol. The Mosquitto broker must be configured to allow the \ac{RAILS} \acp{SPA} to communicate with each other. The Mosquitto broker configuration file must be edited to allow the \ac{RAILS} \acp{SPA} to communicate with each other. The configuration file is found in the virtual storage whose volume name is “mosquitto”. To establish and modify the configuration file the following steps are taken:
+\begin{enumerate}
+    \item Create a Docker volume for the Mosquitto broker.
+    \begin{verbatim}
+    docker volume create --name mosquitto
+    \end{verbatim}
+    \item Run a Docker container for the first time the Mosquitto broker, which will create the initial configuration file.
+    \begin{verbatim}
+    docker run -it --name myMqttBrkr -p 1883:1883 -p 9001:9001 --rm
+    -v mosquitto:/mosquitto -d eclipse-mosquitto
+    \end{verbatim}
+    \item Stop the broker container.
+    \begin{verbatim}    
+    docker stop myMqttBrkr
+    \end{verbatim}
+    \item Locate the configuration file in the "mosquitto" volume.
+    \begin{verbatim}    
+    docker inspect mosquitto
+    \end{verbatim}
+    \item Edit the configuration file modifying or adding the following lines:
+    \begin{verbatim}
+    listener 1883
+    allow_anonymous true
+    socket_domain ipv4
+    \end{verbatim}
+\end{enumerate}
+\section{Create the RAILS Docker Environment}
+\label{sec:railsdockerenv}
+The \ac{RAILS} \acp{SPA} are implemented as Docker containers that require an environment to run in. To create that environment, the following steps are taken:
+\begin{enumerate}
+    \item Create a Docker volume for the Rails database.
+    \begin{verbatim}
+    docker volume create --name myRailsDb  
+    \end{verbatim}
+    \item Create a Docker volume for the Rails images.
+    \begin{verbatim}
+    docker volume create --name myRailsImages
+    \end{verbatim}
+    \item Create a Docker network for the Rails containers to communicate over.
+    \begin{verbatim}
+    docker network create myRailsNet
+    \end{verbatim}
+\end{enumerate}
+\section{Run the RAILS Docker Containers}
+\label{sec:railsdockercontainers}
+The Docker containers are pulled from Docker Hub and run on the host machine. To run all of the \ac{RAILS} Docker containers, either create the YAML file from Appendix \ref{app:yamlfile} or retrieve the YAML file from the \ac{RAILS} GitHub repository found at \href{https://github.com/djbristow/RAILS/tree/master/Docker%20Based}{my GitHub repository}. The YAML file is used to run the \ac{RAILS} Docker containers.  
+to run all four \ac{RAILS} Docker containers, the following command in the directory where the YAML file is located:
+\begin{verbatim}
+docker-compose up -d
+\end{verbatim}
+If the \ac{RAILS} Docker \ac{SPA} containers are to be run individually, the following commands are used:
+\begin{verbatim}
+docker-compose up -d mrim
+docker-compose up -d rsrm
+docker-compose up -d mppm
+docker-compose up -d mrlm
+\end{verbatim}
+Point the browser to the following URLs to access the \ac{RAILS} \acp{SPA}:
+\begin{itemize}
+    \item \ac{MRIM} \ac{SPA} - \href{http://localhost:3001}{http://localhost:3001}
+    \item \ac{RSRM} \ac{SPA} - \href{http://localhost:3002}{http://localhost:3002}
+    \item \ac{MPPM} \ac{SPA} - \href{http://localhost:3008}{http://localhost:3008}
+    \item \ac{MRLM} \ac{SPA} - \href{http://localhost:3004}{http://localhost:3004}
+\end{itemize}
+To stop and remove the \ac{RAILS} Docker containers, the following command is used:
+\begin{verbatim}
+docker-compose down
+\end{verbatim}
+
+See Appendix \ref{app:examplecommands} for screenshots of the Docker commands used to create the Docker environment and run the \ac{RAILS} \acp{SPA}.

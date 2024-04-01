@@ -1,0 +1,95 @@
+\chapter{Alternate Approach} 
+\label{ch:altsapproach}
+An alternate approach to setting up and running the set of \acp{SPA} to implement \ac{RAILS} is to use Docker containers directly. Docker must have been installed on the host machine. The Docker images for the \ac{RAILS} \acp{SPA} must have been built and pushed to Docker Hub. It is anticipated that the reader has a basic understanding of Docker and how to use it.\\
+To create the Docker envirnment for the \ac{RAILS} \acp{SPA} to run in, the following steps are taken:
+\begin{enumerate}
+    \item Create a Docker volume for the Mosquitto broker. Refer to section \ref{sec:brokerconfig} for information on configuring the Mosquitto broker.
+    \begin{verbatim}
+    docker volume create --name mosquitto
+    \end{verbatim}
+    \item Create a Docker volume for the Rails database.
+    \begin{verbatim}
+    docker volume create --name myRailsDb  
+    \end{verbatim}
+    \item Create a Docker volume for the Rails images.
+    \begin{verbatim}
+    docker volume create --name myRailsImages
+    \end{verbatim}
+    \item Create a Docker network for the Rails conatiners to communicate over.
+    \begin{verbatim}
+    docker network create myRailsNet
+    \end{verbatim}
+    \item Run a Docker container for the MongoDB database.
+    \begin{verbatim}
+    docker run --network myRailsNet --name myMongo -v myRailsDb:/data/db
+    -p 27017:27017 -d mongo
+    \end{verbatim}
+    \item Run a Docker container for the \ac{PPDS} \ac{DS}.
+    \begin{verbatim}
+    docker run --network myRailsNet --name myPpds -p 3007:3007 -d dbristow/ppds
+    \end{verbatim}
+    \item Run a Docker container for the \ac{RIDS} \ac{DS}.
+    \begin{verbatim}
+    docker run --network myRailsNet --name myRids -p 3000:3000 -d dbristow/rids
+    \end{verbatim}
+    \item Run a Docker container for the \ac{RLDS} \ac{DS}.
+    \begin{verbatim}
+    docker run --network myRailsNet --name myRlds -p 3006:3006 -d dbristow/rlds
+    \end{verbatim}
+    \item Run a Docker container for the \ac{MRFM} \ac{DS}.
+    \begin{verbatim}
+    docker run --network myRailsNet --name myMrfm -v myRailsImages:/usr/djb/src/uploads 
+    -p 3030:3030 -d dbristow/mrfm
+    \end{verbatim}
+    \item Run a Docker container for the Mosquitto broker.
+    \begin{verbatim}
+    docker run --network myRailsNet -it --name myMqttBrkr -p 1883:1883 -p 9001:9001
+    -v mosquitto:/mosquitto -d eclipse-mosquitto
+    \end{verbatim}
+    \item Run a Docker conatainer for the \ac{ISRS} \ac{IoTS}.
+    \begin{verbatim}
+    docker run --network myRailsNet -p 3005:3005 --name myIsrs -d dbristow/isrs
+    \end{verbatim}
+    \item Run a Docker conatainer for the \ac{ISMS} \ac{IoTS}.
+    \begin{verbatim}
+    docker run --network myRailsNet --name myIsms -d dbristow/isms
+    \end{verbatim}
+    \item Run a Docker conatainer for the \ac{ISTS} \ac{IoTS}.
+    \begin{verbatim}
+    docker run --network myRailsNet -p 3010:3010 --name myIsts -d dbristow/ists
+    \end{verbatim}
+    \item Run a Docker conatainer for the \ac{ISBS} \ac{IoTS}.
+    \begin{verbatim}
+    docker run --network myRailsNet -p 3012:3012 --name myIsbs -d dbristow/isbs
+    \end{verbatim}
+    \item Run a Docker conatainer for the \ac{IPTS} \ac{IoTS}.
+    \begin{verbatim}
+    docker run --network myRailsNet -p 3011:3011 --name myIpts -d dbristow/ipts
+    \end{verbatim}
+    \item Run a Docker conatainer for the \ac{IPLS} \ac{IoTS}.
+    \begin{verbatim}
+    docker run --network myRailsNet -p 3013:3013 --name myIpls -d dbristow/ipls
+    \end{verbatim}
+    \item Run a Docker container for the \ac{RSRM} \ac{SPA}.
+    \begin{verbatim}
+    docker run --network myRailsNet -p 3002:8080 --name myRsrm -d dbristow/rsrm
+    \end{verbatim}
+    \item Run a Docker container for the \ac{MPPM} \ac{SPA}.
+    \begin{verbatim}
+    docker run --network myRailsNet -p 3008:8080 --name myMppm -d dbristow/mppm
+    \end{verbatim}
+    \item Run a Docker container for the \ac{MRIM} \ac{SPA}.
+    \begin{verbatim}
+    docker run --network myRailsNet -p 3001:8080 --name myMrim -d dbristow/mrim
+    \end{verbatim}
+    \item Run a Docker container for the \ac{MRLM} \ac{SPA}.
+    \begin{verbatim}
+    docker run --network myRailsNet -p 3004:8080 --name myMrlm -d dbristow/mrlm
+    \end{verbatim}
+\end{enumerate}
+This approach is more complex than the Docker Compose approach, but it allows for more control over the individual containers. Completing all the steps above will result in running the four \ac{RAILS} \acp{SPA}.\vspace{5mm}\\
+Once the containers are running, the \acp{SPA} can be accessed by pointing a web browser to the appropriate URL. The \ac{MRIM} \ac{SPA} is accessed at http://localhost:3001, the \ac{RSRM} \ac{SPA} is accessed at http://localhost:3002, the \ac{MPPM} \ac{SPA} is accessed at http://localhost:3008, and the \ac{MRLM} \ac{SPA} is accessed at http://localhost:3004.\vspace{5mm}\\  
+If only the \ac{MRIM} \ac{SPA} is desired, the following steps should be taken in order: 2, 3, 4, 5, 7, 9, and 19\\
+If only the \ac{RSRM} \ac{SPA} is desired, the following steps should be taken in order: 1, 2, 4, 5, 7, 8, 10, 11, 12 and 17\\
+If only the \ac{MPPM} \ac{SPA} is desired, the following steps should be taken in order: 2, 4, 6, and 18\\
+If only the \ac{MRLM} \ac{SPA} is desired, the following steps should be taken in order: 2, 4, 5, 8, 10, 12, 13, 14,15, 16, and 20\\

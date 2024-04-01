@@ -1,0 +1,15 @@
+\chapter{Docker Commands}
+\label{app:dockercommands}
+The following Docker commands may be useful when working with Docker images and containers related to the \ac{RAILS} \acp{SPA}.
+\begin{itemize}
+    \item \texttt{docker ps} - List running containers.
+    \item \texttt{docker ps -a} - List all containers including those that have been stopped.
+    \item \texttt{docker images} - List images.
+    \item \texttt{docker run -d --name <container-name> <image-name>} - Run a container from an image.
+    \item \texttt{docker stop <container-name>} - Stop a running container.
+    \item \texttt{docker rm <container-name>} - Remove a container.
+    \item \texttt{docker rmi <image-name>} - Remove an image.
+    \item \texttt{docker inspect <container-name> | <volume-name> } - Display detailed information about a container or volume.
+    \item \texttt{docker-compose up -d} - Start the services defined in the Docker Compose file.
+    \item \texttt{docker-compose down} - Stop the services defined in the Docker Compose file.
+\end{itemize}

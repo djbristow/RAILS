@@ -1,0 +1,203 @@
+\appendix
+\chapter{YAML File}
+\label{app:yamlfile}
+
+\lstdefinelanguage{YAML}
+    {morekeywords={image, container_name, networks, ports, volumes, depends_on, services, version, external, volumes},
+    keywordstyle=\color{bluekeywords},
+    sensitive=false,
+    morecomment=[l][\color{greencomments}]{\#},
+    morecomment=[l][\color{greencomments}]{//},
+    morecomment=[s][\color{greencomments}]{{(*}{*)}},
+    morestring=[b]",
+    morestring=[b]',
+    stringstyle=\color{redstrings}
+    }
+
+    \lstnewenvironment{fslisting}
+    {
+      \lstset{
+          language=YAML,
+          basicstyle=\ttfamily,
+          breaklines=true,
+          columns=fullflexible}
+    }
+    {}
+
+
+\begin{fslisting}
+# &copy; David Bristow, 2020-2024
+# VERSION 1.0.0 
+# LICENSE
+# The code in this repository is licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#    http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+version: "3.8"
+services:
+  myMongo:
+    image: 'mongo'
+    container_name: myMongo
+    networks:
+      - myRailsNet
+    ports:
+      - '27017:27017'
+    volumes: 
+      - myRailsDb:/data/db
+  myPpds:
+     image: 'dbristow/ppds'
+     container_name: myPpds
+     networks:
+      - myRailsNet
+     ports: 
+      - '3007:3007'
+     depends_on:
+      - myMongo
+  myMppm:
+    image: 'dbristow/mppm'
+    container_name: myMppm
+    ports:
+       - '3008:8080'
+    depends_on:
+       - myPpds
+  myRids:
+    image: 'dbristow/rids'
+    container_name: myRids
+    networks:
+      - myRailsNet
+    ports:
+      - '3000:3000'
+    depends_on:
+      - myMongo
+  myMrfm:
+    image: 'dbristow/mrfm'
+    container_name: myMrfm
+    ports: 
+      - '3030:3030'
+    volumes:
+      - myRailsImages:/usr/djb/src/uploads
+  myMrim:
+   image: 'dbristow/mrim'
+   container_name: myMrim
+   networks:
+      - myRailsNet
+   ports:
+      - '3001:8080'
+   depends_on:
+      - myRids
+      - myMrfm
+  myMqttBrkr:
+    image: 'eclipse-mosquitto'
+    container_name: myMqttBrkr
+    networks:
+      - myRailsNet
+    ports:
+      - '1883:1883'
+      - '9001:9001'
+    volumes:
+      - mosquitto:/mosquitto
+  myRlds:
+    image: 'dbristow/rlds'
+    container_name: myRlds
+    networks:
+      - myRailsNet
+    ports:
+      - '3006:3006'
+    depends_on:
+      - myMongo
+  myIsrs:
+    image: 'dbristow/isrs'
+    container_name: myIsrs
+    networks:
+      - myRailsNet
+    ports:
+      - '3005:3005'
+    depends_on:
+      - myMqttBrkr
+  myIsms:
+    image: 'dbristow/isms'
+    container_name: myIsms
+    networks:
+      - myRailsNet
+    depends_on:
+      - myMqttBrkr
+      - myRlds
+  myRsrm:
+    image: 'dbristow/rsrm'
+    container_name: myRsrm
+    networks:
+      - myRailsNet
+    ports:
+      - '3002:8080'
+    depends_on:
+      - myRids
+      - myRlds
+      - myIsrs
+      - myIsms
+  myIsts:
+    image: 'dbristow/ists'
+    container_name: myIsts
+    networks:
+      - myRailsNet
+    ports:
+      - '3010:3010'
+    depends_on:
+      - myMqttBrkr
+  myIsbs:
+    image: 'dbristow/isbs'
+    container_name: myIsbs
+    networks:
+      - myRailsNet
+    ports:
+      - '3012:3012'
+    depends_on:
+      - myMqttBrkr
+  myIpts:
+    image: 'dbristow/ipts'
+    container_name: myIpts
+    networks:
+      - myRailsNet
+    ports:
+      - '3011:3011'
+    depends_on:
+      - myMqttBrkr
+  myIpls:
+    image: 'dbristow/ipls'
+    container_name: myIpls
+    networks:
+      - myRailsNet
+    ports:
+      - '3013:3013'
+    depends_on:
+      - myMqttBrkr
+  myMrlm:
+    image: 'dbristow/mrlm'
+    container_name: myMrlm
+    networks:
+      - myRailsNet
+    ports:
+      - '3004:8080'
+    depends_on:
+      - myRlds
+      - myIsts
+      - myIsbs
+      - myIpts
+      - myIpls
+networks:
+  myRailsNet:
+    external: true
+volumes:
+  myRailsDb:
+    external: true
+  myRailsImages:
+    external: true
+  mosquitto:
+    external: true
+\end{fslisting}
