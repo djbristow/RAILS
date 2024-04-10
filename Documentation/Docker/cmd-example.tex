@@ -1,12 +1,12 @@
 \chapter{Example Setup and Run Commands}
 \label{app:examplecommands}
-The following screenshots show the Docker commands used to create the Docker environment and run the \ac{RAILS} Docker containers.
+The following screenshots show the Docker commands used to create the Docker environment and run the \gls{rails} Docker containers.
 \section{Docker in a Windows Environment}
 \label{sec:win-cmds}
-Docker on Windows 11 relies on a component called \ac{WSL 2} to provide a Linux-like environment for running Docker containers. Docker Desktop installer provides two options:
+Docker on Windows 11 relies on a component called \gls{wsl 2} to provide a Linux-like environment for running Docker containers. Docker Desktop installer provides two options:
 \begin{itemize}
-    \item Use \ac{WSL 2} backend: This is the recommended approach for most users. It leverages \ac{WSL 2} to create a Linux environment for Docker to run containers.
-    \item Use Hyper-V backend: This is an alternative that uses Hyper-V virtualization technology. However, \ac{WSL 2} is generally considered more performant and resource-efficient.   
+    \item Use \gls{wsl 2} backend: This is the recommended approach for most users. It leverages \gls{wsl 2} to create a Linux environment for Docker to run containers.
+    \item Use Hyper-V backend: This is an alternative that uses Hyper-V virtualization technology. However, \gls{wsl 2} is generally considered more performant and resource-efficient.   
 \end{itemize}
 This setup is based on using WSL as it:
 \begin{itemize}
@@ -14,16 +14,16 @@ This setup is based on using WSL as it:
     \item provides a more native Linux experience for Docker, ensuring compatibility with most Linux container images.
     \item uses the Windows kernel directly, leading to more efficient resource usage.
 \end{itemize}
-During Docker Desktop installation with the \ac{WSL 2} backend, Docker will automatically configure and set up \ac{WSL 2} if it's not already installed. It will also create a default Linux distribution (usually Ubuntu) within \ac{WSL 2}. Once \ac{WSL 2} is set up, Docker Desktop installs the Docker daemon within the \ac{WSL 2} environment. This daemon is the core process that manages Docker containers.
-Docker Desktop provides a Docker \ac{CLI} for Windows. This \ac{CLI} interacts with the Docker daemon running in the \ac{WSL 2} environment through a remote API. So, when you run Docker commands on Windows, they are translated and sent to the Docker daemon in \ac{WSL 2} for execution.\vspace{5mm} \\
-In essence, Docker on Windows 11 leverages \ac{WSL 2} to create a Linux-like environment for running Docker containers. This approach provides a powerful and performant solution for containerization on Windows, while still offering a familiar Windows experience for interacting with Docker.
+During Docker Desktop installation with the \gls{wsl 2} backend, Docker will automatically configure and set up \gls{wsl 2} if it's not already installed. It will also create a default Linux distribution (usually Ubuntu) within \gls{wsl 2}. Once \gls{wsl 2} is set up, Docker Desktop installs the Docker daemon within the \gls{wsl 2} environment. This daemon is the core process that manages Docker containers.
+Docker Desktop provides a Docker \gls{cli} for Windows. This \gls{cli} interacts with the Docker daemon running in the \gls{wsl 2} environment through a remote API. So, when you run Docker commands on Windows, they are translated and sent to the Docker daemon in \gls{wsl 2} for execution.\vspace{5mm} \\
+In essence, Docker on Windows 11 leverages \gls{wsl 2} to create a Linux-like environment for running Docker containers. This approach provides a powerful and performant solution for containerization on Windows, while still offering a familiar Windows experience for interacting with Docker.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{win1.png}
     \caption{Intial Windows Docker Commands}
     \label{fig:init-docker-cmds}
 \end{figure}
-Docker Desktop with \ac{WSL 2} backend stores Docker images and volumes on the Windows file system, accessible from both Windows and \ac{WSL 2}. This allows for easy sharing of container data between the two environments. However, it simpler to use Docker Desktop \ac{GUI} to locate and edit the mosquitto configuration file. The following screenshots show the location of he configuration file and the editing of the file.
+Docker Desktop with \gls{wsl 2} backend stores Docker images and volumes on the Windows file system, accessible from both Windows and \gls{wsl 2}. This allows for easy sharing of container data between the two environments. However, it simpler to use Docker Desktop \gls{gui} to locate and edit the mosquitto configuration file. The following screenshots show the location of he configuration file and the editing of the file.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.33]{volumes.png}
@@ -36,7 +36,7 @@ Docker Desktop with \ac{WSL 2} backend stores Docker images and volumes on the W
     \caption{Mosquitto Configuration File}
     \label{fig:mosquitto-config}
 \end{figure}
-The following screenshots show the Docker commands used to create the Docker environment and run all of the \ac{RAILS} Docker containers.
+The following screenshots show the Docker commands used to create the Docker environment and run all of the \gls{rails} Docker containers.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{win2.png}
@@ -56,7 +56,7 @@ The following screenshots confirm the Docker containers are running.
     \caption{Windows Docker Desktop Containers}
     \label{fig:docker-cmds-2}
 \end{figure}
-Once the Docker containers are running, the \ac{RAILS} \acp{SPA} can be accessed from a web browser (Chrome). The following screenshots show the \ac{RAILS} \acp{SPA} running in a web browser.
+Once the Docker containers are running, the \gls{rails} \glspl{spa} can be accessed from a web browser (Chrome). The following screenshots show the \gls{rails} \glspl{spa} running in a web browser.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.46]{mrim.png}
@@ -81,7 +81,7 @@ Once the Docker containers are running, the \ac{RAILS} \acp{SPA} can be accessed
     \caption{RAILS MRLM Running}
     \label{fig:rails-rsrm}
 \end{figure}
-The following screenshot shows the stoping and removal of the \ac{RAILS} Docker containers in a Windows environment.
+The following screenshot shows the stoping and removal of the \gls{rails} Docker containers in a Windows environment.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{win4.png}
@@ -98,7 +98,7 @@ The following screenshot shows the intial Docker commands used to create the Doc
     \caption{Initial Linux Docker Commands}
     \label{fig:linux-docker-cmds}
 \end{figure}
-The following screenshots show the Docker command used to pull images and run the \ac{RAILS} Docker containers in a Linux environment. The pink elispes represent the multiple layers of the images being pulled from the Docker Hub.
+The following screenshots show the Docker command used to pull images and run the \gls{rails} Docker containers in a Linux environment. The pink elispes represent the multiple layers of the images being pulled from the Docker Hub.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.44]{win2l.png}
@@ -111,14 +111,14 @@ The following screenshots show the Docker command used to pull images and run th
     \caption{Linux Docker-Compose Up Continued}
     \label{fig:linux-docker-cmds-3}
 \end{figure}
-The following screenshot shows a \ac{RAILS} \acp{SPA} running in a web browser (Chrome) in a Linux environment. The remaining \acp{SPA} can be accessed in the same manner.
+The following screenshot shows a \gls{rails} \glspl{spa} running in a web browser (Chrome) in a Linux environment. The remaining \glspl{spa} can be accessed in the same manner.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.36]{mriml.png}
     \caption{RAILS MRIM Running}
     \label{fig:rails-mrim}
 \end{figure}
-The following screenshot shows the stoping and removal of the \ac{RAILS} Docker containers in a Linux environment.
+The following screenshot shows the stoping and removal of the \gls{rails} Docker containers in a Linux environment.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.44]{win4l.png}
@@ -130,33 +130,33 @@ The following screenshot shows the stoping and removal of the \ac{RAILS} Docker 
 Docker itself doesn't run directly on MacOS 14 (Mojave). This is because Docker relies on a Linux kernel for containerization, and MacOS uses a different kernel. 
 Similar to Windows there is a Docker Desktop software package that provides a complete Docker experience on MacOS. It includes:
 \begin{itemize}
-\item Docker Desktop installs and runs a lightweight Linux \ac{VM} in the background. This  \ac{VM} typically uses LinuxKit, a minimal Linux distribution optimized for running Docker.
-\item The Docker engine runs within the Linux \ac{VM}. This engine is responsible for managing Docker images, containers, and networks.
-\item Docker Desktop provides a \ac{CLI} for interacting with the Docker engine running in the VM. You can use familiar Docker commands to build, run, and manage containers.
+\item Docker Desktop installs and runs a lightweight Linux \gls{vm} in the background. This  \gls{vm} typically uses LinuxKit, a minimal Linux distribution optimized for running Docker.
+\item The Docker engine runs within the Linux \gls{vm}. This engine is responsible for managing Docker images, containers, and networks.
+\item Docker Desktop provides a \gls{cli} for interacting with the Docker engine running in the VM. You can use familiar Docker commands to build, run, and manage containers.
 \item Docker Desktop offers an optional GUI that allows you to manage containers visually.
 \end{itemize}
-The following screenshot shows the intial Docker commands used to create the Docker environment in a MacOS environment. Like Windows it is simpler to use Docker Desktop \ac{GUI} to locate and edit the mosquitto configuration file.
+The following screenshot shows the intial Docker commands used to create the Docker environment in a MacOS environment. Like Windows it is simpler to use Docker Desktop \gls{gui} to locate and edit the mosquitto configuration file.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{win1m.png}
     \caption{Initial MacOS Docker Commands}
     \label{fig:mac-docker-cmds}
 \end{figure}
-The following screenshots show the Docker command used to pull images and run the \ac{RAILS} Docker containers in a MacOS environment.
+The following screenshots show the Docker command used to pull images and run the \gls{rails} Docker containers in a MacOS environment.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{win2m.png}
     \caption{MacOS Docker-Compose Up}
     \label{fig:mac-docker-cmds-2}
 \end{figure}
-The following screenshot shows a \ac{RAILS} \acp{SPA} running in a web browser (Safari) in a MacOS environment. The remaining \acp{SPA} can be accessed in the same manner.
+The following screenshot shows a \gls{rails} \glspl{spa} running in a web browser (Safari) in a MacOS environment. The remaining \glspl{spa} can be accessed in the same manner.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.33]{mrimm.png}
     \caption{RAILS MRIM Running}
     \label{fig:rails-mrim}
 \end{figure}
-The following screenshot shows the stoping and removal of the \ac{RAILS} Docker containers in a Linux environment.
+The following screenshot shows the stoping and removal of the \gls{rails} Docker containers in a Linux environment.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{win3m.png}

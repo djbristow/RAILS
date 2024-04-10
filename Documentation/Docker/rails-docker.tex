@@ -5,7 +5,6 @@
 \usepackage{graphicx}
 \usepackage{appendix}
 \usepackage{setspace}
-\usepackage{acronym}
 \usepackage[sfdefault]{roboto}
 \usepackage{xcolor}
 \usepackage{sectsty}
@@ -15,6 +14,11 @@
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{listings}
+\usepackage{glossaries}
+
+\setacronymstyle{long-short-desc}
+\loadglsentries{defn}
+\makenoidxglossaries
 
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
@@ -33,7 +37,6 @@
 \sectionfont{\color{MyBlue}}
 \subsectionfont{\color{MyBlue}}
 
-
 \begin{document}
 %%========================================================================
 \begin{titlepage}
@@ -51,7 +54,7 @@
     \vspace*{\baselineskip}
 	{\small David Bristow}
 
-	{\small Version 1.0.0}
+	{\small Version 1.1.0}
 	
 	{\small \today}
 	\vspace*{3\baselineskip}
@@ -68,5 +71,7 @@
 \include{docker-cmds}
 %%========================================================================
 \backmatter
-\include{acros}
+
+\printnoidxglossary[sort=letter]
+\addcontentsline{toc}{chapter}{Glossary}
 \end{document}
