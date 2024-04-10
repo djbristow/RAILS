@@ -31,3 +31,5 @@ node_modules/
 *.toc
 *.out
 docker-update-rep.sh
+*.code-workspace
+

@@ -20,8 +20,8 @@ The three groups of docker components are: IoT Services, Data Services, and Sing
 |Data Services|----------------------------------------------------------|
 |MRFM|**M**odel **R**ailroad **F**ile **M**anager  allows the user to upload image files for the use by the MRIM component|3030|2.2.2|2024-03-28|
 |PPDS|**P**lans and **P**urchases **D**ata **S**ervices  provides REST access to model railroad projects and purchases documents|3007|2.3.3|2024-03-28|
-|RIDS|**R**ailroad **I**nventory **D**ata **S**ervices provides REST access to railroad inventory documents|3000|2.1.32|2024-03-28|
-|RLDS|**R**ailroad **L**ayout **D**ata **S**ervices provides REST access to model railroad projects and purchases documents|3006|2.1.23|2024-03-28|
+|RIDS|**R**ailroad **I**nventory **D**ata **S**ervices provides REST access to railroad inventory documents|3000|2.1.3|2024-03-28|
+|RLDS|**R**ailroad **L**ayout **D**ata **S**ervices provides REST access to model railroad projects and purchases documents|3006|2.1.3|2024-03-28|
 |IoT Services|----------------------------------------------------------|
 |IPLS|**I**oT **P**ublisher Turnout Panel **L**ight **S**ervices publishes light commands to a Turnout Panel Controller|3013|1.1.1|2024-03-28|
 |IPTS|**I**oT **P**ublisher **T**urnout **S**ervices publishes turnout commands to a Turnout Controller|3011|2.1.1|2024-03-28|
