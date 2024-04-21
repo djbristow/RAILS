@@ -1,7 +1,7 @@
 /*****
  * MQTT IOT RFID Reader
  * Copyright 2020-2024 David J Bristow
- * Version 1.0.2- 20223-12-20
+ * Version 1.1.0 - 20224-04-21
  * - paramters to connect to the MQTT broker are kept in a params.h file
  * - connects to an MQTT broker via wifi
  * - publishes info about this reader to the topic "micros"
