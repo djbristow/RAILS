@@ -1,17 +1,17 @@
 /*****
  * MQTT IOT RFID Reader
- * Copyright 2020-2022 David J Bristow
+ * Copyright 2020-2024 David J Bristow
  * Version 1.0.2- 20223-12-20
  * - paramters to connect to the MQTT broker are kept in a params.h file
  * - connects to an MQTT broker via wifi
  * - publishes info about this reader to the topic "micros"
- *   {"et":"1590462747","sensor":"rfidRdr01","msgType":"initial",ip":"192.168.0.19"}
+ *   {"et":"1590462747","mcntrlr":"rfidRdr01","msgType":"initial",ip":"192.168.0.19"}
  * - publishes a heartbeat to the topic "micros"
- *   {"et":"1590462747","sensor":"rfidRdr01","msgType":"heartbeat"}
+ *   {"et":"1590462747","mcntrlr":"rfidRdr01","msgType":"heartbeat"}
  * - reads values from a single ID-12LA or 7491E RFID reader, formats
  *   the results as a JSON string, gets Epoch time from an NTP server
  *   and then publishes the JSON String to the topic "sensors/rfid"
- *   {"et":"1590463450","sensor":"rfidRdr01","reader":"1","rfid":"1C0044CF23"}
+ *   {"et":"1590463450","mcntrlr":"rfidRdr01","reader":"1","rfid":"1C0044CF23"}
 
  *****************************************************************************************
  * Licensed under the Apache License, Version 2.0 (the "License")
@@ -47,7 +47,6 @@ IPAddress mqtt_ser(1, 1, 1, 1);
 PubSubClient client(mqtt_ser, 1883, espWiFi);
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP);
-// SoftwareSerial rfidRdr(D7, NO_TX_PIN); // RX with no TX
 SoftwareSerial rfidRdr[2];
 char pubTopic[] = "sensors/rfid";
 String subTopic = "micros/cmd/";
@@ -66,12 +65,12 @@ String ssid = SSID;
 String password = PASSWORD;
 
 /*********************  MQTT FUNCTIONS  ******************************/
-String buildJson(String id, String sensor, String et, String reader)
+String buildJson(String id, String mcntrlr, String et, String reader)
 {
     String mqttMsg = "{\"et\":\"";
     mqttMsg = mqttMsg + et;
-    mqttMsg = mqttMsg + "\",\"sensor\":\"";
-    mqttMsg = mqttMsg + sensor;
+    mqttMsg = mqttMsg + "\",\"mcntrlr\":\"";
+    mqttMsg = mqttMsg + mcntrlr;
     mqttMsg = mqttMsg + "\",\"reader\":\"";
     mqttMsg = mqttMsg + reader;
     mqttMsg = mqttMsg + "\",\"rfid\":\"";
@@ -129,7 +128,7 @@ void publishHeartbeat()
     Serial.println(et);
     String mqttMsg = "{\"et\":\"";
     mqttMsg += et;
-    mqttMsg += "\",\"sensor\":\"";
+    mqttMsg += "\",\"mcntrlr\":\"";
     mqttMsg += mqttId;
     mqttMsg += "\",\"msgType\":\"heartbeat\"}";
     publishMqtt(mqttMsg, pubMicro);
@@ -198,7 +197,6 @@ String getRfidTags(String readerType, int i)
     }
     if (rfidRdr[i].available() > 0)
     {
-        // while (rfidRdr[i].available() > 0)
         {
             do
             {
@@ -247,7 +245,6 @@ void setup()
     Serial.begin(115200);
     delay(5000);
     Serial.println("\n Starting");
-    Serial.print("Checking to see if the flag is set ");
     WiFi.begin(ssid, password);
     Serial.print("Local ip: ");
     Serial.println(WiFi.localIP());
@@ -279,7 +276,7 @@ void setup()
     Serial.println(et);
     String mqttMsg = "{\"et\":\"";
     mqttMsg += et;
-    mqttMsg += "\",\"sensor\":\"";
+    mqttMsg += "\",\"mcntrlr\":\"";
     mqttMsg += mqttId;
     mqttMsg += "\",\"msgType\":\"initial\"";
     mqttMsg += "\",\"ip\":\"";
