@@ -4,7 +4,7 @@
 **I**oT **P**ublisher Turnout Panel **L**ight **S**ervices is a node application that publishes turnout panel light (acts/tpl/#) messages to the MQTT Broker. This application uses port 3013.
 
 ## Version
-v1.1.1 2024-03-28
+v1.1.2 2024-04-22
 
 ## License
 

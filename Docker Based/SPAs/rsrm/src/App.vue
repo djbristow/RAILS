@@ -69,7 +69,7 @@ onMounted(() => {
   setTimeout(() => refreshMicros(), 60000);
 });
  const getRs = (message) => {
-  //{"et":"1590463450","sensor":"rfidRdr01","reader":"1","rfid":"1C0044CF23"}
+  //{"et":"1590463450","mcntrlr":"rfidRdr01","reader":"1","rfid":"1C0044CF23"}
   let rs = {
     time: "",
     rfid: "",
@@ -82,7 +82,7 @@ onMounted(() => {
   var foundRs = null;
   rs.time = message.et;
   rs.rfid = message.rfid;
-  rs.sensor = message.sensor;
+  rs.sensor = message.mcntrlr;
   rs.reader = message.reader;
   foundRs = rsStore.GET_RS_WITH_RFID(rs.rfid);
   if (foundRs === undefined) {

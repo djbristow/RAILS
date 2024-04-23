@@ -6,7 +6,7 @@ const mqtt = require('mqtt'),
   axios = require('axios');
 
 var client = mqtt.connect('mqtt://' + process.env.MQTT_TCP_URI, { clientId: "mqtt-isms" });
-console.log("ISMS v2.2.1, Started")
+console.log("ISMS v3.0.0, Started")
 setTimeout(checkStatus, 6000);
 
 function rlds() {
@@ -66,11 +66,11 @@ async function updateMicro(params) {
 
 async function handleMicroMsg(message) {
   let parsedMsg = JSON.parse(message);
-  let response = await getMicroByName(parsedMsg.sensor);
+  let response = await getMicroByName(parsedMsg.mcntrlr);
   var micro = response.data;
   if (micro._id == undefined) {
     addMicro({
-      microID: parsedMsg.sensor,
+      microID: parsedMsg.mcntrlr,
       microIP: parsedMsg.ip,
       et: parsedMsg.et,
       purpose: "",
@@ -84,7 +84,7 @@ async function handleMicroMsg(message) {
     }
     updateMicro({
       _id: micro._id,
-      microID: parsedMsg.sensor,
+      microID: parsedMsg.mcntrlr,
       microIP: ip,
       et: parsedMsg.et,
       purpose: micro.purpose,
