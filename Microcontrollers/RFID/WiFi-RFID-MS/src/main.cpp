@@ -1,14 +1,16 @@
 /*****
  * MQTT IOT RFID Reader
  * Copyright 2020-2024 David J Bristow
- * Version 1.1.0 - 20224-04-21
+ * Version 2.0.0 - 20224-04-24
  * - paramters to connect to the MQTT broker are kept in a params.h file
+ *   ID-12LA or equivalent RFID reader is a READERTPE A
+ *   7491E or equivalent RFID reader is a READERTYPE B
  * - connects to an MQTT broker via wifi
  * - publishes info about this reader to the topic "micros"
  *   {"et":"1590462747","mcntrlr":"rfidRdr01","msgType":"initial",ip":"192.168.0.19"}
  * - publishes a heartbeat to the topic "micros"
  *   {"et":"1590462747","mcntrlr":"rfidRdr01","msgType":"heartbeat"}
- * - reads values from a single ID-12LA or 7491E RFID reader, formats
+ * - reads values from a single RFID reader, formats
  *   the results as a JSON string, gets Epoch time from an NTP server
  *   and then publishes the JSON String to the topic "sensors/rfid"
  *   {"et":"1590463450","mcntrlr":"rfidRdr01","reader":"1","rfid":"1C0044CF23"}
@@ -279,7 +281,7 @@ void setup()
     mqttMsg += "\",\"mcntrlr\":\"";
     mqttMsg += mqttId;
     mqttMsg += "\",\"msgType\":\"initial\"";
-    mqttMsg += "\",\"ip\":\"";
+    mqttMsg += ",\"ip\":\"";
     mqttMsg += WiFi.localIP().toString();
     mqttMsg += "\"}";
     publishMqtt(mqttMsg, pubMicro);
