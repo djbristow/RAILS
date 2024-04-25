@@ -13,7 +13,7 @@ In use case modeling, an actor is a person or system that interacts with the sys
 Each actor is typically defined by a set of characteristics, such as their role, responsibilities, and the specific tasks or activities they perform with the system. Actors can be either human users or other systems that interact with the system being developed.\vspace{5mm} \\
 In the use case diagram, actors (human) are represented by stick figures and actors (systems) are represented by subsystem packages. Actors are usually connected to the use cases they interact with by an arrow.\vspace{5mm} \\
 Use case actors are important because they help to identify the different types of users or systems that interact with the system, which can be used to inform user-centered design decisions. Actors also help to identify the specific requirements of the system, which can be used to guide the development process and ensure that the final product meets the needs of all stakeholders.\vspace{5mm} \\
-Figure \ref{fig:use-case} depicts the use case survey model used to design and develop \ac{RAILS}.
+Figure \ref{fig:use-case} depicts the use case survey model used to design and develop \gls{rails}.
 In figure \ref{fig:use-case} the line color:
 \begin{itemize}
   \item blue indicates the actor use case relationship
@@ -30,15 +30,15 @@ In figure \ref{fig:use-case} the line color:
 \subsection{Human Actors}
 \begin{itemize}
   \item Dispatcher is responsible to develop an operating session plan in which rolling stock is assigned to consists and those consists are routed and scheduled.
-  \item Model Railroad Manager is responsible to establish and maintain railroad network; rolling stock inventory; defining \ac{DCC} parameters for appropriate rolling stock; industries and their cargo types; schedule rolling stock and railroad network components for maintenance; initial operating states for all turnouts, signals and \ac{DCC} components.
+  \item Model Railroad Manager is responsible to establish and maintain railroad network; rolling stock inventory; defining \gls{dcc} parameters for appropriate rolling stock; industries and their cargo types; schedule rolling stock and railroad network components for maintenance; initial operating states for all turnouts, signals and \gls{dcc} components.
   \item Model Railroad Modeler is responsible to create, modify, and dispose of model railroad assets.
-  \item Session Operator is responsible to execute part or all an operating session plan, outside of the rail yard, using the system and the \ac{DCC} Subsystem.
+  \item Session Operator is responsible to execute part or all an operating session plan, outside of the rail yard, using the system and the \gls{dcc} Subsystem.
   \item Session Supervisor is responsible to supervise the execution of part or all an operating session plan by the Session Operators and Yard Masters. This person may also function as a Session Operator.
-  \item Yard Master is responsible to execute part of an operating session plan, by assembling the consists inside the rail yard, using the system and the \ac{DCC} Subsystem.
+  \item Yard Master is responsible to execute part of an operating session plan, by assembling the consists inside the rail yard, using the system and the \gls{dcc} Subsystem.
 \end{itemize}
 \subsection{Subsystem Actors}
 \begin{itemize}
-  \item \ac{DCC} Subsystem is responsible to transmit messages to rolling stock equipped with \ac{DCC} receiver/controller, as commanded by the system and to warn the system of possible malfunctions.
+  \item \gls{dcc} Subsystem is responsible to transmit messages to rolling stock equipped with \gls{dcc} receiver/controller, as commanded by the system and to warn the system of possible malfunctions.
   \item Sensor Subsystem is responsible to detect the presence of rolling stock in a railroad network block/segment and provide notification to the system.
   \item Signal Subsystem is responsible to change the state of specified signals located on the rail network as commanded by the system.
   \item Turnout Subsystem is responsible to indicate the state of turnouts on the rail network; change the state of turnouts as commanded by the system; and indicate operators’ action to change the state of turnouts.
@@ -49,8 +49,8 @@ In figure \ref{fig:use-case} the line color:
   \item Configure Industries is responsible to establish and maintain the Industry database, allowing the manager to add, modify or delete industries, simulate production/consumption of goods as cargo, and inform the dispatcher of industry cargo requirements.
   \item Control Model Railroad is responsible to assist the operator in managing the execution of an operating session plan. By:
 \begin{itemize}
-  \item automatically executing the parts of an operating session plan selected by the operator for regular scheduled trains by commanding the Signal, Turnout and \ac{DCC} subsystems; and
-  \item assisting the operator executing parts of an operating session plan by commanding the Signal, Turnout and \ac{DCC} subsystems.
+  \item automatically executing the parts of an operating session plan selected by the operator for regular scheduled trains by commanding the Signal, Turnout and \gls{dcc} subsystems; and
+  \item assisting the operator executing parts of an operating session plan by commanding the Signal, Turnout and \gls{dcc} subsystems.
 \end{itemize}
   \item Configure Maintenance is responsible to establish and maintain the maintenance database, allowing the manager to schedule rolling stock or railroad network components maintenance, simulate component failures, and warn the dispatcher of needed maintenance
   \item Configure Network is responsible to establish and maintain the railroad network database, allowing the manager to add, modify or delete railroad network components, and to initialize the Signal and Turnout Subsystems automatically at startup and as requested by the manager.

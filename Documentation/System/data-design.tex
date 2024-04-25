@@ -1,6 +1,6 @@
 \chapter{Data Design}
-MongoDB is a popular NoSQL database that is widely used for various types of applications. A non-SQL database, often referred to as a NoSQL (which stands for "not only SQL") database, is a type of database management system that provides an alternative approach to storing and retrieving data compared to traditional relational databases that use \ac{SQL}. NoSQL databases are designed to handle large volumes of unstructured or semi-structured data, and they offer more flexibility and scalability for certain types of applications.\vspace{5mm} \\
-MongoDB was choosen for the data repository for \ac{RAILS} for the following factors:
+MongoDB is a popular \gls{nosql} database that is widely used for various types of applications. A \gls{nosql} database, is a type of database management system that provides an alternative approach to storing and retrieving data compared to traditional relational databases that use \gls{sql}. NoSQL databases are designed to handle large volumes of unstructured or semi-structured data, and they offer more flexibility and scalability for certain types of applications.\vspace{5mm} \\
+MongoDB was choosen for the data repository for \gls{rails} for the following factors:
 \begin{itemize}
 \item  Model railroad systems often involve a variety of data types and relationships. NoSQL databases, especially document-oriented ones like MongoDB, allow you to store data in a more flexible and schema-less manner. This is beneficial when dealing with diverse information such as train schedules, routes, stations, user preferences, and more.
 \item  As the model railroad system expands, it might need to accommodate a larger volume of data and potentially more users. NoSQL databases are designed to scale out horizontally, making it easier to handle increased workloads and data growth.
@@ -12,12 +12,12 @@ MongoDB was choosen for the data repository for \ac{RAILS} for the following fac
 \item  MongoDB has a wide range of libraries, drivers, and tools available, which can facilitate development and integration with other components of your system.
 \item  If a developer encounters challenges or has questions while developing the model railroad system, NoSQL databases often have active communities and extensive documentation that can provide assistance.
 \end{itemize}
-MongoDB stores data in a flexible, semi-structured document format, using JSON.
+MongoDB stores data in a flexible, semi-structured document format, using \gls{json}.
 \section{Document Collections}
-MongoDB stores data in a flexible, semi-structured document format, using JSON. \ac{RAILS} organizes the data in three\footnote{The current design has only three but as additional functionality is added additional groups may be added} groupings, which correspond to the three data microservices; \ac{RIDS}, \ac{PPDS} and \ac{RLDS}.
+MongoDB stores data in a flexible, semi-structured document format, using \gls{json}. \gls{rails} organizes the data in three\footnote{The current design has only three but as additional functionality is added additional groups may be added} groupings, which correspond to the three data microservices; \gls{rids}, \gls{ppds} and \gls{rlds}.
 \subsection{Railroad Inventory}
 \subsubsection{aarcodes}\label{aarcode}
-An \ac{AAR} code refers to a classification code used by the \ac{AAR} to identify different types of equipment and rollingstock used in the North American railway industry. The AAR codes are a standardized way of categorizing and labeling various railway vehicles, making it easier to identify and track equipment across different railways and organizations.
+An \gls{aar} code refers to a classification code used by the \gls{aar} to identify different types of equipment and rollingstock used in the North American railway industry. The AAR codes are a standardized way of categorizing and labeling various railway vehicles, making it easier to identify and track equipment across different railways and organizations.
 \begin{longtable}{|L{3cm}|L{1.7cm}|L{9.1cm}|L{1.0cm}|}
 	\caption{\label{aar-table}AarCode Collection Fields Table}\\
     \hline
@@ -34,12 +34,12 @@ An \ac{AAR} code refers to a classification code used by the \ac{AAR} to identif
 	\endfoot
 	\hline
 	\endlastfoot
-        aarCode & String & A classification code used by the \ac{AAR} to identify different types of rollingstock & Yes \\ \hline
+        aarCode & String & A classification code used by the \gls{aar} to identify different types of rollingstock & Yes \\ \hline
         rollingstockType & String & A category of rollingstock having common characteristics, such as; Auxiliary, Freight, Gondola, Hopper, Locomotive, Non Revenue, and Passenger. & No\\ \hline
         description & String & A written representation that aims to make vivid the characteristics of the AAR Code. & No \\ \hline
 \end{longtable}
 \subsubsection{dccs}
-\ac{DCC} is a system used in model railroading to control and operate model trains and their accessories. It is a standardized method of transmitting control signals digitally to locomotives and other rollingstock. \ac{DCC} allows for more precise and independent control of multiple trains on the same track.
+\gls{dcc} is a system used in model railroading to control and operate model trains and their accessories. It is a standardized method of transmitting control signals digitally to locomotives and other rollingstock. \gls{dcc} allows for more precise and independent control of multiple trains on the same track.
 \begin{longtable} { |L{3cm}|L{1.7cm}|L{9.1cm}|L{1.0cm}| }
 	\caption{\label{dcc-table}Dccs Collection Fields Table}\\
     \hline
@@ -57,13 +57,13 @@ An \ac{AAR} code refers to a classification code used by the \ac{AAR} to identif
 	\hline
 	\endlastfoot
         locomotiveID & ObjecctId &  The identity object of the dccs document assigned by MongoDB at the time the rollingstock (locomotive) document is created.& Yes \\ \hline
-        mfg & String & The company that made the \ac{DCC} decoder installed in a rollingstock, typically a locomotive. & No\\ \hline
+        mfg & String & The company that made the \gls{dcc} decoder installed in a rollingstock, typically a locomotive. & No\\ \hline
         family & String & A group of DCC decoders produced by a specific manufacturer that share common features, specifications, and compatibility. & No \\ \hline
-        model &  String & A \ac{DCC} decoder offering specific features or specifications within the same product family& No \\ \hline
-        address & String & A unique identifier assigned to each \ac{DCC} decoder, which is a numerical or digital label that distinguishes one rollingstock from another in the \ac{DCC} system. \ac{DCC} addresses range from 1 to 9999. & No \\ \hline  
+        model &  String & A \gls{dcc} decoder offering specific features or specifications within the same product family& No \\ \hline
+        address & String & A unique identifier assigned to each \gls{dcc} decoder, which is a numerical or digital label that distinguishes one rollingstock from another in the \gls{dcc} system. \gls{dcc} addresses range from 1 to 9999. & No \\ \hline  
 \end{longtable}
 \subsubsection{images}
-A set of photographs or illustrations of the rollingstock and structures of the model railroad present in \ac{RAILS}. These images may capture different designs, configurations, and features of rollingstock, providing a visual representation of the diversity within the railway transportation system.
+A set of photographs or illustrations of the rollingstock and structures of the model railroad present in \gls{rails}. These images may capture different designs, configurations, and features of rollingstock, providing a visual representation of the diversity within the railway transportation system.
 \begin{longtable}{|L{3cm}|L{1.7cm}|L{9.1cm}|L{1.0cm}|}
 	\caption{\label{image-table}Images Collection Fields Table}\\
 	\hline

@@ -4,7 +4,6 @@
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{setspace}
-\usepackage{acronym}
 \usepackage[sfdefault]{roboto}
 \usepackage{xcolor}
 \usepackage{sectsty}
@@ -13,6 +12,11 @@
 \usepackage{hyperref}
 \usepackage{tabularx}
 \usepackage{longtable}
+\usepackage{glossaries}
+
+\setacronymstyle{long-short-desc}
+\loadglsentries{defn}
+\makenoidxglossaries
 
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
@@ -20,6 +24,12 @@
 
 \setcounter{secnumdepth}{3}
 \definecolor{MyBlue}{rgb}{0.03, 0.27, 0.49}
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{turqusnumbers}{rgb}{0.17,0.57,0.69}
+\definecolor{redstrings}{rgb}{0.5,0,0}
+\definecolor{battleshipgrey}{rgb}{0.43, 0.5, 0.5}
+\definecolor{graybkgrnd}{rgb}{0.5,0.5,0.5}
 \chapterfont{\color{MyBlue}}
 \sectionfont{\color{MyBlue}}
 \subsectionfont{\color{MyBlue}}
@@ -41,7 +51,7 @@
     \vspace*{\baselineskip}
 	{\small David Bristow}
 
-	{\small Version 1.0.4}
+	{\small Version 1.1.0}
 	
 	{\small \today}
 	\vspace*{3\baselineskip}
@@ -56,10 +66,9 @@
 \input{IoTdesign}
 \input{data-design}
 \input{microcontrollers-design}
-
 %%========================================================================
 \backmatter
 
-\include{acros}
-
+\printnoidxglossary[sort=letter]
+\addcontentsline{toc}{chapter}{Glossary}
 \end{document}

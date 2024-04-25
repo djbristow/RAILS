@@ -2,11 +2,11 @@
 \label{chap:microcontrollers-design}
 \section{Introduction}
 \label{sec:introduction}
-Figure \ref{fig:microarchitecture} shows the microservices components that make up the design of \ac{RAILS}. The microservices,
-highlighted with the light green colored background in Figure \ref{fig:microarchitecture} are shown connected to the \ac{IoT} components on the left side of the figure.
-The \ac{IoT} components are the microcontrollers that are used to control the model railroad layout. The microcontrollers are connected to the \ac{MQTT} broker via Wi-Fi. 
+Figure \ref{fig:microarchitecture} shows the microservices components that make up the design of \gls{rails}. The microservices,
+highlighted with the light green colored background in Figure \ref{fig:microarchitecture} are shown connected to the \gls{iot} components on the left side of the figure.
+The \gls{iot} components are the microcontrollers that are used to control the model railroad layout. The microcontrollers are connected to the \gls{mqtt} broker via Wi-Fi. 
 The microcontrollers are programmed to provide model railroad sensors and actuators. A conceptual diagram of the microcontroller design is shown in Figure 
-\ref{fig:system-concept} where the PC is the platform the \ac{MQTT} broker and the other microservices are running.
+\ref{fig:system-concept} where the PC is the platform the \gls{mqtt} broker and the other microservices are running.
 \begin{figure}[htbp]
     \centering
     \includegraphics[scale=0.5]{system-concept.png}
@@ -16,47 +16,47 @@ The microcontrollers are programmed to provide model railroad sensors and actuat
 
 \section{Microcontrollers}
 \label{sec:microcontrollers}
-An ESP8266 development board is a small, breadboard-friendly circuit board that houses the ESP8266 Wi-Fi microcontroller chip along with additional components to make 
-it easy to use for programming and prototyping. It's a popular choice for hobbyists and makers working on \ac{IoT} projects.
+An ESP8266 development board is a small, breadboard-friendly circuit board that houses the ESP8266 \gls{wifi} microcontroller chip along with additional components to make 
+it easy to use for programming and prototyping. It's a popular choice for hobbyists and makers working on \gls{iot} projects.
 The key features of the ESP8266 are:
 \begin{itemize}
-\item 32-bit \ac{RISC} \ac{CPU}: Tensilica Xtensa LX106 running at 80 MHz
-\item 64 KiB of instruction \ac{RAM}, 96 KiB of data \ac{RAM}
-\item \ac{IEEE} 802.11 b/g/n \ac{Wi-Fi}
-\item 16 \ac{GPIO} pins
-\item \ac{SPI}, \ac{I2C}, \ac{I2S} interfaces with \ac{DMA} (sharing pins with \ac{GPIO})
-\item \ac{UART} on dedicated pins
-\item 1 10-bit \ac{ADC}
-\item \ac{PWM} on all \ac{GPIO} pins with \ac{DMA} (sharing pins with \ac{GPIO})
-\item 1 8-bit \ac{DAC}
+\item 32-bit \gls{risc} \gls{cpu}: Tensilica Xtensa LX106 running at 80 MHz
+\item 64 KiB of instruction \gls{ram}, 96 KiB of data \gls{ram}
+\item \gls{ieee} 802.11 b/g/n \gls{wifi}
+\item 16 \gls{gpio} pins
+\item \gls{spi}, \gls{i2c}, \gls{i2s} interfaces with \gls{dma} (sharing pins with \gls{gpio})
+\item \gls{uart} on dedicated pins
+\item 1 10-bit \gls{adc}
+\item \gls{pwm} on all \gls{gpio} pins with \gls{dma} (sharing pins with \gls{gpio})
+\item 1 8-bit \gls{dac}
 \item 10 µA deep sleep current
 \end{itemize}
 The benefits of using an ESP8266 development board, such as the NodeMCU are:
 \begin{itemize}
 \item Breadboard-friendly
 \item Versatile and easy to use
-\item ESP8266 boards are some of the cheapest \ac{Wi-Fi} development boards available
-\item Easy to program and debug, either with the Arduino \ac{IDE} or Visual Studio Code with PlatformIO.
+\item ESP8266 boards are some of the cheapest \gls{wifi} development boards available
+\item Easy to program and debug, either with the Arduino \gls{ide} or \gls{vscode} with PlatformIO.
 \item Easy to connect to a network and the Internet
 \end{itemize}
 
 \section{RFID Microcontroller} 
 \label{sec:rfid-microcontroller}
-The RFID microcontroller is responsible for reading the \ac{RFID} tags attached to the rolling stock. The RFID microcontroller is programmed to:
+The \gls{rfid} microcontroller is responsible for reading the \gls{rfid} tags attached to the rolling stock. The \gls{rfid} microcontroller is programmed to:
 \begin{itemize}
-\item initializes \ac{Wi-Fi} and \ac{MQTT} paramters are set at compile time using values kept in a params.h file
-\item connects to an \ac{MQTT} broker via \ac{Wi-Fi}
+\item initializes \gls{wifi} and \gls{mqtt} paramters are set at compile time using values kept in a params.h file
+\item connects to an \gls{mqtt} broker via \gls{wifi}
 \item publishes info about this reader to the topic ``micros'' in the format: \\
-\{``et'':``1590462747'',``sensor'':``rfidRdr01'',``msgType'':``initial'',``ip'':``192.168.0.19''\}
+\{``et'':``1590462747'',``mcntrlr'':``RfidRdr01'',``msgType'':``initial'',``ip'':``192.168.0.19''\}
 \item publishes a heartbeat to the topic ``micros'' in the format: \\
-\{``et'':``1590462747'',``sensor'':``rfidRdr01'',``msgType'':``heartbeat''\}
-\item reads values from a single ID-12LA or 7491E \ac{RFID} reader, formats the results as a \ac{JSON} string, 
-gets Epoch time from an \ac{NTP} server and then publishes the \ac{JSON} String to the topic ``sensors/rfid''
+\{``et'':``1590462747'',``mcntrlr'':``RfidRdr01'',``msgType'':``heartbeat''\}
+\item reads values from a single ID-12LA, 7491E or RDM6300 \gls{rfid} reader, formats the results as a \gls{json} string, 
+gets Epoch time from an \gls{ntp} server and then publishes the \gls{json} string to the topic ``sensors/rfid''
 in the format: \\
-\{``et'':``1590463450'',``sensor'':``rfidRdr01'',``reader'':``1'',``rfid'':``1C0044CF23''\}
+\{``et'':``1590463450'',``mcntrlr'':``rfidRdr01'',``reader'':``1'',``rfid'':``1C0044CF23''\}
 \end{itemize}
 
-Figure \ref{fig:rfid-reader} depicts the circuit diagram of the RFID reader. The RFID reader is connected to the ESP8266 microcontroller via a serial connection.
+Figure \ref{fig:rfid-reader} depicts the circuit diagram of the \gls{rfid} reader. The \gls{rfid} reader is connected to the ESP8266 microcontroller via a serial connection.
 
 \begin{figure}[htbp]
     \centering
