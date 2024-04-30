@@ -2,9 +2,12 @@
 David Bristow, 2019-2024
 
 # Version
-* 1.1.0 - 2024-03-20
+* 1.2.0 - 2024-04-30
 
 Documentation like code is under continual development and only portrays a snapshot in time. The directories in this directory contain documentation about various aspects of RAILS and are developed using Latex technologies.
+There are two documents available:
+* System Design and Implemenation - A document discussing the concept of RAILS and its design,  a downloadable pdf can be found at https://kjcrr.org/?page_id=673
+* Docker Implemenation - A document explaining how to setup and run the Docker based microservices of RAILS, a downloadable pdf can be found at https://kjcrr.org/?page_id=750
 
 ## License
 
