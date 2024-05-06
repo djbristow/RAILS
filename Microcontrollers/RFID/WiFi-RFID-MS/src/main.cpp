@@ -1,17 +1,17 @@
 /*****
  * MQTT IOT RFID Reader
  * Copyright 2020-2024 David J Bristow
- * Version 2.0.0 - 20224-04-24
+ * Version 2.0.1 - 20224-05-04
  * - paramters to connect to the MQTT broker are kept in a params.h file
- *   ID-12LA or equivalent RFID reader is a READERTPE A
+ *   ID-12LA and RDM6300 or equivalent RFID reader is a READERTPE A
  *   7491E or equivalent RFID reader is a READERTYPE B
  * - connects to an MQTT broker via wifi
  * - publishes info about this reader to the topic "micros"
  *   {"et":"1590462747","mcntrlr":"rfidRdr01","msgType":"initial",ip":"192.168.0.19"}
  * - publishes a heartbeat to the topic "micros"
  *   {"et":"1590462747","mcntrlr":"rfidRdr01","msgType":"heartbeat"}
- * - reads values from a single RFID reader, formats
- *   the results as a JSON string, gets Epoch time from an NTP server
+ * - reads values from a single RFID reader, tests to ensure it is not a duplicate,
+ *   formats the results as a JSON string, gets Epoch time from an NTP server
  *   and then publishes the JSON String to the topic "sensors/rfid"
  *   {"et":"1590463450","mcntrlr":"rfidRdr01","reader":"1","rfid":"1C0044CF23"}
 
@@ -65,6 +65,8 @@ int numberReaders = NUMBERREADERS;
 String readerType = READERTYPE;
 String ssid = SSID;
 String password = PASSWORD;
+String rfTagId;
+String lastRfidTagId;
 
 /*********************  MQTT FUNCTIONS  ******************************/
 String buildJson(String id, String mcntrlr, String et, String reader)
@@ -293,24 +295,29 @@ void loop()
     loopCount++;
     String rfidJsonPayload = "";
     Serial.print("*");
-    String rfTagId;
+
     for (int i = 0; i < numberReaders; i++)
     {
         String rfTagId = getRfidTags(readerType, i);
-        if (rfTagId != "")
+        if (rfTagId != "" && rfTagId != lastRfidTagId)
         {
             Serial.println(rfTagId);
             timeClient.update();
             rfidJsonPayload = buildJson(rfTagId, mqttId, String(timeClient.getEpochTime()), String(i + 1));
             publishMqtt(rfidJsonPayload, pubTopic);
+            lastRfidTagId=rfTagId;
         }
     }
     if (client.connected())
+    {
         client.loop();
+    }
     else
+    {
         connectMqtt();
+    }
     delay(200);
-    if (loopCount > 500)
+    if (loopCount > 300)
     {
         publishHeartbeat();
         loopCount = 0;

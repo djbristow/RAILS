@@ -2,7 +2,7 @@
 &copy; 2020-2024 David J Bristow
 
 # Version
-* 2.0.0 - 20224-04-24
+* 2.0.1 - 20224-05-04
 
 This software impmlemnts an IoT RFID reader using an ESP8266 micro controller.
 
