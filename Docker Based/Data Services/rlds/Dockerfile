@@ -1,4 +1,4 @@
-FROM node:21-alpine3.19
+FROM node:22-alpine
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
 COPY package.json /usr/djb 

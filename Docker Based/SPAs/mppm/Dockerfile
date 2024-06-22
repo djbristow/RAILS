@@ -1,4 +1,4 @@
-FROM node:21-alpine3.19 AS builder
+FROM node:22-alpine AS builder
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
 COPY . /usr/djb
@@ -6,7 +6,7 @@ RUN npm install -g npm@10.5.0
 RUN npm install
 RUN npm run build
 
-FROM node:21-alpine3.19
+FROM node:22-alpine
 RUN npm install -g npm@10.5.0
 RUN npm install -g http-server
 RUN mkdir -p /usr/djb/dist
