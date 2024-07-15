@@ -1,6 +1,6 @@
 /*****
  * MQTT IOT RFID Reader
- * Copyright 2020-2023 David J Bristow
+ * Copyright 2020-2024 David J Bristow
  * Version 2.0.0 - 1/23/22
  * - initial wifi and mqtt paramters are set at runtime if no SSID found
  * - connects to an MQTT broker via wifi
