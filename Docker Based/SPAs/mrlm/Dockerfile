@@ -1,14 +1,14 @@
-FROM node:22-alpine AS builder
+FROM node:22-slim AS builder
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
 COPY package.json /usr/djb 
-RUN npm install -g npm@10.5.0
+RUN npm install -g npm@10.8.2
 RUN npm install
 COPY . /usr/djb
 RUN npm run build
 
-FROM node:22-alpine
-RUN npm install -g npm@10.5.0
+FROM node:22-slim
+RUN npm install -g npm@10.8.2
 RUN npm install -g http-server
 RUN mkdir -p /usr/djb/dist
 WORKDIR /usr/djb/dist

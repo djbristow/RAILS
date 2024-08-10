@@ -1,6 +1,6 @@
 {
   "name": "rlds",
-  "version": "2.1.26",
+  "version": "2.1.27",
   "description": "Railroad Layout Data Services",
   "private": true,
   "author": "DJ Bristow <dave@bristow-family.org>",
@@ -12,6 +12,6 @@
   "dependencies": {
     "cors": "2.8.5",
     "express": "4.19.2",
-    "mongoose": "8.5.1"
+    "mongoose": "8.5.2"
   }
 }
