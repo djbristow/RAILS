@@ -1,6 +1,6 @@
 {
   "name": "isms",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "IoT Subscriber Micro Controller Services",
   "main": "app.js",
   "author": "David Bristow",
@@ -10,8 +10,8 @@
     "url": "https://github.com/djbristow/RAILS"
   },
   "dependencies": {
-    "axios": "1.7.3",
+    "axios": "1.7.5",
     "cors": "^2.8.5",
-    "mqtt": "5.9.1"
+    "mqtt": "5.10.1"
   }
 }
