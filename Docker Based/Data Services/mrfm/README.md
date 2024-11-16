@@ -4,7 +4,7 @@ David Bristow, 2019-2024
 **M**odel **R**ailroad **F**ile **M**anager is a Hapi application that stores files on the server (POST). The images stored on the server also available for reterival (GET). This application uses port 3030.
 
 ## Version
-v2.2.5 2024-09-19
+v2.3.0 2024-10-24
 
 ## License
 
@@ -31,5 +31,6 @@ npm install
 # start
 export MRFM_TCP_PORT=3030
 export MRFM_TCP_ADDR='127.0.0.1'
+export VITE_MYMRIM_URI='127.0.0.1:3001'
 node ./src/app
 ```

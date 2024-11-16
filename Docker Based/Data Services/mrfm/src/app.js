@@ -2,14 +2,18 @@
 // This is a Hapi application that stores files on the server (POST). The images stored on
 // the server are also available for reterival (GET).
 
-const express = require("express");
-const cors = require("cors");
-const multer = require("multer");
-const fs = require("fs");
+import express from "express";
+import cors from "cors";
+import multer from "multer";
+import fs from "fs";
 
+const uri = process.env.MYMRIM_URI;
+const corsOptions = {
+  origin: 'http://' + uri,
+};
 const app = express();
 app.use(express.static("src/uploads"));
-app.use(cors());
+app.use(cors(corsOptions));
 
 const fileFilter = (req, file, cb) => {
   const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
@@ -66,4 +70,4 @@ app.use((err, req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`Server v2.2.5 listening on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server v2.3.0 listening on port ${PORT}`));

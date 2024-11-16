@@ -114,12 +114,8 @@ export default {
     doc.text("Images Report", 225, 35);
     doc.setFontSize(10);
     doc.text("Page " + pageCount, 35, pageHeight - 10);
-    let imageRoot =
-      "http://" +
-      import.meta.env.VITE_MRFM_TCP_ADDR +
-      ":" +
-      import.meta.env.VITE_MRFM_TCP_PORT +
-      "/";
+    let imageRoot = "http://" + import.meta.env.VITE_MRFM_URI + "/";
+      console.log("Image Root URL: ", imageRoot);
     for (let k = 0; k < categories.length; k++) {
       if (k > 0) {
         doc.addPage();
