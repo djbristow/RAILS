@@ -2,7 +2,7 @@
 David Bristow, 2019-2024
 
 ## Version
-v3.5.11 2024-11-16
+v3.5.13 2024-11-29
 
 **M**odel **P**roject and **P**urchase **M**anager is a MEVN application that provides a user with a web application to display, create and update information of the projects and purchased items. Additionally MPPM creates PDF reports of projects and purchases.
 

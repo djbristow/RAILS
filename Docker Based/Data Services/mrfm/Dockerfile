@@ -3,7 +3,7 @@ RUN mkdir -p /usr/djb
 RUN mkdir -p /usr/djb/src/uploads
 WORKDIR /usr/djb
 COPY package.json /usr/djb
-RUN npm install -g npm@10.8.2
+RUN npm install -g npm@10.9.1
 RUN npm install
 COPY . /usr/djb
 ENV MRFM_TCP_PORT=3030

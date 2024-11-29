@@ -4,7 +4,7 @@ David Bristow, 2020-2024
 **I**oT **P**ublish **T**urnout **S**ervices is an Express aplication that publishes mqtt turnout messages to the MQTT Broker. This application uses port 3011.
 
 ## Version
-v2.1.9 2024-11-16
+v2.1.10 2024-11-29
 
 ## License
 
