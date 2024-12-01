@@ -1,10 +1,12 @@
 # mrfm
+
 David Bristow, 2019-2024
 
 **M**odel **R**ailroad **F**ile **M**anager is a Hapi application that stores files on the server (POST). The images stored on the server also available for reterival (GET). This application uses port 3030.
 
 ## Version
-v2.3.1 2024-11-29
+
+v2.4.0 2024-11-30
 
 ## License
 
@@ -24,13 +26,12 @@ v2.3.1 2024-11-29
 
 ## Run Setup
 
-``` bash
-# install dependencies
-npm install
+    # install dependencies
+    npm install
 
-# start
-export MRFM_TCP_PORT=3030
-export MRFM_TCP_ADDR='127.0.0.1'
-export VITE_MYMRIM_URI='127.0.0.1:3001'
-node ./src/app
-```
+    # start
+    export MRFM_TCP_PORT=3030
+    export MRFM_TCP_ADDR='127.0.0.1'
+    export MYMRIM_URI1='http://127.0.0.1:3001'
+    export MYMRIM_URI2='http://localhost:3001'
+    node ./src/app

@@ -50,6 +50,9 @@ services:
       - myMongo
   myMrfm:
     image: 'dbristow/mrfm'
+    environment:
+      - MYMRIM_URI1=http://127.0.0.1:3001
+      - MYMRIM_URI2=http://localhost:3001
     container_name: myMrfm
     ports: 
       - '3030:3030'

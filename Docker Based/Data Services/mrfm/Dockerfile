@@ -8,6 +8,7 @@ RUN npm install
 COPY . /usr/djb
 ENV MRFM_TCP_PORT=3030
 ENV MMRFM_TCP_ADDR='127.0.0.1'
-ENV MYMRIM_URI=myMrim:3001
+ENV MYMRIM_URI1=http://127.0.0.1:3001
+ENV MYMRIM_URI2=http://localhost:3001
 EXPOSE 3030
 CMD ["node", "./src/app.js"]

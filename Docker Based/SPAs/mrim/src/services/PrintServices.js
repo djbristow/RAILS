@@ -93,7 +93,7 @@ export default {
       image.src = imagePath;
     });
   },
-  async getBase64StringFromDataURL(imgUrl) {
+  async getBase64StringFromDataURL(imgUrl, {mode = 'no-cors'} = {}) {
     let image = await fetch(imgUrl);
     let blob = await image.blob();
     return new Promise((resolve, reject) => {
