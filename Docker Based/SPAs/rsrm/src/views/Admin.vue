@@ -84,7 +84,7 @@ const headers = [
   { title: "Date Time", key: "et" },
   { title: "Location", key: "location" },
   { title: "Status", key: "status" },
-  { title: "Actions", key: "actions" },
+  { title: "Actions", key: "actions", sortable: false},
 ];
 
 const formatDate = (epochTime) => {

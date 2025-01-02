@@ -1,10 +1,12 @@
 # ppds
-David Bristow, 2020-2024
 
-Projects and Purchases Data Services is an Express Mongoose aplication that connects to a MongoDB database containing inventory collections and provide data services to MPPM component. This application uses port 3007.
+&copy; David Bristow, 2020-2025
+
+**P**lans and **P**urchases **D**ata **S**ervices is an Express Mongoose aplication that connects to a MongoDB database containing inventory collections and provide data services to MPPM component. This application uses port 3007.
 
 ## Version
-v2.3.12 2024-11-29
+
+v2.3.13 2025-01-02
 
 ## License
 
@@ -23,6 +25,7 @@ v2.3.12 2024-11-29
 **NOTE**: This software depends on other packages that may be licensed under different open source licenses.
 
 ## Component dependencies
+
 * MongoDB running on port 27017
 
 ## Run Setup

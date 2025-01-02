@@ -1,10 +1,12 @@
 # isrs
-David Bristow, 2020-2024
+
+&copy; David Bristow, 2020-2025
 
 |**I**oT **S**ubscriber **R**FID **S**ervices is an Express application that subscribes to RFID messages from the MQTT Broker and sends them to a MEVN web application using web sockets. This application uses port 3005.
 
 ## Version
-v1.3.12 2024-11-29
+
+v1.3.13 2025-01-02
 
 ## License
 
@@ -24,6 +26,7 @@ v1.3.12 2024-11-29
 
 
 ## Component dependencies
+
 * MQTT Broker running on port 1883
 
 ## Run Setup

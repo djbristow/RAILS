@@ -14,6 +14,7 @@
           :items="rsStore.rfid"
           item-key="item.id"
           density="compact"
+          hide-default-footer
         >
           <template v-slot:item.time="{ item }">
             {{ formatDate(item.time) }}
@@ -26,7 +27,9 @@
           </template>
           <template v-slot:item.actions="{ item }">
             <div v-if="item.roadNameNumber === 'Not Registered'">
-                <v-icon color="red" @click="dialogRegister(item)">mdi-checkbox-marked-circle-outline</v-icon>
+              <v-icon color="red" @click="dialogRegister(item)"
+                >mdi-checkbox-marked-circle-outline</v-icon
+              >
             </div>
           </template>
         </v-data-table>
@@ -37,6 +40,10 @@
           />
         </v-dialog>
       </v-card>
+      <br />
+      <v-card-actions>
+        <v-btn @click="reloadPage">Clear</v-btn>
+      </v-card-actions>
     </v-container>
   </v-app>
 </template>
@@ -53,13 +60,13 @@ const connStatusStore = useConnStatusStore();
 const dialogRfid = ref("");
 const registerDialog = ref(false);
 const headers = [
-  { title: "Time", key: "time" },
-  { title: "Sensor", key: "sensor" },
-  { title: "Reader", key: "reader" },
-  { title: "Tag", key: "rfid" },
-  { title: "Road Name and Number", key: "roadNameNumber" },
-  { title: "AAR", key: "aarCode" },
-  { title: "Color", key: "color" },
+  { title: "Time", key: "time", sortable: false },
+  { title: "Sensor", key: "sensor", sortable: false },
+  { title: "Reader", key: "reader", sortable: false },
+  { title: "Tag", key: "rfid", sortable: false },
+  { title: "Road Name and Number", key: "roadNameNumber", sortable: false },
+  { title: "AAR", key: "aarCode", sortable: false },
+  { title: "Color", key: "color", sortable: false },
   { title: "Register", key: "actions", sortable: false },
 ];
 
@@ -76,6 +83,9 @@ const formatDate = (epochTime) => {
 const dialogRegister = (item) => {
   dialogRfid.value = item.rfid;
   registerDialog.value = true;
+};
+const reloadPage = () => {
+  location.reload();
 };
 </script>
 

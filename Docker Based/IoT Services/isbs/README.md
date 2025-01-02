@@ -1,10 +1,12 @@
 # isbs
-&copy; David Bristow, 2021-2024
+
+&copy; David Bristow, 2021-2025
 
 **I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices is a node application that subscribes to turnout panel button (sensors/pb) from the MQTT Broker. 
 
 ## Version
-v1.1.12 2024-11-29
+
+v1.1.13 2025-01-02
 
 ## License
 
@@ -24,6 +26,7 @@ v1.1.12 2024-11-29
 
 
 ## Component dependencies
+
 * MQTT Broker running on port 1883
 
 ## Run Setup

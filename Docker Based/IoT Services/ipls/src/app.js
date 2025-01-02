@@ -28,5 +28,5 @@ app.post('/tpl', (req, res) => {
 })
 
 app.listen(process.env.PORT || 3013)
-    console.log("IPLS started v1.1.10")
+    console.log("IPLS started v1.1.11")
     console.log("App listening on port 3013")
