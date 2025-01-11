@@ -1,13 +1,12 @@
 # Documentation
-David Bristow, 2019-2024
+
+David Bristow, 2019-2025
 
 # Version
-* 1.2.0 - 2024-04-30
+
+* 1.3.0 - 2025-01-11
 
 Documentation like code is under continual development and only portrays a snapshot in time. The directories in this directory contain documentation about various aspects of RAILS and are developed using Latex technologies.
-There are two documents available:
-* System Design and Implemenation - A document discussing the concept of RAILS and its design,  a downloadable pdf can be found at https://kjcrr.org/?page_id=673
-* Docker Implemenation - A document explaining how to setup and run the Docker based microservices of RAILS, a downloadable pdf can be found at https://kjcrr.org/?page_id=750
 
 ## License
 
@@ -29,4 +28,5 @@ There are two documents available:
 # cd to the directory of the desired document
 cd System
 # then using the head tex file
-lualatex rails-system
+lualatex rails-system.tex
+lualatex rails-docker.tex
