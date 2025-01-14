@@ -50,7 +50,7 @@ The \gls{rfid} microcontroller is responsible for reading the \gls{rfid} tags at
 \{``et'':``1590462747'',``mcntrlr'':``RfidRdr01'',``msgType'':``initial'',``ip'':``192.168.0.19''\}
 \item publishes a heartbeat to the topic ``micros'' in the format: \\
 \{``et'':``1590462747'',``mcntrlr'':``RfidRdr01'',``msgType'':``heartbeat''\}
-\item reads values from a single ID-12LA, 7491E or RDM6300 \gls{rfid} reader, formats the results as a \gls{json} string, 
+\item reads values from a single ID-12LA \gls{rfid} reader, formats the results as a \gls{json} string, 
 gets Epoch time from an \gls{ntp} server and then publishes the \gls{json} string to the topic ``sensors/rfid''
 in the format: \\
 \{``et'':``1590463450'',``mcntrlr'':``rfidRdr01'',``reader'':``1'',``rfid'':``1C0044CF23''\}

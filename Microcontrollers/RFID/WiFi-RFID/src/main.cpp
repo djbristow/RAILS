@@ -1,10 +1,9 @@
 /*****
  * MQTT IOT RFID Reader
- * Copyright 2020-2024 David J Bristow
- * Version 2.0.1 - 20224-05-04
+ * Copyright 2020-2025 David J Bristow
+ * Version 3.0.0 - 20225-15-04
  * - paramters to connect to the MQTT broker are kept in a params.h file
- *   ID-12LA and RDM6300 or equivalent RFID reader is a READERTPE A
- *   7491E or equivalent RFID reader is a READERTYPE B
+ *   ID-12LA or equivalent RFID readers are supported
  * - connects to an MQTT broker via wifi
  * - publishes info about this reader to the topic "micros"
  *   {"et":"1590462747","mcntrlr":"rfidRdr01","msgType":"initial",ip":"192.168.0.19"}
@@ -55,14 +54,13 @@ String subTopic = "micros/cmd/";
 char pubMicro[] = "micros";
 int mqttRetryAttempts = 0;
 int reader = 0;
-int rfidLength = 10;
+int rfidLength = 16;
 int loopCount = 0;
 String readerNum = "";
 String mqttServer = MQTTSERVER;
 int mqttPort = MQTTPORT;
 String mqttId = MQTTID;
 int numberReaders = NUMBERREADERS;
-String readerType = READERTYPE;
 String ssid = SSID;
 String password = PASSWORD;
 String rfTagId;
@@ -153,7 +151,7 @@ String byteToHexString(uint8_t b)
     buffer = valToHex(b & 0x0f) + buffer;
     return buffer;
 }
-boolean is_valid_checksum(uint8_t tag[], String readerType)
+boolean is_valid_checksum(uint8_t tag[])
 {
     uint8_t code[6];
     uint8_t checksum = 0;
@@ -182,23 +180,15 @@ boolean is_valid_checksum(uint8_t tag[], String readerType)
             tempbyte = val;
         }
     }
-    if (readerType != "A")
-    {
-        checksum ^= 8;
-    }
     return code[5] == checksum ? true : false;
 }
-String getRfidTags(String readerType, int i)
+String getRfidTags(int i)
 {
     int tagIndx = 0;
     uint8_t tagDigit;
     String tagId = "";
     String tagString = "";
     int stxCount = 0;
-    if (readerType == "A")
-    {
-        rfidLength = 16;
-    }
     if (rfidRdr[i].available() > 0)
     {
         {
@@ -213,22 +203,15 @@ String getRfidTags(String readerType, int i)
                 }
                 else
                 {
-                    if (readerType != "A")
-                    {
-                        tagString = byteToHexString(tagDigit);
-                        tagId.concat(tagString);
-                    }
-                    else
-                    {
-                        tagId.concat((char)tagDigit);
-                    }
+                    tagString = byteToHexString(tagDigit);
+                    tagId.concat(tagString);
                     tagIndx++;
                 }
             } while ((tagIndx < rfidLength) && (tagDigit != 0x03));
         }
         uint8_t buf[15];
         tagId.getBytes(buf, 14);
-        if (is_valid_checksum(buf, readerType))
+        if (is_valid_checksum(buf))
         {
             tagId = tagId.substring(0, 10);
         }
@@ -263,7 +246,6 @@ void setup()
     IPAddress mqtt_ip(octet1.toInt(), octet2.toInt(), octet3.toInt(), octet4.toInt());
     client.setServer(mqtt_ip, mqttPort);
     connectMqtt();
-    Serial.println(readerType);
     Serial.println(mqttServer);
     rfidRdr[0].begin(BAUD_RATE, SWSERIAL_8N1, DATA_PIN1, NO_TX_PIN);
     if (numberReaders > 1)
@@ -298,7 +280,7 @@ void loop()
 
     for (int i = 0; i < numberReaders; i++)
     {
-        String rfTagId = getRfidTags(readerType, i);
+        String rfTagId = getRfidTags(i);
         if (rfTagId != "" && rfTagId != lastRfidTagId)
         {
             Serial.println(rfTagId);
