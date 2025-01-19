@@ -1,10 +1,10 @@
 # MQTT IOT RFID Reader
 
-&copy; 2020-2024 David J Bristow
+&copy; 2020-2025 David J Bristow
 
 ## Version
 
-* 2.0.1 20224-05-04
+* 3.0.0 2025-01-14
 
 This software impmlemnts an IoT RFID reader using an ESP8266 micro controller.
 
