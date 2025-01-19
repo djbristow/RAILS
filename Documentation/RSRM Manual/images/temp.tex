@@ -1,0 +1,6 @@
+Rolling Stock RFID Manager (RSRM)
+This micro-service web component processes RFID messages and attempts to find the road name and number from the inventory of rolling stock. It is dependent on two other components:
+
+RIDS, which provides services to access the MongoDB collection of rolling stock documents containing a RFID associated to a road name and number
+ISIS, which subscribes to RFID IoT messages and pushes those messages to the manager
+
