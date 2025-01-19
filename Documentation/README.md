@@ -4,7 +4,7 @@ David Bristow, 2019-2025
 
 # Version
 
-* 1.3.0 - 2025-01-11
+* 1.4.0 - 2025-01-19
 
 Documentation like code is under continual development and only portrays a snapshot in time. The directories in this directory contain documentation about various aspects of RAILS and are developed using Latex technologies.
 
@@ -29,4 +29,4 @@ Documentation like code is under continual development and only portrays a snaps
 cd System
 # then using the head tex file
 lualatex rails-system.tex
-lualatex rails-docker.tex
+
