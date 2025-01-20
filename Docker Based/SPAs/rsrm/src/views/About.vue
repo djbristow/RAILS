@@ -1,7 +1,7 @@
 <template>
   <div class="xx">
     <h1>About RAILS RS RFID Manager</h1>
-    <h3>Version 5.0.11</h3>
+    <h3>Version 5.0.12</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) RFID
       Application is one of several applications in the RAILS family of
@@ -9,9 +9,8 @@
       that provides a user with a web application to show, when an RFID tag is
       read, the road name and number of the rolling stock associated with that
       tag. If there is no association with a peice of rolling stock input fields
-      are provided to allow the user to enter the road name and number.
-    </p>
-    <p>The user guide is available at: tbd</p>
+      are provided to allow the user to enter the road name and number.<br />
+      The user guide is available <a href="https://github.com/djbristow/RAILS/blob/master/Documentation/rails-RSMS.pdf" target="_blank">here.</a></p>
     <hr />
     <p>The database has the following number of documents:</p>
       <li>
