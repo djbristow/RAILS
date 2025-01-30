@@ -4,7 +4,7 @@
 
 ## Version
 
-* 3.0.0 2025-01-14
+* 3.0.1 2025-01-30
 
 This software impmlemnts an IoT RFID reader using an ESP8266 micro controller.
 

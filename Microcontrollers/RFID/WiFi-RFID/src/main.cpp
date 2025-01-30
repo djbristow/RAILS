@@ -191,24 +191,21 @@ String getRfidTags(int i)
     int stxCount = 0;
     if (rfidRdr[i].available() > 0)
     {
+        do
         {
-            do
+            tagDigit = rfidRdr[i].read();
+            if ((tagDigit == RFID_MSG_START) && (stxCount < 2))
             {
-                tagDigit = rfidRdr[i].read();
-                if ((tagDigit == RFID_MSG_START) && (stxCount < 2))
-                {
-                    tagIndx = 0;
-                    tagId = "";
-                    stxCount++;
-                }
-                else
-                {
-                    tagString = byteToHexString(tagDigit);
-                    tagId.concat(tagString);
-                    tagIndx++;
-                }
-            } while ((tagIndx < rfidLength) && (tagDigit != 0x03));
-        }
+                tagIndx = 0;
+                tagId = "";
+                stxCount++;
+            }
+            else
+            {
+                tagId.concat((char)tagDigit);
+                tagIndx++;
+            }
+        } while ((tagIndx < rfidLength) && (tagDigit != 0x03));
         uint8_t buf[15];
         tagId.getBytes(buf, 14);
         if (is_valid_checksum(buf))
@@ -217,6 +214,7 @@ String getRfidTags(int i)
         }
         else
         {
+            Serial.println("Invalid Checksum");
             tagId = "";
         }
     }
@@ -287,7 +285,7 @@ void loop()
             timeClient.update();
             rfidJsonPayload = buildJson(rfTagId, mqttId, String(timeClient.getEpochTime()), String(i + 1));
             publishMqtt(rfidJsonPayload, pubTopic);
-            lastRfidTagId=rfTagId;
+            lastRfidTagId = rfTagId;
         }
     }
     if (client.connected())
