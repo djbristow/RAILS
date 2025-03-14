@@ -3,8 +3,8 @@
 David Bristow, 2019-2025
 
 ## Version
-v3.5.15 2025-01-19
-v3.5.14 2025-01-02
+
+v3.5.16 2025-03-13
 
 **M**odel **P**roject and **P**urchase **M**anager is a MEVN application that provides a user with a web application to display, create and update information of the projects and purchased items. Additionally MPPM creates PDF reports of projects and purchases.
 
@@ -30,14 +30,13 @@ This web application uses port 8080 natively but mapped to 3008 in a docker cont
 
 * PPDS - Project and Purchase Data Services running on port 3007
 
-
 ## Vue 3 + Vite
 
 The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
 ## Recommended IDE Setup
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+* [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
 
 ## Environment Variables
 

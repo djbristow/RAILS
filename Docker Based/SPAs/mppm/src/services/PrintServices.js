@@ -1,6 +1,6 @@
 import moment from "moment";
-import { jsPDF } from "jspdf";
-import "jspdf-autotable";
+import { jsPDF } from 'jspdf';
+import { autoTable } from 'jspdf-autotable';
 export default {
   async printProjects(projSortType, projBreakType, documents, uniqueProjectTypes) {
     class Projrow {
@@ -78,7 +78,7 @@ export default {
       projSortType === "Start Date"
     ) {
       // @ts-ignore
-      doc.autoTable({
+      autoTable(doc, {
         columns: colDefinition,
         body: projrows,
         styles: { cellPadding: 3, fontSize: 9 },
@@ -119,7 +119,7 @@ export default {
             k++;
           }
         }
-        doc.autoTable({
+        autoTable(doc, {
           columns: colDefinition,
           body: somerows,
           styles: { cellPadding: 3, fontSize: 9 },
@@ -203,6 +203,7 @@ export default {
     var j = 0;
     var k = 0;
     var purrows = [];
+    var finalY = 0;
     var colDefinition = [
       { dataKey: "num", header: "#" },
       { dataKey: "date", header: "Date" },
@@ -297,7 +298,7 @@ export default {
     var newTitle = title + byTitle;
     doc.text(newTitle, 350, 30);
     if (purBreakType === "Continuous") {
-      doc.autoTable({
+      autoTable(doc, {
         columns: colDefinition,
         body: purrows,
         styles: { cellPadding: 3, fontSize: 8 },
@@ -326,14 +327,15 @@ export default {
         },
         margin: { top: 50 },
       });
-      var finalY = doc.previousAutoTable.finalY;
+     /*  console.log("Final Y", doc.previousAutoTable.finalY);
+      finalY = doc.previousAutoTable.finalY;
       doc.setFontSize(10);
       var summary =
         "The number purchases made was " +
         purrows.length +
         " for a total cost of " +
         formatter.format(totalcost);
-      doc.text(summary, 100, finalY + 20);
+      doc.text(summary, 100, finalY + 20); */
     } else {
       k = 0;
       var headerY = 0;
@@ -372,7 +374,7 @@ export default {
             k++;
           }
         }
-        doc.autoTable({
+        autoTable(doc, {
           columns: colDefinition,
           body: somerows,
           startY : headerY + 10,
@@ -436,7 +438,7 @@ export default {
     var doc = new jsPDF("l", "pt");
     var title = "Model Railroad Companies";
     doc.text(title, 350, 30);
-    doc.autoTable({
+    autoTable(doc, {
       columns: colDefinition,
       body: documents,
       styles: { cellPadding: 3, fontSize: 8 },

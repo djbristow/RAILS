@@ -3,8 +3,8 @@ import { useCompaniesStore } from "@/stores/companies";
 import { useImagesStore } from "@/stores/images";
 import { useRSStore } from "@/stores/rs";
 import { mapActions } from "pinia";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
+import { jsPDF } from 'jspdf';
+import { autoTable } from 'jspdf-autotable';
 import moment from "moment";
 export default {
   printAarCodes(documents) {
@@ -32,7 +32,7 @@ export default {
     var doc = new jsPDF("l", "pt");
     doc.text("AAR Codes Report", 350, 30);
     // @ts-ignore
-    doc.autoTable({
+    autoTable(doc, {
       columns: columns,
       body: aarrows,
       styles: { cellPadding: 3, fontSize: 9 },
@@ -73,7 +73,7 @@ export default {
     var doc = new jsPDF("l", "pt");
     doc.text("Companies Report", 350, 30);
     // @ts-ignore
-    doc.autoTable({
+    autoTable(doc, {
       columns: columns,
       body: corows,
       styles: { cellPadding: 3, fontSize: 10 },
@@ -307,7 +307,7 @@ export default {
     doc.text(newTitle, 350, 30);
     if (breakType === "Continuous") {
       // @ts-ignore
-      doc.autoTable({
+      autoTable(doc,{
         columns: columns,
         body: rsrows,
         styles: { cellPadding: 3, fontSize: 9 },
@@ -384,7 +384,7 @@ export default {
             k++;
           }
         }
-        doc.autoTable({
+        autoTable(doc, {
           columns: columns,
           body: somerows,
           startY : headerY + 10,
@@ -460,7 +460,7 @@ export default {
     var doc = new jsPDF("p", "pt");
     doc.text("RFID Report", 220, 30);
     // @ts-ignore
-    doc.autoTable({
+    autoTable(doc, {
       columns: columns,
       body: rsrows,
       styles: { cellPadding: 3, fontSize: 9 },
@@ -531,7 +531,7 @@ export default {
     let doc = new jsPDF("l", "pt");
     doc.text("Structure Report", 220, 30);
     // @ts-ignore
-    doc.autoTable({
+    autoTable(doc, {
       columns: columns,
       body: structureRows,
       styles: { cellPadding: 3, fontSize: 10 },

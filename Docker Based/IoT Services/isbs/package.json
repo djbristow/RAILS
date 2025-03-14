@@ -1,6 +1,6 @@
 {
   "name": "isbs",
-  "version": "1.1.14",
+  "version": "1.1.15",
   "description": "IoT Publisher Turnout Panel Button Services",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,10 +12,10 @@
     "url": "https://github.com/djbristow/RAILS"
   },
   "dependencies": {
-    "@hapi/hapi": "21.3.12",
+    "@hapi/hapi": "21.4.0",
     "@hapi/nes": "14.0.1",
     "express": "4.21.2",
-    "mqtt": "5.10.3",
+    "mqtt": "5.10.4",
     "socket.io": "4.8.1"
   }
 }

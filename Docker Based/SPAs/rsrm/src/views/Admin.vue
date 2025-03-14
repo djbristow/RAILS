@@ -62,9 +62,9 @@
 
 <script setup>
 import { ref } from "vue";
-import jsPDF from "jspdf";
+import { jsPDF } from 'jspdf';
+import { autoTable } from 'jspdf-autotable';
 import moment from "moment";
-import "jspdf-autotable";
 import exportFromJSON from "export-from-json";
 import DialogEditMicro from "../components/dialogs/DialogEditMicro.vue";
 import DialogDeleteMicro from "../components/dialogs/DialogDeleteMicro.vue";
@@ -148,7 +148,7 @@ const printRfids = () => {
   var doc = new jsPDF("p", "pt");
   doc.text("RFID Report", 220, 30);
   // @ts-ignore
-  doc.autoTable({
+  autoTable(doc, {
     columns: columns,
     body: rsrows,
     styles: { cellPadding: 3, fontSize: 9 },
