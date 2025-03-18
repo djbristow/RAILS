@@ -65,3 +65,27 @@ Figure \ref{fig:rfid-reader} depicts the circuit diagram of the \gls{rfid} reade
     \label{fig:rfid-reader}
 \end{figure}
 
+\section{Turnout Microcontroller}
+\label{sec:turnout-microcontroller}
+The turnout microcontroller is responsible for controlling the turnouts on the model railroad layout. The turnout microcontroller is programmed to:
+\begin{itemize}
+    \item initializes \gls{wifi} and \gls{mqtt} paramters are set at compile time using values kept in a params.h file
+    \item connects to an \gls{mqtt} broker via \gls{wifi}
+    \item publishes info about this reader to the topic ``micros'' in the format: \\
+    \{``et'':``1590462747'',``mcntrlr'':``ToCntlr01'',``msgType'':``initial'',``ip'':``192.168.0.19''\}
+    \item publishes a heartbeat to the topic ``micros'' in the format: \\
+    \{``et'':``1590462747'',``mcntrlr'':``ToCntlr01'',``msgType'':``heartbeat''\}
+    \item subscribes to the topic acts/to/ToCntlrxx where xx is the this controller in the format: \\
+    \{"to":"1|2|3|4","command":"THROW|CLOSE|STATUS"\} which either sets the turnout using an L293 to closed or thrown based on the command received
+    \item responds to status command for a turnout by publishing the status of the turnout to the topic "sensors/toc" in the format: \\
+    \{``et'':``1590463450'',``mcntrlr'':``ToCntlr01'',``to'':``1'',``dir'':``THROWN''\}
+\end{itemize}
+
+Figure \ref{fig:turnout-controller} depicts the circuit diagram of the turnout controller.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{turnout-controller.png}
+    \caption{Turnout Controller}
+    \label{fig:turnout-controller}
+\end{figure}
