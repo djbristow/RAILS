@@ -38,35 +38,49 @@
 #include <ArduinoJson.h>
 #include <params.h>
 /***********************  WIFI AND MQTT SETUP *****************************/
-const char* ssid = SSID;
-const char* password = PASSWORD;
-WiFiClient espWiFi;
+const char *ssid = SSID;
+const char *password = PASSWORD;
+String mqttServer = MQTTSERVER;
 int mqttPort = MQTTPORT;
-IPAddress mqtt_server(192, 168, 0, 7);  // <===== Configurable
+String mqttId = MQTTID;
+WiFiClient espWiFi;
+IPAddress mqtt_server(1, 1, 1, 1);
 String clientId = MQTTID;
-PubSubClient client(mqtt_server, mqttPort, espWiFi);
+PubSubClient client(mqtt_server, 1883, espWiFi);
 WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP, "192.168.0.7", 3600, 60000);  // <===== Configurable
-char pubTopic[] = "sensors/toc";  // <===== Configurable
-char subTopic[] = "acts/to/trnCntlr00";  // <===== Configurable
+NTPClient timeClient(ntpUDP);
+char pubTopic[] = PUBTOPIC;
+char subTopic[] = SUBTOPIC;
 
 /***********************  MCP23017 DECLARATION *****************************/
 Adafruit_MCP23X17 MCP;
 void ICACHE_RAM_ATTR handleInterrupt();
 
 /*****************  GLOBAL VARIABLES  ************************************/
-//uint8_t gpioB = 0xFF;
-//int turnout = 0;
+// uint8_t gpioB = 0xFF;
+// int turnout = 0;
 String turnoutState;
 String currentTurnoutState;
 unsigned long epochTime = 0;
+int loopCount = 0;
 
 /*****************  SYSTEM FUNCTIONS  *************************************/
-void setup_wifi() {
+void setup_wifi()
+{
   delay(10);
-  WiFi.mode(WIFI_STA);
+
   WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
+  int ind1 = mqttServer.indexOf('.');
+  String octet1 = mqttServer.substring(0, ind1);
+  int ind2 = mqttServer.indexOf('.', ind1 + 1);
+  String octet2 = mqttServer.substring(ind1 + 1, ind2 + 1);
+  int ind3 = mqttServer.indexOf('.', ind2 + 1);
+  String octet3 = mqttServer.substring(ind2 + 1, ind3 + 1);
+  String octet4 = mqttServer.substring(ind3 + 1);
+  IPAddress mqtt_ip(octet1.toInt(), octet2.toInt(), octet3.toInt(), octet4.toInt());
+  client.setServer(mqtt_ip, mqttPort);
+  while (WiFi.status() != WL_CONNECTED)
+  {
     delay(500);
     Serial.print(".");
   }
@@ -77,100 +91,135 @@ void setup_wifi() {
   This function determines the state of the Tortoise motor as either
   thrown or closed from the value of the B port and the TO commanded
 ***********************************************************************/
-String determineState(int turnout) {
+String determineState(int turnout)
+{
   uint8_t gpioB = (uint8_t)((MCP.readGPIOAB() & 0xFF00) >> 8);
-  String turnoutState = "CLOSED";  // default to closed
+  String turnoutState = "CLOSED"; // default to closed
   uint8_t mask = 0x03 << (turnout - 1) * 2;
   uint8_t state = (gpioB & mask) >> (turnout - 1) * 2;
-  if (state == 1) {
+  if (state == 1)
+  {
     turnoutState = "THROWN";
   }
   return turnoutState;
 }
 
-void setState(int turnout, String cmd) {
-  if (cmd == "CLOSE") {
+void setState(int turnout, String cmd)
+{
+  if (cmd == "CLOSE")
+  {
     MCP.digitalWrite((turnout - 1) * 2, LOW);
     MCP.digitalWrite(((turnout - 1) * 2) + 1, HIGH);
   }
-  if (cmd == "THROW") {
+  if (cmd == "THROW")
+  {
     MCP.digitalWrite((turnout - 1) * 2, HIGH);
     MCP.digitalWrite(((turnout - 1) * 2) + 1, LOW);
   }
 }
 
-String checkTurnoutState(int turnout, String currentTurnoutState, String cmd ) {
+String checkTurnoutState(int turnout, String currentTurnoutState, String cmd)
+{
   String desiredTurnoutState;
   String tempState;
-  if (currentTurnoutState == "CLOSED") {
+  if (currentTurnoutState == "CLOSED")
+  {
     desiredTurnoutState = "THROWN";
-  } else {
+  }
+  else
+  {
     desiredTurnoutState = "CLOSED";
   }
-  for (int i = 0; i <= 9; i++) {
+  for (int i = 0; i <= 9; i++)
+  {
     tempState = determineState(turnout);
-    if (tempState != desiredTurnoutState) {
+    if (tempState != desiredTurnoutState)
+    {
       delay(1000);
-    } else {
+    }
+    else
+    {
       break;
     }
   }
   return tempState;
 }
 /***************** JSON MESSAGE BUILDER FUNCTION *********************/
-String buildJson(String id, int turnout, unsigned long et, String state) {
+String buildJson(String id, int turnout, unsigned long et, String state)
+{
 
   String mqttMsg = "{\"et\":\"";
-  mqttMsg = mqttMsg +  String(et);
-  mqttMsg = mqttMsg +  "\",\"cntrlr\":\"";
-  mqttMsg = mqttMsg +  id;
-  mqttMsg = mqttMsg +  "\",\"to\":\"";
-  mqttMsg = mqttMsg +  turnout;
-  mqttMsg = mqttMsg +  "\",\"state\":\"";
-  mqttMsg = mqttMsg +  state;
-  mqttMsg = mqttMsg +  "\"}";
+  mqttMsg += String(et);
+  mqttMsg += "\",\"cntrlr\":\"";
+  mqttMsg += id;
+  mqttMsg += "\",\"to\":\"";
+  mqttMsg += turnout;
+  mqttMsg += "\",\"state\":\"";
+  mqttMsg += state;
+  mqttMsg += "\"}";
   return mqttMsg;
 }
 
 /************************** MQTT FUNCTIONS ****************************/
-void reconnectMqtt() {
+void reconnectMqtt()
+{
   Serial.print("Attempting MQTT re-connection...");
-  while (!client.connected()) {
-    if (client.connect(clientId.c_str())) {
-
-    } else {
+  while (!client.connected())
+  {
+    if (client.connect(clientId.c_str()))
+    {
+    }
+    else
+    {
       Serial.print("failed, rc=");
       Serial.println(client.state());
       delay(5000); // Wait 5 seconds before retrying
     }
   }
 }
-void publishMqtt(String payload, String topic) {
+void publishMqtt(String payload, String topic)
+{
   char buf_payload[100];
-  //char buf_topic[20];
+  // char buf_topic[20];
   int strLengthPayload = payload.length() + 1;
   payload.toCharArray(buf_payload, strLengthPayload);
   int strLengthTopic = topic.length() + 1;
   topic.toCharArray(pubTopic, strLengthTopic);
-  if (!client.connected()) {
+  if (!client.connected())
+  {
     reconnectMqtt();
   }
-  if (client.connected()) {
+  if (client.connected())
+  {
     client.publish(pubTopic, buf_payload);
   }
 }
-void publishMqttToc(int turnout, String turnoutState) {
+void publishMqttToc(int turnout, String turnoutState)
+{
   epochTime = timeClient.getEpochTime();
   String msg = buildJson(clientId, turnout, epochTime, turnoutState);
-  publishMqtt(msg, "sensors/toc");
+  publishMqtt(msg, PUBTOPIC);
 }
-void callback(char* topic, byte* payload, unsigned int length) {
+void publishHeartbeat()
+{
+    String et = String(timeClient.getEpochTime());
+    Serial.println(et);
+    String mqttMsg = "{\"et\":\"";
+    mqttMsg += et;
+    mqttMsg += "\",\"mcntrlr\":\"";
+    mqttMsg += mqttId;
+    mqttMsg += "\",\"msgType\":\"heartbeat\"}";
+    publishMqtt(mqttMsg, PUBMICRO);
+}
+void callback(char *topic, byte *payload, unsigned int length)
+{
   // Serial.println("got callback");
   String toState;
   int turnout;
   StaticJsonDocument<200> doc;
   DeserializationError error = deserializeJson(doc, payload);
-  if (error) {
+  if (error)
+  {
     Serial.print(F("deserializeJson() failed: "));
     Serial.println(error.c_str());
     return;
@@ -179,36 +228,47 @@ void callback(char* topic, byte* payload, unsigned int length) {
   turnout = to.toInt();
   String cmd = doc["cmd"];
   currentTurnoutState = determineState(turnout);
-  if (cmd == "CLOSE") {
-    if (currentTurnoutState == "THROWN") {
+  if (cmd == "CLOSE")
+  {
+    if (currentTurnoutState == "THROWN")
+    {
       setState(turnout, cmd);
       toState = checkTurnoutState(turnout, currentTurnoutState, cmd);
       publishMqttToc(turnout, toState);
     }
-  } else if (cmd == "THROW") {
-    if (currentTurnoutState == "CLOSED") {
+  }
+  else if (cmd == "THROW")
+  {
+    if (currentTurnoutState == "CLOSED")
+    {
       setState(turnout, cmd);
       toState = checkTurnoutState(turnout, currentTurnoutState, cmd);
       publishMqttToc(turnout, toState);
     }
-  } else if (cmd == "STATUS") {
+  }
+  else if (cmd == "STATUS")
+  {
     publishMqttToc(turnout, currentTurnoutState);
-  } else {
+  }
+  else
+  {
     publishMqttToc(turnout, "INVLD");
   }
 }
 
-void connectMqtt() {
+void connectMqtt()
+{
   Serial.print("Attempting MQTT connection...");
   client.setCallback(callback);
-  if (!client.connected()) {
+  if (!client.connected())
+  {
     reconnectMqtt();
   }
-  if (client.connected()) {
+  if (client.connected())
+  {
     client.subscribe(subTopic);
   }
 }
-
 
 /*****************  MCP23017 INITIALIZATION FUNCTION  *****************
   This function sets the A port pins as outputs controlling 4 Tortoise
@@ -216,7 +276,8 @@ void connectMqtt() {
   resistors. After the pins are setup the state of each turnout is
   determined and published.
 ***********************************************************************/
-void setup_MCP23017() {
+void setup_MCP23017()
+{
   timeClient.update();
   epochTime = timeClient.getEpochTime();
   MCP.begin_I2C();
@@ -246,37 +307,55 @@ void setup_MCP23017() {
   MCP.pinMode(14, INPUT_PULLUP);
   MCP.pinMode(15, INPUT_PULLUP);
   epochTime = timeClient.getEpochTime();
-  //check setting of turnout contacts then initialize the L293s
-  for (int i = 1; i <= 4; i++) {
+  // check setting of turnout contacts then initialize the L293s
+  for (int i = 1; i <= 4; i++)
+  {
     initialState = determineState(i);
-    if (initialState == "CLOSED") {
+    if (initialState == "CLOSED")
+    {
       setState(i, "CLOSE");
-    } else if (initialState == "THROWN") {
+    }
+    else if (initialState == "THROWN")
+    {
       setState(i, "THROW");
     }
     String payload = buildJson(clientId, i, epochTime, (determineState(i)));
-    publishMqtt(payload, "sensors/toc");
+    publishMqtt(payload, PUBTOPIC);
   }
 }
 
 /*****************  SETUP FUNCTION  ***********************************/
-void setup() {
+void setup()
+{
   Serial.begin(115200);
-  Serial.println("WiFi Turnout Cntlr");
-  Serial.println("Start Setup");
-  setup_wifi();
-  client.setServer(mqtt_server, 1883);
+  delay(5000);
+  Serial.println("\n Starting WiFi Turnout Cntlr");
+  WiFi.begin(ssid, password);
+  int ind1 = mqttServer.indexOf('.');
+  String octet1 = mqttServer.substring(0, ind1);
+  int ind2 = mqttServer.indexOf('.', ind1 + 1);
+  String octet2 = mqttServer.substring(ind1 + 1, ind2 + 1);
+  int ind3 = mqttServer.indexOf('.', ind2 + 1);
+  String octet3 = mqttServer.substring(ind2 + 1, ind3 + 1);
+  String octet4 = mqttServer.substring(ind3 + 1);
+  IPAddress mqtt_ip(octet1.toInt(), octet2.toInt(), octet3.toInt(), octet4.toInt());
+  client.setServer(mqtt_ip, mqttPort);
   client.setCallback(callback);
   connectMqtt();
+  timeClient.begin(mqtt_ip);
+    while (!timeClient.update())
+    {
+        timeClient.forceUpdate();
+    }
   setup_MCP23017();
-  timeClient.begin();
   String mqttMsg = "{\"et\":\"";
-  mqttMsg = mqttMsg + timeClient.getEpochTime();
-  mqttMsg = mqttMsg + "\",\"micro\":\"";
-  mqttMsg = mqttMsg + clientId;
-  mqttMsg = mqttMsg + "\",\"ip\":\"";
-  mqttMsg = mqttMsg + WiFi.localIP().toString();
-  mqttMsg = mqttMsg + "\"}";
+  mqttMsg += + timeClient.getEpochTime();
+  mqttMsg += "\",\"micro\":\"";
+  mqttMsg += clientId;
+  mqttMsg += "\",\"msgType\":\"initial\"";
+  mqttMsg += "\",\"ip\":\"";
+  mqttMsg += WiFi.localIP().toString();
+  mqttMsg += "\"}";
   publishMqtt(mqttMsg, "micros");
   Serial.println("Finished Setup");
 }
@@ -287,10 +366,17 @@ void setup() {
   achieved. Then a message is published with the status of the turnout
   under command.
 ***********************************************************************/
-void loop() {
+void loop()
+{
+  loopCount++;
   if (client.connected())
     client.loop();
   else
     connectMqtt();
-  delay(50);
+  delay(200);
+  if (loopCount > 300)
+    {
+        publishHeartbeat();
+        loopCount = 0;
+    }
 }
