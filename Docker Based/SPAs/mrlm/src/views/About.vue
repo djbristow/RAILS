@@ -1,7 +1,7 @@
 <template>
   <div class="xx">
     <h1>About Model Railroad Layout Manager</h1>
-    <h3>Version 3.2.15</h3>
+    <h3>Version 3.2.16</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) Model
       Railroad Layout Manager is one of several applications in the RAILS family
