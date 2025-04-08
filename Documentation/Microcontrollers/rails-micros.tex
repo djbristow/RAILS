@@ -1,0 +1,70 @@
+\documentclass[letterpaper, oneside, 11pt]{book}
+\usepackage[left=1in, right=1in, top=0.75in]{geometry}
+\usepackage[svgnames]{xcolor}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{acronym}
+\usepackage[sfdefault]{roboto}
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage[colorlinks=true, linkcolor=gray]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{glossaries}
+
+\setacronymstyle{long-short-desc}
+\loadglsentries{defn}
+\makenoidxglossaries
+
+\setcounter{secnumdepth}{3}
+\definecolor{MyBlue}{rgb}{0.03, 0.27, 0.49}
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{turqusnumbers}{rgb}{0.17,0.57,0.69}
+\definecolor{redstrings}{rgb}{0.5,0,0}
+\definecolor{battleshipgrey}{rgb}{0.43, 0.5, 0.5}
+\definecolor{graybkgrnd}{rgb}{0.5,0.5,0.5}
+\chapterfont{\color{MyBlue}}
+\sectionfont{\color{MyBlue}}
+\subsectionfont{\color{MyBlue}}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+%%========================================================================
+\begin{titlepage}
+	\raggedleft
+	\begin{figure}[H]
+	\centering
+		\includegraphics[scale=1.53]{railway_track.jpg}
+	\label{fig:track}
+\end{figure}
+	\vspace*{0.167\textheight}
+	\textbf{\LARGE Microcontrollers Design and Implementation}\\[\baselineskip]
+    \textbf{\textcolor{MyBlue}{\Huge R\Large ailway \Huge A\Large dministration and \Huge I\Large nformation \Huge L\Large ogical \Huge S\Large ystem}}\\[\baselineskip]
+	{\Large \textit{RAILS for Model Railroads}}
+	\vfill
+    \vspace*{\baselineskip}
+	{\small David Bristow}
+
+	{\small Version 1.0.0}
+	
+	{\small \today}
+	\vspace*{3\baselineskip}
+\end{titlepage}
+%%========================================================================
+\tableofcontents
+%% copyright notice
+\copyright David Bristow\\
+%%========================================================================
+\input{intro}
+\input{rfid-microcontroller}
+\input{turnout-microcontroller}
+%%========================================================================
+\backmatter
+
+\printnoidxglossary[sort=letter]
+\addcontentsline{toc}{chapter}{Glossary}
+\end{document}
