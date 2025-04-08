@@ -1,7 +1,7 @@
 /*****
   MQTT IOT Turnout Controller
-  Copyright 2020-2024 David J Bristow
-  Version 2.0.0 - 7/18/2020
+  Copyright 2020-2025 David J Bristow
+  Version 3.0.0 - 2025-04-08
 
   - connects to an MQTT broker via wifi
   - subscribes to the topic acts/to/trnCtlrxx where xx is the this controller

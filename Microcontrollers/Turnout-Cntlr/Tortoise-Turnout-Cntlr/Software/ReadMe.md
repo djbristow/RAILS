@@ -1,8 +1,8 @@
 # MQTT IOT Turnout Controller
-&copy; David J Bristow, 2020-2023
+&copy; David J Bristow, 2020-2025
 
 # Version
-* 2.1.0 - 2023-12-26
+* 3.0.0 - 2025-04-08
 
 This software impmlemnts a IoT turnout controller for Tortoise motors.
 For further information see http://kjcrr.org/
