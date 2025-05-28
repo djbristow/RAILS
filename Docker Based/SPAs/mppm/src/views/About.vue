@@ -1,7 +1,7 @@
 <template>
   <div class="xx">
     <h1>About Model Project & Purchase Manager</h1>
-    <h3>Version 3.5.18</h3>
+    <h3>Version 3.5.19</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) Model Railroad Purchases
       and Projects Manager is one of several applications in the RAILS family of applications.
