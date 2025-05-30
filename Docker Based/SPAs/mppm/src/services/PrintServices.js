@@ -303,7 +303,7 @@ export default {
         body: purrows,
         styles: { cellPadding: 3, fontSize: 8 },
         columnStyles: {
-          0: { halign: "right", cellWidth: 30 }, // num
+          0: { halign: "right", cellWidth: 50 }, // num
           1: { cellWidth: 60 }, // date
           2: { cellWidth: 110 }, // store
           3: { cellWidth: 60 }, // item
@@ -327,15 +327,15 @@ export default {
         },
         margin: { top: 50 },
       });
-     /*  console.log("Final Y", doc.previousAutoTable.finalY);
-      finalY = doc.previousAutoTable.finalY;
+     console.log("Final Y", doc.lastAutoTable.finalY);
+      finalY = doc.lastAutoTable.finalY;
       doc.setFontSize(10);
       var summary =
         "The number purchases made was " +
         purrows.length +
         " for a total cost of " +
         formatter.format(totalcost);
-      doc.text(summary, 100, finalY + 20); */
+      doc.text(summary, 100, finalY + 20); 
     } else {
       k = 0;
       var headerY = 0;
@@ -344,7 +344,7 @@ export default {
         headerY = 50;
         if (purBreakType !== "Page"){
         if (i !== 0) {
-          headerY = doc.previousAutoTable.finalY + 15;
+          headerY = doc.lastAutoTable.finalY + 15;
         }
         if (headerY + 50 > doc.internal.pageSize.height) {
           doc.addPage();
@@ -380,7 +380,7 @@ export default {
           startY : headerY + 10,
           styles: { cellPadding: 3, fontSize: 8 },
           columnStyles: {
-            0: { halign: "right", cellWidth: 30 }, // num
+            0: { halign: "right", cellWidth: 50 }, // num
             1: { cellWidth: 60 }, // date
             2: { cellWidth: 110 }, // store
             3: { cellWidth: 60 }, // item

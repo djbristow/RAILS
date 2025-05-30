@@ -354,7 +354,7 @@ export default {
         headerY = 50;
         if (breakType !== "Page"){
         if (i !== 0) {
-          headerY = doc.previousAutoTable.finalY + 15;
+          headerY = doc.lastAutoTable.finalY + 15;
         }
         if (headerY + 50 > doc.internal.pageSize.height) {
           doc.addPage();

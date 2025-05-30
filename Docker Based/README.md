@@ -15,8 +15,8 @@ The three groups of docker components are: IoT Services, Data Services, and Sing
 |Name |Title                                  |Port |Version|Date     |
 |-----|----------------------------------------------------------|-----|-------|---------|
 |SPAs|----------------------------------------------------------|
-|MPPM|**M**odel **P**rojects and **P**urchase **M**anager allows a user to enter information about their projects and purchases|3008|3.5.19|2025-05-28|
-|MRIM|**M**odel **R**ailroad **I**nventory **M**anager allows a user to enter information about their inventoried items|3001|4.3.20|2025-05-28|
+|MPPM|**M**odel **P**rojects and **P**urchase **M**anager allows a user to enter information about their projects and purchases|3008|3.5.20|2025-05-29|
+|MRIM|**M**odel **R**ailroad **I**nventory **M**anager allows a user to enter information about their inventoried items|3001|4.3.21|2025-05-29|
 |MRLM|**M**odel **R**ailroad **L**ayout **M**anager allows a user to enter information about their layout and control elements of it|3004|3.2.17|2025-05-28|
 |RSRM|**R**olling**s**tock **R**FID **M**anager allows a user to match a RFID value to a rolling stock road name and number|3002|5.0.16|2025-05-28|
 |Data Services|----------------------------------------------------------|
