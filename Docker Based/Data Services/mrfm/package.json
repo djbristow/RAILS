@@ -1,6 +1,6 @@
 {
   "name": "mrfm",
-  "version": "2.4.4",
+  "version": "2.4.5",
   "description": "Model Railroad File Manager",
   "private": true,
   "author": "DJ Bristow <dave@bristow-family.org>",
@@ -13,6 +13,6 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "5.1.0",
-    "multer": "2.0.0"
+    "multer": "2.0.1"
   }
 }
