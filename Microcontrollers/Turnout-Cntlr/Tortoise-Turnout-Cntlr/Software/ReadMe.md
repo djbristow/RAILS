@@ -2,7 +2,7 @@
 &copy; David J Bristow, 2020-2025
 
 # Version
-* 3.0.0 - 2025-04-08
+* 3.1.0 - 2025-06-06
 
 This software impmlemnts a IoT turnout controller for Tortoise motors.
 For further information see http://kjcrr.org/

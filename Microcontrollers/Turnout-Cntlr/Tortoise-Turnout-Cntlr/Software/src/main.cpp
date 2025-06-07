@@ -1,17 +1,17 @@
 /*****
   MQTT IOT Turnout Controller
   Copyright 2020-2025 David J Bristow
-  Version 3.0.0 - 2025-04-08
+  Version 3.1.0 - 2025-06-06
 
   - connects to an MQTT broker via wifi
   - subscribes to the topic acts/to/trnCtlrxx where xx is the this controller
-  - {"cntrlr":"trnCtlr01","to":"1|2|3|4","cmd":"throw|close|status"}
+  - {"to":"1|2|3|4","cmd":"THROW|CLOSE|STATUS"}
   - checks current state of turnout and either switches the turnout using an L293 and changes state or ignores
   - responds to status command for a turnout
   - determines the state of the turnout under command
   - gets Epoch time from an NTP server
   - formats the results as a JSON string
-  - {"et":"1588827073","cntrlr":"trnCtlr01","to":"1","state":"THROWN|CLOSED|ERR|INVLD"}
+  - {"et":"1588827073","cntrlr":"trnCtlr01","to":"1","state":"THROWN|CLOSED|INVLD"}
   - and publishes the JSON String to the topic "sensors/toc"
 
   Note: items marked as "configurable" need to be set for the specifics of
@@ -29,6 +29,7 @@
 *****/
 
 /******************  LIBRARY SECTION *************************************/
+#include <Arduino.h>
 #include <Wire.h>
 #include <Adafruit_MCP23X17.h>
 #include <ESP8266WiFi.h>
@@ -57,12 +58,11 @@ Adafruit_MCP23X17 MCP;
 void ICACHE_RAM_ATTR handleInterrupt();
 
 /*****************  GLOBAL VARIABLES  ************************************/
-// uint8_t gpioB = 0xFF;
-// int turnout = 0;
 String turnoutState;
 String currentTurnoutState;
 unsigned long epochTime = 0;
 int loopCount = 0;
+int turnoutPin[4] = {2, 0, 6, 4}; // MCP23017 GPA2, GPA0, GPA6, GPA4
 
 /*****************  SYSTEM FUNCTIONS  *************************************/
 void setup_wifi()
@@ -108,13 +108,13 @@ void setState(int turnout, String cmd)
 {
   if (cmd == "CLOSE")
   {
-    MCP.digitalWrite((turnout - 1) * 2, LOW);
-    MCP.digitalWrite(((turnout - 1) * 2) + 1, HIGH);
+    MCP.digitalWrite(turnoutPin[turnout-1], LOW); //
+    MCP.digitalWrite(turnoutPin[turnout-1] + 1, HIGH);
   }
   if (cmd == "THROW")
   {
-    MCP.digitalWrite((turnout - 1) * 2, HIGH);
-    MCP.digitalWrite(((turnout - 1) * 2) + 1, LOW);
+    MCP.digitalWrite(turnoutPin[turnout-1], HIGH);
+    MCP.digitalWrite(turnoutPin[turnout-1] + 1, LOW);
   }
 }
 
@@ -282,18 +282,19 @@ void setup_MCP23017()
   epochTime = timeClient.getEpochTime();
   MCP.begin_I2C();
   String initialState;
-  // GPA0 and GPA1 (pins 21 & 22) output TO1
-  MCP.pinMode(0, OUTPUT);
-  MCP.pinMode(1, OUTPUT);
-  // GPA2 and GPA3 (pins 23 & 24) output TO2
+  // GPA2 and GPA3 (pins 23 & 24) output TO1
   MCP.pinMode(2, OUTPUT);
   MCP.pinMode(3, OUTPUT);
-  // GPA4 and GPA5 (pins 25 & 26) output TO3
-  MCP.pinMode(4, OUTPUT);
-  MCP.pinMode(5, OUTPUT);
-  // GPA6 and GPA7 (pins 27 & 28) output TO4
+  // GPA0 and GPA1 (pins 21 & 22) output TO2 
+  MCP.pinMode(0, OUTPUT);
+  MCP.pinMode(1, OUTPUT);
+  // GPA6 and GPA7 (pins 27 & 28) output TO3
   MCP.pinMode(6, OUTPUT);
   MCP.pinMode(7, OUTPUT);
+  // GPA4 and GPA5 (pins 25 & 26) output TO4
+  MCP.pinMode(4, OUTPUT);
+  MCP.pinMode(5, OUTPUT);
+ 
   // GPB0 and GPB1 (pins 1 & 2) input TO1 position
   MCP.pinMode(8, INPUT_PULLUP);
   MCP.pinMode(9, INPUT_PULLUP);
