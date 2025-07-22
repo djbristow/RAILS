@@ -29,6 +29,8 @@
 import { ref, onMounted } from "vue";
 import { useTurnoutsStore } from "@/stores/turnouts";
 
+const emit = defineEmits(["closeEditTurnoutDialog"]);
+
 const props = defineProps({
     turnout: {
         type: Object,

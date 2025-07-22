@@ -25,6 +25,8 @@
 import { ref, onMounted, computed } from "vue";
 import { useTplightsStore } from "@/stores/tplights";
 
+const emit = defineEmits(["closeEditTPLightDialog"]);
+
 const props = defineProps({
     tplight: {
         type: Object,

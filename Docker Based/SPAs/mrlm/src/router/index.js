@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Admin from '../views/Admin.vue'
 import About from '../views/About.vue'
 import MicroContlr from '../views/MicroContlr.vue'
+import Panel from '../views/Panel.vue'
 import Turnouts from '../views/Turnouts.vue'
 import TPLights from '../views/TPLights.vue'
 const routes = [
@@ -19,6 +20,11 @@ const routes = [
       path: '/MicroContlr',
       name: 'MicroContlr',
       component: MicroContlr
+    },
+    {
+      path: '/Panel',
+      name: 'Panel',
+      component: Panel
     },
     {
       path: '/Turnouts',

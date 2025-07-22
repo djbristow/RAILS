@@ -34,6 +34,9 @@ const controller = ref("");
 const panelName = ref("");
 const panelNum = ref("");
 const error = ref("");
+
+const emit = defineEmits(["closeAddTPLightDialog"]);
+
 const tpLightAddDataInvalid = computed(() => {
     if ((turnout.value !== "" && controller.value !== "" && tplNum.value !== "") || error.value) {
         return false;

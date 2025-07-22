@@ -17,6 +17,8 @@
 <script setup>
 import { useTplightsStore } from "@/stores/tplights";
 
+const emit = defineEmits(["closeDeleteTPLightDialog"]);
+
 const props = defineProps({
   tplight: {
     type: Object,

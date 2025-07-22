@@ -39,6 +39,9 @@ const state = ref("");
 const lock = ref("");
 const toLoc = ref("");
 const notes = ref("");
+
+const emit = defineEmits(["closeAddTurnoutDialog"]);
+
 const turnoutAddDataInvalid = computed(() => {
     if ((toID.value !== "" && controller.value !== "" && toNum.value !== "") ) {
         return false;

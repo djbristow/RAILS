@@ -47,6 +47,7 @@ const drawer = ref(false);
 const items = [
   { title: "Turnouts", icon: "mdi-electric-switch", to: "/turnouts" },
   { title: "Turnout Panel Lights", icon: "mdi-alarm-panel", to: "/tplights" },
+  { title: "Panel", icon: "mdi-view-dashboard", to: "/panel" },
   { title: "Micro Contollers", icon: "mdi-memory", to: "/microcontlr" },
   { title: "Admin", icon: "mdi-format-list-checks", to: "/admin" },
   { title: "About", icon: "mdi-help-box", to: "/" },
@@ -170,5 +171,11 @@ const processBtnMsg = (message) => {
   margin-left: 50px;
   width: 1200px;
   padding: 10px;
+}
+.svg-wrapper svg {
+  width: 100%;       /* fills container */
+  height: auto;
+  display: block;
+  border: 5px solid black;
 }
 </style>

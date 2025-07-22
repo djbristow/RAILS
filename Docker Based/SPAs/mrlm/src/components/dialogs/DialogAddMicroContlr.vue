@@ -30,6 +30,9 @@ const microIP = ref("");
 const purpose = ref("");
 const et = ref("");
 const status = ref("");
+
+const emit = defineEmits(["closeAddMicroContlrDialog"]);
+
 const microContlrAddDataInvalid = computed(() => {
     if (microID.value !== "" && microIP.value !== "") {
         return false;

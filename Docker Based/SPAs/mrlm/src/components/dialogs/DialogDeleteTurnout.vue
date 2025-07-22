@@ -17,6 +17,8 @@
 <script setup>
 import { useTurnoutsStore } from "@/stores/turnouts";
 
+const emit = defineEmits(["closeDeleteTurnoutDialog"]);
+
 const props = defineProps({
   turnout: {
     type: Object,

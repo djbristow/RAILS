@@ -68,9 +68,9 @@ import DialogDeleteTurnout from "@/components/dialogs/DialogDeleteTurnout.vue";
 import DialogAddTurnout from "@/components/dialogs/DialogAddTurnout.vue";
 import moment from "moment";
 import { useTurnoutsStore } from "@/stores/turnouts";
+import RlService from "@/services/RlService";
 
 const turnoutsStore = useTurnoutsStore();
-import RlService from "@/services/RlService";
 const editTurnoutDialog = ref(false);
 const deleteTurnoutDialog = ref(false);
 const addTurnoutDialog = ref(false);

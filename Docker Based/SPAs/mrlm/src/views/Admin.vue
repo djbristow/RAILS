@@ -15,16 +15,29 @@
                     An error has ocurred, select a collection.
                 </p>
                 <v-row>
-                    <v-col cols="4">
-                        <v-file-input v-model="inFilename" accept="txt" label="File input"
-                            @change="onFileChange"></v-file-input>
-                    </v-col>
-                    <v-col cols="4">
-                        <v-select :items="items" label="Collection" v-model="selectedInpt"></v-select>
-                    </v-col>
-                    <v-col cols="4">
-                        <v-btn @click="uploadFile"> Import </v-btn>
-                    </v-col>
+                  <v-col cols="4">
+                    <v-file-input v-model="inFilename" accept="txt" label="File input"
+                      @change="onFileChange"></v-file-input>
+                  </v-col>
+                  <v-col cols="4">
+                    <v-select :items="items" label="Collection" v-model="selectedInpt"></v-select>
+                  </v-col>
+                  <v-col cols="4">
+                    <v-btn @click="uploadFile"> Import </v-btn>
+                  </v-col>
+                </v-row>
+                <v-row class="mt-4">
+                  <v-col cols="8">
+                    <v-file-input
+                      v-model="svgFile"
+                      accept=".svg"
+                      label="Panel input"
+                      @change="onSvgFileChange"
+                    ></v-file-input>
+                  </v-col>
+                  <v-col cols="4">
+                    <v-btn @click="importSvgFile" :disabled="!svgFile"> Import </v-btn>
+                  </v-col>
                 </v-row>
                 <v-row>
                     <p v-if="inptError" style="color: #ff0000">
@@ -42,9 +55,12 @@ import FileService from "../services/FileService";
 import { useMicrosStore } from "@/stores/micros";
 import { useTurnoutsStore } from "@/stores/turnouts";
 import { useTplightsStore } from "@/stores/tplights";
+import { useSvgContentStore, SET_SVG_CONTENT } from "@/stores/svgContent";
+
 const microsStore = useMicrosStore();
 const turnoutsStore = useTurnoutsStore();
 const tplightsStore = useTplightsStore();
+const svgContentStore = useSvgContentStore();
 const items = ["Micros", "Turnouts", "TPLights"];
 const selectedExpt = ref(null);
 const selectedInpt = ref(null);
@@ -53,6 +69,8 @@ const exprtError = ref(false);
 const inptError = ref(false);
 const error = ref(null);
 const inFilename = ref([]);
+const svgFile = ref(null);
+
 const downloadFile = () => {
     let data = null;
     if (selectedExpt.value == null) {
@@ -76,11 +94,52 @@ const downloadFile = () => {
         selectedExpt.value = null;
     }
 };
+
 const onFileChange = (e) => {
   let files = e.target.files || e.dataTransfer.files;
   if (!files.length) return;
   chosenFile.value = files[0];
 };
+
+const onSvgFileChange = (e) => {
+  let files = e.target?.files || e.dataTransfer?.files || svgFile.value;
+  if (!files || !files.length) return;
+  svgFile.value = files[0];
+};
+
+/* const importSvgFile = (e) => {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const content = e.target.result;
+      console.log("SVG file content: ", content);
+      svgContentStore[SET_SVG_CONTENT](content);
+    } catch (err) {
+      console.error("File processing error:", err);
+    }
+  };
+  reader.readAsText(svgFile.value);
+}; */
+
+/* watch(svgFile, (newVal, oldVal) => {
+  // Optionally handle changes if needed
+}); */
+
+const importSvgFile = (e) => {
+  if (!svgFile.value) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const content = e.target.result;
+      svgContentStore[SET_SVG_CONTENT](content);
+      svgFile.value = null; // Clear the file input after successful import
+    } catch (err) {
+      console.error("File processing error:", err);
+    }
+  };
+  reader.readAsText(svgFile.value);
+};
+
 const splitWithParser = (input) => {
   let tokens = [];
   let startPosition = 0;
@@ -113,6 +172,7 @@ const splitWithParser = (input) => {
   }
   return tokens;
 };
+
 const uploadFile = () => {
   inptError.value = false;
   var reader = new FileReader();

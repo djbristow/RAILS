@@ -17,6 +17,8 @@
 <script setup>
 import { useMicrosStore } from "@/stores/micros";
 
+const emit = defineEmits(["closeDeleteMicroContlrDialog"]);
+
 const props = defineProps({
   micro: {
     type: Object,

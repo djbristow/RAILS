@@ -33,6 +33,8 @@
 import { ref, onMounted, computed } from "vue";
 import { useMicrosStore } from "@/stores/micros";
 
+const emit = defineEmits(["closeEditMicroContlrDialog"]);
+
 const props = defineProps({
   micro: {
     type: Object,
