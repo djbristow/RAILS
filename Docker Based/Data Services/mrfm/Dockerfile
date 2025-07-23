@@ -1,4 +1,4 @@
-FROM node:22-slim
+FROM node:24-slim
 RUN mkdir -p /usr/djb
 RUN mkdir -p /usr/djb/src/uploads
 WORKDIR /usr/djb

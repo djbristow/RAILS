@@ -1,6 +1,6 @@
 {
   "name": "isbs",
-  "version": "1.1.17",
+  "version": "1.1.18",
   "description": "IoT Publisher Turnout Panel Button Services",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,7 +15,7 @@
     "@hapi/hapi": "21.4.0",
     "@hapi/nes": "14.0.1",
     "express": "5.1.0",
-    "mqtt": "5.13.0",
+    "mqtt": "5.13.3",
     "socket.io": "4.8.1"
   }
 }

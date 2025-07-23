@@ -1,8 +1,8 @@
-FROM node:22-slim
+FROM node:24-slim
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
 COPY package.json /usr/djb
-RUN npm install -g npm@11.2.0
+RUN npm install -g npm@11.4.1
 RUN npm install
 COPY . /usr/djb
 ENV RSRM_TCP_URI=localhost:3002

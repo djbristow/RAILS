@@ -35,6 +35,6 @@ client.on('message', function (topic, message) {
 })
 
 httpServer.listen(3012, function () {
-     console.log("ISBS v1.1.17, Started")
+     console.log("ISBS v1.1.18, Started")
      console.log("ISBS listening on port 3012")
 });
