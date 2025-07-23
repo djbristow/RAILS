@@ -1,4 +1,4 @@
-FROM node:24-slim AS builder
+FROM node:slim AS builder
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
 COPY package.json /usr/djb 
@@ -7,7 +7,7 @@ RUN npm install
 COPY . /usr/djb
 RUN npm run build
 
-FROM node:24-slim
+FROM node:slim
 RUN npm install -g npm@11.4.1
 RUN npm install -g http-server
 RUN mkdir -p /usr/djb/dist
