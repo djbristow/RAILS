@@ -41,8 +41,8 @@ const turnoutsStore = useTurnoutsStore();
 const tplightsStore = useTplightsStore();
 const microsStore = useMicrosStore();
 const connStatsStore = useConnStatsStore();
-const socketTo = io('http://' + import.meta.env.VITE_MYISTS_TCP_URI);
-const socketBtn = io('http://' + import.meta.env.VITE_MYISBS_TCP_URI);
+const ISTS_BASE_URI = import.meta.env.VITE_MYISTS_URI;
+const ISBS_BASE_URI = import.meta.env.VITE_MYISBS_URI;
 const drawer = ref(false);
 const items = [
   { title: "Turnouts", icon: "mdi-electric-switch", to: "/turnouts" },
@@ -64,28 +64,50 @@ const refreshMicros = () => {
   microsStore.GET_MICROS();
   setTimeout(() => refreshMicros(), 60000);
 };
+
+// Initialize the Socket.IO client for turnout contacts
+const socketTo = io({
+  path: `${ISTS_BASE_URI}/socket.io/` // This tells the client to connect to /api/isrs/socket.io/
+});
+
 const opensocketToListener = () => {
   socketTo.on("connect", () => {
     connStatsStore.SET_CONN_TO_STATUS("Connected");
+    console.log("Socket.IO Connected! Current URI:", socketTo.io.uri); // For debugging
   });
-  socketTo.on("disconnect", () => {
+  socketTo.on("disconnect", (reason) => {
     connStatsStore.SET_CONN_TO_STATUS("Disconnected");
+    console.log("Socket.IO Disconnected:", reason); // For debugging
   });
   socketTo.on("tocmsg", (message) => {
     processToMsg(message);
   });
+  socketTo.on("connect_error", (error) => { // Add this for better error visibility
+    console.error("Socket.IO Connection Error:", error);
+  });
 };
+// Initialize the Socket.IO client for turnout panel buttons
+const socketBtn = io({
+  path: `${ISBS_BASE_URI}/socket.io/`
+});
+
 const opensocketBtnListener = () => {
   socketBtn.on("connect", () => {
     connStatsStore.SET_CONN_BTN_STATUS("Connected");
+    console.log("Socket.IO Connected! Current URI:", socketBtn.io.uri); // For debugging
   });
   socketBtn.on("disconnect", () => {
     connStatsStore.SET_CONN_BTN_STATUS("Disconnected");
+    console.log("Socket.IO Disconnected:", reason); // For debugging
   });
   socketBtn.on("btnmsg", (message) => {
     processBtnMsg(message);
   });
+  socketBtn.on("connect_error", (error) => { // Add this for better error visibility
+    console.error("Socket.IO Connection Error:", error);
+  });
 };
+
 const processToMsg = (message) => {
   let turnout = turnoutsStore.GET_TURNOUT_BY_CNTRLR_TO(message.cntrlr, message.to);
   if (turnout) {

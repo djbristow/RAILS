@@ -33,6 +33,6 @@ const props = defineProps({
 const structuresStore = useStructuresStore();
 const imageServer = ref("");
 onMounted(() => {
-  imageServer.value = 'http://' + import.meta.env.VITE_MRFM_URI +'/'+ props.structure.image;
+  imageServer.value = import.meta.env.VITE_MRFM_URI +'/'+ props.structure.image;
 });
 </script>

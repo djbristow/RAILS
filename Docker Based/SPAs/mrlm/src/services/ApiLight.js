@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const baseurl =  'http://' + import.meta.env.VITE_MYIPLS_TCP_URI;
+const baseurl =  import.meta.env.VITE_MYIPLS_URI;
+
 const ApiRl = axios.create({  
   baseURL: baseurl,
   headers: {

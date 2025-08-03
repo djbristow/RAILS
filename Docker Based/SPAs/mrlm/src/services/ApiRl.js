@@ -1,6 +1,8 @@
+
 import axios from 'axios'
 
-const baseurl =  'http://' + import.meta.env.VITE_MYRLDS_TCP_URI;
+const baseurl = import.meta.env.VITE_MYRLDS_URI;
+
 const ApiRl = axios.create({  
   baseURL: baseurl,
   headers: {
@@ -8,6 +10,7 @@ const ApiRl = axios.create({
     'Accept': 'application/json'
   }
 })
+
 export default() => {
   return ApiRl
 }

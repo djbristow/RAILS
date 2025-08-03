@@ -1,7 +1,7 @@
 <template>
   <div class="xx">
     <h1>About Model Railroad Layout Manager</h1>
-    <h3>Version 3.3.2</h3>
+    <h3>Version 4.0.0</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) Model
       Railroad Layout Manager is one of several applications in the RAILS family
@@ -21,28 +21,30 @@
     <li>Turnout Panel Lights: {{ tplightsStore.TPLIGHT_COUNT }}</li>
     <hr />
     <table>
-      <tr>
-        <td>Connection to ISTS Turnout Contacts</td>
-        <td>
-          <div v-if="connStatsStore.connToStatus === 'Connected'">
-            <v-icon color="green">mdi-cast-connected</v-icon>
-          </div>
-          <div v-else>
-            <v-icon color="red">mdi-cast-connected</v-icon>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>Connection to ISTS Turnout Panel Buttons</td>
-        <td>
-          <div v-if="connStatsStore.connBtnStatus === 'Connected'">
-            <v-icon color="green">mdi-cast-connected</v-icon>
-          </div>
-          <div v-else>
-            <v-icon color="red">mdi-cast-connected</v-icon>
-          </div>
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <td>Connection to ISTS Turnout Contacts</td>
+          <td>
+            <div v-if="connStatsStore.connToStatus === 'Connected'">
+              <v-icon color="green">mdi-cast-connected</v-icon>
+            </div>
+            <div v-else>
+              <v-icon color="red">mdi-cast-connected</v-icon>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Connection to ISBS Turnout Panel Buttons</td>
+          <td>
+            <div v-if="connStatsStore.connBtnStatus === 'Connected'">
+              <v-icon color="green">mdi-cast-connected</v-icon>
+            </div>
+            <div v-else>
+              <v-icon color="red">mdi-cast-connected</v-icon>
+            </div>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>

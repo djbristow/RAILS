@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseurl =  'http://' + import.meta.env.VITE_MYIPTS_TCP_URI;
+const baseurl =  import.meta.env.VITE_MYIPTS_URI;
 const ApiIp = axios.create({  
   baseURL: baseurl,
   headers: {

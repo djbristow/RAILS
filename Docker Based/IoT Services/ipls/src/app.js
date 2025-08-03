@@ -1,6 +1,7 @@
 // IPLS - IoT Publisher Turnout Panel Light Services
 // This express app provides an API for Vue applications to publish 
 // turnout panel light cmd messages to a MQTT broker
+
 const cors = require('cors'),
       express = require('express'),
       mqtt = require('mqtt');
@@ -16,16 +17,23 @@ async function handlePost(params) {
     msg = '{"tplNum":"' + params.tplNum + '","color":"' + params.color + '"}';
     // console.log(msg);
     topic = 'acts/tpl/' + params.topic;
+    console.log(`Publishing to MQTT topic: ${topic}, message: ${msg}`); // Added for debugging
     client.publish(topic.toString(), msg);
 }
 
 client.on('connect', () => {
-  console.log("MQTT Connected");
+  console.log("MQTT Connected (IPLS)"); // Added (IPLS) for clarity in combined logs
 })
 
+client.on('error', (error) => { // ADDED: MQTT error handler
+  console.error("MQTT Error (IPLS):", error);
+});
+
 app.post('/tpl', (req, res) => {
+  console.log("Received POST request on /tpl with body:", req.body); // Added for debugging
   handlePost(req.body);
-})
+  res.status(200).send({ status: 'Message published' }); // Send a response back to the client
+});
 
 app.listen(process.env.PORT || 3013)
     console.log("IPLS started v1.1.15")

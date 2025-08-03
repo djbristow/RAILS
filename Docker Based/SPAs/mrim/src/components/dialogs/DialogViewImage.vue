@@ -29,6 +29,6 @@ const props = defineProps({
 const imagesStore = useImagesStore();
 const imageServer = ref("");
 onMounted(() => {
-  imageServer.value = 'http://' + import.meta.env.VITE_MRFM_URI +'/'+ props.image.fileName;
+  imageServer.value = import.meta.env.VITE_MRFM_URI + "/"+ props.image.fileName;
 });
 </script>

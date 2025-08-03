@@ -3,7 +3,7 @@
 &copy; David Bristow, 2020-2025
 
 ## Version
-v3.3.2 2025-07-23
+v4.0.0 2025-07-30
 
 
 Model Railway Layout Manager is a Vue application that provides a user with a web application to show layout information.  This web application uses port 3004.
@@ -33,11 +33,11 @@ Model Railway Layout Manager is a Vue application that provides a user with a we
 
 ## Environment Variables
 
-* export VITE_MYRLDS_TCP_URI='127.0.0.1:3006'
-* export VITE_MYIPLS_TCP_URI='127.0.0.1:3013'
-* export VITE_MYIPTS_TCP_URI='127.0.0.1:3011'
-* export VITE_MYISBS_TCP_URI='127.0.0.1:3014'
-* export VITE_MYISTS_TCP_URI='127.0.0.1:3010'
+* export VITE_MYRLDS_URI='127.0.0.1:3006'
+* export VITE_MYIPLS_URI='127.0.0.1:3013'
+* export VITE_MYIPTS_URI='127.0.0.1:3011'
+* export VITE_MYISBS_URI='127.0.0.1:3014'
+* export VITE_MYISTS_URI='127.0.0.1:3010'
 
 ## Running the application in Dev
 To run the application in development mode, you can use the following command:

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseurl =  'http://' + import.meta.env.VITE_MYPPDS_URI;
+const baseurl =  import.meta.env.VITE_MYPPDS_URI;
 const ApiRs = axios.create({  
   baseURL: baseurl,
   headers: {

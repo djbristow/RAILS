@@ -47,13 +47,13 @@ The \gls{rfid} microcontroller is responsible for reading the \gls{rfid} tags at
 \item initializes \gls{wifi} and \gls{mqtt} paramters are set at compile time using values kept in a params.h file
 \item connects to an \gls{mqtt} broker via \gls{wifi}
 \item publishes info about this reader to the topic ``micros'' in the format: \\
-\{``et'':``1590462747'',``mcntrlr'':``RfidRdr01'',``msgType'':``initial'',``ip'':``192.168.0.19''\}
+\{"et":"1590462747","mcntrlr":"RfidRdr01","msgType":"initial","ip":"192.168.0.19"\}
 \item publishes a heartbeat to the topic ``micros'' in the format: \\
-\{``et'':``1590462747'',``mcntrlr'':``RfidRdr01'',``msgType'':``heartbeat''\}
+\{"et":"1590462747","mcntrlr":"RfidRdr01","msgType":"heartbeat"\}
 \item reads values from a single ID-12LA \gls{rfid} reader, formats the results as a \gls{json} string, 
 gets Epoch time from an \gls{ntp} server and then publishes the \gls{json} string to the topic ``sensors/rfid''
 in the format: \\
-\{``et'':``1590463450'',``mcntrlr'':``rfidRdr01'',``reader'':``1'',``rfid'':``1C0044CF23''\}
+\{"et":"1590463450","mcntrlr":"RfidRdr01","reader":"1","rfid":"1C0044CF23"\}
 \end{itemize}
 
 Figure \ref{fig:rfid-reader} depicts the circuit diagram of the \gls{rfid} reader. The \gls{rfid} reader is connected to the ESP8266 microcontroller via a serial connection.
@@ -72,13 +72,13 @@ The turnout microcontroller is responsible for controlling the turnouts on the m
     \item initializes \gls{wifi} and \gls{mqtt} paramters are set at compile time using values kept in a params.h file
     \item connects to an \gls{mqtt} broker via \gls{wifi}
     \item publishes info about this reader to the topic ``micros'' in the format: \\
-    \{``et'':``1590462747'',``mcntrlr'':``ToCntlr01'',``msgType'':``initial'',``ip'':``192.168.0.19''\}
+    \{"et":"1590462747","mcntrlr":"TrnCntlr01","msgType":"initial","ip":"192.168.0.19"\}
     \item publishes a heartbeat to the topic ``micros'' in the format: \\
-    \{``et'':``1590462747'',``mcntrlr'':``ToCntlr01'',``msgType'':``heartbeat''\}
-    \item subscribes to the topic acts/to/ToCntlrxx where xx is the this controller in the format: \\
+    \{"et":"1590462747","mcntrlr":"TrnCntlr01","msgType":"heartbeat"\}
+    \item subscribes to the topic acts/to/TrnCntlrxx where xx is the this controller in the format: \\
     \{"to":"1|2|3|4","command":"THROW|CLOSE|STATUS"\} which either sets the turnout using an L293 to closed or thrown based on the command received
     \item responds to status command for a turnout by publishing the status of the turnout to the topic "sensors/toc" in the format: \\
-    \{``et'':``1590463450'',``mcntrlr'':``ToCntlr01'',``to'':``1'',``dir'':``THROWN''\}
+    \{"et":"1590463450","mcntrlr":"TrnCntlr01","to":"1","dir":"THROWN"\}
 \end{itemize}
 
 Figure \ref{fig:turnout-controller} depicts the circuit diagram of the turnout controller.

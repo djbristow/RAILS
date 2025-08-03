@@ -25,30 +25,31 @@ Figure \ref{fig:iotdesign} depicts the flow of \gls{mqtt} messages through the \
 
 \begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.7]{mqtt-v7.eps}
+		\includegraphics[scale=0.7]{mqtt.png}
 	\caption{IoT Design}
 	\label{fig:iotdesign}
 \end{figure}
 
 \section{Message Definitions}
 \begin{itemize}
-\item \textbf {\gls{rfid}} message format: \{“et”:“epoch time",”mcntrlr”:”sensor id“,”rfid”:”rfid tag value“\}
+\item \textbf {\gls{rfid}} message format: \{"et":"epoch time","mcntrlr":"sensor id","rfid":"rfid tag value"\}
 \begin{itemize}
-\item example \{"et":"1590463450",”mcntrlr”:"rfidRdr01","reader":"1","rfid":"1C0044CF23"\}
+\item example \{"et":"1590463450","mcntrlr":"RfidRdr01","reader":"1","rfid":"1C0044CF23"\}
 \end{itemize}
-\item \textbf {Turnout Position} message format: \{“et”:”epoch time“,”mcntrlr”:”turnout controller id“, \\”to”:”turnout number“,”state”:”THROWN|CLOSED|ERROR“\}
+\item \textbf {Turnout Position} message format: \{"et":"epoch time","mcntrlr":"turnout controller id", \\"to":"turnout number","state":"THROWN|CLOSED|ERROR"\}
 \begin{itemize}
-\item example \{"et":"1588827073",”mcntrlr”:"TrnCtlr01","to":"1","state":"THROWN"\}
+\item example \{"et":"1588827073","mcntrlr":"TrnCtlr01","to":"1","state":"THROWN"\}
 \end{itemize}
-\item \textbf {Turnout Panel Button} message format: \{“et”:”epoch time“,”mcntrlr”:”tp controller id“, \\”pb”:”push button number“\} 
-\item \textbf {Turnout Command} message format: \{”mcntrlr”:”turnout controller id“,”to”:”turnout number“, \\”cmd”:”THROW|CLOSE|STATUS“\}
+\item \textbf {Turnout Panel Button} message format: \{"et":"epoch time","mcntrlr":"tp controller id", \\"pb":"push button number"\}
+\item example \{"et":"1588827073","mcntrlr":"TrnCtlr01","pb":"3"\}
+\item \textbf {Turnout Command} message format: \{"mcntrlr":"turnout controller id","to":"turnout number", \\"cmd":"THROW|CLOSE|STATUS"\}
 \begin{itemize}
-\item example \{”mcntrlr”:"TrnCtlr01","to":"1","cmd":"CLOSE"\}
+\item example \{"mcntrlr":"TrnCtlr01","to":"1","cmd":"CLOSE"\}
 \end{itemize}
-\item \textbf {Turnout Panel Light Command} message format: \{”mcntrlr”:”turnout panel controller id“, \\”tpl”:”light number“,”color”:”RED|GREEN|BLUE“,”type”:”BUTTON”\}
-\item \textbf {Micro Info} message format: \{“et”:”epoch time“,”mcntrlr”:microcontroller id“, \\"msgType":"initial|heartbeat","ip":"Address of Micro"\}
+\item \textbf {Turnout Panel Light Command} message format: \{"mcntrlr":"turnout panel controller id", \\"tpl":"light number","color":"RED|GREEN|BLUE","type":"BUTTON"\}
+\item \textbf {Micro Info} message format: \{"et":"epoch time","mcntrlr":"microcontroller id", \\"msgType":"initial|heartbeat","ip":"Address of Micro"\}
 \begin{itemize}
-\item 'heartbeat' example: \{"et":"1590462747",”mcntrlr”:"RfidRdr00","msgType":"heartbeat"\} 
-\item 'initial' example: \{"et":"1590462747",”mcntrlr”:"RfidRdr00","msgType":"initial","ip":"192.168.0.19"\}
+\item 'heartbeat' example: \{"et":"1590462747","mcntrlr":"RfidRdr00","msgType":"heartbeat"\} 
+\item 'initial' example: \{"et":"1590462747","mcntrlr":"RfidRdr00","msgType":"initial","ip":"192.168.0.19"\}
 \end{itemize}
 \end{itemize}

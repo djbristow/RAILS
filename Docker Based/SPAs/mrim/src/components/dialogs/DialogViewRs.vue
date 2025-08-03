@@ -71,6 +71,6 @@ const formatDate = (unformatDate) => {
 };
 const imageServer = ref("");
 onMounted(() =>{
-  imageServer.value = 'http://' + import.meta.env.VITE_MRFM_URI +'/'+ props.rollingstock.imageID;
+  imageServer.value = import.meta.env.VITE_MRFM_URI +'/'+ props.rollingstock.imageID;
 });
 </script>

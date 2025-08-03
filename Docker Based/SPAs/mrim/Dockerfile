@@ -1,19 +1,24 @@
+# Dockerfile for dbristow/mrim (Adjusted for Reverse Proxy)
+# --- Builder Stage ---
 FROM node:24-slim AS builder
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
-COPY package.json /usr/djb 
-RUN npm install -g npm@11.4.1
+COPY package.json /usr/djb/
 RUN npm install
 COPY . /usr/djb
+
+# Set VITE_ variables to relative paths for the frontend build
+# These are baked into the JS bundle. The reverse proxy will handle routing.
+ENV VITE_MYRIDS_URI=/api/rids
+ENV VITE_MRFM_URI=/images
+
 RUN npm run build
 
+# --- Production/Runtime Stage ---
 FROM node:24-slim
-RUN npm install -g npm@11.4.1
 RUN npm install -g http-server
 RUN mkdir -p /usr/djb/dist
 WORKDIR /usr/djb/dist
 COPY --from=builder /usr/djb/dist .
-ENV VITE_MYRIDS_URI=myRids:3000
-ENV VITE_MRFM_URI=myMrfm:3030
 EXPOSE 8080
-CMD [ "http-server", "/usr/djb/dist" ]
+CMD [ "http-server", "-p", "8080", "." ]

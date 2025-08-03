@@ -120,6 +120,17 @@ For more information about Vue.js, visit the \href{https://vuejs.org/}{official 
 \item Wills: When a client connects to a server, it can inform the server that it has a will , or a message, that should be published to a specific topic or topics in the event of an unexpected disconnection. A will is particularly useful in alarm or security settings where system managers must know immediately when a remote sensor has lost contact with the network.
 \end{itemize}
 A detailed explantion of the basics of MQTT can be found in the \href{https://www.hivemq.com/mqtt-essentials/}{MQTT Essentials} guide.
+\subsubsection{NGINX}
+NGINX is an HTTP web server, reverse proxy, content cache, load balancer, TCP/UDP proxy server, and mail proxy server.
+\begin{itemize}
+\item As an HTTP Web Server it serves web pages and static content (HTML, CSS, JS, images, etc.) At its core, NGINX can act like Apache or any other web server: it receives HTTP requests from browsers and responds with web content. It’s highly efficient at serving static files and is widely used to host websites.
+\item As a Reverse Proxy it forwards client requests to backend servers and return their responses. NGINX can sit in front of app servers (like Node.js, Python Flask, etc.), forwarding requests and responses without the client knowing the actual backend architecture. It helps with load distribution, SSL termination, security, and scalability.
+\item As a Content Cache it caches responses to reduce backend load and speed up responses. NGINX can store (cache) responses from the backend temporarily, so if the same request comes again, NGINX serves it directly without querying the backend server again.
+\item As a Load Balancer it distributes incoming requests across multiple backend servers. NGINX can balance traffic across several servers to improve performance, availability, and reliability. It supports round-robin, least connections, and IP-hash load balancing strategies.
+\item As a TCP/UDP Proxy Server it proxies raw TCP or UDP traffic, such as for database or game servers. NGINX (specifically NGINX Plus or with stream module) can handle non-HTTP protocols. This is useful for proxying MySQL, Redis, or other services over raw TCP/UDP.
+\item As a Mail Proxy Server it proxies SMTP, IMAP, or POP3 mail traffic. NGINX can act as a gateway for email protocols, allowing for routing and authentication before forwarding to mail servers. This is often used in larger-scale mail systems.
+\end{itemize}
+For more information about Open Source NGINX, visit the \href{https://nginx.org/en/}{official website}.
 \subsubsection{Microcontoller}
 A microcontroller is a small computer on a single integrated circuit that contains a processor core, memory, and programmable input/output peripherals. It is designed to control a specific function or set of functions within a larger system. Microcontrollers are used in a wide range of electronic devices and appliances, including automobiles, appliances, and consumer electronics.
 There are multiple advantages to using microcontrollers in electronic devices and systems:

@@ -1,5 +1,6 @@
-# &copy; David Bristow, 2020-2024
-# VERSION 1.0.0
+# docker-compose.yaml
+# &copy; David Bristow, 2020-2025
+# VERSION 2.0.0
 # LICENSE
 # The code in this repository is licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,89 +13,150 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 services:
+  # Nginx Reverse Proxy Service
+  nginx:
+    image: nginx:latest # Use the official Nginx image
+    container_name: myNginxProxy
+    ports:
+      - '80:80' # Expose Nginx on host port 80 (for HTTP)
+      # - '443:443' # Uncomment and configure SSL for HTTPS in nginx.conf
+    volumes:
+      # Mount your custom nginx.conf into the container
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      # If you have separate site configs in conf.d, you'd mount a directory:
+      # - ./nginx_conf.d/:/etc/nginx/conf.d/:ro
+    networks:
+      - myRailsNet # Connect Nginx to your internal network
+    depends_on:
+      # Nginx should start after all services it proxies to
+      - myMongo
+      - myPpds
+      - myMppm
+      - myRids
+      - myMrfm
+      - myMrim
+      - myMqttBrkr
+      - myRlds
+      - myIsrs
+      - myIsms
+      - myRsrm
+      - myIsts
+      - myIsbs
+      - myIpts
+      - myIpls
+      - myMrlm
+
   myMongo:
     image: 'mongo'
     container_name: myMongo
     networks:
       - myRailsNet
-    ports:
-      - '27017:27017'
-    volumes: 
+    # No direct host port exposure needed if only Nginx accesses it
+    # ports:
+    #   - '27017:27017' # Remove this if only Nginx accesses it
+    volumes:
       - myRailsDb:/data/db
+
   myPpds:
-     image: 'dbristow/ppds'
-     container_name: myPpds
-     networks:
+    image: 'dbristow/ppds'
+    container_name: myPpds
+    networks:
       - myRailsNet
-     ports: 
-      - '3007:3007'
-     depends_on:
+    # No direct host port exposure needed if only Nginx accesses it
+    # ports:
+    #   - '3007:3007' # Remove this
+    depends_on:
       - myMongo
+
   myMppm:
     image: 'dbristow/mppm'
     container_name: myMppm
-    ports:
-       - '3008:8080'
+    # No direct host port exposure needed if only Nginx accesses it
+    # ports:
+    #   - '3008:8080' # Remove this
+    networks:
+      - myRailsNet # Add to network so Nginx can find it
     depends_on:
-       - myPpds
+      - myPpds
+
   myRids:
     image: 'dbristow/rids'
     container_name: myRids
     networks:
       - myRailsNet
-    ports:
-      - '3000:3000'
+    # No direct host port exposure needed if only Nginx accesses it
+    # ports:
+    #   - '3000:3000' # Remove this
     depends_on:
       - myMongo
+
   myMrfm:
     image: 'dbristow/mrfm'
+    # Environment variables for myMrfm's *backend* if it has one.
+    # Frontend VITE_ variables are handled at image build time.
     environment:
-      - MYMRIM_URI1=http://127.0.0.1:3001
-      - MYMRIM_URI2=http://localhost:3001
+      # These might be for internal communication *within* myMrfm's backend,
+      # or if myMrfm's backend needs to call other services.
+      # If myMrfm is purely a static file server, these might not be needed.
+      - MYMRIM_URI1=http://myMrim:8080 # Use service name for internal Docker network
+      - MYMRIM_URI2=http://myMrim:8080 # Use service name for internal Docker network
     container_name: myMrfm
-    ports: 
-      - '3030:3030'
+    # No direct host port exposure needed if only Nginx accesses it
+    # ports:
+    #   - '3030:3030' # Remove this
     volumes:
       - myRailsImages:/usr/djb/src/uploads
+    networks:
+      - myRailsNet # Add to network so Nginx can find it
+
   myMrim:
-   image: 'dbristow/mrim'
-   container_name: myMrim
-   networks:
+    image: 'dbristow/mrim'
+    container_name: myMrim
+    networks:
       - myRailsNet
-   ports:
-      - '3001:8080'
-   depends_on:
+    # No direct host port exposure needed if only Nginx accesses it
+    # ports:
+    #   - '3001:8080' # Remove this
+    depends_on:
       - myRids
       - myMrfm
+
   myMqttBrkr:
     image: 'eclipse-mosquitto'
     container_name: myMqttBrkr
     networks:
       - myRailsNet
+    # Keep MQTT ports exposed if external clients need to connect directly
     ports:
       - '1883:1883'
       - '9001:9001'
     volumes:
       - mosquitto:/mosquitto
+
   myRlds:
     image: 'dbristow/rlds'
     container_name: myRlds
     networks:
       - myRailsNet
-    ports:
-      - '3006:3006'
+    # No direct host port exposure needed if only Nginx accesses it
+    # ports:
+    #   - '3006:3006' # Remove this
     depends_on:
       - myMongo
+
   myIsrs:
     image: 'dbristow/isrs'
     container_name: myIsrs
     networks:
       - myRailsNet
-    ports:
-      - '3005:3005'
+    # No direct host port exposure needed if only Nginx accesses it
+    # ports:
+    #   - '3005:3005' # Remove this
     depends_on:
       - myMqttBrkr
+
   myIsms:
     image: 'dbristow/isms'
     container_name: myIsms
@@ -103,70 +165,89 @@ services:
     depends_on:
       - myMqttBrkr
       - myRlds
+
   myRsrm:
     image: 'dbristow/rsrm'
     container_name: myRsrm
     networks:
       - myRailsNet
-    ports:
-      - '3002:8080'
+    # No direct host port exposure needed if only Nginx accesses it
+    # ports:
+    #   - '3002:8080' # Remove this
     depends_on:
       - myRids
       - myRlds
       - myIsrs
       - myIsms
+
   myIsts:
     image: 'dbristow/ists'
     container_name: myIsts
     networks:
       - myRailsNet
-    ports:
-      - '3010:3010'
+    # No direct host port exposure needed if only Nginx accesses it
+    # ports:
+    #   - '3010:3010' # Remove this
     depends_on:
       - myMqttBrkr
+
   myIsbs:
     image: 'dbristow/isbs'
     container_name: myIsbs
     networks:
       - myRailsNet
-    ports:
-      - '3012:3012'
+    # No direct host port exposure needed if only Nginx accesses it
+    # ports:
+    #   - '3012:3012' # Remove this
     depends_on:
       - myMqttBrkr
+
   myIpts:
     image: 'dbristow/ipts'
     container_name: myIpts
     networks:
       - myRailsNet
-    ports:
-      - '3011:3011'
+    # No direct host port exposure needed if only Nginx accesses it
+    # ports:
+    #   - '3011:3011' # Remove this
     depends_on:
       - myMqttBrkr
+
   myIpls:
     image: 'dbristow/ipls'
     container_name: myIpls
     networks:
       - myRailsNet
-    ports:
-      - '3013:3013'
+    # No direct host port exposure needed if only Nginx accesses it
+    # ports:
+    #   - '3013:3013' # Remove this
     depends_on:
       - myMqttBrkr
+
   myMrlm:
     image: 'dbristow/mrlm'
     container_name: myMrlm
     networks:
       - myRailsNet
-    ports:
-      - '3004:8080'
+    # No direct host port exposure needed if only Nginx accesses it
+    # ports:
+    #   - '3004:8080' # Remove this
     depends_on:
       - myRlds
       - myIsts
       - myIsbs
       - myIpts
       - myIpls
+
 networks:
   myRailsNet:
-    external: true
+    # It's good practice to define the network as internal for security,
+    # unless you explicitly need containers outside this compose file to join it.
+    # If `myRailsNet` is truly external (created manually with `docker network create`),
+    # then keep `external: true`. Otherwise, use `driver: bridge`.
+    external: true # Keep if you've already created it with `docker network create myRailsNet`
+    # driver: bridge # Use this if you want Docker Compose to manage its creation
+
 volumes:
   myRailsDb:
     external: true
@@ -174,4 +255,3 @@ volumes:
     external: true
   mosquitto:
     external: true
-  

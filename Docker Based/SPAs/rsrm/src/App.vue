@@ -41,6 +41,7 @@ const connStatusStore = useConnStatusStore();
 const aarCodesStore = useAarCodesStore();
 const microsStore = useMicrosStore();
 const rsStore = useRSStore();
+const ISRS_BASE_URI = import.meta.env.VITE_MYISRS_URI;
 const drawer = ref(false);
 const items = ref([
   { title: "Reader", icon: "mdi-smart-card-reader", to: "/reader" },
@@ -49,16 +50,27 @@ const items = ref([
   { title: "AAR Codes", icon: "mdi-code-array", to: "/aarcodes" },
   { title: "About", icon: "mdi-help-box", to: "/" },
 ]);
-const socket = io.connect("http://" + import.meta.env.VITE_MYISRS_URI);
+// Initialize the Socket.IO client
+// The first argument to io() can be the base URL (which is the current origin, "/")
+// The second argument is an options object.
+const socket = io({
+  path: `${ISRS_BASE_URI}/socket.io/` // This tells the client to connect to /api/isrs/socket.io/
+});
+
 const opensocketListener = () => {
   socket.on("connect", () => {
     connStatusStore.SET_CONN_STATUS("Connected");
+    console.log("Socket.IO Connected! Current URI:", socket.io.uri); // For debugging
   });
-  socket.on("disconnect", () => {
+  socket.on("disconnect", (reason) => {
     connStatusStore.SET_CONN_STATUS("Disconnected");
+    console.log("Socket.IO Disconnected:", reason); // For debugging
   });
   socket.on("rfidmsg", (message) => {
     getRs(message);
+  });
+  socket.on("connect_error", (error) => { // Add this for better error visibility
+    console.error("Socket.IO Connection Error:", error);
   });
 };
 onMounted(() => {
