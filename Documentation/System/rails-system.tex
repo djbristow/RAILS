@@ -4,8 +4,7 @@
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{setspace}
-\usepackage[sfdefault]{roboto}
-\usepackage[T1]{fontenc}
+\usepackage{fontspec}
 \usepackage{upquote}
 \usepackage{xcolor}
 \usepackage{sectsty}
@@ -14,9 +13,11 @@
 \usepackage{hyperref}
 \usepackage{tabularx}
 \usepackage{longtable}
-\usepackage{glossaries}
+\usepackage{glossaries-extra}
 
-\setacronymstyle{long-short-desc}
+\setmainfont{Roboto}
+
+\setabbreviationstyle{long-short}
 \loadglsentries{defn}
 \makenoidxglossaries
 
@@ -53,7 +54,7 @@
     \vspace*{\baselineskip}
 	{\small David Bristow}
 
-	{\small Version 2.0.0}
+	{\small Version 2.0.1}
 	
 	{\small \today}
 	\vspace*{3\baselineskip}
