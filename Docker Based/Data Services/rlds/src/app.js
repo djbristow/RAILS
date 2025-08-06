@@ -5,7 +5,18 @@ const cors = require("cors");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:3004",    // Your Vite mrlm dev server
+    "http://127.0.0.1:3004",    // Alternate localhost IP for dev server
+    "http://localhost",         // For Nginx proxy in production
+    "http://127.0.0.1",         // For Nginx proxy in production
+    "http://localhost:3001",    // For Vite mrim dev server
+    "http://127.0.0.1:3001",    // For Vite mrim dev server
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
 const mongodb_conn_module = require("./mongodbConnModule");
 var db = mongodb_conn_module.connect();
