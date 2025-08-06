@@ -1,0 +1,6 @@
+Docker/docker-compose.yaml
+*.log
+*.out
+*.aux
+System/use-case-eps-converted-to.pdf
+
