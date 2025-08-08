@@ -5,7 +5,7 @@
 **I**oT **S**ubscriber **T**urnout **S**ervices is a Express application that subscribes to turnout contact switch messages from the MQTT Broker and sends them to a Vue application using a web socket. This application uses port 3010.
 
 ## Version
-v1.4.15 2025-07-22
+v2.0.0 2025-08-06
 
 ## License
 

@@ -1,7 +1,14 @@
-
 import axios from 'axios'
 
-const baseurl = import.meta.env.VITE_MYRLDS_URI;
+let baseurl;
+// Check if we are in development mode (npm run dev)
+if (import.meta.env.DEV) {
+  // For local development
+  baseurl = import.meta.env.VITE_MYRLDS_URI_DEV;
+} else {
+  // For production (Docker/Nginx)
+  baseurl = import.meta.env.VITE_MYRLDS_URI;
+}
 
 const ApiRl = axios.create({  
   baseURL: baseurl,

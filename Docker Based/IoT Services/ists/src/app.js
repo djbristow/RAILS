@@ -13,13 +13,12 @@ var httpServer = require('http').createServer(app);
 var io = require('socket.io')(httpServer, {
      cors: {
           origin: [
-      // Allow the origin where your frontend SPA is served from
-      "http://localhost", // For local access via Nginx proxy
-      "http://127.0.0.1", // Another common local access IP
-      // If you access your Nginx proxy via a specific LAN IP (e.g., 192.168.4.200)
-      
-      // Keep existing RSRM_TCP_URI
-      "http://" + process.env.RSRM_TCP_URI,
+          // Allow the origin where your frontend SPA is served from
+          "http://localhost:3004",  // Allow mrlm Vite dev server
+          "http://127.0.0.1:3004",  // Allow alternate localhost IP for dev server
+          "http://localhost",       // For Nginx proxy in production
+          "http://127.0.0.1",       // For Nginx proxy in production
+
     ],
           methods: ["GET", "POST"]
      }

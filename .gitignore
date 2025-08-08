@@ -23,9 +23,6 @@
 'Docker Based/SPAs/rsrm/.vscode/'
 'Docker Based/Data Services/mrfm/src/tmp/'
 'Docker Based/Data Services/mrfm/src/uploads/'
-Documentation/System/design-eps-converted-to.pdf
-Documentation/System/mqtt-v7-eps-converted-to.pdf
-Documentation/System/use-case-eps-converted-to.pdf
 node_modules/
 *.vscode/
 *.aux

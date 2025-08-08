@@ -21,12 +21,9 @@ services:
     container_name: myNginxProxy
     ports:
       - '80:80' # Expose Nginx on host port 80 (for HTTP)
-      # - '443:443' # Uncomment and configure SSL for HTTPS in nginx.conf
     volumes:
       # Mount your custom nginx.conf into the container
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      # If you have separate site configs in conf.d, you'd mount a directory:
-      # - ./nginx_conf.d/:/etc/nginx/conf.d/:ro
     networks:
       - myRailsNet # Connect Nginx to your internal network
     depends_on:
@@ -53,9 +50,6 @@ services:
     container_name: myMongo
     networks:
       - myRailsNet
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '27017:27017' # Remove this if only Nginx accesses it
     volumes:
       - myRailsDb:/data/db
 
@@ -64,18 +58,12 @@ services:
     container_name: myPpds
     networks:
       - myRailsNet
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '3007:3007' # Remove this
     depends_on:
       - myMongo
 
   myMppm:
     image: 'dbristow/mppm'
     container_name: myMppm
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '3008:8080' # Remove this
     networks:
       - myRailsNet # Add to network so Nginx can find it
     depends_on:
@@ -86,9 +74,6 @@ services:
     container_name: myRids
     networks:
       - myRailsNet
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '3000:3000' # Remove this
     depends_on:
       - myMongo
 
@@ -103,9 +88,6 @@ services:
       - MYMRIM_URI1=http://myMrim:8080 # Use service name for internal Docker network
       - MYMRIM_URI2=http://myMrim:8080 # Use service name for internal Docker network
     container_name: myMrfm
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '3030:3030' # Remove this
     volumes:
       - myRailsImages:/usr/djb/src/uploads
     networks:
@@ -116,9 +98,6 @@ services:
     container_name: myMrim
     networks:
       - myRailsNet
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '3001:8080' # Remove this
     depends_on:
       - myRids
       - myMrfm
@@ -140,9 +119,6 @@ services:
     container_name: myRlds
     networks:
       - myRailsNet
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '3006:3006' # Remove this
     depends_on:
       - myMongo
 
@@ -151,9 +127,6 @@ services:
     container_name: myIsrs
     networks:
       - myRailsNet
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '3005:3005' # Remove this
     depends_on:
       - myMqttBrkr
 
@@ -171,9 +144,6 @@ services:
     container_name: myRsrm
     networks:
       - myRailsNet
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '3002:8080' # Remove this
     depends_on:
       - myRids
       - myRlds
@@ -185,9 +155,6 @@ services:
     container_name: myIsts
     networks:
       - myRailsNet
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '3010:3010' # Remove this
     depends_on:
       - myMqttBrkr
 
@@ -196,9 +163,6 @@ services:
     container_name: myIsbs
     networks:
       - myRailsNet
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '3012:3012' # Remove this
     depends_on:
       - myMqttBrkr
 
@@ -207,9 +171,6 @@ services:
     container_name: myIpts
     networks:
       - myRailsNet
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '3011:3011' # Remove this
     depends_on:
       - myMqttBrkr
 
@@ -218,9 +179,6 @@ services:
     container_name: myIpls
     networks:
       - myRailsNet
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '3013:3013' # Remove this
     depends_on:
       - myMqttBrkr
 
@@ -229,9 +187,6 @@ services:
     container_name: myMrlm
     networks:
       - myRailsNet
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '3004:8080' # Remove this
     depends_on:
       - myRlds
       - myIsts

@@ -66,10 +66,22 @@ const refreshMicros = () => {
 };
 
 // Initialize the Socket.IO client for turnout contacts
-const socketTo = io({
-  path: `${ISTS_BASE_URI}/socket.io/` // This tells the client to connect to /api/isrs/socket.io/
-});
+let istsSocketUrl;
+let istsSocketPath;
 
+if (import.meta.env.DEV) {
+  // For local development, connect directly to the host IP:Port
+  istsSocketUrl = import.meta.env.VITE_MYISTS_URI_DEV; // e.g., "http://127.0.0.1:3010"
+  istsSocketPath = undefined; // No specific path needed if connecting directly to the root
+} else {
+  // For production (Docker/Nginx), use the relative path for the proxy
+  istsSocketUrl = undefined; // Connect to current origin
+  istsSocketPath = `${import.meta.env.VITE_MYISTS_URI}/socketTo.io/`; // e.g., "/api/ists/socketTo.io/"
+}
+
+const socketTo = io(istsSocketUrl, {
+  path: istsSocketPath
+});
 const opensocketToListener = () => {
   socketTo.on("connect", () => {
     connStatsStore.SET_CONN_TO_STATUS("Connected");
@@ -87,8 +99,21 @@ const opensocketToListener = () => {
   });
 };
 // Initialize the Socket.IO client for turnout panel buttons
-const socketBtn = io({
-  path: `${ISBS_BASE_URI}/socket.io/`
+let isbsSocketUrl;
+let isbsSocketPath;
+
+if (import.meta.env.DEV) {
+  // For local development, connect directly to the host IP:Port
+  isbsSocketUrl = import.meta.env.VITE_MYISBS_URI_DEV; // e.g., "http://127.0.0.1:3012"
+  isbsSocketPath = undefined; // No specific path needed if connecting directly to the root
+} else {
+  // For production (Docker/Nginx), use the relative path for the proxy
+  isbsSocketUrl = undefined; // Connect to current origin
+  isbsSocketPath = `${import.meta.env.VITE_MYISBS_URI}/socketBtn.io/`; // e.g., "/api/isbs/socket.io/"
+}
+
+const socketBtn = io(isbsSocketUrl, {
+  path: isbsSocketPath
 });
 
 const opensocketBtnListener = () => {
@@ -109,7 +134,9 @@ const opensocketBtnListener = () => {
 };
 
 const processToMsg = (message) => {
+  //console.log("Received TO message:", message);
   let turnout = turnoutsStore.GET_TURNOUT_BY_CNTRLR_TO(message.cntrlr, message.to);
+  //console.log("Matched Turnout:", turnout);
   if (turnout) {
     let updatedTurnout = {
       _id: turnout._id,
@@ -153,6 +180,7 @@ const processToMsg = (message) => {
   }
 };
 const processBtnMsg = (message) => {
+  console.log("Received Button message:", message);
   let tpl = tplightsStore.GET_TPLIGHT_BY_CNT_TPLNUM(message.cntrlr, message.tplNum);
   let to = turnoutsStore.GET_TURNOUT_BY_ID(tpl.to_id);
   if (to.lock === "") {

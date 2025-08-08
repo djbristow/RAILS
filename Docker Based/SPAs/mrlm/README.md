@@ -31,13 +31,13 @@ Model Railway Layout Manager is a Vue application that provides a user with a we
 * IPTS IoT Publisher running on port 3011
 * ISBS IOT Subscriber running on port 3012
 
-## Environment Variables
+## Environment Variables for the development environment
 
-* export VITE_MYRLDS_URI='127.0.0.1:3006'
-* export VITE_MYIPLS_URI='127.0.0.1:3013'
-* export VITE_MYIPTS_URI='127.0.0.1:3011'
-* export VITE_MYISBS_URI='127.0.0.1:3014'
-* export VITE_MYISTS_URI='127.0.0.1:3010'
+* export VITE_MYRLDS_URI_DEV='http://127.0.0.1:3006'
+* export VITE_MYIPLS_URI_DEV='http://127.0.0.1:3013'
+* export VITE_MYIPTS_URI_DEV='http://127.0.0.1:3011'
+* export VITE_MYISBS_URI_DEV='http://127.0.0.1:3014'
+* export VITE_MYISTS_URI_DEV='http://127.0.0.1:3010'
 
 ## Running the application in Dev
 To run the application in development mode, you can use the following command:

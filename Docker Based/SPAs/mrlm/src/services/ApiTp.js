@@ -1,6 +1,15 @@
 import axios from 'axios'
 
-const baseurl =  import.meta.env.VITE_MYIPTS_URI;
+let baseurl;
+// Check if we are in development mode (npm run dev)
+if (import.meta.env.DEV) {
+  // For local development
+  baseurl = import.meta.env.VITE_MYIPTS_URI_DEV;
+} else {
+  // For production (Docker/Nginx)
+  baseurl = import.meta.env.VITE_MYIPTS_URI;
+}
+
 const ApiIp = axios.create({  
   baseURL: baseurl,
   headers: {

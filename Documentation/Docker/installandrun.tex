@@ -67,13 +67,16 @@ docker-compose up -d myRsrm
 docker-compose up -d myMppm
 docker-compose up -d myMrlm
 \end{verbatim}
-Point the browser to the following URLs to access the \gls{rails} \glspl{spa}:
+Point a browser, on the host machine, to the following URLs to access the \gls{rails} \glspl{spa}:
 \begin{itemize}
-    \item \gls{mrim} \gls{spa} - \href{http://localhost:3001}{http://localhost:3001}
-    \item \gls{rsrm} \gls{spa} - \href{http://localhost:3002}{http://localhost:3002}
-    \item \gls{mppm} \gls{spa} - \href{http://localhost:3008}{http://localhost:3008}
-    \item \gls{mrlm} \gls{spa} - \href{http://localhost:3004}{http://localhost:3004}
+    \item \gls{mrim} \gls{spa} - \href{http://localhost/mrim}{http://localhost/mrim} (or \texttt{http://\textless MACHINE\_IP\textgreater /mrim/})
+    \item \gls{rsrm} \gls{spa} - \href{http://localhost/rsrm}{http://localhost/rsrm} (or \texttt{http://\textless MACHINE\_IP\textgreater /rsrm/})
+    \item \gls{mppm} \gls{spa} - \href{http://localhost/mppm}{http://localhost/mppm} (or \texttt{http://\textless MACHINE\_IP\textgreater /mppm/})
+    \item \gls{mrlm} \gls{spa} - \href{http://localhost/mrlm}{http://localhost/mrlm} (or \texttt{http://\textless MACHINE\_IP\textgreater /mrlm/})
 \end{itemize}
+Where \textless MACHINE\_IP\textgreater is the IP address of the host machine running the Docker containers. The \gls{rails} \glspl{spa} can be accessed from any browser on any Personal Computer (PC) in the network.
+\section{Stop and Remove the RAILS Docker Containers}
+\label{sec:stopremoverailsdockercontainers}
 To stop and remove the \gls{rails} Docker containers, the following command is used:
 \begin{verbatim}
 docker-compose down
