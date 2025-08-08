@@ -71,45 +71,50 @@ let istsSocketPath;
 
 if (import.meta.env.DEV) {
   // For local development, connect directly to the host IP:Port
-  istsSocketUrl = import.meta.env.VITE_MYISTS_URI_DEV; // e.g., "http://127.0.0.1:3010"
-  istsSocketPath = undefined; // No specific path needed if connecting directly to the root
+  // This is correct as a direct connection doesn't use the 'path' option.
+  istsSocketUrl = import.meta.env.VITE_MYISTS_URI_DEV; 
+  istsSocketPath = undefined; 
 } else {
   // For production (Docker/Nginx), use the relative path for the proxy
+  // CORRECTED: Use the standard '/socket.io/' path here.
   istsSocketUrl = undefined; // Connect to current origin
-  istsSocketPath = `${import.meta.env.VITE_MYISTS_URI}/socketTo.io/`; // e.g., "/api/ists/socketTo.io/"
+  istsSocketPath = `${import.meta.env.VITE_MYISTS_URI}/socket.io/`; 
 }
 
 const socketTo = io(istsSocketUrl, {
   path: istsSocketPath
 });
+
 const opensocketToListener = () => {
   socketTo.on("connect", () => {
     connStatsStore.SET_CONN_TO_STATUS("Connected");
-    console.log("Socket.IO Connected! Current URI:", socketTo.io.uri); // For debugging
+    console.log("Socket.IO Connected! Current URI:", socketTo.io.uri);
   });
   socketTo.on("disconnect", (reason) => {
     connStatsStore.SET_CONN_TO_STATUS("Disconnected");
-    console.log("Socket.IO Disconnected:", reason); // For debugging
+    console.log("Socket.IO Disconnected:", reason);
   });
   socketTo.on("tocmsg", (message) => {
     processToMsg(message);
   });
-  socketTo.on("connect_error", (error) => { // Add this for better error visibility
+  socketTo.on("connect_error", (error) => {
     console.error("Socket.IO Connection Error:", error);
   });
 };
+
 // Initialize the Socket.IO client for turnout panel buttons
 let isbsSocketUrl;
 let isbsSocketPath;
 
 if (import.meta.env.DEV) {
   // For local development, connect directly to the host IP:Port
-  isbsSocketUrl = import.meta.env.VITE_MYISBS_URI_DEV; // e.g., "http://127.0.0.1:3012"
-  isbsSocketPath = undefined; // No specific path needed if connecting directly to the root
+  isbsSocketUrl = import.meta.env.VITE_MYISBS_URI_DEV;
+  isbsSocketPath = undefined;
 } else {
   // For production (Docker/Nginx), use the relative path for the proxy
-  isbsSocketUrl = undefined; // Connect to current origin
-  isbsSocketPath = `${import.meta.env.VITE_MYISBS_URI}/socketBtn.io/`; // e.g., "/api/isbs/socket.io/"
+  // CORRECTED: Use the standard '/socket.io/' path here.
+  isbsSocketUrl = undefined;
+  isbsSocketPath = `${import.meta.env.VITE_MYISBS_URI}/socket.io/`;
 }
 
 const socketBtn = io(isbsSocketUrl, {
@@ -119,16 +124,16 @@ const socketBtn = io(isbsSocketUrl, {
 const opensocketBtnListener = () => {
   socketBtn.on("connect", () => {
     connStatsStore.SET_CONN_BTN_STATUS("Connected");
-    console.log("Socket.IO Connected! Current URI:", socketBtn.io.uri); // For debugging
+    console.log("Socket.IO Connected! Current URI:", socketBtn.io.uri);
   });
-  socketBtn.on("disconnect", () => {
+  socketBtn.on("disconnect", (reason) => {
     connStatsStore.SET_CONN_BTN_STATUS("Disconnected");
-    console.log("Socket.IO Disconnected:", reason); // For debugging
+    console.log("Socket.IO Disconnected:", reason);
   });
   socketBtn.on("btnmsg", (message) => {
     processBtnMsg(message);
   });
-  socketBtn.on("connect_error", (error) => { // Add this for better error visibility
+  socketBtn.on("connect_error", (error) => {
     console.error("Socket.IO Connection Error:", error);
   });
 };
