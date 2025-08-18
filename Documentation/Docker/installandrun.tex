@@ -60,13 +60,8 @@ to run all four \gls{rails} Docker containers, the following command in the dire
 \begin{verbatim}
 docker-compose up -d
 \end{verbatim}
-If the \gls{rails} Docker \gls{spa} containers are to be run individually, the following commands are used:
-\begin{verbatim}
-docker-compose up -d myMrim
-docker-compose up -d myRsrm
-docker-compose up -d myMppm
-docker-compose up -d myMrlm
-\end{verbatim}
+This command will pull the Docker images from Docker Hub and run the containers in detached mode. The \gls{rails} \glspl{spa} will be running in the background, and the terminal will return to the command prompt.
+The \gls{rails} \glspl{spa} will be running on the host machine.
 Point a browser, on the host machine, to the following URLs to access the \gls{rails} \glspl{spa}:
 \begin{itemize}
     \item \gls{mrim} \gls{spa} - \href{http://localhost/mrim}{http://localhost/mrim} (or \texttt{http://\textless MACHINE\_IP\textgreater /mrim/})
