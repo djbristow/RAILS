@@ -60,17 +60,22 @@ const props = defineProps({
   },
 });
 const formatDate = (unformatDate) => {
-  if (unformatDate === null || unformatDate === "") {
+  if (!unformatDate) {
     return "";
-  } else {
-    let pdate = new Date(unformatDate.toString().substring(0, 10));
-    let day = pdate.getDate() + 1;
-    pdate = pdate.setDate(day);
-    return format(pdate, "MMM d, yyyy");
   }
+  const dateObject = new Date(unformatDate);
+    if (isNaN(dateObject)) {
+    console.error("Invalid date string provided:", unformatDate);
+    return "";
+  }
+  return format(dateObject, "yyyy-MM-dd");
 };
 const imageServer = ref("");
 onMounted(() =>{
-  imageServer.value = import.meta.env.VITE_MRFM_URI +'/'+ props.rollingstock.imageID;
+  if (import.meta.env.DEV) {
+    imageServer.value = import.meta.env.VITE_MRFM_URI_DEV + "/"+ props.rollingstock.imageID;}
+  else {
+    imageServer.value = import.meta.env.VITE_MRFM_URI + "/"+ props.rollingstock.imageID;
+  }
 });
 </script>

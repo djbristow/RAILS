@@ -1,10 +1,15 @@
 
 import axios from 'axios'
 
-// --- CHANGE THIS LINE ---
-// const baseurl =  'http://' + import.meta.env.VITE_MYRIDS_URI; // OLD, INCORRECT
-const baseurl = import.meta.env.VITE_MYRIDS_URI; // NEW, CORRECT: This will be "/api/rids"
-// --- END CHANGE ---
+let baseurl;
+// Check if we are in development mode (npm run dev)
+if (import.meta.env.DEV) {
+  // For local development
+  baseurl = import.meta.env.VITE_MYRIDS_URI_DEV;
+} else {
+  // For production (Docker/Nginx)
+  baseurl = import.meta.env.VITE_MYRIDS_URI;
+}
 
 const ApiRs = axios.create({  
   baseURL: baseurl,

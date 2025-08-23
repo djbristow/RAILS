@@ -119,6 +119,10 @@ const rsStore = useRSStore();
 const emit = defineEmits(['closeAddRsDialog']);
 
 const addRs = () => {
+  const inSvcDateValue = inSvcDate.value ? new Date(inSvcDate.value) : null;
+  const lastMaintDateValue = lastMaintDate.value ? new Date(lastMaintDate.value) : null;
+  const bltDateValue = bltDate.value ? new Date(bltDate.value) : null;
+  
   rsStore.ADD_NEW_RS({
     roadName: roadName.value,
     roadNumber: roadNumber.value,
@@ -126,18 +130,18 @@ const addRs = () => {
     aarCode: aarCode.value,
     description: description.value,
     numberBlt: numberBlt.value,
-    inSvcDate: (Date(inSvcDate.value)),
+    inSvcDate: inSvcDateValue,
     insideLength: insideLength.value,
     insideHeight: insideHeight.value,
     insideWidth: insideWidth.value,
     loadTypes: loadTypes.value,
     capacity: capacity.value,
     bldr: bldr.value,
-    bltDate: (Date(bltDate.value)),
+    bltDate: bltDateValue,
     notes: notes.value,
     ltWeight: ltWeight.value,
     loadLimit: loadLimit.value,
-    lastMaintDate: (Date(lastMaintDate.value)),
+    lastMaintDate: lastMaintDateValue,
     locationNow: locationNow.value,
     homeLocation: homeLocation.value,
     rsStatus: rsStatus.value,

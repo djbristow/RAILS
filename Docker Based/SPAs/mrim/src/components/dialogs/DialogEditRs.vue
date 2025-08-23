@@ -120,6 +120,10 @@ const props = defineProps({
 });
 
 const editRsUpdate = () => {
+  const inSvcDateValue = inSvcDate.value ? new Date(inSvcDate.value) : null;
+  const lastMaintDateValue = lastMaintDate.value ? new Date(lastMaintDate.value) : null;
+  const bltDateValue = bltDate.value ? new Date(bltDate.value) : null;
+
   rsStore.UPDATE_RS({
     _id: _id.value,
     roadName: roadName.value,
@@ -128,18 +132,18 @@ const editRsUpdate = () => {
     aarCode: aarCode.value,
     description: description.value,
     numberBlt: numberBlt.value,
-    inSvcDate: inSvcDate.value,
+    inSvcDate: inSvcDateValue,
     insideLength: insideLength.value,
     insideHeight: insideHeight.value,
     insideWidth: insideWidth.value,
     loadTypes: loadTypes.value,
     capacity: capacity.value,
     bldr: bldr.value,
-    bltDate: bltDate.value,
+    bltDate: bltDateValue,
     notes: notes.value,
     ltWeight: ltWeight.value,
     loadLimit: loadLimit.value,
-    lastMaintDate: lastMaintDate.value,
+    lastMaintDate: lastMaintDateValue,
     locationNow: locationNow.value,
     homeLocation: homeLocation.value,
     rsStatus: rsStatus.value,
@@ -151,14 +155,15 @@ const editRsUpdate = () => {
   emit("closeEditRsDialog");
 };
 const formatDate = (unformatDate) => {
-  if (unformatDate === null || unformatDate === "") {
+  if (!unformatDate) {
     return "";
-  } else {
-    let pdate = new Date(unformatDate.toString().substring(0, 10));
-    let day = pdate.getDate() + 1;
-    pdate = pdate.setDate(day);
-    return format(pdate, "MMM d, yyyy");
   }
+  const dateObject = new Date(unformatDate);
+    if (isNaN(dateObject)) {
+    console.error("Invalid date string provided:", unformatDate);
+    return "";
+  }
+  return format(dateObject, "yyyy-MM-dd");
 };
 onMounted(() => {
   _id.value = props.rollingstock._id;

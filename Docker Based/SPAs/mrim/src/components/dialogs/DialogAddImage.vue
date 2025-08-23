@@ -47,7 +47,12 @@ const addImage =  () => {
   let formData = new FormData();
   formData.append("file", file.value);
   console.log("file" + file.value);
-  let serverUrl = "http://" + import.meta.env.VITE_MRFM_URI + "/upload";
+let serverUrl;
+if (import.meta.env.DEV) {
+    serverUrl = import.meta.env.VITE_MRFM_URI_DEV + "/upload";
+  } else {
+    serverUrl = import.meta.env.VITE_MRFM_URI + "/upload";
+  }
   console.log("serverUrl: " + serverUrl);
   axios.post(serverUrl, formData).then(async response => {
     console.log('SUCCESS!!' + response.data);
