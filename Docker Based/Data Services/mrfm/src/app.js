@@ -17,7 +17,7 @@ const PORT = "3030" || process.env.PORT;
 const uri1 = process.env.MYMRIM_URI1;
 const uri2 = process.env.MYMRIM_URI2;
 
-const allowedOrigins = [uri1, uri2];
+const allowedOrigins = [uri1, uri2, 'http://localhost:3001', 'http://127.0.0.1:3001'];
 console.log("Allowed origins: ", allowedOrigins);
 const corsOptions = {
   origin: function (origin, callback) {
@@ -27,16 +27,22 @@ const corsOptions = {
       callback(new Error("Not allowed by CORS"));
     }
   },
-  methods: ["GET", "POST"],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
     "Content-Type",
     "Authorization",
-    "Access-Control-Allow-Origin",
+    'X-Requested-With', // Common header for AJAX requests
+    'Accept'
   ],
+  maxAge: 3600
 };
 app.use(cors(corsOptions));
 
-app.use(express.static("src/uploads"));
+// Correctly define the upload directory path
+const UPLOAD_DIR = path.join(__dirname, 'uploads');
+console.log("Upload directory: ", UPLOAD_DIR);
+
+app.use(express.static(UPLOAD_DIR));
 
 const fileFilter = (req, file, cb) => {
   const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
@@ -48,11 +54,21 @@ const fileFilter = (req, file, cb) => {
   cb(null, true);
 };
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+    cb(null, UPLOAD_DIR);
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
 const upload = multer({
-  dest: "./src/tmp",
-  fileFilter,
+  storage: storage,
+  fileFilter: fileFilter,
   limits: {
-    fileSize: 1000000,
+    fileSize: 5000000,
   },
 });
 
@@ -60,45 +76,38 @@ app.get("/", function (req, res) {
   res.sendFile("index.html");
 });
 
-app.post("/upload", upload.single("file"), (req, res) => {
-  try {
-    let fileName = req.file.originalname;
-    let filePath = req.file.path;
-    let newPath = filePath.slice(filePath.indexOf("tmp") - 1, filePath.length);
-    console.log(
-      "File name: ",
-      fileName + " File path: ",
-      filePath + " New path: ",
-      newPath
-    );
-    console.log(__dirname);
-    fs.copyFile(
-      __dirname + newPath,
-      __dirname + "/uploads/" + fileName,
-      function (err) {
-        if (err) {
-          throw err;
-        } else {
-          console.log("File Renamed.");
-        }
+app.post("/upload", (req, res, next) => {
+  upload.single("file")(req, res, (err) => {
+    if (err) {
+      console.error("Multer error during upload:", err);
+      if (err.code === "INCORRECT_FILETYPE" || err.code === "LIMIT_FILE_SIZE") {
+        return res.status(422).json({ error: err.message });
       }
-    );
-    res.json({ file: req.file });
-  } catch (err) {
-    console.log("Error uploading file:", err);
-    res.status(500).send("Error uploading file.");
-  }
+      return res.status(500).send("Error uploading file.");
+    }
+
+    if (!req.file) {
+      return res.status(400).send("No file uploaded.");
+    }
+  
+    try {
+      const fileName = req.file.originalname;
+      console.log(`File uploaded successfully: ${fileName}`);
+      res.json({ message: "File uploaded successfully", file: req.file });
+    } catch (innerErr) {
+      console.error("Error processing uploaded file:", innerErr);
+      res.status(500).send("Error processing file after upload.");
+    }
+  });
 });
 
-app.use((err, req, res) => {
-  if (err.code === "INCORRECT_FILETYPE") {
-    res.status(422).json({ error: "Only images are allowed" });
-    return;
+app.use((err, req, res, next) => {
+  console.error("Express middleware error:", err);
+  if (err.message === 'Not allowed by CORS') {
+    return res.status(403).json({ error: 'CORS policy violation' });
   }
-  if (err.code === "LIMIT_FILE_SIZE") {
-    res.status(422).json({ error: "Allowed file size is 1000KB" });
-    return;
-  }
+  res.status(500).send("An unexpected error occurred.");
 });
 
-app.listen(PORT, () => console.log(`Server v2.4.6 listening on port ${PORT}`));
+
+app.listen(PORT, () => console.log(`Server v2.5.0 listening on port ${PORT}`));
