@@ -39,6 +39,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useProjectsStore } from "@/stores/projects";
+import { format } from "date-fns";
 
 const props = defineProps({
     project: {
@@ -59,27 +60,40 @@ const roadnumbers = ref("");
 const notes = ref("");
 const emit = defineEmits(["closeEditProjectDialog"]);
 
+const formatDate = (unformatDate) => {
+  if (!unformatDate) {
+    return "";
+  }
+  const dateObject = new Date(unformatDate);
+    if (isNaN(dateObject)) {
+    console.error("Invalid date string provided:", unformatDate);
+    return "";
+  }
+  return format(dateObject, "yyyy-MM-dd");
+};
 onMounted(() => {
     title.value = props.project.title;
     type.value = props.project.type;
     description.value = props.project.description;
     priority.value = props.project.priority;
-    startdate.value = props.project.startdate;
-    enddate.value = props.project.enddate;
+    startdate.value = formatDate(props.project.startdate);
+    enddate.value = formatDate(props.project.enddate);
     roadname.value = props.project.roadname;
     roadnumbers.value = props.project.roadnumbers;
     notes.value = props.project.notes;
 });
 const editProject = () => {
     console.log("editProject");
+    const startdateValue = startdate.value ? new Date(startdate.value) : null;
+    const enddateValue = enddate.value ? new Date(enddate.value) : null;
     let updatedProject = {
         _id: props.project._id,
         title: title.value,
         type: type.value,
         description: description.value,
         priority: priority.value,
-        startdate: startdate.value,
-        enddate: enddate.value,
+        startdate: startdateValue,
+        enddate: enddateValue,
         roadname: roadname.value,
         roadnumbers: roadnumbers.value,
         notes: notes.value,

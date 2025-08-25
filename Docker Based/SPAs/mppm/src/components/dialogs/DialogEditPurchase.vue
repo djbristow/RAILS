@@ -52,6 +52,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { usePurchasesStore } from "@/stores/purchases";
+import { format } from "date-fns";
 
 const props = defineProps({
   purchase: {
@@ -75,9 +76,20 @@ const roadnumbers = ref("");
 const notes = ref("");
 const emit = defineEmits(["closeEditPurchaseDialog"]);
 
+const formatDate = (unformatDate) => {
+  if (!unformatDate) {
+    return "";
+  }
+  const dateObject = new Date(unformatDate);
+    if (isNaN(dateObject)) {
+    console.error("Invalid date string provided:", unformatDate);
+    return "";
+  }
+  return format(dateObject, "yyyy-MM-dd");
+};
 onMounted(() => {
   num.value = props.purchase.num;
-  date.value = props.purchase.date;
+  date.value = formatDate(props.purchase.date);
   store.value = props.purchase.store;
   item.value = props.purchase.item;
   desciption.value = props.purchase.desciption;
@@ -90,10 +102,11 @@ onMounted(() => {
   notes.value = props.purchase.notes;
 });
 const editPurchase = () => {
+  const dateValue = date.value ? new Date(date.value) : null;
   let updatedPurchase = {
     _id: props.purchase._id,
     num: num.value,
-    date: date.value,
+    date: dateValue,
     store: store.value,
     item: item.value,
     desciption: desciption.value,

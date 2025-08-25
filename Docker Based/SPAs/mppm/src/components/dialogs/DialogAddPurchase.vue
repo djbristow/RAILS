@@ -66,9 +66,10 @@ const purchaseAddDataInvalid = ref(false);
 const emit = defineEmits(["closeAddPurchaseDialog"]);
 
 const addPurchase = () => {
+  const dateValue = date.value ? new Date(date.value) : null;
   purchasesStore.ADD_PURCHASE({
     num: num.value,
-    date: date.value,
+    date: dateValue,
     store: store.value,
     item: item.value,
     desciption: desciption.value,

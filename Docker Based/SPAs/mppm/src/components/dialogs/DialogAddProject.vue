@@ -54,13 +54,15 @@ const projectAddDataInvalid = ref(false);
 const emit = defineEmits(["closeAddProjectDialog"]);
 
 const addProject = () => {
+    const startdateValue = startdate.value ? new Date(startdate.value) : null;
+    const enddateValue = enddate.value ? new Date(enddate.value) : null;
     projectsStore.ADD_PROJECT({
         title: title.value,
         type: type.value,
         description: description.value,
         priority: priority.value,
-        startdate: startdate.value,
-        enddate: enddate.value,
+        startdate: startdateValue,
+        enddate: enddateValue,
         roadname: roadname.value,
         roadnumbers: roadnumbers.value,
         notes: notes.value,
