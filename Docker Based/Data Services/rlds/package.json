@@ -1,6 +1,6 @@
 {
   "name": "rlds",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Railroad Layout Data Services",
   "private": true,
   "author": "DJ Bristow <dave@bristow-family.org>",

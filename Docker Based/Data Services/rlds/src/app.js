@@ -7,6 +7,8 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   origin: [
+    "http://localhost:3002",    // Your Vite rsrmdev server
+    "http://127.0.0.1:3002",    // Alternate localhost IP for dev server
     "http://localhost:3004",    // Your Vite mrlm dev server
     "http://127.0.0.1:3004",    // Alternate localhost IP for dev server
     "http://localhost",         // For Nginx proxy in production
