@@ -29,6 +29,7 @@
 <script setup>
 import { ref } from "vue";
 import { useMicrosStore } from "@/stores/micros";
+import moment from "moment";
 
 const microID = ref("");
 const microIP = ref("");
@@ -41,10 +42,37 @@ const microStore = useMicrosStore();
 const emit = defineEmits(["closeAddMicroDialog"]);
 
 const addMicro = () => {
+let epochTimeValue = "";
+  const inputValue = et.value.trim().toLowerCase();
+  // If the user enters "now", get the current epoch time
+  if (inputValue === "now") {
+    epochTimeValue = moment().unix();
+  }
+  // If the user omits the date, use today's date
+  else if (inputValue.match(/^\d{2}:\d{2}$/)) {
+    const today = moment().format("YYYY-MM-DD");
+    const fullDateString = `${today} ${inputValue}`;
+    epochTimeValue = moment(fullDateString, "YYYY-MM-DD hh:mm").unix();
+  }
+  // If the user enters a full date and time
+  else if (inputValue) {
+    // moment() is smart enough to handle YYYY-MM-DD hh:mm format
+    // and returns an invalid date if the format is wrong
+    const parsedMoment = moment(et.value, "YYYY-MM-DD hh:mm");
+    if (parsedMoment.isValid()) {
+      epochTimeValue = parsedMoment.unix();
+    } else {
+      // Set to invalid or handle error
+      console.error("Invalid date format entered.");
+      microEditDataInvalid.value = true;
+      return;
+    }
+  }
+
   microStore.ADD_NEW_MICRO({
     microID: microID.value,
     microIP: microIP.value,
-    et: et.value,
+    et: epochTimeValue,
     purpose: purpose.value,
     sensorLoc: sensorLoc.value,
     status: status.value,

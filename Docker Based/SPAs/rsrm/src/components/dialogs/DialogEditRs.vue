@@ -119,8 +119,23 @@ const props = defineProps({
   },
 });
 const emit = defineEmits(["closeEditRsDialog"]);
+const formatDate = (unformatDate) => {
+  if (!unformatDate) {
+    return "";
+  }
+  const dateObject = new Date(unformatDate);
+    if (isNaN(dateObject)) {
+    console.error("Invalid date string provided:", unformatDate);
+    return "";
+  }
+  return format(dateObject, "yyyy-MM-dd");
+};
 
 const editRsUpdate = () => {
+  const inSvcDateValue = inSvcDate.value ? new Date(inSvcDate.value) : null;
+  const lastMaintDateValue = lastMaintDate.value ? new Date(lastMaintDate.value) : null;
+  const bltDateValue = bltDate.value ? new Date(bltDate.value) : null;
+
   rsStore.UPDATE_RS({
     _id: _id.value,
     roadName: roadName.value,
@@ -129,18 +144,18 @@ const editRsUpdate = () => {
     aarCode: aarCode.value,
     description: description.value,
     numberBlt: numberBlt.value,
-    inSvcDate: inSvcDate.value,
+    inSvcDate: inSvcDateValue,
     insideLength: insideLength.value,
     insideHeight: insideHeight.value,
     insideWidth: insideWidth.value,
     loadTypes: loadTypes.value,
     capacity: capacity.value,
     bldr: bldr.value,
-    bltDate: bltDate.value,
+    bltDate: bltDateValue,
     notes: notes.value,
     ltWeight: ltWeight.value,
     loadLimit: loadLimit.value,
-    lastMaintDate: lastMaintDate.value,
+    lastMaintDate: lastMaintDateValue,
     locationNow: locationNow.value,
     homeLocation: homeLocation.value,
     rsStatus: rsStatus.value,
@@ -159,24 +174,18 @@ onMounted(() => {
   aarCode.value = props.rollingstock.aarCode;
   description.value = props.rollingstock.description;
   numberBlt.value = props.rollingstock.numberBlt;
-  inSvcDate.value = format(
-    new Date(props.rollingstock.inSvcDate),
-    "MMM d, yyyy"
-  );
+  inSvcDate.value = formatDate(props.rollingstock.inSvcDate);
   insideLength.value = props.rollingstock.insideLength;
   insideHeight.value = props.rollingstock.insideHeight;
   insideWidth.value = props.rollingstock.insideWidth;
   loadTypes.value = props.rollingstock.loadTypes;
   capacity.value = props.rollingstock.capacity;
   bldr.value = props.rollingstock.bldr;
-  bltDate.value = format(new Date(props.rollingstock.bltDate), "MMM d, yyyy");
+  bltDate.value = formatDate(props.rollingstock.bltDate);
   notes.value = props.rollingstock.notes;
   ltWeight.value = props.rollingstock.ltWeight;
   loadLimit.value = props.rollingstock.loadLimit;
-  lastMaintDate.value = format(
-      new Date(props.rollingstock.lastMaintDate),
-      "MMM d, yyyy"
-    );
+  lastMaintDate.value = formatDate(props.rollingstock.lastMaintDate);
   locationNow.value = props.rollingstock.locationNow;
   homeLocation.value = props.rollingstock.homeLocation;
   rsStatus.value = props.rollingstock.rsStatus;

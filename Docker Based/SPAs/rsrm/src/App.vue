@@ -42,6 +42,7 @@ const aarCodesStore = useAarCodesStore();
 const microsStore = useMicrosStore();
 const rsStore = useRSStore();
 const ISRS_BASE_URI = import.meta.env.VITE_MYISRS_URI;
+const ISRS_BASE_URI_DEV = import.meta.env.VITE_MYISRS_URI_DEV;
 const drawer = ref(false);
 const items = ref([
   { title: "Reader", icon: "mdi-smart-card-reader", to: "/reader" },
@@ -50,12 +51,20 @@ const items = ref([
   { title: "AAR Codes", icon: "mdi-code-array", to: "/aarcodes" },
   { title: "About", icon: "mdi-help-box", to: "/" },
 ]);
+
 // Initialize the Socket.IO client
-// The first argument to io() can be the base URL (which is the current origin, "/")
-// The second argument is an options object.
-const socket = io({
-  path: `${ISRS_BASE_URI}/socket.io/` // This tells the client to connect to /api/isrs/socket.io/
+let socket;
+if (import.meta.env.DEV) {
+  // For local development
+  socket = io(import.meta.env.VITE_MYISRS_URI_DEV, {
+  transports: ["websocket"]
 });
+} else {
+  // For production (Docker/Nginx)
+  socket = io({
+  path: `${`${ISRS_BASE_URI}`}/socket.io/` // This tells the client to connect to /api/isrs/socket.io/
+});
+}
 
 const opensocketListener = () => {
   socket.on("connect", () => {

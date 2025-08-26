@@ -94,7 +94,7 @@ const formatDate = (epochTime) => {
     return moment
       .utc(epochTime * 1000)
       .local()
-      .format("YYYY-MM-DD hh:mm:ss");
+      .format("YYYY-MM-DD hh:mm");
   }
 };
 const downloadFile = () => {
