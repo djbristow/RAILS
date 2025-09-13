@@ -1,6 +1,6 @@
 {
   "name": "rids",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Railroad Inventory Data Services",
   "private": true,
   "author": "DJ Bristow <dave@bristow-family.org>",
@@ -13,6 +13,6 @@
     "cors": "2.8.5",
     "express": "5.1.0",
     "minimist": "1.2.8",
-    "mongoose": "8.18.0"
+    "mongoose": "8.18.1"
   }
 }

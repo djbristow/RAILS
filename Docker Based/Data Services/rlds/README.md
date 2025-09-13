@@ -5,7 +5,7 @@
 **R**ailroad **L**ayout **D**ata **S**ervices is an Express Mongoose aplication that connects to a MongoDB database containing layout collections and provide data services to the MRLM and ISMS components. This application uses port 3006.
 
 ## Version
-v3.0.3 2025-08-25
+v3.0.4 2025-09-13
 
 
 ## License
