@@ -5,7 +5,7 @@ Figure \ref{fig:microarchitecture} shows the microservices components that make 
 
 \begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.7]{../System/design.png}
+		\includegraphics[scale=0.15]{../Images/micro-services-arch.png}
 	\caption{Microservices Component Architecture}
 	\label{fig:microarchitecture}
 \end{figure}
@@ -15,6 +15,7 @@ The microservices design components are divided into three sets:
   \item \gls{iot} components, which are highlighted with the light green colored background in Figure \ref{fig:microarchitecture}.
   \item \gls{ds} components, which are highlighted with the light blue colored background in Figure \ref{fig:microarchitecture}.
   \item \gls{spa} components, which are highlighted with the buff colored background in Figure \ref{fig:microarchitecture}.
+  \item a reverse proxy, which is highlighted with the mauve colored background in Figure \ref{fig:microarchitecture}.
 \end{itemize}
 
 \subsection{IoT Components}
@@ -82,13 +83,13 @@ The key aspects of Docker are:
 \end{itemize}
 For additional information on Docker see the \href{https://www.docker.com/}{official website}.
 \section {Docker Compose}
-Docker Compose is a tool for defining and running multi-container Docker applications. It uses a YAML file to configure the services, networks, and volumes required for a multi-container application, making it easy to manage complex deployments. Docker Compose allows developers to define a multi-container application in a single file, then use the \gls{cli} to create and start all the services defined in the file with a single command. This simplifies the process of managing the deployment and scaling of microservices, as well as the configuration of the networks and volumes needed to run the application. Docker Compose also provides a number of commands for managing the lifecycle of the application, such as starting, stopping, and scaling the services, as well as viewing the status of the running containers. This makes it easy to develop, test, and deploy multi-container applications, and to manage the dependencies between the different services that make up the application.
+Docker Compose is a tool for defining and running multi-container Docker applications. It uses a \gls{yaml} file to configure the services, networks, and volumes required for a multi-container application, making it easy to manage complex deployments. Docker Compose allows developers to define a multi-container application in a single file, then use the \gls{cli} to create and start all the services defined in the file with a single command. This simplifies the process of managing the deployment and scaling of microservices, as well as the configuration of the networks and volumes needed to run the application. Docker Compose also provides a number of commands for managing the lifecycle of the application, such as starting, stopping, and scaling the services, as well as viewing the status of the running containers. This makes it easy to develop, test, and deploy multi-container applications, and to manage the dependencies between the different services that make up the application.
 Key features of Docker Compose include:
 \begin{itemize}
     \item \textbf{Multi-container Applications} It helps you define and manage applications composed of multiple interacting Docker containers. Each container can represent a different service within your application. 
-    \item \textbf{Simplified Configuration} By using a docker-compose.yml file, you specify the configuration for each service, including the image to use, ports, volumes, networks, and environment variables. This centralizes configuration and makes it easier to manage complex applications. 
+    \item \textbf{Simplified Configuration} By using a docker-compose.yaml file, you specify the configuration for each service, including the image to use, ports, volumes, networks, and environment variables. This centralizes configuration and makes it easier to manage complex applications. 
     \item \textbf{Streamlined Workflow} Docker Compose provides commands to easily build, run, stop, and scale your multi-container application. You can manage all your services with a single command instead of managing individual Docker commands for each container. 
-    \item \textbf{Declarative Syntax} The docker-compose.yml file uses a declarative syntax, meaning you specify the desired state of your application (services, configurations), and Docker Compose takes care of creating and managing the containers to achieve that state. 
+    \item \textbf{Declarative Syntax} The docker-compose.yaml file uses a declarative syntax, meaning you specify the desired state of your application (services, configurations), and Docker Compose takes care of creating and managing the containers to achieve that state. 
     \item \textbf{Dependency Management} Docker Compose automatically handles dependencies between services. If one service depends on another, Compose ensures the dependent service starts only after the required service is up and running. 
 \end{itemize}
     For additional information on Docker Compose see the \href{https://docs.docker.com/compose/}{official website}.
@@ -112,21 +113,21 @@ Table \ref{tbl:docker-images} lists the Docker images available from the \href{h
 	\hline
 	\endlastfoot
   & ----------------- SPAs --------------- &  &  & \\ \hline
-  dbristow/mppm & \textbf{M}odel \textbf{P}rojects and \textbf{P}urchase \textbf{M}anager & 3008 & 4.0.0 & 2025-07-30 \\ \hline
-  dbristow/mrim & \textbf{M}odel \textbf{R}ailroad \textbf{I}nventory \textbf{M}anager & 3001 & 5.0.0 & 2025-07-30 \\ \hline
-  dbristow/mrlm & \textbf{M}odel \textbf{R}ailroad \textbf{L}ayout \textbf{M}anager & 3004 & 3.3.2 & 2025-07-30 \\ \hline
-  dbristow/rsrm & \textbf{R}olling\textbf{s}tock \textbf{R}FID \textbf{M}anager & 3002 & 6.0.0 & 2025-07-30 \\ \hline
+  dbristow/mppm & \textbf{M}odel \textbf{P}rojects and \textbf{P}urchase \textbf{M}anager & 3008 & 4.0.5 & 2025-09-13 \\ \hline
+  dbristow/mrim & \textbf{M}odel \textbf{R}ailroad \textbf{I}nventory \textbf{M}anager & 3001 & 5.1.3 & 2025-09-13 \\ \hline
+  dbristow/mrlm & \textbf{M}odel \textbf{R}ailroad \textbf{L}ayout \textbf{M}anager & 3004 & 4.0.5 & 2025-09-13 \\ \hline
+  dbristow/rsrm & \textbf{R}olling\textbf{s}tock \textbf{R}FID \textbf{M}anager & 3002 & 6.0.5 & 2025-09-13 \\ \hline
   & ----------------- Data Services --------------- &  &  & \\ \hline
-  dbristow/mrfm & \textbf{M}odel \textbf{R}ailroad \textbf{F}ile \textbf{M}anager & 3030 & 2.4.6 & 2025-07-22 \\ \hline
-  dbristow/ppds & \textbf{P}lans and \textbf{P}urchases \textbf{D}ata \textbf{S}ervices  & 3007 & 2.3.19 & 2025-07-30 \\ \hline
-  dbristow/rids & \textbf{R}ailroad \textbf{I}nventory \textbf{D}ata \textbf{S}ervices  & 3000 & 2.3.19 & 2025-07-30 \\ \hline
-  dbristow/rlds & \textbf{R}ailroad \textbf{L}ayout \textbf{D}ata \textbf{S}ervices  & 3006 & 2.1.39 & 22025-07-30 \\ \hline
+  dbristow/mrfm & \textbf{M}odel \textbf{R}ailroad \textbf{F}ile \textbf{M}anager & 3030 & 2.5.0 & 2025-08-22 \\ \hline
+  dbristow/ppds & \textbf{P}lans and \textbf{P}urchases \textbf{D}ata \textbf{S}ervices  & 3007 & 3.0.3 & 2025-09-13 \\ \hline
+  dbristow/rids & \textbf{R}ailroad \textbf{I}nventory \textbf{D}ata \textbf{S}ervices  & 3000 & 3.0.3 & 2025-09-13 \\ \hline
+  dbristow/rlds & \textbf{R}ailroad \textbf{L}ayout \textbf{D}ata \textbf{S}ervices  & 3006 & 3.0.4 & 2025-09-13 \\ \hline
   & ----------------- IoT Services --------------- &  &  & \\ \hline
-  dbristow/ipls & \textbf{I}ot \textbf{P}ublisher \textbf{T}urnout \textbf{P}anel \textbf{L}ight \textbf{S}ervices & 3013 & 1.1.15 & 2025-07-22 \\ \hline
-  dbristow/ipts & \textbf{I}ot \textbf{P}ublisher \textbf{T}urnout \textbf{S}ervices & 3011 & 2.1.15 & 2025-07-22 \\ \hline
-  dbristow/isbs & \textbf{I}ot \textbf{S}ubscriber \textbf{T}urnout \textbf{P}anel \textbf{B}utton \textbf{S}ervices & 3012 & 1.1.18 & 2025-07-22 \\ \hline
-  dbristow/isms & \textbf{I}ot \textbf{S}ubscriber \textbf{M}icro-controller \textbf{S}ervices &  & 3.0.13 & 2025-07-23 \\ \hline
-  dbristow/isrs & \textbf{I}ot \textbf{S}ubscriber \textbf{R}FID \textbf{S}ervices & 3005 & 2.0.0 & 2025-07-30 \\ \hline
-  dbristow/ists & \textbf{I}ot \textbf{S}ubscriber \textbf{T}urnout \textbf{S}ervices & 3010 & 1.4.15 & 2025-07-22 \\ \hline
+  dbristow/ipls & \textbf{I}ot \textbf{P}ublisher \textbf{T}urnout \textbf{P}anel \textbf{L}ight \textbf{S}ervices & 3013 & 1.1.17 & 2025-09-13 \\ \hline
+  dbristow/ipts & \textbf{I}ot \textbf{P}ublisher \textbf{T}urnout \textbf{S}ervices & 3011 & 2.1.17 & 2025-09-13 \\ \hline
+  dbristow/isbs & \textbf{I}ot \textbf{S}ubscriber \textbf{T}urnout \textbf{P}anel \textbf{B}utton \textbf{S}ervices & 3012 & 2.0.3 & 2025-09-13 \\ \hline
+  dbristow/isms & \textbf{I}ot \textbf{S}ubscriber \textbf{M}icro-controller \textbf{S}ervices &  & 3.0.15 & 2025-07-23 \\ \hline
+  dbristow/isrs & \textbf{I}ot \textbf{S}ubscriber \textbf{R}FID \textbf{S}ervices & 3005 & 2.0.3 & 2025-09-13 \\ \hline
+  dbristow/ists & \textbf{I}ot \textbf{S}ubscriber \textbf{T}urnout \textbf{S}ervices & 3010 & 2.0.2 & 2025-09-13 \\ \hline
     \end{longtable}
 The \gls{rails} Docker implementation is a multi-container application that uses Docker Compose to define and run the services required for the \gls{rails} application. The Docker Compose file specifies the services, networks, and volumes needed to run the \gls{rails} application, making it easy to manage the deployment and scaling of the microservices.

@@ -7,11 +7,12 @@ The host machine must have Docker installed. Docker is a platform for developing
 The installation instructions for Docker can be found at \href{https://docs.docker.com/get-docker/}{https://docs.docker.com/get-docker/}.
 \section{Docker Compose Installation}
 \label{sec:dockercomposeinstall}
-Docker Compose is a tool for defining and running multi-container Docker applications. Docker Compose uses a YAML file to configure the application's services. The installation instructions\footnote{Note that for Microsoft Windows the installation of the \gls{gui} Docker Desktop automatically installs Docker Compose.} for Docker Compose can be found at \href{https://docs.docker.com/compose/install/}{https://docs.docker.com/compose/install/}.  The Docker Compose file for the \gls{rails} \glspl{spa} is shown in Appendix \ref{app:yamlfile}.
+Docker Compose is a tool for defining and running multi-container Docker applications. Docker Compose uses a \gls{yaml} file to configure the application's services. The installation instructions\footnote{Note that for Microsoft Windows the installation of the \gls{gui} Docker Desktop automatically installs Docker Compose.} for Docker Compose can be found at \href{https://docs.docker.com/compose/install/}{https://docs.docker.com/compose/install/}.  The Docker Compose file for the \gls{rails} \glspl{spa} is shown in Appendix \ref{app:yamlfile}.
 \section{Broker Configuration}
 \label{sec:brokerconfig}
 The \gls{rails} \glspl{spa} use the Mosquitto broker to communicate with each other. The Mosquitto broker is an open-source message broker that implements the \gls{mqtt} protocol. The Mosquitto broker must be configured to allow the \gls{rails} \glspl{spa} to communicate with each other. The Mosquitto broker configuration file must be edited to allow the \gls{rails} \glspl{spa} to communicate with each other. The configuration file is found in the virtual storage whose volume name is “mosquitto”. To establish and modify the configuration file the following steps are taken:
 \begin{enumerate}
+    \item Create a folder/directory ``RAILS'' and open a terminal from that folder/directory (all docker commands should be run in that terminal).
     \item Create a Docker volume for the Mosquitto broker.
     \begin{verbatim}
     docker volume create --name mosquitto
@@ -55,10 +56,10 @@ The \gls{rails} \glspl{spa} are implemented as Docker containers that require an
 \end{enumerate}
 \section{Run the RAILS Docker Containers}
 \label{sec:railsdockercontainers}
-The Docker containers are pulled from Docker Hub and run on the host machine. To run all of the \gls{rails} Docker containers, either create the YAML file from Appendix \ref{app:yamlfile} or retrieve the YAML file from the \gls{rails} GitHub repository found at \href{https://github.com/djbristow/RAILS/tree/master/Docker%20Based}{my GitHub repository}. The YAML file is used to run the \gls{rails} Docker containers.  
-to run all four \gls{rails} Docker containers, the following command in the directory where the YAML file is located:
+The Docker containers are pulled from Docker Hub and run on the host machine. To run all of the \gls{rails} Docker containers, either create the \gls{yaml} file from Appendix \ref{app:yamlfile} or retrieve the \gls{yaml} file from the \gls{rails} GitHub repository found at \href{https://github.com/djbristow/RAILS/tree/master/Docker%20Based}{my GitHub repository}. Additionally create the ``nginx.conf'' file from Appendix \ref{app:nginx-config} or retreive it from the \gls{rails} GitHub repository. Be sure that both files are put into the ``RAILS'' folder/directory. 
+To fetch the images, create the containers, and start the conatiners running execute the following command in the terminal:
 \begin{verbatim}
-docker-compose up -d
+docker compose up -d
 \end{verbatim}
 This command will pull the Docker images from Docker Hub and run the containers in detached mode. The \gls{rails} \glspl{spa} will be running in the background, and the terminal will return to the command prompt.
 The \gls{rails} \glspl{spa} will be running on the host machine.
@@ -69,12 +70,12 @@ Point a browser, on the host machine, to the following URLs to access the \gls{r
     \item \gls{mppm} \gls{spa} - \href{http://localhost/mppm}{http://localhost/mppm} (or \texttt{http://\textless MACHINE\_IP\textgreater /mppm/})
     \item \gls{mrlm} \gls{spa} - \href{http://localhost/mrlm}{http://localhost/mrlm} (or \texttt{http://\textless MACHINE\_IP\textgreater /mrlm/})
 \end{itemize}
-Where \textless MACHINE\_IP\textgreater is the IP address of the host machine running the Docker containers. The \gls{rails} \glspl{spa} can be accessed from any browser on any Personal Computer (PC) in the network.
+Where \textless MACHINE\_IP\textgreater\ is the IP address of the host machine running the Docker containers. The \gls{rails} \glspl{spa} can be accessed from any browser on any Personal Computer (PC) in the network.
 \section{Stop and Remove the RAILS Docker Containers}
 \label{sec:stopremoverailsdockercontainers}
 To stop and remove the \gls{rails} Docker containers, the following command is used:
 \begin{verbatim}
-docker-compose down
+docker compose down
 \end{verbatim}
 
 See Appendix \ref{app:examplecommands} for screenshots of the Docker commands used to create the Docker environment and run the \gls{rails} \glspl{spa}.
