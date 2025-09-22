@@ -12,7 +12,7 @@ Each component is carefully integrated to ensure reliable recieving the tag info
 
 \begin{figure}[H]
   \centering
-    \includegraphics[scale=0.2]{rfid_schematic.png}
+    \includegraphics[scale=0.2]{../Images/rfid_schematic.png}
   \caption{RFID Microcontroller Schematic}
   \label{fig:rfid-schematic}
 \end{figure}
@@ -33,17 +33,17 @@ connections and efficient routing of signals.
 
 \begin{figure}[H]
   \centering
-    \includegraphics[scale=0.15]{rfid_pcb.png}
+    \includegraphics[scale=0.15]{../Images/rfid_pcb.png}
   \caption{RFID Microcontroller PCB}
   \label{fig:rfid_pcb}
 \end{figure}
 \subsection{Connectivity}
-The wiring diagram in Figure \ref{fig:turnout-board} illustrates the connections between the \gls{rfid} readers and the microcontroller. The \gls{rfid} readers are connected to the TB1 terminal block, which uses a RS232 connection to the NodeMCU.
+The wiring diagram in Figure \ref{fig:rfid-board} illustrates the connections between the \gls{rfid} readers and the microcontroller. The \gls{rfid} readers are connected to the TB1 terminal block, which uses a RS232 connection to the NodeMCU.
 The connections are made using standard wiring techniques, ensuring reliable and secure connections. The use of terminal blocks allows for easy connection and disconnection of the Tortoise machines, making maintenance and troubleshooting easier.
 \begin{figure}[H]
   \centering
-    \includegraphics[scale=0.2]{board1.png}\hfill
-    \includegraphics[scale=0.2]{readers.png}
+    \includegraphics[scale=0.2]{../Images/rfid-board.png}\hfill
+    \includegraphics[scale=0.2]{../Images/rfid-readers.png}
   \caption{RFID Microcontroller - RFID Reader Connections}
   \label{fig:rfid-board}
 \end{figure}
@@ -54,12 +54,12 @@ The software implementation includes the following key functionalities:
 \begin{itemize}
   \item Initialization of the NodeMCU and configuration of the GPIO pins.
   \item Initialization of the \gls{wifi} connectivity and connect to the \gls{mqtt} broker. This allows the microcontroller to send and receive messages over the network.
-  At the finish of the initialization process, the microcontroller, it will publish a message to the topic "micros" indicating its readiness and status to the \gls{mqtt} broker. The message is in JSON format as follows:\\
-  \{"et":"1590462747","mcntrlr":"RfidRdr01","msgType":"initial","ip":"192.168.0.19"\}
+  At the finish of the initialization process, the microcontroller, it will publish a message to the topic ``micros'' indicating its readiness and status to the \gls{mqtt} broker. The message is in \gls{json} format as follows:\\
+  \{``et'':``1590462747'',``mcntrlr'':``RfidRdr01'',``msgType'':``initial'',``ip'':``192.168.0.19''\}
 \item Setup of the serial communication protocol to interface with the \gls{rfid} reader module. This allows for reading \gls{rfid} tags.
-\item Handling \gls{rfid} tag detection and processing the data received from the \gls{rfid} reader. reads values from a single \gls{rfid} reader, formats the results as a JSON string, gets Epoch time from an NTP server and then publishes the JSON String to the topic "sensors/rfid" on the \gls{mqtt} broker. The message is in JSON format as follows:\\
-\{"et":"1590463450","mcntrlr":"RfidRdr01","reader":"1","rfid":"1C0044CF23"\}
-\item Sending periodic heartbeat messages to the \gls{mqtt} broker to indicate that the microcontroller is operational. This can be used for monitoring and debugging purposes. The message are in JSON format as follows:\\
-\{"et":"1590462747","mcntrlr":"RfidRdr01","msgType":"heartbeat"\}
+\item Handling \gls{rfid} tag detection and processing the data received from the \gls{rfid} reader. reads values from a single \gls{rfid} reader, formats the results as a \gls{json} string, gets Epoch time from an NTP server and then publishes the \gls{json} String to the topic ``sensors/rfid'' on the \gls{mqtt} broker. The message is in \gls{json} format as follows:\\
+\{``et'':``1590463450'',``mcntrlr'':``RfidRdr01'',``reader'':``1'',``rfid'':``1C0044CF23''\}
+\item Sending periodic heartbeat messages to the \gls{mqtt} broker to indicate that the microcontroller is operational. This can be used for monitoring and debugging purposes. The message are in \gls{json} format as follows:\\
+\{``et'':``1590462747'',``mcntrlr'':``RfidRdr01'',``msgType'':``heartbeat''\}
 \end{itemize}
-The software is designed to be modular and easily maintainable, allowing for future enhancements and bug fixes. The use of libraries such as `PubSubClient.h` for MQTT messaging simplifies the implementation and ensures compatibility with the hardware components.
+The software is designed to be modular and easily maintainable, allowing for future enhancements and bug fixes. The use of libraries such as ``PubSubClient.h'' for \gls{mqtt} messaging simplifies the implementation and ensures compatibility with the hardware components.
