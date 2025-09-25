@@ -5,6 +5,7 @@ The following Docker commands may be useful when working with Docker images and 
     \item \texttt{docker ps} - List running containers.
     \item \texttt{docker ps -a} - List all containers including those that have been stopped.
     \item \texttt{docker images} - List images.
+    \item \texttt{docker volume ls} - List volumes.
     \item \texttt{docker run -d --name <container-name> <image-name>} - Run a container from an image.
     \item \texttt{docker stop <container-name>} - Stop a running container.
     \item \texttt{docker rm <container-name>} - Remove a container.
@@ -12,4 +13,5 @@ The following Docker commands may be useful when working with Docker images and 
     \item \texttt{docker inspect <container-name> | <volume-name> } - Display detailed information about a container or volume.
     \item \texttt{docker-compose up -d} - Start the services defined in the Docker Compose file.
     \item \texttt{docker-compose down} - Stop the services defined in the Docker Compose file.
+    \item \texttt{docker volume prune} - This will remove all local volumes not used by at least one container. This command is designed to clean up any volumes that are not currently attached to a container, which is a good thing to do because after running RAILS as Docker Compose creates some randomly named volumes. Be sure to do this while all of the RAILS conatiners are running otherwise the volumes: mosquitto, myRailsDb, and myRailsImages may be destroyed causing a complete lose of your data.
 \end{itemize}
