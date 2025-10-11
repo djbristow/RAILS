@@ -13,11 +13,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = "3030" || process.env.PORT;
+// const PORT = "3030" || process.env.PORT;
 const uri1 = process.env.MYMRIM_URI1;
 const uri2 = process.env.MYMRIM_URI2;
 
-const allowedOrigins = [uri1, uri2, 'http://localhost:3001', 'http://127.0.0.1:3001'];
+const allowedOrigins = ['http://localhost', 'http://127.0.0.1', 'http://localhost:3001', 'http://127.0.0.1:3001'];
 console.log("Allowed origins: ", allowedOrigins);
 const corsOptions = {
   origin: function (origin, callback) {
@@ -110,4 +110,7 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(PORT, () => console.log(`Server v2.5.0 listening on port ${PORT}`));
+app.listen(3030, function () {
+     console.log("MRFM v2.5.1, Started")
+     console.log("MRFM listening on port 3030")
+});
