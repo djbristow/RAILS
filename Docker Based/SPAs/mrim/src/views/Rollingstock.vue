@@ -12,11 +12,11 @@
           label="Search"
           single-line
           hide-details
-        ></v-text-field>
+          class="mb-4" ></v-text-field>
+        
         <v-data-table
           :headers="headers"
-          :items="rsStore.rs"
-          :search="search"
+          :items="filteredRollingstock" :search="search"
           item-key="item.id"
           density="compact"
         >
@@ -56,13 +56,24 @@
             @closeViewRsDialog="viewRsDialog = false"
           />
         </v-dialog>
+        <v-select
+          v-model="selectedStatuses"
+          :items="statusOptions"
+          label="Filter by Status"
+          multiple
+          chips
+          clearable
+          single-line
+          hide-details
+          class="mb-3"
+        ></v-select>
       </v-card>
     </v-container>
   </v-app>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue"; // CHANGED: Added 'computed'
 import DialogEditRs from "../components/dialogs/DialogEditRs.vue";
 import DialogDeleteRs from "../components/dialogs/DialogDeleteRs.vue";
 import DialogAddRs from "../components/dialogs/DialogAddRs.vue";
@@ -75,6 +86,24 @@ const deleteRsDialog = ref(false);
 const addRsDialog = ref(false);
 const viewRsDialog = ref(false);
 const editableRs = ref(null);
+
+// 👇 ADDED: Status filtering logic
+const statusOptions = ref(["Operational", "Out of Service", "In Service", "In Maintenance", ""]);
+// Default to all options to show all rollingstock initially
+const selectedStatuses = ref(statusOptions.value);
+
+const filteredRollingstock = computed(() => {
+  if (selectedStatuses.value.length === 0) {
+    return []; // If nothing is selected, show an empty list
+  }
+  
+  // Filter the full list from the store
+  return rsStore.rs.filter((rs) => {
+    return selectedStatuses.value.includes(rs.rsStatus);
+  });
+});
+// 👆 END ADDED
+
 const headers = [
   { title: "Road Name", key: "roadName" },
   { title: "Road Number", key: "roadNumber" },
