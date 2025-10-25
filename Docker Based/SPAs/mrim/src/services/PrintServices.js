@@ -1,12 +1,83 @@
-import { useAarCodesStore } from "@/stores/aarCodes";
+/* import { useAarCodesStore } from "@/stores/aarCodes";
 import { useCompaniesStore } from "@/stores/companies";
 import { useImagesStore } from "@/stores/images";
 import { useRSStore } from "@/stores/rs";
-import { mapActions } from "pinia";
+import { mapActions } from "pinia"; */
 import { jsPDF } from 'jspdf';
 import { autoTable } from 'jspdf-autotable';
 import moment from "moment";
 export default {
+ 
+  printCarCards(rs) {
+    const cardWidth = 3.25;
+    const cardHeight = 3.5;
+    const margin = 0.25;
+    const cardsPerRow = 3;
+    const cardsPerPage = 6; 
+    const doc = new jsPDF('l', 'in', 'letter');
+    let cardCount = 0;
+    let xPos = margin;
+    let yPos = margin;
+    rs.forEach(car => {
+      if (cardCount >= cardsPerPage) {
+        doc.addPage();
+        cardCount = 0;
+        xPos = margin;
+        yPos = margin;
+      }
+      this.drawCard(doc, car, xPos, yPos);
+      cardCount++;
+      xPos += cardWidth + margin;
+      if (cardCount % cardsPerRow === 0) {
+        xPos = margin;
+        yPos += cardHeight + margin;
+      }
+    });
+    doc.save('car_cards.pdf');
+  },
+  drawCard(doc, car, x, y) {
+    const cardWidth = 3.25;
+    const cardHeight = 3.5;
+    const fontSize = 10;
+    const lineHeight = 0.15; // inches
+    doc.setLineWidth(0.01);
+    doc.rect(x, y, cardWidth, cardHeight); // Card border
+    // Add Logo (replace with your actual logo image path)
+/*     const logoImg = new Image(); 
+    logoImg.src = 'path/to/your/logo.png'; // Replace with your logo path
+    doc.addImage(logoImg, 'PNG', x + cardWidth - 0.7, y + 0.1, 0.6, 0.6);  */
+    doc.setFontSize(14); 
+    doc.setFont(undefined, 'bold');
+    doc.text(`${car.roadName} ${car.roadNumber}`, x + 0.1, y + 0.3);
+    doc.line(x, y + 0.35, x + cardWidth, y + 0.35);
+    doc.setFontSize(12); 
+    doc.setFont(undefined, 'normal'); 
+    let currentY = y + lineHeight + 0.5; // Start content below the top edge
+    this.addText(doc, `Color: ${car.color}`, x + 0.1, currentY, fontSize);
+    currentY += lineHeight;
+    this.addText(doc, `AAR: ${car.aarCode}`, x + 0.1, currentY, fontSize);
+    currentY += lineHeight;
+    this.addText(doc, `Description: ${car.description}`, x + 0.1, currentY, fontSize);
+    currentY += lineHeight;
+    this.addText(doc, `Capacity: ${car.capacity}`, x + 0.1, currentY, fontSize);
+    currentY += lineHeight;
+    this.addText(doc, `Builder: ${car.bldr}`, x + 0.1, currentY, fontSize);
+    currentY += lineHeight;
+    this.addText(doc, `Built: ${this.formatDate(car.bltDate)}`, x + 0.1, currentY, fontSize);
+    currentY += lineHeight;
+    this.addText(doc, `LT Weight: ${car.ltWeight}`, x + 0.1, currentY, fontSize);
+    currentY += lineHeight;
+    this.addText(doc, `Load Limit: ${car.loadLimit}`, x + 0.1, currentY, fontSize);
+    currentY += lineHeight;
+    this.addText(doc, `Last Maint: ${this.formatDate(car.lastMaintDate)}`, x + 0.1, currentY, fontSize);
+    currentY += lineHeight;
+    this.addText(doc, `Status: ${car.rsStatus}`, x + 0.1, currentY, fontSize);
+    currentY += lineHeight;   
+  },
+  addText(doc, text, x, y, fontSize) {
+    doc.setFontSize(fontSize);
+    doc.text(text, x, y);
+  },
   printAarCodes(documents) {
     class Aarrow {
       constructor(aarCode, rollingstockType, description) {
@@ -547,7 +618,7 @@ export default {
     if (unformatDate === null || unformatDate === "") {
       return "";
     } else {
-      return moment.utc(unformatDate).format("YYYY/MM/DD");
+      return moment.utc(unformatDate).format("YYYY-MM-DD");
     }
   },
 };

@@ -79,6 +79,11 @@
             <VBtn @click="printFile"> Print </VBtn>
           </VCol>
         </VRow>
+        <VRow>
+        <VCol cols="3">
+            <VBtn @click="printCards"> Print Cards </VBtn>
+          </VCol>
+        </VRow>
       </VContainer>
     </div>
   </div>
@@ -360,5 +365,9 @@ const printFile = () => {
   printCollection.value = null;
   sortBy.value = null;
   breakType.value = null;
+};
+const printCards = () => {
+  console.log("Printing Rolling Stock Cards");
+  PrintServices.printCarCards(rsStore.rs);
 };
 </script>
