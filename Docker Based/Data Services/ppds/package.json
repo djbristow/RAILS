@@ -1,6 +1,6 @@
 {
   "name": "ppds",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Projects and Purchases Data Services",
   "private": true,
   "author": "DJ Bristow <dave@bristow-family.org>",
@@ -13,6 +13,6 @@
     "cors": "2.8.5",
     "express": "5.1.0",
     "moment": "2.30.1",
-    "mongoose": "8.18.1"
+    "mongoose": "8.19.2"
   }
 }

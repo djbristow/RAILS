@@ -152,6 +152,10 @@ app.get("/tpllist", async (req, res) => {
   });
   res.send(tplights);
 });
+app.get("/tpllist/:id", async (req, res) => {
+  let tpl = await TPLight.find({ controller: req.params.id });
+  res.send(tpl);
+});
 app.get("/tpl_id/:id", async (req, res) => {
   let tpl = await TPLight.findById(req.params.id);
   res.send(tpl);
@@ -162,6 +166,7 @@ app.get("/tpl_num/:id", async (req, res) => {
   });
   res.send(tpl);
 });
+
 app.post("/add_tpl", async (req, res) => {
   await TPLight.create(req.body);
   res.send({

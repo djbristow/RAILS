@@ -60,7 +60,6 @@ import DialogEditTPLight from "@/components/dialogs/DialogEditTPLight.vue";
 import DialogDeleteTPLight from "@/components/dialogs/DialogDeleteTPLight.vue";
 import DialogAddTPLight from "@/components/dialogs/DialogAddTPLight.vue";
 import { useTplightsStore } from "@/stores/tplights";
-import { useTurnoutsStore } from "@/stores/turnouts";
 
 const tplightsStore = useTplightsStore();
 const editableTPLight = ref(null);

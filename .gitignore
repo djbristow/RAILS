@@ -23,6 +23,7 @@
 'Docker Based/SPAs/rsrm/.vscode/'
 'Docker Based/Data Services/mrfm/src/tmp/'
 'Docker Based/Data Services/mrfm/src/uploads/'
+'Docker Based/packages.microsoft.gpg'
 node_modules/
 *.vscode/
 *.aux

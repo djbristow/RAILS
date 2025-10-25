@@ -6,6 +6,9 @@ export default {
   fetchTPLightList() {
     return ApiRl().get('tpllist')
   },
+  fetchTPLightListForController(controller) {
+    return ApiRl().get('tpllist/' + controller)
+  },
   deleteTPL(id) {
     return ApiRl().delete('tpl/' + id)
   },

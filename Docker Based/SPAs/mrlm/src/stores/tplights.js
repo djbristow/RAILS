@@ -7,6 +7,8 @@ export const TO_TPLIGHTS = "TO_TPLIGHTS";
 export const GET_TPLIGHT_BY_CNT_TPLNUM = "GET_TPLIGHT_BY_CNT_TPLNUM";
 export const GET_TPLIGHT_BY_TO_ID = "GET_TPLIGHT_BY_TO_ID";
 export const GET_TPLIGHTS = "GET_TPLIGHTS";
+export const GET_TPLIGHTS_FOR_CONTROLLER = "GET_TPLIGHTS_FOR_CONTROLLER";
+export const GET_TPLIGHTS_CONTROLLERS = "GET_TPLIGHTS_CONTROLLERS";
 export const ADD_NEW_TPLIGHT = "ADD_NEW_TPLIGHT";
 export const DELETE_TPLIGHT = "DELETE_TPLIGHT";
 export const UPDATE_TPLIGHT = "UPDATE_TPLIGHT";
@@ -69,6 +71,18 @@ export const useTplightsStore = defineStore("tplights", {
     async [GET_TPLIGHTS]() {
       let response = await RlService.fetchTPLightList();
       this.tplights = response.data;
+    },
+    async [GET_TPLIGHTS_FOR_CONTROLLER](controller) {
+      let response = await RlService.fetchTPLightListForController(controller);
+      this.tplights = response.data;
+    },
+    GET_TPLIGHTS_CONTROLLERS() {
+      const uniqueControllers = new Set();    
+      this.tplights.forEach(light => {
+        // Add each controller to the Set.
+        uniqueControllers.add(light.controller);
+      });
+      return Array.from(uniqueControllers);
     },
     async [ADD_NEW_TPLIGHT](tplight) {
       await RlService.addTPL(tplight);

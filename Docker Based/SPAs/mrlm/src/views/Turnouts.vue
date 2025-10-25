@@ -68,9 +68,11 @@ import DialogDeleteTurnout from "@/components/dialogs/DialogDeleteTurnout.vue";
 import DialogAddTurnout from "@/components/dialogs/DialogAddTurnout.vue";
 import moment from "moment";
 import { useTurnoutsStore } from "@/stores/turnouts";
+import { useTplightsStore } from "@/stores/tplights";
 import RlService from "@/services/RlService";
 
 const turnoutsStore = useTurnoutsStore();
+const tplightsStore = useTplightsStore();
 const editTurnoutDialog = ref(false);
 const deleteTurnoutDialog = ref(false);
 const addTurnoutDialog = ref(false);
@@ -130,16 +132,19 @@ const pubToMsg = async (id, cmd) => {
   await RlService.postToMsg(msg);
 };
 const pubLightMsg = (item) => {
-  let tpl = turnoutsStore.GET_TURNOUT(item._id);
+  console.log(item);
+  let tpl = tplightsStore.GET_TPLIGHT_BY_TO_ID(item._id);
   console.log(tpl);
+ 
   if (tpl !== null) {
+    let color = item.state === "THROWN" ? "BLUE" : "GREEN";
     const msg = {
       topic: tpl.controller,
       tplNum: tpl.tplNum,
-      cmd: item.state,
+      color: color,
     };
     console.log(msg);
     RlService.postTplMsg(msg);
-  }
-};
+  } 
+}
 </script>
