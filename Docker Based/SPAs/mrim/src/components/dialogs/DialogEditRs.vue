@@ -53,7 +53,18 @@
             v-model="lastMaintDate"
             label="Last Maintenance"
           ></v-text-field>
-          <v-text-field v-model="rsStatus" label="Status"></v-text-field>
+          <v-select
+            v-model="rsStatus"
+            :items="[
+              'Operational',
+              'In Service',
+              'In Maintenance',
+              'Out of Service',
+            ]"
+            label="Status"
+            dense
+            outlined
+          ></v-select>
         </v-row>
         <v-card-subtitle>Model Details</v-card-subtitle>
         <v-row dense>
@@ -110,7 +121,7 @@ const modelWeight = ref("");
 const modelLength = ref("");
 const rfid = ref("");
 const rsEditDataInvalid = ref(false);
-const emit = defineEmits(['closeEditRsDialog']);
+const emit = defineEmits(["closeEditRsDialog"]);
 const rsStore = useRSStore();
 const props = defineProps({
   rollingstock: {
@@ -121,7 +132,9 @@ const props = defineProps({
 
 const editRsUpdate = () => {
   const inSvcDateValue = inSvcDate.value ? new Date(inSvcDate.value) : null;
-  const lastMaintDateValue = lastMaintDate.value ? new Date(lastMaintDate.value) : null;
+  const lastMaintDateValue = lastMaintDate.value
+    ? new Date(lastMaintDate.value)
+    : null;
   const bltDateValue = bltDate.value ? new Date(bltDate.value) : null;
 
   rsStore.UPDATE_RS({
@@ -159,7 +172,7 @@ const formatDate = (unformatDate) => {
     return "";
   }
   const dateObject = new Date(unformatDate);
-    if (isNaN(dateObject)) {
+  if (isNaN(dateObject)) {
     console.error("Invalid date string provided:", unformatDate);
     return "";
   }

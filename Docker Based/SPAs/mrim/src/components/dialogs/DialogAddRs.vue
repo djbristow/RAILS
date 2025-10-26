@@ -59,7 +59,13 @@
               v-model="lastMaintDate"
               label="Last Maintenance"
             ></v-text-field>
-            <v-text-field v-model="rsStatus" label="Status"></v-text-field>
+            <v-select
+              v-model="rsStatus"
+              :items="['Operational', 'In Service', 'In Maintenance', 'Out of Service']"
+              label="Status"
+              dense
+              outlined
+            ></v-select>
           </v-row>
           <v-card-subtitle>Model Details</v-card-subtitle>
           <v-row dense>
