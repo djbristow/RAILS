@@ -1,43 +1,346 @@
-\newacronym[description={}]{aar}{AAR}{Association of American Railroads}
-\newacronym[description={acts as a middleman between different software applications. It defines a set of rules and specifications that allow applications to talk to each other and exchange data or functionality}]{api}{API}{Application Program Interface}
-\newacronym[description={is a a text-based way to interact with a computer program by typing commands and seeing text-based responses}]{cli}{CLI}{command-line interface}
-\newacronym[description={is a class of RAILS components that provides an API permitting access to the MongoDB that stores the documents used by RAILS}]{ds}{DS}{Data Services}
-\newacronym[description={also known as Unix time or POSIX time, is a system for representing time as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap seconds}]{epoch}{ET}{Epoch time}
-\newacronym[description={is the visual way you interact with a computer program using elements like windows, icons, menus, and buttons, instead of typing commands. GUIs are the standard way most people interact with computers today}]{gui}{GUI}{Graphic User Interface}
-\newacronym[description={is a type of electromagnetic radiation that lies just beyond the red end of the visible light spectrum. It's invisible to the human eye, but we can feel it as heat}]{ir}{IR}{infrared}
-\newacronym[description={refers to a vast network of physical devices embedded with sensors, software, and other technologies that allows them to connect and exchange data with other devices and systems over the internet or other communication networks}]{iot}{IoT}{Internet of Things}
-\newacronym[description={is a collection of RAILS components that enable access to messaging components through an \gls{api}}]{iots}{IoTS}{IoT Services}
-\newacronym[description={}]{ipls}{IPLS}{IoT Publisher Turnout Panel Light Services}
-\newacronym[description={}]{ipts}{IPTS}{IoT Publisher Turnout Services}
-\newacronym[description={}]{isbs}{ISBS}{IoT Subscriber Turnout Panel Button Services}
-\newacronym[description={}]{isls}{ISLS}{IoT Subscriber Location Services}
-\newacronym[description={}]{isms}{ISMS}{IoT Subscriber Micro-controller Services}
-\newacronym[description={}]{isrs}{ISRS}{IoT Subscriber RFID Services}
-\newacronym[description={}]{ists}{ISTS}{IoT Subscriber Turnout Services}
-\newacronym[description={is a lightweight data-interchange format that uses human-readable text to transmit data objects consisting of attribute–value 1  pairs and arrays}]{json}{JSON}{JavaScript Object Notation}
-\newacronym[description={is a lightweight messaging protocol designed for machine-to-machine (M2M) communication in resource-constrained environments, like those found in the Internet of Things (IoT)}]{mqtt}{MQTT}{Message Queuing Telemetry Transport}
-\newacronym[description={}]{mr}{MR}{Model Railroad}
-\newacronym[description={}]{mrfm}{MRFM}{Model Railroad File Manager}
-\newacronym[description={}]{mrim}{MRIM}{Model Railroad Inventory Manager}
-\newacronym[description={}]{mppm}{MPPM}{Model Projects and Purchase Manager}
-\newacronym[description={}]{mrlm}{MRLM}{Model Railroad Layout Manager}
-\newacronym[description={is a networking protocol designed to synchronize the clocks of computer systems over the internet or a local area network (LAN)}]{ntp}{NTP}{Network Time Protocol}
-\newacronym[description={}]{pdf}{PDF}{Portable Document Format}
-\newacronym[description={}]{ppds}{PPDS}{Plans and Purchases Data Services}
-\newacronym[description={}]{rails}{RAILS}{Railway Administration and Information Logical System}
-\newacronym[description={}]{rids}{RIDS}{Railroad Inventory Data Services}
-\newacronym[description={}]{rlds}{RLDS}{Railroad Layout Data Services}
-\newacronym[description={is technology that uses radio waves to wirelessly identify and track objects}]{rfid}{RFID}{Radio Frequence Identification}
-\newacronym[description={is a set of architectural principles for designing web services. It's not a protocol itself (like HTTP), but rather a guideline for creating web services}]{rest}{REST}{Representational State Transfer}
-\newacronym[description={all the vehicles that operate on a railroad line. This includes both powered and unpowered vehicles}]{rs}{RS}{rollingstock}
-\newacronym[description={}]{rsrm}{RSRM}{Rollingstock RFID Manager}
-\newacronym[description={is a web application that loads a single HTML page in the user's browser and dynamically updates the content based on user interaction, without reloading the entire page. This creates a more fluid and responsive user experience, similar to what you might expect from a native mobile app}]{spa}{SPA}{Single Page Application}
-\newacronym[description={a suite of communication protocols that governs how data is exchanged over the internet or a private network. It is the foundation of any data exchange on the Web}]{tcpip}{TCP/IP}{Transmission Control Protocol/Internet Protocol}
-\newacronym[description={}]{vscode}{VS Code}{Visual Studio Code}
-\newacronym[description={is a software program that acts like a physical computer. It creates a virtualized environment that can run its own operating system (OS) and applications, just like a physical computer would}]{vm}{VM}{virtual machine}
-\newacronym[description={is a feature introduced by Microsoft that allows you to run Linux distributions directly on Windows 10 and 11, alongside your existing Windows environment}]{wsl 2}{WSL 2}{Windows Subsystem for Linux 2}
-\newacronym[description={is a human-readable data serialization language used for configuration files, data exchange, and system automation, known for its use of indentation to define structure, similar to Python, and for being a strict superset of JSON}]{yaml}{YAML}{yet another markup language}
-\newglossaryentry{widget}{
-  name=widget,
-  description={a generic term for a component in the system}
-}
+
+
+\newacronym[
+    name={Association of American Railroads (AAR)},
+    description={}
+]{aar}{AAR}{Association of American Railroads}
+
+\newacronym[
+    name={Analog to Digital Converter (ADC)},
+    description={}
+]{adc}{ADC}{Analog to Digital Converter}
+
+\newacronym[
+    name={Application Program Interface (API)},
+    description={acts as a middleman between different software applications. It defines a set of rules and specifications that allow applications to talk to each other and exchange data or functionality}
+]{api}{API}{Application Program Interface}
+
+\newacronym[
+    name={command line interface (CLI)},
+    description={is a text based way to interact with a computer program by typing commands and seeing text based responses}
+]{cli}{CLI}{command line interface}
+
+\newacronym[
+    name={Central Processing Unit (CPU)},
+    description={}
+]{cpu}{CPU}{Central Processing Unit}
+
+\newacronym[
+    name={Digital to Analog Converter (DAC)},
+    description={}
+]{dac}{DAC}{Digital to Analog Converter}
+
+\newacronym[
+    name={Digital Command and Control (DCC)},
+    description={}
+]{dcc}{DCC}{Digital Command and Control}
+
+\newacronym[
+    name={Direct Memory Access (DMA)},
+    description={}
+]{dma}{DMA}{Direct Memory Access}
+
+\newacronym[
+    name={Data Services (DS)},
+    description={is a class of RAILS components that provides an API permitting access to the MongoDB that stores the documents used by RAILS}
+]{ds}{DS}{Data Services}
+
+\newacronym[
+    name={Enterprise Java Bean (EJB)},
+    description={}
+]{ejb}{EJB}{Enterprise Java Bean}
+
+\newacronym[
+    name={Epoch time (ET)},
+    description={also known as Unix time or POSIX time, is a system for representing time as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap seconds}
+]{epoch}{ET}{Epoch time}
+
+\newacronym[
+    name={General Purpose Input/Output (GPIO)},
+    description={}
+]{gpio}{GPIO}{General Purpose Input/Output}
+
+\newacronym[
+    name={Graphic User Interface (GUI)},
+    description={is the visual way you interact with a computer program using elements like windows, icons, menus, and buttons, instead of typing commands. GUIs are the standard way most people interact with computers today}
+]{gui}{GUI}{Graphic User Interface}
+
+\newacronym[
+    name={Inter-Integrated Circuit (I2C)},
+    description={}
+]{i2c}{I2C}{Inter-Integrated Circuit}
+
+\newacronym[
+    name={Inter-IC Sound (I2S)},
+    description={}
+]{i2s}{I2S}{Inter-IC Sound}
+
+\newacronym[
+    name={in-circuit emulator (ICE)},
+    description={}
+]{ice}{ICE}{in-circuit emulator}
+
+\newacronym[
+    name={Integrated Development Environment (IDE)},
+    description={}
+]{ide}{IDE}{Integrated Development Environment}
+
+\newacronym[
+    name={Institute of Electrical and Electronics Engineers (IEEE)},
+    description={}
+]{ieee}{IEEE}{Institute of Electrical and Electronics Engineers}
+
+\newacronym[
+    name={input/output (I/O)},
+    description={}
+]{io}{I/O}{input/output}
+
+\newacronym[
+    name={Internet of Things (IoT)},
+    description={refers to a vast network of physical devices embedded with sensors, software, and other technologies that allows them to connect and exchange data with other devices and systems over the internet or other communication networks}
+]{iot}{IoT}{Internet of Things}
+
+\newacronym[
+    name={IoT Services (IoTS)},
+    description={is a collection of RAILS components that enable access to messaging components through an \gls{api}}
+]{iots}{IoTS}{IoT Services}
+
+\newacronym[
+    name={IoT Publisher Turnout Panel Light Services (IPLS)},
+    description={}
+]{ipls}{IPLS}{IoT Publisher Turnout Panel Light Services}
+
+\newacronym[
+    name={IoT Publisher Turnout Services (IPTS)},
+    description={}
+]{ipts}{IPTS}{IoT Publisher Turnout Services}
+
+\newacronym[
+    name={infrared (IR)},
+    description={is a type of electromagnetic radiation that lies just beyond the red end of the visible light spectrum. It's invisible to the human eye, but we can feel it as heat}
+]{ir}{IR}{infrared}
+
+\newacronym[
+    name={IoT Subscriber Turnout Panel Button Services (ISBS)},
+    description={}
+]{isbs}{ISBS}{IoT Subscriber Turnout Panel Button Services}
+
+\newacronym[
+    name={IoT Subscriber Location Services (ISLS)},
+    description={}
+]{isls}{ISLS}{IoT Subscriber Location Services}
+
+\newacronym[
+    name={IoT Subscriber Micro-controller Services (ISMS)},
+    description={}
+]{isms}{ISMS}{IoT Subscriber Micro-controller Services}
+
+\newacronym[
+    name={IoT Subscriber RFID Services (ISRS)},
+    description={}
+]{isrs}{ISRS}{IoT Subscriber RFID Services}
+
+\newacronym[
+    name={IoT Subscriber Turnout Services (ISTS)},
+    description={}
+]{ists}{ISTS}{IoT Subscriber Turnout Services}
+
+\newacronym[
+    name={Java Enterprise Edition (JEE)},
+    description={}
+]{jee}{JEE}{Java Enterprise Edition}
+
+\newacronym[
+    name={JavaServer Faces (JSF)},
+    description={}
+]{jsf}{JSF}{JavaServer Faces}
+
+\newacronym[
+    name={JavaScript Object Notation (JSON)},
+    description={is a lightweight data-interchange format that uses human-readable text to transmit data objects consisting of attribute–value 1  pairs and arrays}
+]{json}{JSON}{JavaScript Object Notation}
+
+\newacronym[
+    name={Local Area Network (LAN)},
+    description={}
+]{lan}{LAN}{Local Area Network}
+
+\newacronym[
+    name={light-emitting diode (LED)},
+    plural=LEDs, firstplural=light-emitting diodes (LEDs), description={a semiconductor diode which glows when a voltage is applied}
+]{led}{LED}{light-emitting diode}
+
+\newacronym[
+    name={Model Projects and Purchase Manager (MPPM)},
+    description={}
+]{mppm}{MPPM}{Model Projects and Purchase Manager}
+
+\newacronym[
+    name={Message Queuing Telemetry Transport (MQTT)},
+    description={is a lightweight messaging protocol designed for machine-to-machine (M2M) communication in resource-constrained environments, like those found in the Internet of Things (IoT)}
+]{mqtt}{MQTT}{Message Queuing Telemetry Transport}
+
+\newacronym[
+    name={Model Railroad (MR)},
+    description={}
+]{mr}{MR}{Model Railroad}
+
+\newacronym[
+    name={Model Railroad File Manager (MRFM)},
+    description={}
+]{mrfm}{MRFM}{Model Railroad File Manager}
+
+\newacronym[
+    name={Model Railroad Inventory Manager (MRIM)},
+    description={}
+]{mrim}{MRIM}{Model Railroad Inventory Manager}
+
+\newacronym[
+    name={Model Railroad Layout Manager (MRLM)},
+    description={}
+]{mrlm}{MRLM}{Model Railroad Layout Manager}
+
+\newacronym[
+    name={not only SQL (NoSQL)},
+    description={}
+]{nosql}{NoSQL}{not only SQL}
+
+\newacronym[
+    name={Network Time Protocol (NTP)},
+    description={is a networking protocol designed to synchronize the clocks of computer systems over the internet or a local area network (LAN)}
+]{ntp}{NTP}{Network Time Protocol}
+
+\newacronym[
+    name={Personal Computer (PC)},
+    plural=PCs, firstplural=Personal Computers (PCs)
+]{pc}{PC}{Personal Computer}
+
+\newacronym[
+    name={Portable Document Format (PDF)},
+    description={}
+]{pdf}{PDF}{Portable Document Format}
+
+\newacronym[
+    name={Plans and Purchases Data Services (PPDS)},
+    description={}
+]{ppds}{PPDS}{Plans and Purchases Data Services}
+
+\newacronym[
+    name={Pulse Width Modulation (PWM)},
+    description={}
+]{pwm}{PWM}{Pulse Width Modulation}
+
+\newacronym[
+    name={quality of service (QoS)},
+    description={}
+]{qos}{QoS}{quality of service}
+
+\newacronym[
+    name={Railway Administration and Information Logical System (RAILS)},
+    description={}
+]{rails}{RAILS}{Railway Administration and Information Logical System}
+
+\newacronym[
+    name={Random Access Memory (RAM)},
+    description={}
+]{ram}{RAM}{Random Access Memory}
+
+\newacronym[
+    name={Relational Database (RDB)},
+    description={}
+]{rdb}{RDB}{Relational Database}
+
+\newacronym[
+    name={Representational State Transfer (REST)},
+    description={is a set of architectural principles for designing web services. It's not a protocol itself (like HTTP), but rather a guideline for creating web services}
+]{rest}{REST}{Representational State Transfer}
+
+\newacronym[
+    name={Radio Frequence Identification (RFID)},
+    description={is technology that uses radio waves to wirelessly identify and track objects}
+]{rfid}{RFID}{Radio Frequence Identification}
+
+\newacronym[
+    name={Railroad Inventory Data Services (RIDS)},
+    description={}
+]{rids}{RIDS}{Railroad Inventory Data Services}
+
+\newacronym[
+    name={Reduced Instruction Set Computer (RISC)},
+    description={}
+]{risc}{RISC}{Reduced Instruction Set Computer}
+
+\newacronym[
+    name={Railroad Layout Data Services (RLDS)},
+    description={}
+]{rlds}{RLDS}{Railroad Layout Data Services}
+
+\newacronym[
+    name={rollingstock (RS)},
+    description={all the vehicles that operate on a railroad line. This includes both powered and unpowered vehicles}
+]{rs}{RS}{rollingstock}
+
+\newacronym[
+    name={Rollingstock RFID Manager (RSRM)},
+    description={}
+]{rsrm}{RSRM}{Rollingstock RFID Manager}
+
+\newacronym[
+    name={Services Oriented Architecture (SOA)},
+    description={}
+]{soa}{SOA}{Services Oriented Architecture}
+
+\newacronym[
+    name={Single Page Application (SPA)},
+    plural=SPAs, firstplural=Single Page Applications (SPAs), description={a web application that loads a single HTML page in the user's browser and dynamically updates the content based on user interaction, without reloading the entire page. This creates a more fluid and responsive user experience, similar to what you might expect from a native mobile app}
+]{spa}{SPA}{Single Page Application}
+
+\newacronym[
+    name={Serial Peripheral Interface (SPI)},
+    description={}
+]{spi}{SPI}{Serial Peripheral Interface}
+
+\newacronym[
+    name={Structured Query Language (SQL)},
+    description={}
+]{sql}{SQL}{Structured Query Language}
+
+\newacronym[
+    name={Transmission Control Protocol/Internet Protocol (TCP/IP)},
+    description={a suite of communication protocols that governs how data is exchanged over the internet or a private network. It is the foundation of any data exchange on the Web}
+]{tcpip}{TCP/IP}{Transmission Control Protocol/Internet Protocol}
+
+\newacronym[
+    name={Universal Asynchronous Receiver-Transmitter (UART)},
+    description={}
+]{uart}{UART}{Universal Asynchronous Receiver-Transmitter}
+
+\newacronym[
+    name={version control system (VCS)},
+    description={}
+]{vcs}{VCS}{version control system}
+
+\newacronym[
+    name={virtual machine (VM)},
+    description={is a software program that acts like a physical computer. It creates a virtualized environment that can run its own operating system (OS) and applications, just like a physical computer would}
+]{vm}{VM}{virtual machine}
+
+\newacronym[
+    name={Visual Studio Code (VS Code)},
+    description={}
+]{vscode}{VS Code}{Visual Studio Code}
+
+\newacronym[
+    name={Wireless Fidelity (Wi-Fi)},
+    description={}
+]{wifi}{Wi-Fi}{Wireless Fidelity}
+
+\newacronym[
+    name={Windows Subsystem for Linux 2 (WSL 2)},
+    description={is a feature introduced by Microsoft that allows you to run Linux distributions directly on Windows 10 and 11, alongside your existing Windows environment}
+]{wsl 2}{WSL 2}{Windows Subsystem for Linux 2}
+
+\newacronym[
+    name={yet another markup language (YAML)},
+    description={is a human-readable data serialization language used for configuration files, data exchange, and system automation, known for its use of indentation to define structure, similar to Python, and for being a strict superset of JSON}
+]{yaml}{YAML}{yet another markup language}

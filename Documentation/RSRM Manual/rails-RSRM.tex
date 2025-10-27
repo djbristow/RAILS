@@ -14,9 +14,9 @@
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{listings}
-\usepackage{glossaries}
+\usepackage{glossaries-extra}
 
-\setacronymstyle{long-short-desc}
+\setabbreviationstyle[acronym]{long-short}
 \loadglsentries{../Common/defn}
 \makenoidxglossaries
 
@@ -59,7 +59,6 @@
 %%========================================================================
 \backmatter
 
-\printnoidxglossary[sort=letter]
-\addcontentsline{toc}{chapter}{Glossary}
+\printnoidxglossary[type=\acronymtype, sort=letter, title={Acronyms}, style=list]
 
 \end{document}
