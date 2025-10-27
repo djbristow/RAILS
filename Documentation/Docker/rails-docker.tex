@@ -14,12 +14,12 @@
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{listings}
-\usepackage{glossaries}
+\usepackage{glossaries-extra}
 
 \setmainfont{Roboto}
 
-\setacronymstyle{long-short-desc}
-\loadglsentries{defn}
+\setabbreviationstyle[acronym]{long-short}
+\loadglsentries{../Common/defn}
 \makenoidxglossaries
 
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
@@ -76,6 +76,6 @@
 %%========================================================================
 \backmatter
 
-\printnoidxglossary[sort=letter]
-\addcontentsline{toc}{chapter}{Glossary}
+\printnoidxglossary[type=\acronymtype, sort=letter, title={Acronyms}, style=list]
+
 \end{document}

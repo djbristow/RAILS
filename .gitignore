@@ -32,4 +32,4 @@ node_modules/
 *.out
 docker-update-rep.sh
 *.code-workspace
-
+*.gpg
