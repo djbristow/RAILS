@@ -1,0 +1,65 @@
+\documentclass[letterpaper, oneside, 11pt]{book}
+\usepackage[left=1in, right=1in, top=0.75in]{geometry}
+\usepackage[svgnames]{xcolor}
+\usepackage{graphicx}
+\usepackage{appendix}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage[sfdefault]{roboto}
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage[colorlinks=true, linkcolor=gray]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{glossaries}
+
+\setacronymstyle{long-short-desc}
+\loadglsentries{../Common/defn}
+\makenoidxglossaries
+
+\definecolor{MyBlue}{rgb}{0.03, 0.27, 0.49}
+\chapterfont{\color{MyBlue}}
+\sectionfont{\color{MyBlue}}
+\subsectionfont{\color{MyBlue}}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+%%========================================================================
+\begin{titlepage}
+	\raggedleft
+	\begin{figure}[H]
+	\centering
+		\includegraphics[scale=1.53]{../Images/railway_track.jpg}
+	\label{fig:track}
+\end{figure}
+	\vspace*{0.167\textheight}
+	\textbf{\LARGE RSMS Installation and Operations Manual}\\[\baselineskip]
+    \textbf{\textcolor{MyBlue}{\Huge R\Large ailway \Huge A\Large dministration and \Huge I\Large nformation \Huge L\Large ogical \Huge S\Large ystem}}\\[\baselineskip]
+	{\Large \textit{RAILS for Model Railroads}}
+	\vfill
+    \vspace*{\baselineskip}
+	{\small David Bristow}
+
+	{\small Version 2.0.0}
+	
+	{\small \today}
+	\vspace*{3\baselineskip}
+\end{titlepage}
+%%========================================================================
+\tableofcontents
+%% copyright notice
+%%========================================================================
+\input{intro}
+\input{rfidrdrsetup}
+\input{../Common/docker-run}
+\input{operations}
+%%========================================================================
+\backmatter
+
+\printnoidxglossary[sort=letter]
+\addcontentsline{toc}{chapter}{Glossary}
+
+\end{document}
