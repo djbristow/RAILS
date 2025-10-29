@@ -33,7 +33,7 @@ Figure \ref{fig:rsms-ms-components} depicts the micro-services used to create th
 
 \begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.15]{./images/rsrm-design.png}
+		\includegraphics[scale=0.2]{./images/rsrm-design.png}
 	\caption{Microservices Components}
 	\label{fig:rsms-ms-components}
 \end{figure}
@@ -42,8 +42,9 @@ Figure \ref{fig:rsms-ms-components} depicts the micro-services used to create th
 Three system components that make up this subsystem:
 \begin{itemize}
 \item \gls{rfid} Controller is a micro-controller that processes \gls{rfid} tags obtained from a \gls{rfid} reader and then publishes \gls{iot} messages to the \gls{mqtt} Broker, one or more micro-controllers can be connected to the network;
-\item Network is a \gls{tcpip} communication medium that connects the \gls{rfid} Controller (one or more), \gls{mqtt} Broker and \gls{rsrm} components; and
-\item Host is a computer that runs the \gls{mqtt} Broker and other \gls{rsrm} micro-services components.
+\item Network is a \gls{tcpip} communication medium that connects the \gls{rfid} Controller (one or more), \gls{mqtt} Broker and \gls{rsrm} components;
+\item Server is a computer that runs the \gls{mqtt} Broker and other \gls{rsrm} micro-services components; and
+\item Client\footnote{A web browser may be used on the Server and client machine is omitted} is a computer that runs a web browser to display the \gls{rsrm} \gls{spa}.
 \end{itemize}
 
 \begin{figure}[H]
