@@ -3,22 +3,21 @@ import { useCompaniesStore } from "@/stores/companies";
 import { useImagesStore } from "@/stores/images";
 import { useRSStore } from "@/stores/rs";
 import { mapActions } from "pinia"; */
-import { jsPDF } from 'jspdf';
-import { autoTable } from 'jspdf-autotable';
+import { jsPDF } from "jspdf";
+import { autoTable } from "jspdf-autotable";
 import moment from "moment";
 export default {
- 
   printCarCards(rs) {
-    const cardWidth = 3.25;
-    const cardHeight = 3.5;
+    const cardWidth = 2.25;
+    const cardHeight = 4.0;
     const margin = 0.25;
-    const cardsPerRow = 3;
-    const cardsPerPage = 6; 
-    const doc = new jsPDF('l', 'in', 'letter');
+    const cardsPerRow = 4;
+    const cardsPerPage = 8;
+    const doc = new jsPDF("l", "in", "letter");
     let cardCount = 0;
     let xPos = margin;
     let yPos = margin;
-    rs.forEach(car => {
+    rs.forEach((car) => {
       if (cardCount >= cardsPerPage) {
         doc.addPage();
         cardCount = 0;
@@ -27,52 +26,57 @@ export default {
       }
       this.drawCard(doc, car, xPos, yPos);
       cardCount++;
-      xPos += cardWidth + margin;
+      xPos += cardWidth; //+ margin;
       if (cardCount % cardsPerRow === 0) {
         xPos = margin;
-        yPos += cardHeight + margin;
+        yPos += cardHeight; //+ margin;
       }
     });
-    doc.save('car_cards.pdf');
+    doc.save("car_cards.pdf");
   },
   drawCard(doc, car, x, y) {
-    const cardWidth = 3.25;
-    const cardHeight = 3.5;
-    const fontSize = 10;
-    const lineHeight = 0.15; // inches
+    const cardWidth = 2.25;
+    const cardHeight = 4.0;
+    let fontSize = 9;
+    let yy = y + 0.35;
+    const lineHeight = 0.125; // inches
     doc.setLineWidth(0.01);
     doc.rect(x, y, cardWidth, cardHeight); // Card border
     // Add Logo (replace with your actual logo image path)
-/*     const logoImg = new Image(); 
+    /*     const logoImg = new Image(); 
     logoImg.src = 'path/to/your/logo.png'; // Replace with your logo path
     doc.addImage(logoImg, 'PNG', x + cardWidth - 0.7, y + 0.1, 0.6, 0.6);  */
-    doc.setFontSize(14); 
-    doc.setFont(undefined, 'bold');
+    doc.setFontSize(14);
+    doc.setFont(undefined, "bold");
     doc.text(`${car.roadName} ${car.roadNumber}`, x + 0.1, y + 0.3);
-    doc.line(x, y + 0.35, x + cardWidth, y + 0.35);
-    doc.setFontSize(12); 
-    doc.setFont(undefined, 'normal'); 
-    let currentY = y + lineHeight + 0.5; // Start content below the top edge
+    doc.line(x, yy, x + cardWidth, yy);
+    doc.setFontSize(9);
+    doc.setFont(undefined, "normal");
+    fontSize = 9;
+    let currentY = y + lineHeight + 0.35; // Start content below the top edge
     this.addText(doc, `Color: ${car.color}`, x + 0.1, currentY, fontSize);
     currentY += lineHeight;
     this.addText(doc, `AAR: ${car.aarCode}`, x + 0.1, currentY, fontSize);
     currentY += lineHeight;
-    this.addText(doc, `Description: ${car.description}`, x + 0.1, currentY, fontSize);
+    this.addText(doc, ` ${car.description}`, x + 0.25, currentY, fontSize);
     currentY += lineHeight;
     this.addText(doc, `Capacity: ${car.capacity}`, x + 0.1, currentY, fontSize);
-    currentY += lineHeight;
-    this.addText(doc, `Builder: ${car.bldr}`, x + 0.1, currentY, fontSize);
-    currentY += lineHeight;
-    this.addText(doc, `Built: ${this.formatDate(car.bltDate)}`, x + 0.1, currentY, fontSize);
     currentY += lineHeight;
     this.addText(doc, `LT Weight: ${car.ltWeight}`, x + 0.1, currentY, fontSize);
     currentY += lineHeight;
     this.addText(doc, `Load Limit: ${car.loadLimit}`, x + 0.1, currentY, fontSize);
     currentY += lineHeight;
-    this.addText(doc, `Last Maint: ${this.formatDate(car.lastMaintDate)}`, x + 0.1, currentY, fontSize);
+    this.addText(doc, `Last Maint: ${this.formatDate(car.lastMaintDate)}`, x + 0.1, currentY, fontSize); 
     currentY += lineHeight;
-    this.addText(doc, `Status: ${car.rsStatus}`, x + 0.1, currentY, fontSize);
-    currentY += lineHeight;   
+    yy += lineHeight*8;
+    doc.line(x, yy, x + cardWidth, yy);
+    currentY += lineHeight;
+    this.addText(doc, `When empty, Return to:`, x + 0.1, currentY, fontSize);
+    currentY += lineHeight;
+    this.addText(doc, `${car.homeLocation}`, x + 0.25, currentY, fontSize);
+    yy = 3.0 + y;
+    doc.line(x, yy, x + cardWidth, yy);
+    this.addText(doc, `Fold Here`, x + 0.75, yy - 0.03, fontSize);
   },
   addText(doc, text, x, y, fontSize) {
     doc.setFontSize(fontSize);
@@ -164,7 +168,7 @@ export default {
       image.src = imagePath;
     });
   },
-  async getBase64StringFromDataURL(imgUrl, {mode = 'no-cors'} = {}) {
+  async getBase64StringFromDataURL(imgUrl, { mode = "no-cors" } = {}) {
     let image = await fetch(imgUrl);
     let blob = await image.blob();
     return new Promise((resolve, reject) => {
@@ -378,22 +382,22 @@ export default {
     doc.text(newTitle, 350, 30);
     if (breakType === "Continuous") {
       // @ts-ignore
-      autoTable(doc,{
+      autoTable(doc, {
         columns: columns,
         body: rsrows,
         styles: { cellPadding: 3, fontSize: 9 },
         columnStyles: {
-          0: { cellWidth: 50 },
+          0: { cellWidth: 45 },
           1: { cellWidth: 50 },
-          2: { cellWidth: 50 },
+          2: { cellWidth: 35 },
           3: { cellWidth: 152 },
           4: { cellWidth: 78 },
           5: { cellWidth: 50 },
-          6: { cellWidth: 50 },
+          6: { cellWidth: 64 },
           7: { cellWidth: 50 },
           8: { cellWidth: 50 },
           9: { cellWidth: 50 },
-          10: { cellWidth: 70 },
+          10: { cellWidth: 64 },
           11: { cellWidth: "auto" },
         },
         theme: "striped",
@@ -423,14 +427,15 @@ export default {
       doc.setFontSize(12);
       for (i = 0; i < uniques.length; i++) {
         headerY = 50;
-        if (breakType !== "Page"){
-        if (i !== 0) {
-          headerY = doc.lastAutoTable.finalY + 15;
+        if (breakType !== "Page") {
+          if (i !== 0) {
+            headerY = doc.lastAutoTable.finalY + 15;
+          }
+          if (headerY + 50 > doc.internal.pageSize.height) {
+            doc.addPage();
+            headerY = 50;
+          }
         }
-        if (headerY + 50 > doc.internal.pageSize.height) {
-          doc.addPage();
-          headerY = 50;
-        }}
         doc.text(uniques[i], 50, headerY);
         for (j = 0; j < rsrows.length; j++) {
           if (
@@ -458,20 +463,20 @@ export default {
         autoTable(doc, {
           columns: columns,
           body: somerows,
-          startY : headerY + 10,
+          startY: headerY + 10,
           styles: { cellPadding: 3, fontSize: 9 },
           columnStyles: {
-            0: { cellWidth: 50 },
+            0: { cellWidth: 45 },
             1: { cellWidth: 50 },
-            2: { cellWidth: 50 },
+            2: { cellWidth: 35 },
             3: { cellWidth: 152 },
             4: { cellWidth: 78 },
             5: { cellWidth: 50 },
-            6: { cellWidth: 50 },
+            6: { cellWidth: 64 },
             7: { cellWidth: 50 },
             8: { cellWidth: 50 },
             9: { cellWidth: 50 },
-            10: { cellWidth: 70 },
+            10: { cellWidth: 64 },
             11: { cellWidth: "auto" },
           },
           theme: "striped",
