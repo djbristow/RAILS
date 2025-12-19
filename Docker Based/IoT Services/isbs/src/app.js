@@ -49,6 +49,6 @@ function handleMqtt(message) {
 }
 
 httpServer.listen(3012, function () {
-     console.log("ISBS v2.0.3, Started")
+     console.log("ISBS v2.0.4, Started")
      console.log("ISBS listening on port 3012")
 });

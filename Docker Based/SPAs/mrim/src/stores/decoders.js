@@ -37,6 +37,7 @@ export const useDecodersStore = defineStore("decoders", {
         decoderLoco.model = this.decoders[i].model;
         decoderLoco.address = this.decoders[i].address;
         decoderLoco.locomotiveID = this.decoders[i].locomotiveID;
+        console.log("decoder loco " + decoderLoco.locomotiveID + "index " + i);
         let loco = rsStore.LOCOMOTIVE_LIST.find(
           (l) => l._id === decoderLoco.locomotiveID
         );

@@ -1,18 +1,14 @@
 const newLocal = require('mongoose');
 var mongoose = newLocal;
 
-const options = {
-	useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
 
 module.exports.connect = function () {
-	mongoose.connect('mongodb://' + process.env.MONGODB_URI + '/rails', options);
+	mongoose.connect('mongodb://' + process.env.MONGODB_URI + '/rails');
 	var db = mongoose.connection;
 	db.on("error", console.error.bind(console, "connection error"));
 	db.once("open", function (callback) {
 		console.log("Connection Succeeded");
-        console.log("RLDS 3.0.6");
+        console.log("RLDS 3.0.7");
 		return db;
 	})
 }
