@@ -8,7 +8,7 @@ module.exports.connect = function () {
 	db.on("error", console.error.bind(console, "connection error"));
 	db.once("open", function (callback) {
 		console.log("Connection Succeeded");
-        console.log("RIDS v3.0.5");
+        console.log("RIDS v3.0.6");
 		return db;
 	})
 }

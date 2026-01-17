@@ -1,11 +1,11 @@
 # ppds
 
-&copy; David Bristow, 2020-2025
+&copy; David Bristow, 2020-2026
 
 **P**lans and **P**urchases **D**ata **S**ervices is an Express Mongoose aplication that connects to a MongoDB database containing inventory collections and provide data services to MPPM component. This application uses port 3007.
 
 ## Version
-v3.0.5 2025-12-18
+v3.0.6 2026-01-17
 
 
 ## License

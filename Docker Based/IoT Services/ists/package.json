@@ -1,6 +1,6 @@
 {
   "name": "ists",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "IoT Subscriber Turnout Services",
   "main": "app.js",
   "scripts": {
@@ -16,6 +16,6 @@
     "cors": "^2.8.5",
     "express": "5.2.1",
     "mqtt": "5.14.1",
-    "socket.io": "4.8.1"
+    "socket.io": "4.8.3"
   }
 }

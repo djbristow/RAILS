@@ -49,6 +49,6 @@ function handleMqtt(message) {
 }
 
 httpServer.listen(3010, function () {
-     console.log("ISTS v2.0.3, started")
+     console.log("ISTS v2.0.4, started")
      console.log("ISTS listening on port 3010")
 });
