@@ -1,6 +1,6 @@
 {
   "name": "ipts",
-  "version": "2.1.18",
+  "version": "2.1.19",
   "description": "IoT Publisher Turnout Services",
   "author": "David Bristow",
   "license": "Apache-2.0",
@@ -9,8 +9,8 @@
     "url": "https://github.com/djbristow/RAILS"
   },
   "dependencies": {
-    "cors": "^2.8.5",
+    "cors": "2.8.6",
     "express": "5.2.1",
-    "mqtt": "5.14.1"
+    "mqtt": "5.15.0"
   }
 }

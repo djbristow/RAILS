@@ -1,6 +1,6 @@
 # Dockerfile for dbristow/mppm (Adjusted for Reverse Proxy)
 # --- Builder Stage ---
-FROM node:24-slim AS builder
+FROM node:25-slim AS builder
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
 COPY package.json /usr/djb/
@@ -14,7 +14,7 @@ ENV VITE_MYPPDS_URI=/api/ppds
 RUN npm run build
 
 # --- Production/Runtime Stage ---
-FROM node:24-slim
+FROM node:25-slim
 RUN npm install -g http-server
 RUN mkdir -p /usr/djb/dist
 WORKDIR /usr/djb/dist

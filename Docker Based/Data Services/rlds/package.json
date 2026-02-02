@@ -1,6 +1,6 @@
 {
   "name": "rlds",
-  "version": "3.0.8",
+  "version": "3.0.9",
   "description": "Railroad Layout Data Services",
   "private": true,
   "author": "DJ Bristow <dave@bristow-family.org>",
@@ -10,8 +10,8 @@
     "url": "https://github.com/djbristow/RAILS"
   },
   "dependencies": {
-    "cors": "2.8.5",
+    "cors": "2.8.6",
     "express": "5.2.1",
-    "mongoose": "9.1.4"
+    "mongoose": "9.1.5"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "isrs",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "IoT Subscriber RFID Services",
   "main": "app.js",
   "author": "David Bristow",
@@ -10,9 +10,9 @@
     "url": "https://github.com/djbristow/RAILS"
   },
   "dependencies": {
-    "cors": "^2.8.5",
+    "cors": "2.8.6",
     "express": "5.2.1",
-    "mqtt": "5.14.1",
+    "mqtt": "5.15.0",
     "socket.io": "4.8.3"
   }
 }

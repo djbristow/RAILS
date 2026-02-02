@@ -1,4 +1,4 @@
-FROM node:24-slim
+FROM node:25-slim
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
 COPY package.json /usr/djb

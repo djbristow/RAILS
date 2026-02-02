@@ -8,7 +8,7 @@ module.exports.connect = function () {
 	db.on("error", console.error.bind(console, "connection error"));
 	db.once("open", function (callback) {
 		console.log("Connection Succeeded");
-        console.log("RLDS 3.0.8");
+        console.log("RLDS 3.0.9");
 		return db;
 	})
 }
