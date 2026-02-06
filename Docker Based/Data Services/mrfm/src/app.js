@@ -17,13 +17,29 @@ const app = express();
 const uri1 = process.env.MYMRIM_URI1;
 const uri2 = process.env.MYMRIM_URI2;
 
-const allowedOrigins = ['http://localhost', 'http://127.0.0.1', 'http://localhost:3001', 'http://127.0.0.1:3001'];
+const allowedOrigins = [
+    'http://localhost',
+    'http://127.0.0.1',
+    'http://localhost:3001',
+    'http://127.0.0.1:3001',
+    process.env.ALLOWED_CONTAINER_ORIGIN // This pulls 'http://myMrim' from compose
+];
 console.log("Allowed origins: ", allowedOrigins);
 const corsOptions = {
   origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+    // 1. Allow calls with no origin (internal server-to-server)
+    if (!origin) return callback(null, true);
+
+    // 2. Check if the origin is in our list
+    const isWhitelisted = allowedOrigins.includes(origin);
+    
+    // 3. Check if it's a Docker internal IP (172.16.x.x to 172.31.x.x)
+    const isDockerNetwork = origin.startsWith('http://172.');
+
+    if (isWhitelisted || isDockerNetwork) {
       callback(null, true);
     } else {
+      console.error(`CORS Rejecting: ${origin}`);
       callback(new Error("Not allowed by CORS"));
     }
   },
@@ -111,6 +127,6 @@ app.use((err, req, res, next) => {
 
 
 app.listen(3030, function () {
-     console.log("MRFM v2.5.2, Started")
+     console.log("MRFM v2.6.0, Started")
      console.log("MRFM listening on port 3030")
 });

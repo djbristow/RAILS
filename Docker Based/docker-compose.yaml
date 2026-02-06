@@ -87,6 +87,7 @@ services:
       # If myMrfm is purely a static file server, these might not be needed.
       - MYMRIM_URI1=http://myMrim:8080 # Use service name for internal Docker network
       - MYMRIM_URI2=http://myMrim:8080 # Use service name for internal Docker network
+      - ALLOWED_CONTAINER_ORIGIN=http://myMrim
     container_name: myMrfm
     volumes:
       - myRailsImages:/usr/djb/src/uploads
