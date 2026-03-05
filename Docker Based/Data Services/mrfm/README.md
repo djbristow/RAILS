@@ -5,7 +5,7 @@
 **M**odel **R**ailroad **F**ile **M**anager is a Hapi application that stores files on the server (POST). The images stored on the server also available for reterival (GET). This application uses port 3030.
 
 ## Version
-v2.6.1 2026-02-28
+v2.6.2 2026-03-05
 
 
 ## License
