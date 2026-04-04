@@ -27,8 +27,8 @@ var client = mqtt.connect('mqtt://' + process.env.MQTT_TCP_URI, { clientId: "mqt
 
 client.on('connect', function() {
      console.log("MQTT Connected");
-     client.subscribe('sensors/rfid');
-     console.log("Subscribed to 'sensors/rfid' topic.");
+     client.subscribe('sensors/rfid/#');
+     console.log("Subscribed to 'sensors/rfid/#' topic.");
 });
 
 client.on('message', function(topic, message) {
@@ -50,6 +50,6 @@ function handleRfid(message){
 }
 
 httpServer.listen(3005, function() {
-      console.log("ISRS v2.0.7, Started");
+      console.log("ISRS v2.1.0, Started");
       console.log("ISRS listening on port 3005");
 });
