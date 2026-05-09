@@ -5,7 +5,7 @@
 **R**ailroad **I**nventory **D**ata **S**ervices is an Express Mongoose aplication that connects to a MongoDB database containing inventory collections and provide data services to RSRM and MRIM components. This application uses port 3000.
 
 ## Version
-v3.0.12 2026-04-04
+v3.0.13 2026-05-08
 
 
 ## License
