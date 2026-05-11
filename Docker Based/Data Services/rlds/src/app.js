@@ -1,6 +1,7 @@
 // This express app provides an API for Vue applications to get and put data
 // to the MongoDB
 const express = require("express");
+const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 
 const app = express();
@@ -19,6 +20,13 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+});
+
+app.use(limiter);
 
 const mongodb_conn_module = require("./mongodbConnModule");
 var db = mongodb_conn_module.connect();
