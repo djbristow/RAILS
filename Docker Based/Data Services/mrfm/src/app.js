@@ -8,6 +8,7 @@ import multer from "multer";
 import fs from "fs";
 import { fileURLToPath } from 'url';
 import path from 'path';
+import rateLimit from "express-rate-limit";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,6 +17,13 @@ const app = express();
 // const PORT = "3030" || process.env.PORT;
 const uri1 = process.env.MYMRIM_URI1;
 const uri2 = process.env.MYMRIM_URI2;
+
+const indexRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 const allowedOrigins = [
     'http://localhost',
@@ -88,7 +96,7 @@ const upload = multer({
   },
 });
 
-app.get("/", function (req, res) {
+app.get("/", indexRateLimiter, function (req, res) {
   res.sendFile("index.html");
 });
 
@@ -127,6 +135,6 @@ app.use((err, req, res, next) => {
 
 
 app.listen(3030, function () {
-     console.log("MRFM v2.6.3, Started")
+     console.log("MRFM v2.7.0, Started")
      console.log("MRFM listening on port 3030")
 });
