@@ -1,6 +1,6 @@
 # Dockerfile for dbristow/rsrm (Adjusted fo)r Reverse Proxy
 # --- Builder Stage ---
-FROM node:25-slim AS builder
+FROM node:26-slim AS builder
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
 COPY package.json /usr/djb/
@@ -16,8 +16,8 @@ ENV VITE_MYISRS_URI=/api/isrs
 RUN npm run build
 
 # --- Production/Runtime Stage ---
-FROM node:25-slim
-RUN npm install -g http-server
+FROM node:26-slim
+RUN npm install -g http-server@14.1.1
 RUN mkdir -p /usr/djb/dist
 WORKDIR /usr/djb/dist
 COPY --from=builder /usr/djb/dist .

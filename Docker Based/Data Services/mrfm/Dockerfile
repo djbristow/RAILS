@@ -1,4 +1,4 @@
-FROM node:25-slim
+FROM node:26-slim
 # Update system packages to reduce vulnerabilities
 RUN apt-get update && apt-get upgrade -y && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN mkdir -p /usr/djb
