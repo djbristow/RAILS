@@ -1,6 +1,6 @@
 <template>
   <div class="xx">
-    <h1>MR Panel</h1>
+    <h1>MR Layout</h1>
     <div v-if="svgContent" class="svg-container">
       <div v-html="svgContent" ref="svgWrapper" class="svg-wrapper"></div>
     </div>
@@ -28,49 +28,43 @@ watch(
     if (!svg) return;
 
     turnoutsStore.turnouts.forEach((turnout) => {
-      // Display CLOSED turnouts routes in white
+      console.log(`Processing turnout:`, turnout);
+      
+      // Try exact match first
+      let turnoutGroup = svg.querySelector(`g[id="${turnout.toID}"]`);
+      
+      // If not found, try searching by ID contains
+      if (!turnoutGroup) {
+        turnoutGroup = svg.querySelector(`g[id*="${turnout.toID}"]`);
+      }
+      
+      console.log(`Found turnout group for toID ${turnout.toID}:`, turnoutGroup);
       if (turnout.state === "CLOSED") {
-        let line = svg.querySelector(`#to${turnout.toID.slice(-2)}c`);
-        if (line) {
-          line.setAttribute("stroke", "white");
-          line.setAttribute("stroke-width", "0.1");
+        for (let i = 1; i <= 2; i++) {
+          let segment = turnoutGroup.querySelector(`[id$='c${i}']`);
+          if (segment) {
+            segment.setAttribute("stroke", "white");
+          }
         }
-        line = svg.querySelector(`#to${turnout.toID.slice(-2)}t1`);
-        if (line) {
-          line.setAttribute("stroke", "gray");
-          line.setAttribute("stroke-width", "0.1");
-        }
-        line = svg.querySelector(`#to${turnout.toID.slice(-2)}t2`);
-        if (line) {
-          line.setAttribute("stroke", "gray");
-          line.setAttribute("stroke-width", "0.1");
-        }
-        line = svg.querySelector(`#to${turnout.toID.slice(-2)}t3`);
-        if (line) {
-          line.setAttribute("stroke", "gray");
-          line.setAttribute("stroke-width", "0.1");
+        for (let i = 1; i <= 3; i++) {
+          let segment = turnoutGroup.querySelector(`[id$='t${i}']`);
+          if (segment) {
+            segment.setAttribute("stroke", "gray");
+          }
         }
       }
       if (turnout.state === "THROWN") {
-        let line = svg.querySelector(`#to${turnout.toID.slice(-2)}c`);
-        if (line) {
-          line.setAttribute("stroke", "gray");
-          line.setAttribute("stroke-width", "0.1");
+        for (let i = 1; i <= 2; i++) {
+          let segment = turnoutGroup.querySelector(`[id$='c${i}']`);
+          if (segment) {
+            segment.setAttribute("stroke", "gray");
+          }
         }
-        line = svg.querySelector(`#to${turnout.toID.slice(-2)}t1`);
-        if (line) {
-          line.setAttribute("stroke", "white");
-          line.setAttribute("stroke-width", "0.1");
-        }
-        line = svg.querySelector(`#to${turnout.toID.slice(-2)}t2`);
-        if (line) {
-          line.setAttribute("stroke", "white");
-          line.setAttribute("stroke-width", "0.1");
-        }
-        line = svg.querySelector(`#to${turnout.toID.slice(-2)}t3`);
-        if (line) {
-          line.setAttribute("stroke", "white");
-          line.setAttribute("stroke-width", "0.1");
+        for (let i = 1; i <= 3; i++) {
+          let segment = turnoutGroup.querySelector(`[id$='t${i}']`);
+          if (segment) {
+            segment.setAttribute("stroke", "white");
+          }
         }
       }
     });
@@ -89,4 +83,14 @@ watch(
     svgContent.value = newVal;
   }
 );
+
+// Load SVG from localStorage on mount
+onMounted(() => {
+  const storedSvg = localStorage.getItem("svgContent");
+  if (storedSvg) {
+    svgContent.value = storedSvg;
+  } else if (svgContentStore.svgContent) {
+    svgContent.value = svgContentStore.svgContent;
+  }
+});
 </script>

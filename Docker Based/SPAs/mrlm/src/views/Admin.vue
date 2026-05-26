@@ -154,7 +154,9 @@ const importSvgFile = (e) => {
   reader.onload = (e) => {
     try {
       const content = e.target.result;
+      localStorage.removeItem("svgContent");
       svgContentStore[SET_SVG_CONTENT](content);
+      localStorage.setItem("svgContent", content);
       svgFile.value = null; // Clear the file input after successful import
     } catch (err) {
       console.error("File processing error:", err);
