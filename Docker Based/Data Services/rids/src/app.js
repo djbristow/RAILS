@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
+app.enable('trust proxy');
 app.use(bodyParser.json());
 app.use(cors({
     origin: [
@@ -182,21 +183,13 @@ app.delete("/struct/:id", async (req, res) => {
   res.send();
 });
 
-// The following CRUD functions handle data in the images collection
 app.get("/imglist", async (req, res) => {
   const images = await Image.find().sort({
     _id: -1,
   });
   res.send(images);
 });
-/* app.get("/img/:id", (req, res) => {
-  Image.findById(req.params.id, function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post);
-  });
-});*/
+
 app.get("/img_file/:id", async (req, res) => {
   const img = await Image.findOne({
     fileName: req.params.id,
@@ -228,21 +221,13 @@ app.delete("/img/:id", async (req, res) => {
   res.send();
 });
 
-// The following CRUD functions handle data in the industries collection
 app.get("/colist", async (req, res) => {
   const industries = await Industry.find().sort({
     shortName: 1,
   });
   res.send(industries);
 });
-/* app.get("/co/:id", (req, res) => {
-  Industry.findById(req.params.id, function (error, post) {
-    if (error) {
-      console.error(error);
-    }
-    res.send(post);
-  });
-}); */
+
 app.get("/co_name/:id", async (req, res) => {
   const co = await Industry.findOne({
     shortName: req.params.id,
@@ -274,7 +259,6 @@ app.delete("/co/:id", async (req, res) => {
   res.send();
 });
 
-// The following CRUD functions handle data in the rollingstocks collection
 app.get("/rslistall", async (req, res) => {
   const rollingstocks = await Rollingstock.find().sort({
     roadName: 1,
@@ -288,56 +272,7 @@ app.get("/rsopslist", async (req, res) => {
     console.log(rollingstocks.length);
   res.send(rollingstocks);
 });
-/*app.get("/rslistroadnames", (req, res) => {
-  Rollingstock.distinct("roadName", function (error, roadnames) {
-    if (error) {
-      console.error(error);
-    }
-    roadnames.sort();
-    res.send({
-      roadnames: roadnames,
-    });
-  });
-});
-app.get("/rslistaarcodes", (req, res) => {
-  Rollingstock.distinct("aarCode", function (error, aarcodes) {
-    if (error) {
-      console.error(error);
-    }
-    aarcodes.sort();
-    res.send({
-      aarcodes: aarcodes,
-    });
-  });
-});
-app.get("/rslistopstatuses", (req, res) => {
-  Rollingstock.distinct("rsStatus", function (error, opstatuses) {
-    if (error) {
-      console.error(error);
-    }
-    opstatuses.sort();
-    res.send({
-      opstatuses: opstatuses,
-    });
-  });
-});
 
-app.get("/rslocomotives", (req, res) => {
-  Rollingstock.find(
-    { $or: [{ aarCode: "DE" }, { aarCode: "SE" }] },
-    function (error, rollingstocks) {
-      if (error) {
-        console.error(error);
-      }
-      res.send({
-        rollingstocks: rollingstocks,
-      });
-    }
-  ).sort({
-    roadName: 1,
-    roadNumber: 1,
-  });
-}); */
 app.get("/resetstatusoperational", async (req, res) => {
   const rollingstocks = await Rollingstock.find({
     rsStatus: { $ne: "Operational" },

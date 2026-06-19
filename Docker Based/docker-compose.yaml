@@ -74,6 +74,8 @@ services:
     container_name: myRids
     networks:
       - myRailsNet
+    environment:
+      - PORT=3000
     depends_on:
       - myMongo
 
@@ -90,7 +92,7 @@ services:
       - ALLOWED_CONTAINER_ORIGIN=http://myMrim
     container_name: myMrfm
     volumes:
-      - myRailsImages:/usr/djb/src/uploads
+      - myRailsImages:/app/src/uploads
     networks:
       - myRailsNet # Add to network so Nginx can find it
 
