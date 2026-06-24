@@ -4,7 +4,7 @@
 
 # Version
 
-* 2.3.3 - 2026-06-18
+* 2.4.0 - 2026-06-24
  
 Docker based components are the partial realization of RAILS software model of an automated system to assist the model railroader achieve realism in the operation of a model railroad. These components are the micro-services that are conatinerized and typically run on a PC (Linux, Mac, or Windows) or Single Board Computer running Linux.
 
@@ -31,6 +31,10 @@ The three groups of docker components are: IoT Services, Data Services, and Sing
 |ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices subscribes to micros and adds or updates micros collection in RAILS||3.0.26|2026-06-18|
 |ISRS|**I**oT **S**ubscriber **R**FID **S**ervices subscribes to RFID tags and pushes them via a web-socket to the RSRM component|3005|2.1.0|2026-05-26|
 |ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component|3010|2.0.6|2026-05-26|
+|COTS|----------------------------------------------------------|
+|MongoDB|It is a document-oriented, operational database. MongoDB stores rich JSON-like documents that map naturally to the objects used in the other microservices.|27017|8.2.11|2026-06-12|
+|NGINX|It is an open-source web server known for its high performance, stability, and low resource consumption used as a reverse proxy.|8080|1.29.0|2025-07-14|
+|eclipse-mosquitto|It is is an open-source message broker that implements the MQTT protocol|1883|2.1.2|2026-04-15|
 
 ## License
 
