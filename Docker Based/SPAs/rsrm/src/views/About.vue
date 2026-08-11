@@ -10,7 +10,7 @@
       read, the road name and number of the rolling stock associated with that
       tag. If there is no association with a peice of rolling stock input fields
       are provided to allow the user to enter the road name and number.<br />
-      The user guide is available <a href="https://github.com/djbristow/RAILS/blob/master/Documentation/rails-RSMS.pdf" target="_blank">here.</a></p>
+      The user guide is available <a href="https://github.com/djbristow/RAILS/blob/master/Documentation/rails-RSRM.pdf" target="_blank">here.</a></p>
     <hr />
     <p>The database has the following number of documents:</p>
       <li>
