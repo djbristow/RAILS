@@ -12,7 +12,7 @@
     <v-navigation-drawer app v-model="drawer">
       <v-list-item>
         <v-list-item-title class="text-h6"> RFID Manager </v-list-item-title>
-        <v-list-item-subtitle> KJ&C RR </v-list-item-subtitle>
+        <v-list-item-subtitle> {{ mrName }} </v-list-item-subtitle>
       </v-list-item>
       <v-list nav dense>
         <v-list-item v-for="(item, i) in items" :key="i" :to="item.to">
@@ -44,6 +44,7 @@ const rsStore = useRSStore();
 const ISRS_BASE_URI = import.meta.env.VITE_MYISRS_URI;
 const ISRS_BASE_URI_DEV = import.meta.env.VITE_MYISRS_URI_DEV;
 const drawer = ref(false);
+const mrName = ref(import.meta.env.DEV ? import.meta.env.VITE_MRNAME_DEV : "");
 const items = ref([
   { title: "Reader", icon: "mdi-smart-card-reader", to: "/reader" },
   { title: "Admin", icon: "mdi-format-list-checks", to: "/admin" },
@@ -82,12 +83,22 @@ const opensocketListener = () => {
     console.error("Socket.IO Connection Error:", error);
   });
 };
-onMounted(() => {
+onMounted(async () => {
   rsStore.GET_RS();
   aarCodesStore.GET_AARCODES();
   microsStore.GET_MICROS();
   opensocketListener();
   setTimeout(() => refreshMicros(), 60000);
+
+  // MRNAME is injected at container runtime (see compose "environment"), not at build time
+  if (!import.meta.env.DEV) {
+    try {
+      const res = await fetch("./config.json");
+      mrName.value = (await res.json()).mrName || "";
+    } catch (e) {
+      mrName.value = "";
+    }
+  }
 });
  const getRs = (message) => {
   //{"et":"1590463450","mcntrlr":"rfidRdr01","reader":"1","rfid":"1C0044CF23"}

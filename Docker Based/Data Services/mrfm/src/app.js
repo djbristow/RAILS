@@ -96,8 +96,9 @@ const upload = multer({
   },
 });
 
-app.get("/", indexRateLimiter, function (req, res) {
-  res.sendFile("index.html");
+app.get("/images/:filename", indexRateLimiter, function (req, res) {
+  const filename = req.params.filename;
+  res.sendFile(filename, { root: "/app/src/uploads" });
 });
 
 app.post("/upload", (req, res, next) => {
@@ -135,6 +136,6 @@ app.use((err, req, res, next) => {
 
 
 app.listen(3030, function () {
-     console.log("MRFM v2.7.6, Started")
+     console.log("MRFM v2.8.0, Started")
      console.log("MRFM listening on port 3030")
 });

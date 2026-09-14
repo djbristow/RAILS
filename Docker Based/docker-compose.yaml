@@ -63,6 +63,8 @@ services:
 
   myMppm:
     image: 'dbristow/mppm'
+    environment:
+      - MRNAME=KJ&C RR
     container_name: myMppm
     networks:
       - myRailsNet # Add to network so Nginx can find it
@@ -98,6 +100,8 @@ services:
 
   myMrim:
     image: 'dbristow/mrim'
+    environment:
+      - MRNAME=KJ&C RR
     container_name: myMrim
     networks:
       - myRailsNet
@@ -144,6 +148,8 @@ services:
 
   myRsrm:
     image: 'dbristow/rsrm'
+    environment:
+      - MRNAME=KJ&C RR
     container_name: myRsrm
     networks:
       - myRailsNet
@@ -187,6 +193,8 @@ services:
 
   myMrlm:
     image: 'dbristow/mrlm'
+    environment:
+      - MRNAME=KJ&C RR
     container_name: myMrlm
     networks:
       - myRailsNet

@@ -9,9 +9,9 @@
     <v-navigation-drawer app v-model="drawer">
       <v-list-item>
         <v-list-item-title class="text-h6">
-          Model Railroad Layout Manager
+          Model Railroad Layout Mgr
         </v-list-item-title>
-        <v-list-item-subtitle> KJ&C RR </v-list-item-subtitle>
+        <v-list-item-subtitle> {{ mrName }} </v-list-item-subtitle>
       </v-list-item>
       <v-list nav dense>
         <v-list-item v-for="(item, i) in items" :key="i" :to="item.to">
@@ -44,6 +44,7 @@ const connStatsStore = useConnStatsStore();
 const ISTS_BASE_URI = import.meta.env.VITE_MYISTS_URI;
 const ISBS_BASE_URI = import.meta.env.VITE_MYISBS_URI;
 const drawer = ref(false);
+const mrName = ref(import.meta.env.DEV ? import.meta.env.VITE_MRNAME_DEV : "");
 const items = [
   { title: "Turnouts", icon: "mdi-electric-switch", to: "/turnouts" },
   { title: "Turnout Panel Lights", icon: "mdi-alarm-panel", to: "/tplights" },
@@ -52,13 +53,23 @@ const items = [
   { title: "Admin", icon: "mdi-format-list-checks", to: "/admin" },
   { title: "About", icon: "mdi-help-box", to: "/" },
 ];
-onMounted(() => {
+onMounted(async () => {
   turnoutsStore.GET_TURNOUTS();
   tplightsStore.GET_TPLIGHTS();
   microsStore.GET_MICROS();
   setTimeout(() => refreshMicros(), 60000);
   opensocketToListener();
   opensocketBtnListener();
+
+     // MRNAME is injected at container runtime (see compose "environment"), not at build time
+  if (!import.meta.env.DEV) {
+    try {
+      const res = await fetch("./config.json");
+      mrName.value = (await res.json()).mrName || "";
+    } catch (e) {
+      mrName.value = "";
+    }
+  }
 });
 const refreshMicros = () => {
   microsStore.GET_MICROS();

@@ -1,7 +1,7 @@
 <template>
   <div class="xx">
     <h1>About Model Railroad Inventory Manager</h1>
-    <h3>Version 5.3.22</h3>
+    <h3>Version 5.4.0</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) MRIM
       Application is one of several single page applications (SPAs) in the RAILS
@@ -12,7 +12,7 @@
       locomotives along with DCC decoders. MRIM provides reports on the various
       elements as well as the ability to export and import CSV files.
     </p>
-    <p>The user guide is available at: tbd</p>
+    <p>The user guide is available <a href="https://github.com/djbristow/RAILS/blob/master/Documentation/rails-MRIM.pdf" target="_blank">here.</a></p>
     <br />
     <hr />
     <p>The database has the following number of documents:</p>

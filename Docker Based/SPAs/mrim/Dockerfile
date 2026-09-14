@@ -13,10 +13,16 @@ ENV VITE_MRFM_URI=/images
 RUN npm run build
 
 # Create a tiny, native Node static server script to replace http-server
+# Serves /config.json dynamically from process.env.MRNAME so it can be set at container runtime (e.g. docker-compose "environment")
 RUN echo "const http = require('http'); \
 const fs = require('fs'); \
 const path = require('path'); \
 const server = http.createServer((req, res) => { \
+  if (req.url === '/config.json') { \
+    res.writeHead(200, { 'Content-Type': 'application/json' }); \
+    res.end(JSON.stringify({ mrName: process.env.MRNAME || '' }), 'utf-8'); \
+    return; \
+  } \
   let filePath = path.join(__dirname, req.url === '/' ? 'index.html' : req.url); \
   fs.readFile(filePath, (err, content) => { \
     if (err) { \

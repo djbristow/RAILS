@@ -70,6 +70,8 @@ services:
 
   myMppm:
     image: 'dbristow/mppm'
+    environment:
+      - MRNAME=KJ&C RR
     container_name: myMppm
     # No direct host port exposure needed if only Nginx accesses it
     # ports:
@@ -104,12 +106,14 @@ services:
     ports:
       - '3030:3030'
     volumes:
-      - myRailsImages:/usr/djb/src/uploads
+      - myRailsImages:/app/src/uploads
     networks:
       - myRailsNet # Add to network so Nginx can find it
 
   myMrim:
     image: 'dbristow/mrim'
+    environment:
+      - MRNAME=KJ&C RR
     container_name: myMrim
     networks:
       - myRailsNet
@@ -163,6 +167,8 @@ services:
 
   myRsrm:
     image: 'dbristow/rsrm'
+    environment:
+      - MRNAME=KJ&C RR
     container_name: myRsrm
     networks:
       - myRailsNet
@@ -217,6 +223,8 @@ services:
 
   myMrlm:
     image: 'dbristow/mrlm'
+    environment:
+      - MRNAME=KJ&C RR
     container_name: myMrlm
     networks:
       - myRailsNet

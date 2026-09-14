@@ -14,7 +14,7 @@
         <v-list-item-title class="text-h6">
           Model Project & Purchase Manager
         </v-list-item-title>
-        <v-list-item-subtitle> KJ&C RR </v-list-item-subtitle>
+        <v-list-item-subtitle> {{ mrName }} </v-list-item-subtitle>
       </v-list-item>
       <v-list nav dense>
         <v-list-item v-for="(item, i) in items" :key="i" :to="item.to">
@@ -41,6 +41,7 @@ const drawer = ref(false);
 const purchasesStore = usePurchasesStore();
 const projectsStore = useProjectsStore();
 const mrcosStore = useMrcosStore();
+const mrName = ref(import.meta.env.DEV ? import.meta.env.VITE_MRNAME_DEV : "");
 const items = [
   { title: "Purchases", icon: "mdi-currency-usd", to: "/purchases" },
   { title: "Grouped Purchases", icon: "mdi-currency-usd", to: "/groupedpurchases"},
@@ -49,10 +50,20 @@ const items = [
   { title: "Admin", icon: "mdi-format-list-checks", to: "/admin" },
   { title: "About", icon: "mdi-help-box", to: "/" },
 ];
-onMounted(() => {
+onMounted(async () => {
   purchasesStore.GET_PURCHASES();
   projectsStore.GET_PROJECTS();
   mrcosStore.GET_MRCOS();
+
+   // MRNAME is injected at container runtime (see compose "environment"), not at build time
+  if (!import.meta.env.DEV) {
+    try {
+      const res = await fetch("./config.json");
+      mrName.value = (await res.json()).mrName || "";
+    } catch (e) {
+      mrName.value = "";
+    }
+  }
 });
 </script>
 <style>

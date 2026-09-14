@@ -18,6 +18,11 @@ RUN echo "const http = require('http'); \
 const fs = require('fs'); \
 const path = require('path'); \
 const server = http.createServer((req, res) => { \
+  if (req.url === '/config.json') { \
+    res.writeHead(200, { 'Content-Type': 'application/json' }); \
+    res.end(JSON.stringify({ mrName: process.env.MRNAME || '' })); \
+    return; \
+  } \
   let filePath = path.join(__dirname, req.url === '/' ? 'index.html' : req.url); \
   fs.readFile(filePath, (err, content) => { \
     if (err) { \
