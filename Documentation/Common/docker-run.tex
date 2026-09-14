@@ -54,6 +54,18 @@ The \gls{rails} \glspl{spa} are implemented as Docker containers that require an
     docker network create myRailsNet
     \end{verbatim}
 \end{enumerate}
+\section{Modify the Model Railroad Name}
+To change the name of the model railroad displayed in the \glspl{spa} from "KJ\&C RR" to a name of choice edit the docker-compose.yaml file.
+Find the text at line \#67 for the \gls{spa} \gls{mppm}:
+    \begin{verbatim}
+- MRNAME=KJ&C RR
+    \end{verbatim}
+Edit the string "KJ\&C RR" to the name of choice. Then repeat for each of the other \glspl{spa} as follows:
+\begin{itemize}
+    \item at line \#104 for the \gls{spa} \gls{mrim}
+    \item at line \#152 for the \gls{spa} \gls{rsrm}
+    \item at line \#197 for the \gls{spa} \gls{mrlm}
+\end{itemize}
 \section{Run the RAILS Docker Containers}
 \label{sec:railsdockercontainers}
 The Docker containers are pulled from Docker Hub and run on the host machine. To run all of the \gls{rails} Docker containers retrieve the \gls{yaml} ``docker-compose.yaml'' file from the \gls{rails} GitHub repository found at \href{https://github.com/djbristow/RAILS/tree/master/Docker%20Based}{my GitHub repository}. Additionally retreive the ``nginx.conf'' file from \gls{rails} GitHub repository. Be sure that both files are put into the ``RAILS'' folder/directory. 
