@@ -53,6 +53,7 @@
             v-model="lastMaintDate"
             label="Last Maintenance"
           ></v-text-field>
+          <v-text-field v-model="numAxles" label="Number of Axles"></v-text-field>
           <v-select
             v-model="rsStatus"
             :items="[
@@ -69,9 +70,12 @@
         <v-card-subtitle>Model Details</v-card-subtitle>
         <v-row dense>
           <v-text-field v-model="rfid" label="RFID Tag"></v-text-field>
+          <v-text-field v-model="rfidLocation" label="RFID Location"></v-text-field>
+          <v-text-field v-model="imageID" label="Image ID"></v-text-field>
+        </v-row>
+        <v-row dense>
           <v-text-field v-model="modelWeight" label="Weight"></v-text-field>
           <v-text-field v-model="modelLength" label="Length"></v-text-field>
-          <v-text-field v-model="imageID" label="Image ID"></v-text-field>
         </v-row>
         <v-row dense>
           <v-textarea v-model="notes" label="Notes"></v-textarea>
@@ -120,6 +124,8 @@ const imageID = ref("");
 const modelWeight = ref("");
 const modelLength = ref("");
 const rfid = ref("");
+const rfidLocation = ref("");
+const numAxles = ref("");
 const rsEditDataInvalid = ref(false);
 const emit = defineEmits(["closeEditRsDialog"]);
 const rsStore = useRSStore();
@@ -164,6 +170,8 @@ const editRsUpdate = () => {
     modelWeight: modelWeight.value,
     modelLength: modelLength.value,
     rfid: rfid.value,
+    rfidLocation: rfidLocation.value,
+    numAxles: numAxles.value,
   });
   emit("closeEditRsDialog");
 };
@@ -205,5 +213,7 @@ onMounted(() => {
   modelWeight.value = props.rollingstock.modelWeight;
   modelLength.value = props.rollingstock.modelLength;
   rfid.value = props.rollingstock.rfid;
+  rfidLocation.value = props.rollingstock.rfidLocation;
+  numAxles.value = props.rollingstock.numAxles;
 });
 </script>

@@ -34,14 +34,19 @@
       </v-row>
       <v-row dense>
         <v-text-field>Last Maintenance: {{ formatDate(rollingstock.lastMaintDate) }}</v-text-field>
+        <v-text-field>Number of Axles: {{ rollingstock.numAxles }}</v-text-field>
+        <v-text-field>Next Maintenance: {{ formatDate(rollingstock.nextMaintDate) }}</v-text-field>
         <v-text-field>Status: {{ rollingstock.rsStatus }}</v-text-field>
       </v-row>
       <v-card-subtitle>Model Details</v-card-subtitle>
       <v-row dense>
         <v-text-field>RFID Tag: {{ rollingstock.rfid }}</v-text-field>
+        <v-text-field>RFID Location: {{ rollingstock.rfidLocation }}</v-text-field>
+        <v-text-field>Image ID: {{ rollingstock.imageID }}</v-text-field>
+      </v-row>
+      <v-row dense>
         <v-text-field>Weight: {{ rollingstock.modelWeight }}</v-text-field>
         <v-text-field>Length: {{ rollingstock.modelLength }}</v-text-field>
-        <v-text-field>Image ID: {{ rollingstock.imageID }}</v-text-field>
       </v-row>
       <v-row dense>
         <v-text-field>Notes: {{ rollingstock.notes}}</v-text-field>

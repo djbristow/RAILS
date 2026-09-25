@@ -259,6 +259,7 @@ app.delete("/co/:id", async (req, res) => {
   res.send();
 });
 
+// rollingstocks collection
 app.get("/rslistall", async (req, res) => {
   const rollingstocks = await Rollingstock.find().sort({
     roadName: 1,
@@ -266,6 +267,7 @@ app.get("/rslistall", async (req, res) => {
   });
   res.send(rollingstocks);
 });
+
 app.get("/rsopslist", async (req, res) => {
   const rollingstocks = await Rollingstock.find(
     {},"roadName roadNumber color aarCode issue duration severity rsStatus");
@@ -283,16 +285,19 @@ app.get("/resetstatusoperational", async (req, res) => {
   }
   res.send();
 });
+
 app.get("/rs/:id", async (req, res) => {
   const rs = await Rollingstock.findById(req.params.id);
   res.send(rs);
 });
+
 app.get("/rs_rfid/:id", async (req, res) => {
   const rs = await Rollingstock.findOne({
     rfid: req.params.id,
   });
   res.send(rs);
 });
+
 app.get("/rs_road/:id", async (req, res) => {
   let rn = req.params.id.split("-");
   const rs = await Rollingstock.findOne({
@@ -301,6 +306,7 @@ app.get("/rs_road/:id", async (req, res) => {
   });
   res.send(rs);
 });
+
 app.post("/add_rs", async (req, res) => {
   await Rollingstock.create({
     roadName: req.body.roadName,
@@ -328,9 +334,12 @@ app.post("/add_rs", async (req, res) => {
     modelWeight: req.body.modelWeight,
     modelLength: req.body.modelLength,
     rfid: req.body.rfid,
+    rfidLocation: req.body.rfidLocation,
+    numAxles: req.body.numAxles,
   });
   res.send();
 });
+
 app.put("/rs/:id", async (req, res) => {
   const rs = await Rollingstock.findById(req.params.id);
   rs.roadName = req.body.roadName;
@@ -358,9 +367,12 @@ app.put("/rs/:id", async (req, res) => {
   rs.modelWeight = req.body.modelWeight;
   rs.modelLength = req.body.modelLength;
   rs.rfid = req.body.rfid;
+  rs.rfidLocation = req.body.rfidLocation;
+  rs.numAxles = req.body.numAxles;
   await rs.save();
   res.send(rs);
 });
+
 app.delete("/rs/:id", async (req, res) => {
   await Rollingstock.deleteOne({
     _id: req.params.id,

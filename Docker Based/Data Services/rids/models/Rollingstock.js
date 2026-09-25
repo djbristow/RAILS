@@ -26,7 +26,7 @@ var RollingstockSchema = new Schema({
         type: String
     },
     numberBlt: {
-        type: String
+        type: Number
     },
     inSvcDate: {
         type: Date
@@ -44,7 +44,7 @@ var RollingstockSchema = new Schema({
         type: String
     },
     capacity: {
-        type: String
+        type: Number
     },
     bldr: {
         type: String
@@ -56,10 +56,10 @@ var RollingstockSchema = new Schema({
         type: String
     },
     ltWeight: {
-        type: String
+        type: Number
     },
     loadLimit: {
-        type: String
+        type: Number
     },
     lastMaintDate: {
         type: Date
@@ -88,13 +88,19 @@ var RollingstockSchema = new Schema({
         type: String
     },
     modelWeight: {
-        type: String
+        type: Number
     },
     modelLength: {
-        type: String
+        type: Number
     },
     rfid: {
         type: String
+    },
+    rfidLocation: {
+        type: Number
+    },
+    numAxles: {
+        type: Number
     }
 });
 

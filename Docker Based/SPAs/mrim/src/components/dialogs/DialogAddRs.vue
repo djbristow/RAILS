@@ -59,6 +59,7 @@
               v-model="lastMaintDate"
               label="Last Maintenance"
             ></v-text-field>
+            <v-text-field v-model="numAxles" label="Number of Axles"></v-text-field>
             <v-select
               v-model="rsStatus"
               :items="['Operational', 'In Service', 'In Maintenance', 'Out of Service']"
@@ -70,9 +71,12 @@
           <v-card-subtitle>Model Details</v-card-subtitle>
           <v-row dense>
             <v-text-field v-model="rfid" label="RFID Tag"></v-text-field>
+            <v-text-field v-model="rfidLocation" label="RFID Location"></v-text-field>
+            <v-text-field v-model="imageID" label="Image ID"></v-text-field>
+          </v-row>
+          <v-row dense>
             <v-text-field v-model="modelWeight" label="Weight"></v-text-field>
             <v-text-field v-model="modelLength" label="Length"></v-text-field>
-            <v-text-field v-model="imageID" label="Image ID"></v-text-field>
           </v-row>
           <v-row dense>
             <v-text-field v-model="notes" label="Notes"></v-text-field>
@@ -100,26 +104,28 @@ const roadNumber = ref("");
 const color = ref("");
 const aarCode = ref("");
 const description = ref("");
-const numberBlt = ref("");
+const numberBlt = ref(0);
 const inSvcDate = ref("");
 const insideLength = ref("");
 const insideHeight = ref("");
 const insideWidth = ref("");
 const loadTypes = ref("");
-const capacity = ref("");
+const capacity = ref(0);
 const bldr = ref("");
 const bltDate = ref("");
 const notes = ref("");
-const ltWeight = ref("");
-const loadLimit = ref("");
+const ltWeight = ref(0);
+const loadLimit = ref(0);
 const lastMaintDate = ref("");
 const locationNow = ref("");
 const homeLocation = ref("");
 const rsStatus = ref("");
 const imageID = ref("");
-const modelWeight = ref("");
-const modelLength = ref("");
+const modelWeight = ref(0);
+const modelLength = ref(0);
 const rfid = ref("");
+const rfidLocation = ref(0);
+const numAxles = ref(4);
 const rsAddDataInvalid = ref(false);
 const rsStore = useRSStore();
 const emit = defineEmits(['closeAddRsDialog']);
@@ -155,6 +161,8 @@ const addRs = () => {
     modelWeight: modelWeight.value,
     modelLength: modelLength.value,
     rfid: rfid.value,
+    rfidLocation: rfidLocation.value,
+    numAxles: numAxles.value,
   });
   emit('closeAddRsDialog');
 };
