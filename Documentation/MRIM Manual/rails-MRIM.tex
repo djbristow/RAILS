@@ -14,11 +14,18 @@
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{listings}
+%%\usepackage{etoolbox}
 \usepackage{glossaries-extra}
 
 \setabbreviationstyle[acronym]{long-short}
 \loadglsentries{../Common/defn}
 \makenoidxglossaries
+
+\usepackage{cleveref}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
 \definecolor{MyBlue}{rgb}{0.03, 0.27, 0.49}
 \chapterfont{\color{MyBlue}}
@@ -43,7 +50,7 @@
     \vspace*{\baselineskip}
 	{\small David Bristow}
 
-	{\small Version 1.0.1}
+	{\small Version 1.0.2}
 	
 	{\small \today}
 	\vspace*{3\baselineskip}
@@ -63,6 +70,7 @@
 \input{ops-structures}
 \input{ops-companies}
 \input{ops-admin}
+\input{table-app}
 %%========================================================================
 \backmatter
 
