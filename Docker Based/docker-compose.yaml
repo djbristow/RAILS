@@ -1,6 +1,6 @@
 # docker-compose.yaml
 # &copy; David Bristow, 2020-2026
-# VERSION 2.0.0
+# VERSION 2.1.0
 # LICENSE
 # The code in this repository is licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,6 +18,12 @@ services:
   # Nginx Reverse Proxy Service
   nginx:
     image: nginx:latest # Use the official Nginx image
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     container_name: myNginxProxy
     ports:
       - '80:80' # Expose Nginx on host port 80 (for HTTP)
@@ -47,6 +53,12 @@ services:
 
   myMongo:
     image: 'mongo'
+    deploy:
+      resources:
+        limits:
+          memory: 200M
+        reservations:
+          memory: 125M
     container_name: myMongo
     networks:
       - myRailsNet
@@ -55,6 +67,12 @@ services:
 
   myPpds:
     image: 'dbristow/ppds'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     container_name: myPpds
     networks:
       - myRailsNet
@@ -63,6 +81,12 @@ services:
 
   myMppm:
     image: 'dbristow/mppm'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     environment:
       - MRNAME=KJ&C RR
     container_name: myMppm
@@ -73,6 +97,12 @@ services:
 
   myRids:
     image: 'dbristow/rids'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     container_name: myRids
     networks:
       - myRailsNet
@@ -83,6 +113,12 @@ services:
 
   myMrfm:
     image: 'dbristow/mrfm'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     # Environment variables for myMrfm's *backend* if it has one.
     # Frontend VITE_ variables are handled at image build time.
     environment:
@@ -100,6 +136,12 @@ services:
 
   myMrim:
     image: 'dbristow/mrim'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     environment:
       - MRNAME=KJ&C RR
     container_name: myMrim
@@ -111,6 +153,12 @@ services:
 
   myMqttBrkr:
     image: 'eclipse-mosquitto'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     container_name: myMqttBrkr
     networks:
       - myRailsNet
@@ -123,6 +171,12 @@ services:
 
   myRlds:
     image: 'dbristow/rlds'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     container_name: myRlds
     networks:
       - myRailsNet
@@ -131,6 +185,12 @@ services:
 
   myIsrs:
     image: 'dbristow/isrs'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     container_name: myIsrs
     networks:
       - myRailsNet
@@ -139,6 +199,12 @@ services:
 
   myIsms:
     image: 'dbristow/isms'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     container_name: myIsms
     networks:
       - myRailsNet
@@ -148,6 +214,12 @@ services:
 
   myRsrm:
     image: 'dbristow/rsrm'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     environment:
       - MRNAME=KJ&C RR
     container_name: myRsrm
@@ -161,6 +233,12 @@ services:
 
   myIsts:
     image: 'dbristow/ists'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     container_name: myIsts
     networks:
       - myRailsNet
@@ -169,6 +247,12 @@ services:
 
   myIsbs:
     image: 'dbristow/isbs'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     container_name: myIsbs
     networks:
       - myRailsNet
@@ -177,6 +261,12 @@ services:
 
   myIpts:
     image: 'dbristow/ipts'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     container_name: myIpts
     networks:
       - myRailsNet
@@ -185,6 +275,12 @@ services:
 
   myIpls:
     image: 'dbristow/ipls'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     container_name: myIpls
     networks:
       - myRailsNet
@@ -193,6 +289,12 @@ services:
 
   myMrlm:
     image: 'dbristow/mrlm'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
     environment:
       - MRNAME=KJ&C RR
     container_name: myMrlm
