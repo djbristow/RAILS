@@ -15,6 +15,8 @@ app.use(cors({
     "http://127.0.0.1",         // For Nginx proxy in production
     "http://localhost:3001",    // For Vite mrim dev server
     "http://127.0.0.1:3001",    // For Vite mrim dev server
+    "http://localhost:3020",    // For Vite mrom dev server
+    "http://127.0.0.1:3020",    // For Vite mrom dev server
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ['Content-Type', 'Authorization'],
