@@ -1,19 +1,33 @@
 <template>
   <v-card width="800">
-    <v-card-title class="headline"> Decoder </v-card-title>
+    <v-card-title class="headline">Decoder</v-card-title>
     <v-card-text>
       <v-container>
-        <v-text-field v-model="roadName" label="Road Name"></v-text-field>
-        <v-text-field v-model="roadNumber" label="Road Number"></v-text-field>
-        <v-text-field v-model="mfg" label="Manufacturer"></v-text-field>
-        <v-text-field v-model="family" label="Family"></v-text-field>
-        <v-text-field v-model="model" label="Model"></v-text-field>
-        <v-text-field v-model="address" label="Address"></v-text-field>
-      </v-container>
+          <v-row compact>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="roadName" label="Road Name" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="roadNumber" label="Road Number" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="mfg" label="Manufacturer" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="family" label="Family" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="model" label="Model" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="address" label="Address" hide-details density="compact" variant="outlined" />
+            </v-col>
+          </v-row>
+        </v-container>
     </v-card-text>
     <v-card-actions>
       <div v-if="noLoco">
-        <v-spacer></v-spacer>
+        <v-spacer />
         <h3 style="color: darkred">Locomotive not in inventory.</h3>
       </div>
       <v-spacer></v-spacer>

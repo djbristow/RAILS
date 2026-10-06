@@ -1,21 +1,34 @@
 <template>
   <v-card width="400">
-    <v-card-title class="headline"> New Image </v-card-title>
+    <v-card-title class="headline">New Image</v-card-title>
     <v-card-text>
       <v-container>
-        <v-text-field v-model="title" label="Title"></v-text-field>
-        <v-file-input
-          v-model="fileName"
-          accept="txt"
-          label="File input"
-          @change="onFileChange"
-        ></v-file-input>
-        <v-text-field v-model="category" label="Category"></v-text-field>
-        <v-textarea v-model="notes" label="Notes"></v-textarea>
+        <v-row compact>
+          <v-col cols="12">
+            <v-text-field v-model="title" label="Title" hide-details density="compact" variant="outlined" />
+          </v-col>
+          <v-col cols="12">
+            <v-file-input
+              v-model="fileName"
+              accept="txt"
+              label="File input"
+              @change="onFileChange"
+              hide-details
+              density="compact"
+              variant="outlined"
+            />
+          </v-col>
+          <v-col cols="12">
+            <v-text-field v-model="category" label="Category" hide-details density="compact" variant="outlined" />
+          </v-col>
+          <v-col cols="12">
+            <v-textarea v-model="notes" label="Notes" hide-details density="compact" variant="outlined" />
+          </v-col>
+        </v-row>
       </v-container>
     </v-card-text>
     <v-card-actions>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-btn @click="$emit('closeAddImageDialog')" color="red darken-1" text>
         Cancel
       </v-btn>

@@ -1,90 +1,102 @@
 <template>
     <v-card width="700">
-      <v-card-title class="headline"> New Rollingstock </v-card-title>
-      <v-card-text
-        ><v-container>
-          <v-row dense>
-            <v-text-field v-model="roadName" label="Road Name"></v-text-field>
-            <v-text-field
-              v-model="roadNumber"
-              label="Road Number"
-            ></v-text-field>
-            <v-text-field v-model="aarCode" label="AAR Code"></v-text-field>
-            <v-text-field v-model="color" label="Color"></v-text-field>
-          </v-row>
-          <v-row dense>
-            <v-text-field
-              v-model="description"
-              label="Description"
-            ></v-text-field>
-          </v-row>
-          <v-row dense>
-            <v-text-field
-              v-model="numberBlt"
-              label="Number Built"
-            ></v-text-field>
-            <v-text-field v-model="bldr" label="Builder"></v-text-field>
-            <v-text-field v-model="bltDate" label="Built Date"></v-text-field>
-            <v-text-field
-              v-model="inSvcDate"
-              label="In Service Date"
-            ></v-text-field>
-          </v-row>
-          <v-row dense>
-            <v-text-field
-              v-model="insideLength"
-              label="Inside Length"
-            ></v-text-field>
-            <v-text-field
-              v-model="insideHeight"
-              label="Inside Height"
-            ></v-text-field>
-            <v-text-field
-              v-model="insideWidth"
-              label="Inside Width"
-            ></v-text-field>
-            <v-text-field v-model="ltWeight" label="Lt Weight"></v-text-field>
-          </v-row>
-          <v-row dense>
-            <v-text-field v-model="loadLimit" label="Load Limit"></v-text-field>
-            <v-text-field v-model="loadTypes" label="Load Types"></v-text-field>
-            <v-text-field v-model="capacity" label="Capacity"></v-text-field>
-            <v-text-field
-              v-model="homeLocation"
-              label="Home Location"
-            ></v-text-field>
-          </v-row>
-          <v-row dense>
-            <v-text-field
-              v-model="lastMaintDate"
-              label="Last Maintenance"
-            ></v-text-field>
-            <v-text-field v-model="numAxles" label="Number of Axles"></v-text-field>
-            <v-select
-              v-model="rsStatus"
-              :items="['Operational', 'In Service', 'In Maintenance', 'Out of Service']"
-              label="Status"
-              dense
-              outlined
-            ></v-select>
-          </v-row>
-          <v-card-subtitle>Model Details</v-card-subtitle>
-          <v-row dense>
-            <v-text-field v-model="rfid" label="RFID Tag"></v-text-field>
-            <v-text-field v-model="rfidLocation" label="RFID Location"></v-text-field>
-            <v-text-field v-model="imageID" label="Image ID"></v-text-field>
-          </v-row>
-          <v-row dense>
-            <v-text-field v-model="modelWeight" label="Weight"></v-text-field>
-            <v-text-field v-model="modelLength" label="Length"></v-text-field>
-          </v-row>
-          <v-row dense>
-            <v-text-field v-model="notes" label="Notes"></v-text-field>
+      <v-card-title class="headline">New Rollingstock</v-card-title>
+      <v-card-text>
+        <v-container>
+          <v-row compact>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="roadName" label="Road Name" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="roadNumber" label="Road Number" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="aarCode" label="AAR Code" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="color" label="Color" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="description" label="Description" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="numberBlt" label="Number Built" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="bldr" label="Builder" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="bltDate" label="Built Date" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="inSvcDate" label="In Service Date" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="insideLength" label="Inside Length" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="insideHeight" label="Inside Height" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="insideWidth" label="Inside Width" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="ltWeight" label="Lt Weight" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="loadLimit" label="Load Limit" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="loadTypes" label="Load Types" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="capacity" label="Capacity" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="homeLocation" label="Home Location" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="lastMaintDate" label="Last Maintenance" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="numAxles" label="Number of Axles" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-select
+                v-model="rsStatus"
+                :items="['Operational', 'In Service', 'In Maintenance', 'Out of Service']"
+                label="Status"
+                hide-details
+                density="compact"
+                variant="outlined"
+              />
+            </v-col>
+            <v-col cols="12">
+              <v-card-subtitle>Model Details</v-card-subtitle>
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="rfid" label="RFID Tag" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="rfidLocation" label="RFID Location" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="imageID" label="Image ID" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="modelWeight" label="Weight" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field v-model="modelLength" label="Length" hide-details density="compact" variant="outlined" />
+            </v-col>
+            <v-col cols="12">
+              <v-textarea v-model="notes" label="Notes" hide-details density="compact" variant="outlined" />
+            </v-col>
           </v-row>
         </v-container>
       </v-card-text>
       <v-card-actions>
-        <v-spacer></v-spacer>
+        <v-spacer />
         <v-btn @click="$emit('closeAddRsDialog')" color="red darken-1" text>
           Cancel
         </v-btn>

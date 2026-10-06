@@ -1,16 +1,26 @@
 <template>
   <v-card width="800">
-    <v-card-title class="headline"> AAR Code </v-card-title>
+    <v-card-title class="headline">Image Details</v-card-title>
     <v-card-text>
       <v-container>
-        <v-text-field v-model="title" label="Title"></v-text-field>
-        <v-text-field v-model="fileName" label="File Name"></v-text-field>
-        <v-text-field v-model="category" label="Category"></v-text-field>
-        <v-textarea v-model="notes" label="Notes"></v-textarea>
+        <v-row compact>
+          <v-col cols="12" sm="6" md="4">
+            <v-text-field v-model="title" label="Title" hide-details density="compact" variant="outlined" />
+          </v-col>
+          <v-col cols="12" sm="6" md="4">
+            <v-text-field v-model="fileName" label="File Name" hide-details density="compact" variant="outlined" />
+          </v-col>
+          <v-col cols="12" sm="6" md="4">
+            <v-text-field v-model="category" label="Category" hide-details density="compact" variant="outlined" />
+          </v-col>
+          <v-col cols="12">
+            <v-textarea v-model="notes" label="Notes" hide-details density="compact" variant="outlined" />
+          </v-col>
+        </v-row>
       </v-container>
     </v-card-text>
     <v-card-actions>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-btn @click="$emit('closeEditImageDialog')" color="red darken-1" text>
         Cancel
       </v-btn>
