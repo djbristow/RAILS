@@ -1,5 +1,5 @@
 # --- Builder Stage ---
-FROM node:26-slim AS builder
+FROM node:24.11.0-bookworm-slim AS builder
 RUN mkdir -p /usr/djb
 WORKDIR /usr/djb
 COPY package.json /usr/djb/
@@ -7,20 +7,22 @@ RUN npm install
 COPY . /usr/djb
 
 # Set VITE_ variables to relative paths for the frontend build
-ENV VITE_MYRIDS_URI=/api/rids 
-ENV VITE_MYRLDS_URI=/api/rlds
+ENV VITE_MYRIDS_URI=/api/rids
+ENV VITE_MRFM_URI=/images
 ENV VITE_MYISRS_URI=/api/isrs
+ENV VITE_MYRLDS_URI=/api/rlds
 
 RUN npm run build
 
 # Create a tiny, native Node static server script to replace http-server
+# Serves /config.json dynamically from process.env.MRNAME so it can be set at container runtime (e.g. docker-compose "environment")
 RUN echo "const http = require('http'); \
 const fs = require('fs'); \
 const path = require('path'); \
 const server = http.createServer((req, res) => { \
   if (req.url === '/config.json') { \
     res.writeHead(200, { 'Content-Type': 'application/json' }); \
-    res.end(JSON.stringify({ mrName: process.env.MRNAME || '' })); \
+    res.end(JSON.stringify({ mrName: process.env.MRNAME || '' }), 'utf-8'); \
     return; \
   } \
   let filePath = path.join(__dirname, req.url === '/' ? 'index.html' : req.url); \
@@ -37,6 +39,9 @@ const server = http.createServer((req, res) => { \
       if (ext === '.css') contentType = 'text/css'; \
       if (ext === '.json') contentType = 'application/json'; \
       if (ext === '.png') contentType = 'image/png'; \
+      if (ext === '.jpg' || ext === '.jpeg') { contentType = 'image/jpeg'; isBinary = true; }; \
+      if (ext === '.gif') { contentType = 'image/gif'; isBinary = true; }; \
+      if (ext === '.svg') contentType = 'image/svg+xml'; \
       res.writeHead(200, { 'Content-Type': contentType }); \
       res.end(content, 'utf-8'); \
     } \
@@ -44,18 +49,9 @@ const server = http.createServer((req, res) => { \
 }); \
 server.listen(8080, () => console.log('Distroless static server running on port 8080...'));" > /usr/djb/dist/server.js
 
-
 # --- Production/Runtime Stage ---
-# Using Google's minimal Node.js distroless image (Debian 12 based)
 FROM gcr.io/distroless/nodejs20-debian12
-
-# Set the working directory inside the distroless container
 WORKDIR /app
-
-# Copy the built frontend distribution and our minimal server script from the builder stage
 COPY --from=builder /usr/djb/dist /app
-
 EXPOSE 8080
-
-# Run the native node server directly (no shell or npm required)
 CMD [ "server.js" ]

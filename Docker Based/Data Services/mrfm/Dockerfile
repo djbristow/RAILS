@@ -1,5 +1,5 @@
 # --- Builder Stage ---
-FROM node:26-slim AS builder
+FROM node:24.11.0-bookworm-slim AS builder
 RUN mkdir -p /usr/djb/src/uploads
 WORKDIR /usr/djb
 

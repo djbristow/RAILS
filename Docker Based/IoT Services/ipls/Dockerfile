@@ -1,7 +1,7 @@
 # ==========================================
 # Stage 1: Build & Dependency Installation
 # ==========================================
-FROM node:26-slim AS build
+FROM node:24.11.0-bookworm-slim AS builder
 
 # Set the working directory for dependency compilation
 WORKDIR /app
@@ -18,18 +18,17 @@ COPY . .
 # ==========================================
 # Stage 2: Distroless Secure Runtime
 # ==========================================
-# UPDATED: Changed from debian12 to debian13 to match Node 26 availability
-FROM gcr.io/distroless/nodejs26-debian13
+FROM gcr.io/distroless/nodejs24-debian12
 
 # Set the working execution directory inside the distroless container
 WORKDIR /app
 
 # Copy the pruned production dependencies from the build stage
-COPY --from=build /app/node_modules ./node_modules
+COPY --from=builder /app/node_modules ./node_modules
 
 # Copy the application source code from the build stage
-COPY --from=build /app/src ./src
-COPY --from=build /app/package.json ./package.json
+COPY --from=builder /app/src ./src
+COPY --from=builder /app/package.json ./package.json
 
 # Establish your IoT environmental defaults
 ENV MQTT_TCP_URI=myMqttBrkr:1883
@@ -39,4 +38,4 @@ ENV NODE_ENV=production
 EXPOSE 3013
 
 # Distroless has no shell, so specify the entrypoint array directly
-CMD ["./src/app.js"]
+CMD ["src/app.js"]

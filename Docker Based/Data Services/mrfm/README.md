@@ -5,7 +5,7 @@
 **M**odel **R**ailroad **F**ile **M**anager is an Express application that stores files on the server (POST). The images stored on the server are also available for retrieval (GET). This application uses port 3030.
 
 ## Version
-v2.8.0 2026-09-12
+v2.8.1 2026-10-09
 
 
 ## License

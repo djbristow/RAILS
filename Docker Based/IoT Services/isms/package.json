@@ -1,6 +1,6 @@
 {
   "name": "isms",
-  "version": "3.0.29",
+  "version": "3.0.30",
   "description": "IoT Subscriber Micro Controller Services",
   "main": "app.js",
   "author": "David Bristow",
@@ -12,6 +12,6 @@
   "dependencies": {
     "axios": "1.20.0",
     "cors": "2.8.6",
-    "mqtt": "5.15.2"
+    "mqtt": "5.16.0"
   }
 }

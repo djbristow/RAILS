@@ -5,7 +5,7 @@
 **P**lans and **P**urchases **D**ata **S**ervices is an Express Mongoose aplication that connects to a MongoDB database containing inventory collections and provide data services to MPPM component. This application uses port 3007.
 
 ## Version
-v3.0.21 2026-09-08
+v3.0.22 2026-10-09
 
 
 ## License

@@ -1,7 +1,7 @@
 # ==========================================
 # Stage 1: Build & Dependency Installation
 # ==========================================
-FROM node:26-slim AS build
+FROM node:24.11.0-bookworm-slim AS builder
 
 # Set the working directory for dependency compilation
 WORKDIR /app
@@ -24,11 +24,11 @@ FROM gcr.io/distroless/nodejs26-debian13
 WORKDIR /app
 
 # Copy the pruned production dependencies from the build stage
-COPY --from=build /app/node_modules ./node_modules
+COPY --from=builder /app/node_modules ./node_modules
 
 # Copy the application source code from the build stage
-COPY --from=build /app/src ./src
-COPY --from=build /app/package.json ./package.json
+COPY --from=builder /app/src ./src
+COPY --from=builder /app/package.json ./package.json
 
 # Establish your IoT environmental defaults
 ENV RSRM_TCP_URI=localhost:3002
