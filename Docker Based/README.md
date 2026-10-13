@@ -4,7 +4,7 @@
 
 # Version
 
-* 2.4.8 - 2026-10-06
+* 2.5.0- 2026-10-13
  
 Docker based components are the partial realization of RAILS software model of an automated system to assist the model railroader achieve realism in the operation of a model railroad. These components are the micro-services that are conatinerized and typically run on a PC (Linux, Mac, or Windows) or Single Board Computer running Linux.
 
@@ -24,6 +24,7 @@ The three groups of docker components are: IoT Services, Data Services, Single P
 |PPDS|**P**lans and **P**urchases **D**ata **S**ervices  provides REST access to model railroad projects and purchases documents|3007|3.0.22|2026-10-09|
 |RIDS|**R**ailroad **I**nventory **D**ata **S**ervices provides REST access to railroad inventory documents|3000|3.2.1|2026-10-09|
 |RLDS|**R**ailroad **L**ayout **D**ata **S**ervices provides REST access to model railroad projects and purchases documents|3006|3.1.9|2026-10-09|
+|RODS|**R**ailroad **O**perations **D**ata **S**ervices provides REST access to railroad operations documents|3040|1.0.0|2026-10-13|
 |IoT Services|----------------------------------------------------------|
 |IPLS|**I**oT **P**ublisher Turnout Panel **L**ight **S**ervices publishes light commands to a Turnout Panel Controller|3013|1.1.22|2026-10-09|
 |IPTS|**I**oT **P**ublisher **T**urnout **S**ervices publishes turnout commands to a Turnout Controller|3011|2.1.22|2026-10-09|
