@@ -16,12 +16,13 @@ RUN echo "const http = require('http'); \
 const fs = require('fs'); \
 const path = require('path'); \
 const server = http.createServer((req, res) => { \
-  if (req.url === '/config.json') { \
+  if (req.url.split('?')[0] === '/config.json') { \
     res.writeHead(200, { 'Content-Type': 'application/json' }); \
     res.end(JSON.stringify({ mrName: process.env.MRNAME || '' })); \
     return; \
   } \
-  let filePath = path.join(__dirname, req.url === '/' ? 'index.html' : req.url); \
+  let urlPath = decodeURIComponent(req.url.split('?')[0]); \
+  let filePath = path.join(__dirname, urlPath === '/' ? 'index.html' : urlPath); \
   fs.readFile(filePath, (err, content) => { \
     if (err) { \
       fs.readFile(path.join(__dirname, 'index.html'), (e, index) => { \
