@@ -1,6 +1,6 @@
 # docker-compose.yaml
 # &copy; David Bristow, 2020-2026
-# VERSION 2.1.0
+# VERSION 2.2.0
 # LICENSE
 # The code in this repository is licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,6 +50,8 @@ services:
       - myIpts
       - myIpls
       - myMrlm
+      - myRods
+      - myMrom
 
   myMongo:
     image: 'mongo'
@@ -108,6 +110,22 @@ services:
       - myRailsNet
     environment:
       - PORT=3000
+    depends_on:
+      - myMongo
+
+  myRods:
+    image: 'dbristow/rods'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
+    container_name: myRods
+    networks:
+      - myRailsNet
+    environment:
+      - PORT=3040
     depends_on:
       - myMongo
 
@@ -306,6 +324,24 @@ services:
       - myIsbs
       - myIpts
       - myIpls
+
+  myMrom:
+    image: 'dbristow/mrom'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
+    environment:
+      - MRNAME=KJ&C RR
+    container_name: myMrom
+    networks:
+      - myRailsNet
+    depends_on:
+      - myRods
+      - myRids
+      - myIsrs
 
 networks:
   myRailsNet:

@@ -1,0 +1,61 @@
+# --- Builder Stage ---
+FROM node:24.11.0-bookworm-slim AS builder
+RUN mkdir -p /usr/djb
+WORKDIR /usr/djb
+COPY package.json /usr/djb/
+RUN npm install
+COPY . /usr/djb
+
+# Set VITE_ variables to relative paths for the frontend build
+ENV VITE_MYRIDS_URI=/api/rids
+ENV VITE_MYRODS_URI=/api/rods
+ENV VITE_MYISRS_URI=/api/isrs
+
+RUN npm run build
+
+# Create a tiny, native Node static server script to replace http-server
+# Serves /config.json dynamically from process.env.MRNAME so it can be set at container runtime (e.g. docker-compose "environment")
+RUN echo "const http = require('http'); \
+const fs = require('fs'); \
+const path = require('path'); \
+const server = http.createServer((req, res) => { \
+  if (req.url.split('?')[0] === '/config.json') { \
+    res.writeHead(200, { 'Content-Type': 'application/json' }); \
+    res.end(JSON.stringify({ mrName: process.env.MRNAME || '' }), 'utf-8'); \
+    return; \
+  } \
+  let urlPath = decodeURIComponent(req.url.split('?')[0]); \
+  let filePath = path.join(__dirname, urlPath === '/' ? 'index.html' : urlPath); \
+  fs.readFile(filePath, (err, content) => { \
+    if (err) { \
+      fs.readFile(path.join(__dirname, 'index.html'), (e, index) => { \
+        res.writeHead(200, { 'Content-Type': 'text/html' }); \
+        res.end(index, 'utf-8'); \
+      }); \
+    } else { \
+      let ext = path.extname(filePath); \
+      let contentType = 'text/html'; \
+      if (ext === '.js') contentType = 'text/javascript'; \
+      if (ext === '.css') contentType = 'text/css'; \
+      if (ext === '.json') contentType = 'application/json'; \
+      if (ext === '.png') contentType = 'image/png'; \
+      if (ext === '.jpg' || ext === '.jpeg') { contentType = 'image/jpeg'; isBinary = true; }; \
+      if (ext === '.gif') { contentType = 'image/gif'; isBinary = true; }; \
+      if (ext === '.svg') contentType = 'image/svg+xml'; \
+      if (ext === '.woff2') contentType = 'font/woff2'; \
+      if (ext === '.woff') contentType = 'font/woff'; \
+      if (ext === '.ttf') contentType = 'font/ttf'; \
+      if (ext === '.eot') contentType = 'application/vnd.ms-fontobject'; \
+      res.writeHead(200, { 'Content-Type': contentType }); \
+      res.end(content, 'utf-8'); \
+    } \
+  }); \
+}); \
+server.listen(8080, () => console.log('Distroless static server running on port 8080...'));" > /usr/djb/dist/server.js
+
+# --- Production/Runtime Stage ---
+FROM gcr.io/distroless/nodejs20-debian12
+WORKDIR /app
+COPY --from=builder /usr/djb/dist /app
+EXPOSE 8080
+CMD [ "server.js" ]
