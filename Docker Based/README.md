@@ -19,6 +19,7 @@ The three groups of docker components are: IoT Services, Data Services, Single P
 |MRIM|**M**odel **R**ailroad **I**nventory **M**anager allows a user to enter information about their inventoried items|3001|5.6.1|2026-10-09|
 |MRLM|**M**odel **R**ailroad **L**ayout **M**anager allows a user to enter information about their layout and control elements of it|3004|4.2.1|2026-10-09|
 |RSRM|**R**olling**s**tock **R**FID **M**anager allows a user to match a RFID value to a rolling stock road name and number|3002|6.1.1|2026-10-09|
+|MROM|**M**odel **R**ailroad **O**perations **M**anager allows a user to manage operations of a model railroad|3020|1.0.0|2026-10-10|
 |Data Services|----------------------------------------------------------|
 |MRFM|**M**odel **R**ailroad **F**ile **M**anager  allows the user to upload image files for the use by the MRIM component|3030|2.8.1|2026-10-09|
 |PPDS|**P**lans and **P**urchases **D**ata **S**ervices  provides REST access to model railroad projects and purchases documents|3007|3.0.22|2026-10-09|
