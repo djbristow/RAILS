@@ -8,7 +8,7 @@ module.exports.connect = function () {
 	db.on("error", console.error.bind(console, "connection error"));
 	db.once("open", function (callback) {
 		console.log("Connection Succeeded");
-        console.log("RODS v1.0.0");
+        console.log("RODS v1.1.0");
 		return db;
 	})
 }

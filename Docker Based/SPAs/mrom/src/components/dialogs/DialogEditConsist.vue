@@ -16,6 +16,14 @@
         density="compact"
         variant="outlined"
       />
+      <v-select
+        v-model="type"
+        :items="consistTypes"
+        label="Type"
+        :rules="[(v) => !!v || 'Type is required']"
+        density="compact"
+        variant="outlined"
+      />
       <v-textarea
         v-model="notes"
         label="Notes"
@@ -33,7 +41,7 @@
       <v-btn
         color="primary"
         :loading="saving"
-        :disabled="!name.trim() || !leadIsLoco"
+        :disabled="!name.trim() || !type || !leadIsLoco"
         @click="save"
       >
         Save
@@ -58,6 +66,8 @@ const consistsStore = useConsistsStore();
 const rsStore = useRSStore();
 const name = ref(props.consist?.name ?? "");
 const trainNumber = ref(props.consist?.trainNumber ?? "");
+const consistTypes = ["Freight", "Block", "Mixed", "Intermodal", "Local", "Passenger", "Express", "Special", "Work"];
+const type = ref(props.consist?.type ?? "");
 const notes = ref(props.consist?.notes ?? "");
 const cars = ref(
   (props.consist?.cars ?? []).map((c) => ({
@@ -77,6 +87,7 @@ const save = async () => {
       _id: props.consist._id,
       name: name.value.trim(),
       trainNumber: trainNumber.value.trim(),
+      type: type.value,
       notes: notes.value,
       cars: cars.value,
     });

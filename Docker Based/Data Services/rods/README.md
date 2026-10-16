@@ -1,11 +1,11 @@
-# rids
+# rods
 
 &copy; David Bristow, 2019-2026
 
 **R**ailroad **O**perations **D**ata **S**ervices is an Express Mongoose aplication that connects to a MongoDB database containing operations collections and provide data services to MROM component. This application uses port 3040.
 
 ## Version
-v1.0.0 2026-10-13
+v1.1.0 2026-10-16
 
 
 ## License

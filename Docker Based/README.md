@@ -4,13 +4,13 @@
 
 # Version
 
-* 2.5.0- 2026-10-13
+* 2.5.1- 2026-10-16
  
 Docker based components are the partial realization of RAILS software model of an automated system to assist the model railroader achieve realism in the operation of a model railroad. These components are the micro-services that are conatinerized and typically run on a PC (Linux, Mac, or Windows) or Single Board Computer running Linux.
 
 The three groups of docker components are: IoT Services, Data Services, Single Page Applications(SPAs), and Commercial off-the-shelf(COTS) as defined in the table below. All the Docker based components are highlighted with the rose colored background in the following figure.
 
-![System Design](https://github.com/djbristow/RAILS/blob/master/Docker%20Based/docker-based-ms.svg)
+![System Design](https://github.com/djbristow/RAILS/blob/master/Docker%20Based/micro-services-arch.png)
 
 |Name |Title                                  |Port |Version|Date     |
 |-----|----------------------------------------------------------|-----|-------|---------|
@@ -19,13 +19,13 @@ The three groups of docker components are: IoT Services, Data Services, Single P
 |MRIM|**M**odel **R**ailroad **I**nventory **M**anager allows a user to enter information about their inventoried items|3001|5.6.1|2026-10-09|
 |MRLM|**M**odel **R**ailroad **L**ayout **M**anager allows a user to enter information about their layout and control elements of it|3004|4.2.1|2026-10-09|
 |RSRM|**R**olling**s**tock **R**FID **M**anager allows a user to match a RFID value to a rolling stock road name and number|3002|6.1.1|2026-10-09|
-|MROM|**M**odel **R**ailroad **O**perations **M**anager allows a user to manage operations of a model railroad|3020|1.0.0|2026-10-10|
+|MROM|**M**odel **R**ailroad **O**perations **M**anager allows a user to manage operations of a model railroad|3020|1.1.0|2026-10-16|
 |Data Services|----------------------------------------------------------|
 |MRFM|**M**odel **R**ailroad **F**ile **M**anager  allows the user to upload image files for the use by the MRIM component|3030|2.8.1|2026-10-09|
 |PPDS|**P**lans and **P**urchases **D**ata **S**ervices  provides REST access to model railroad projects and purchases documents|3007|3.0.22|2026-10-09|
 |RIDS|**R**ailroad **I**nventory **D**ata **S**ervices provides REST access to railroad inventory documents|3000|3.2.1|2026-10-09|
 |RLDS|**R**ailroad **L**ayout **D**ata **S**ervices provides REST access to model railroad projects and purchases documents|3006|3.1.9|2026-10-09|
-|RODS|**R**ailroad **O**perations **D**ata **S**ervices provides REST access to railroad operations documents|3040|1.0.0|2026-10-13|
+|RODS|**R**ailroad **O**perations **D**ata **S**ervices provides REST access to railroad operations documents|3040|1.1.0|2026-10-16|
 |IoT Services|----------------------------------------------------------|
 |IPLS|**I**oT **P**ublisher Turnout Panel **L**ight **S**ervices publishes light commands to a Turnout Panel Controller|3013|1.1.22|2026-10-09|
 |IPTS|**I**oT **P**ublisher **T**urnout **S**ervices publishes turnout commands to a Turnout Controller|3011|2.1.22|2026-10-09|

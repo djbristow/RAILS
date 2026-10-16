@@ -1,18 +1,16 @@
 <template>
   <div class="xx">
     <h1>About Model Railroad Operations Manager</h1>
-    <h3>Version 1.0.0</h3>
+    <h3>Version 1.1.0</h3>
     <p>
-      The Railway Administration and Information Logical System (RAILS) MRIM
+      The Railway Administration and Information Logical System (RAILS) MROM
       Application is one of several single page applications (SPAs) in the RAILS
       family of applications. It uses MongoDB, Vue 3, Vuetify and Node to
-      construct the SPA. MRIM provides a user with a web SPA to show inventories
-      of modeled railroad elements, such as rolling stock, AAR codes,
-      structures, images, and companies. Rolling stock has a sub collections of
-      locomotives along with DCC decoders. MRIM provides reports on the various
-      elements as well as the ability to export and import CSV files.
+      construct the SPA. MROM provides a user with a web SPA to assist in the management
+      of modeled railroad operations, such as consists, AAR codes,
+      structures, images, and companies.
     </p>
-    <p>The user guide is available <a href="https://github.com/djbristow/RAILS/blob/master/Documentation/rails-MRIM.pdf" target="_blank">here.</a></p>
+    <p>The user guide is available TBD</p>
     <br />
     <hr />
     <p>The database has the following number of documents:</p>

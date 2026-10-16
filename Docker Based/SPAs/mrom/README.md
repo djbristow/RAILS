@@ -3,9 +3,9 @@
 &copy; David Bristow, 2020-2026
 
 ## Version
-v1.0.0 2026-10-10
+v1.1.0 2026-10-16
 
-**M**odel **R**ailroad **O**perations **M**anager is a MEVN application that provides a user with a web application to manage operations of a model railroad. This web application uses port 3020.
+**M**odel **R**ailroad **O**perations **M**anager (MROM) is a MEVN application that provides a user with a web application to manage operations of a model railroad. This web application uses port 3020.
 
 ## License
 

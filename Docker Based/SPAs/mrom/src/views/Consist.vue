@@ -48,6 +48,7 @@ const editableConsist = ref(null);
 const headers = [
     { title: "Consist", key: "name" },
     { title: "Train Number", key: "trainNumber" },
+    { title: "Type", key: "type" },
     { title: "Cars", key: "carCount" },
     { title: "Notes", key: "notes" },
     { title: "Actions", key: "actions" },

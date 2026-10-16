@@ -27,6 +27,11 @@ const ConsistSchema = new mongoose.Schema({
     trim: true
   },
   notes: String,
+  type: {
+    type: String,
+    enum: ['Freight', 'Block', 'Mixed','Intermodal', 'Local','Passenger', 'Express', 'Special','Work'], // Example types, adjust as needed
+    required: true
+  },
   // The ordered list of cars - array index determines sequence
   cars: [ConsistCarSchema]
 }, {
