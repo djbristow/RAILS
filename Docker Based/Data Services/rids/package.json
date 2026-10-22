@@ -1,6 +1,6 @@
 {
   "name": "rids",
-  "version": "3.2.4",
+  "version": "3.2.5",
   "description": "Railroad Inventory Data Services",
   "private": true,
   "author": "DJ Bristow <dave@bristow-family.org>",

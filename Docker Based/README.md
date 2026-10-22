@@ -4,7 +4,7 @@
 
 # Version
 
-* 2.5.1- 2026-10-16
+* 2.5.2- 2026-10-21
  
 Docker based components are the partial realization of RAILS software model of an automated system to assist the model railroader achieve realism in the operation of a model railroad. These components are the micro-services that are conatinerized and typically run on a PC (Linux, Mac, or Windows) or Single Board Computer running Linux.
 
@@ -15,24 +15,24 @@ The three groups of docker components are: IoT Services, Data Services, Single P
 |Name |Title                                  |Port |Version|Date     |
 |-----|----------------------------------------------------------|-----|-------|---------|
 |SPAs|----------------------------------------------------------|
-|MPPM|**M**odel **P**rojects and **P**urchase **M**anager allows a user to enter information about their projects and purchases|3008|4.1.1|2026-10-09|
-|MRIM|**M**odel **R**ailroad **I**nventory **M**anager allows a user to enter information about their inventoried items|3001|5.6.1|2026-10-09|
-|MRLM|**M**odel **R**ailroad **L**ayout **M**anager allows a user to enter information about their layout and control elements of it|3004|4.2.1|2026-10-09|
-|RSRM|**R**olling**s**tock **R**FID **M**anager allows a user to match a RFID value to a rolling stock road name and number|3002|6.1.1|2026-10-09|
-|MROM|**M**odel **R**ailroad **O**perations **M**anager allows a user to manage operations of a model railroad|3020|1.1.0|2026-10-16|
+|MPPM|**M**odel **P**rojects and **P**urchase **M**anager allows a user to enter information about their projects and purchases|3008|4.1.4|2026-10-21|
+|MRIM|**M**odel **R**ailroad **I**nventory **M**anager allows a user to enter information about their inventoried items|3001|5.6.4|2026-10-21|
+|MRLM|**M**odel **R**ailroad **L**ayout **M**anager allows a user to enter information about their layout and control elements of it|3004|4.2.4|2026-10-21|
+|RSRM|**R**olling**s**tock **R**FID **M**anager allows a user to match a RFID value to a rolling stock road name and number|3002|6.1.4|2026-10-21|
+|MROM|**M**odel **R**ailroad **O**perations **M**anager allows a user to manage operations of a model railroad|3020|1.1.3|2026-10-21|
 |Data Services|----------------------------------------------------------|
 |MRFM|**M**odel **R**ailroad **F**ile **M**anager  allows the user to upload image files for the use by the MRIM component|3030|2.8.1|2026-10-09|
-|PPDS|**P**lans and **P**urchases **D**ata **S**ervices  provides REST access to model railroad projects and purchases documents|3007|3.0.22|2026-10-09|
-|RIDS|**R**ailroad **I**nventory **D**ata **S**ervices provides REST access to railroad inventory documents|3000|3.2.1|2026-10-09|
-|RLDS|**R**ailroad **L**ayout **D**ata **S**ervices provides REST access to model railroad projects and purchases documents|3006|3.1.9|2026-10-09|
-|RODS|**R**ailroad **O**perations **D**ata **S**ervices provides REST access to railroad operations documents|3040|1.1.0|2026-10-16|
+|PPDS|**P**lans and **P**urchases **D**ata **S**ervices  provides REST access to model railroad projects and purchases documents|3008|3.0.22|2026-10-21|
+|RIDS|**R**ailroad **I**nventory **D**ata **S**ervices provides REST access to railroad inventory documents|3000|3.2.5|2026-10-21|
+|RLDS|**R**ailroad **L**ayout **D**ata **S**ervices provides REST access to model railroad projects and purchases documents|3006|3.1.13|2026-10-21|
+|RODS|**R**ailroad **O**perations **D**ata **S**ervices provides REST access to railroad operations documents|3040|1.1.3|2026-10-21|
 |IoT Services|----------------------------------------------------------|
-|IPLS|**I**oT **P**ublisher Turnout Panel **L**ight **S**ervices publishes light commands to a Turnout Panel Controller|3013|1.1.22|2026-10-09|
-|IPTS|**I**oT **P**ublisher **T**urnout **S**ervices publishes turnout commands to a Turnout Controller|3011|2.1.22|2026-10-09|
-|ISBS|**I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices subscribes to turnout panel push button events and pushes them via a web-socket to the MRLM component|3014|2.0.13|2026-10-09|
-|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices subscribes to micros and adds or updates micros collection in RAILS||3.0.30|2026-10-09|
-|ISRS|**I**oT **S**ubscriber **R**FID **S**ervices subscribes to RFID tags and pushes them via a web-socket to the RSRM component|3005|2.1.2|2026-10-09|
-|ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component|3010|2.0.8|2026-10-09|
+|IPLS|**I**oT **P**ublisher Turnout Panel **L**ight **S**ervices publishes light commands to a Turnout Panel Controller|3013|1.1.23|2026-10-21|
+|IPTS|**I**oT **P**ublisher **T**urnout **S**ervices publishes turnout commands to a Turnout Controller|3011|2.1.23|2026-10-21|
+|ISBS|**I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices subscribes to turnout panel push button events and pushes them via a web-socket to the MRLM component|3014|2.0.15|2026-10-21|
+|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices subscribes to micros and adds or updates micros collection in RAILS||3.0.31|2026-10-21|
+|ISRS|**I**oT **S**ubscriber **R**FID **S**ervices subscribes to RFID tags and pushes them via a web-socket to the RSRM component|3005|2.1.3|2026-10-21|
+|ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component|3010|2.0.11|2026-10-21|
 |COTS|----------------------------------------------------------|
 |MongoDB|It is a document-oriented, operational database. MongoDB stores rich JSON-like documents that map naturally to the objects used in the other microservices.|27017|8.2.11|2026-06-12|
 |NGINX|It is an open-source web server known for its high performance, stability, and low resource consumption used as a reverse proxy.|8080|1.29.0|2025-07-14|
