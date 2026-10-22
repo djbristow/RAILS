@@ -1,6 +1,6 @@
 {
   "name": "isrs",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "IoT Subscriber RFID Services",
   "main": "app.js",
   "author": "David Bristow",
@@ -12,7 +12,7 @@
   "dependencies": {
     "cors": "2.8.6",
     "express": "5.3.0",
-    "mqtt": "5.16.0",
+    "mqtt": "5.16.1",
     "socket.io": "4.8.4"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "mrom",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Model Railroad Operations Manager",
   "author": "dbristow <dave@bristow-family.org>",
   "private": true,
@@ -38,6 +38,6 @@
   },
   "type": "module",
   "allowScripts": {
-    "core-js@3.50.0": true
+    "core-js@3.51.0": true
   }
 }

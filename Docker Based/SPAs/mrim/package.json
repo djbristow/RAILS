@@ -1,6 +1,6 @@
 {
   "name": "mrim",
-  "version": "5.6.1",
+  "version": "5.6.3",
   "description": "Model Railroad Inventory Manager",
   "author": "dbristow <dave@bristow-family.org>",
   "private": true,
@@ -38,6 +38,6 @@
   },
   "type": "module",
   "allowScripts": {
-    "core-js@3.50.0": true
+    "core-js@3.51.0": true
   }
 }
