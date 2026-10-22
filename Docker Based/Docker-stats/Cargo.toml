@@ -6,6 +6,7 @@ description = "Docker Container & Process Monitor (egui + bollard)"
 
 [dependencies]
 eframe = "0.27"
+egui_plot = "0.27"
 egui_extras = "0.27"
 bollard = "0.16"
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "sync", "time"] }

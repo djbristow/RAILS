@@ -2,7 +2,7 @@
 &copy; David Bristow, 2019-2025
 
 ## Version
-* 1.0.0 - 2025-10-18
+* 1.1.0 - 2025-10-21
 
 
 The Rust application is a graphical Docker container and process monitor. It connects to the Docker Engine on your computer, displays running containers and their resource usage, lets you inspect the processes inside each container, and provides a live log viewer.
@@ -36,3 +36,5 @@ The main features:
 cargo build --release
 ```
 **NOTE**: The executable will be contained within the target/release folder.
+
+**NOTE**: The executable in this repository was compiled on a Linux Mint system.
