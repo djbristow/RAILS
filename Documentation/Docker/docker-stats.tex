@@ -1,24 +1,118 @@
-\chapter{Docker Monitor}
+\chapter{Docker Container \& Process Monitor}
 \label{app:dockermonitor}
-The script, Docker-stats.py is a Python-based graphical Docker container and process monitor. It connects to the Docker Engine on your computer, displays running containers and their resource usage, lets you inspect the processes inside each container, and provides a live log viewer.
-It uses Tkinter for the graphical interface and the Python docker library to communicate with Docker.
-The main features are:
+
+The \textbf{Docker Container \& Process Monitor} is a desktop application written in Rust and powered by \texttt{eframe}/\texttt{egui}. It provides real-time telemetry, interactive process trees, resource utilization leaderboards, historical performance graphing, and live container logging. This manual details application installation, interface navigation, and key feature workflows.
+
+\section{Introduction \& System Requirements}
+
+The application communicates directly with your local Docker Engine via standard UNIX socket or named pipes. It provides an intuitive, responsive user interface without requiring web browsers or external cloud dependencies.
+
+\subsection{Key Features}
 \begin{itemize}
-    \item Container monitoring - Lists running Docker containers, showing their names, abbreviated IDs, status, uptime, CPU usage, memory usage, network traffic, and exposed port mappings.
-    \item Live resource statistics - Refreshes container discovery and resource statistics approximately every two seconds, displaying CPU utilization, memory consumption, and cumulative network bytes received and transmitted.
-    \item Container process inspection - Expand a container in the interface to retrieve its process list using Docker's top() method. Individual processes are displayed as child rows with their command, PID, CPU percentage, and memory percentage.
-    \item Live log viewer - Double-click a container or right-click and choose View Logs to open a separate log window. It initially loads the last 200 log entries, includes timestamps, continuously streams new entries, and automatically scrolls to the bottom.
+    \item \textbf{Collapsible Sidebar Navigation:} Toggleable menu icon providing access to all application views.
+    \item \textbf{Live Container Table:} Real-time updates for CPU usage, memory consumption, network I/O (RX/TX), process IDs, and exposed ports.
+    \item \textbf{Process Tree Inspection:} Drill down into individual containers to view running OS processes and multi-threading stats.
+    \item \textbf{Performance Leaderboard:} Aggregate system overview highlighting top CPU and Memory consuming containers along with total process/thread metrics.
+    \item \textbf{Real-Time Telemetry Graphs:} Historical plotting for total CPU utilization, memory allocation, and network traffic.
+    \item \textbf{Streaming Log Viewer:} Dedicated multi-window log streaming for inspectable container stdout/stderr output.
 \end{itemize}
 
-\begin{figure}[H]
-	\centering
-		\includegraphics[scale=0.12]{../Images/docker-monitor.png}
-	\caption{Docker Monitor}
-	\label{fig:docker-monitor}
+\subsection{System Prerequisites}
+\begin{itemize}
+    \item \textbf{Operating System:} Linux, macOS, or Windows 10/11.
+    \item \textbf{Docker Engine:} Docker Daemon running locally (v20.10+ recommended).
+    \item \textbf{User Permissions:} Sufficient user group privileges to query the Docker socket (\texttt{/var/run/docker.sock} on Linux/macOS).
+\end{itemize}
+
+\section{Main Navigation \& Layout}
+
+The user interface is divided into three primary regions: the \textbf{Top Header Bar}, the \textbf{Collapsible Navigation Sidebar}, and the \textbf{Central Content Panel}.
+
+\vspace{1em}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.18]{../Images/dm-main.png}
+    \caption{Main interface showing top header controls and collapsible navigation.}
+    \label{fig:main_overview}
 \end{figure}
 
-To start the monitoring from a terminal enter the command:
-\begin{verbatim}
-python3 Docker-stats.py&
-\end{verbatim}
-The resulting window is shown in figure \ref{fig:docker-monitor}, it also depicts a window display a log of a container.
+\subsection{Header Controls}
+\begin{itemize}
+    \item \textbf{Hamburger Toggle (Menu):} Opens or collapses the primary sidebar navigation menu.
+    \item \textbf{Active View Title:} Displays the current view name (e.g., \textit{Containers}, \textit{Performance}, \textit{Graphs}).
+    \item \textbf{Search Filter:} Interactive text entry to instantly filter containers by name or short ID.
+    \item \textbf{Refresh Button (Sync):} Forces an immediate re-query of the Docker daemon snapshot.
+\end{itemize}
+
+\section{Core Modules \& Views}
+
+\subsection{1. Containers View}
+The \textbf{Containers View} displays all discovered Docker containers in a structured table.
+
+\vspace{1em}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.18]{../Images/dm-containers.png}
+    \caption{Container status table with expandable process hierarchy.}
+    \label{fig:container_table}
+\end{figure}
+
+\subsubsection{Interactions \& Actions}
+\begin{itemize}
+    \item \textbf{Expand Container ($>$ / v):} Click the arrow icon next to a container name to spawn a background query fetching live processes running inside that container.
+    \item \textbf{Process Status Hover:} Hovering over process status codes (e.g., \texttt{Ss}, \texttt{R+}, \texttt{Z}) reveals detailed process state definitions (e.g., Interruptible Sleep, Session Leader).
+    \item \textbf{Context Menu \& Double Click:} Right-clicking a container row opens a context menu. Double-clicking or selecting \textit{View Logs} opens a dedicated log streaming window.
+\end{itemize}
+
+\subsection{2. Performance Overview View}
+The \textbf{Performance View} aggregates resource metrics across all active containers.
+
+\vspace{1em}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.18]{../Images/dm-performance.png}
+    \caption{System \& container performance overview with active leaderboards.}
+    \label{fig:performance_view}
+\end{figure}
+
+\subsubsection{Summary Metrics}
+\begin{itemize}
+    \item \textbf{Containers \& Processes Box:} Displays total active vs. stopped containers along with total processes and thread counts across all containers.
+    \item \textbf{Total CPU Utilization:} Displays total accumulated CPU percentage utilized.
+    \item \textbf{Total Memory Allocated:} Sums overall memory consumption across all active containers.
+    \item \textbf{Leaderboards:} Ranked top 5 consumers for both CPU and Memory usage.
+\end{itemize}
+
+\subsection{3. Graphs View}
+The \textbf{Graphs View} plots live time-series telemetry to analyze system trends over time.
+
+\vspace{1em}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.18]{../Images/dm-graphs.png}
+    \caption{Real-time global Docker telemetry charts.}
+    \label{fig:graphs_view}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{CPU Usage Plot:} Tracks total host CPU core utilization over time.
+    \item \textbf{Memory Usage Plot:} Displays memory allocation trends in MiB.
+    \item \textbf{Network RX / TX Plots:} Separate graphs tracking incoming and outgoing network throughput in bytes.
+\end{itemize}
+
+\subsection{4. Log Viewer Windows}
+Opening logs spawns an independent floating window with live log streaming.
+
+\vspace{1em}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.18]{../Images/dm-log.png}
+    \caption{Container stdout/stderr streaming window.}
+    \label{fig:log_window}
+\end{figure}
+
+\section{Troubleshooting \& Error Handling}
+\begin{itemize}
+    \item \textbf{Docker Connection Errors:} If the app cannot communicate with Docker, an error panel appears on startup. Ensure Docker service is active (\texttt{systemctl status docker} or Docker Desktop).
+    \item \textbf{Missing Processes:} Process details require elevated container permissions or appropriate Linux \texttt{ps} capabilities inside the container image.
+\end{itemize}
