@@ -53,38 +53,5 @@ Key features of Docker Compose include:
 \section {RAILS Docker Implementation}
 Docker based components are the partial realization of \gls{rails} software model of an automated system. These components are the micro-services that are conatinerized and typically run on a PC (Linux, Mac, or Windows) or Single Board Computer running Linux.\vspace{5mm} \\
 Table \ref{tbl:docker-images} lists the Docker images available from the \href{https://hub.docker.com/repositories/dbristow}{Docker Hub repository}. These images are the microservices depicted in Figure \ref{fig:microarchitecture}.
-\begin{longtable}{|L{3cm}|L{7cm}|L{1cm}|L{1.5cm}|L{2cm}|}
-	\caption{\label{tbl:docker-images}Docker Images Table}\\
-    \hline
-    \textbf{Image} & \textbf{Name} & \textbf{Port} & \textbf{Version} & \textbf{Date} \\
-	\hline
-	\endfirsthead
-	\multicolumn{4}{c}%
-	{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
-	\hline
-	\textbf{Image} & \textbf{Name} & \textbf{Port} & \textbf{Version} & \textbf{Date} \\
-	\hline
-	\endhead
-	\hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
-	\endfoot
-	\hline
-	\endlastfoot
-  & ----------------- SPAs --------------- &  &  & \\ \hline
-  dbristow/mppm & \textbf{M}odel \textbf{P}rojects and \textbf{P}urchase \textbf{M}anager & 3008 & 4.1.0 & 2026-09-13 \\ \hline
-  dbristow/mrim & \textbf{M}odel \textbf{R}ailroad \textbf{I}nventory \textbf{M}anager & 3001 & 5.4.0 & 2026-09-13 \\ \hline
-  dbristow/mrlm & \textbf{M}odel \textbf{R}ailroad \textbf{L}ayout \textbf{M}anager & 3004 & 4.1.0 & 2026-09-13 \\ \hline
-  dbristow/rsrm & \textbf{R}olling\textbf{s}tock \textbf{R}FID \textbf{M}anager & 3002 & 6.1.0 & 2026-09-13 \\ \hline
-  & ----------------- Data Services --------------- &  &  & \\ \hline
-  dbristow/mrfm & \textbf{M}odel \textbf{R}ailroad \textbf{F}ile \textbf{M}anager & 3030 & 2.8.0 & 2026-09-13 \\ \hline
-  dbristow/ppds & \textbf{P}lans and \textbf{P}urchases \textbf{D}ata \textbf{S}ervices  & 3007 & 3.0.21 & 2026-09-08 \\ \hline
-  dbristow/rids & \textbf{R}ailroad \textbf{I}nventory \textbf{D}ata \textbf{S}ervices  & 3000 & 3.0.21 & 2026-09-08 \\ \hline
-  dbristow/rlds & \textbf{R}ailroad \textbf{L}ayout \textbf{D}ata \textbf{S}ervices  & 3006 & 3.0.21 & 2026-09-08 \\ \hline
-  & ----------------- IoT Services --------------- &  &  & \\ \hline
-  dbristow/ipls & \textbf{I}ot \textbf{P}ublisher \textbf{T}urnout \textbf{P}anel \textbf{L}ight \textbf{S}ervices & 3013 & 1.1.21 & 2026-07-08 \\ \hline
-  dbristow/ipts & \textbf{I}ot \textbf{P}ublisher \textbf{T}urnout \textbf{S}ervices & 3011 & 2.1.21 & 2026-07-08 \\ \hline
-  dbristow/isbs & \textbf{I}ot \textbf{S}ubscriber \textbf{T}urnout \textbf{P}anel \textbf{B}utton \textbf{S}ervices & 3012 & 2.0.12 & 2026-06-09 \\ \hline
-  dbristow/isms & \textbf{I}ot \textbf{S}ubscriber \textbf{M}icro-controller \textbf{S}ervices &  & 3.0.29 & 2026-09-08 \\ \hline
-  dbristow/isrs & \textbf{I}ot \textbf{S}ubscriber \textbf{R}FID \textbf{S}ervices & 3005 & 2.1.0 & 2026-07-08 \\ \hline
-  dbristow/ists & \textbf{I}ot \textbf{S}ubscriber \textbf{T}urnout \textbf{S}ervices & 3010 & 2.0.7 & 2026-07-08 \\ \hline
-    \end{longtable}
+\input{table}
 The \gls{rails} Docker implementation is a multi-container application that uses Docker Compose to define and run the services required for the \gls{rails} application. The Docker Compose file specifies the services, networks, and volumes needed to run the \gls{rails} application, making it easy to manage the deployment and scaling of the microservices.
