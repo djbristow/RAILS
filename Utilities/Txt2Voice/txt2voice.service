@@ -1,0 +1,15 @@
+[Unit]
+Description=MQTT Text-to-Voice TTS Listener Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Replace /home/david/railroad with your actual project directory path
+WorkingDirectory=/home/dbristow/Txt2Voice
+ExecStart=/home/dbristow/Txt2Voice/venv/bin/python3 /home/dbristow/Txt2Voice/txt2voice.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
