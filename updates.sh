@@ -2,43 +2,71 @@
 
 check_and_update ()
 {
-    # Check for outdated packages
-    current_version=$(cat package.json | jq -r '.version' )
-    outdated_packages=$(npm outdated --json)
-    if [ "$outdated_packages" == "{}" ]; then
+    pwd
+    current_version=$(cat package.json | jq -r '.version')
+    
+    outdated_packages=$(npm outdated --json || true)
+    
+    if [ "$outdated_packages" == "{}" ] || [ -z "$outdated_packages" ]; then
         echo "All npm packages are up to date, current version $current_version"
     else
-        npm update > /dev/null
+        echo "Updating packages..."
+        npm update --no-audit --no-fund > /dev/null
+        
         # Update version of microservice in package.json
-        version_number=$(npm version patch)
-        echo "Version number updated from $current_version to $version_number"
-        # Update version in README.md
+        new_tag=$(npm version patch --no-git-tag-version)
+        echo "Version number updated from $current_version to $new_tag"
+        
+        # 1. Update version in local README.md
         line_number=$(grep -n "## Version" README.md | cut -d ':' -f 1)
-        next_line_number=$((line_number + 1))
-        current_date=$(date +"%Y-%m-%d")
-        new_line="$version_number $current_date"
-        sed -i "${next_line_number}s/.*/$new_line/" README.md
-        # Update version in execution file
+        if [ -n "$line_number" ]; then
+            next_line_number=$((line_number + 1))
+            current_date=$(date +"%Y-%m-%d")
+            new_line="$new_tag $current_date"
+            sed -i "${next_line_number}s/.*/$new_line/" README.md
+        fi
+        
+        # 2. Update version and date in the master table (located 2 levels up in parent README.md)
+        service_name=$(basename "$PWD" | tr '[:lower:]' '[:upper:]')
+        master_readme="../../README.md"
+        if [ -f "$master_readme" ]; then
+            current_date=$(date +"%Y-%m-%d")
+            # Matches the row starting with the service name and replaces its version & date columns
+            sed -i -E "s/\|?($service_name\|[^|]*\|[^|]*\|)[^|]*\|[^|]*\|/\1${new_tag:1}|$current_date|/" "$master_readme"
+            echo "Updated master README.md table for $service_name to ${new_tag:1} on $current_date"
+        fi
+        
+        # Update version in execution file based on directory path
         file_dir="$PWD"
+        file_name=""
         if [[ "$file_dir" == *"SPAs"* ]]; then
             file_name="./src/views/About.vue"
-        fi
-        if [[ "$file_dir" == *"Data Services"* ]]; then
+        elif [[ "$file_dir" == *"Data Services"* ]]; then
             file_name="./src/mongodbConnModule.js"
-        fi
-        if [[ "$file_dir" == *"IoT Services"* ]]; then
+        elif [[ "$file_dir" == *"IoT Services"* ]]; then
             file_name="./src/app.js"
         fi
-        sed -i "s/$current_version/${version_number:1}/" $file_name
-        # Update version of each changed package
-        updated_packages=$(echo "$outdated_packages" | jq -r '. | keys[]')
-        while IFS= read -r package; do
-            version_number=$(npm show "$package" version)
-            npm install --save-exact "$package@$version_number"  > /dev/null
-            echo "Version number updated for $package to $version_number"
-        done <<< "$updated_packages"
+        
+        if [ -n "$file_name" ] && [ -f "$file_name" ]; then
+            sed -i "s/$current_version/${new_tag:1}/" "$file_name"
+            echo "Updated version in $file_name"
+        fi
+        
+        echo "All packages successfully updated for $PWD"
     fi
 }
+
+# --- NVM Safeguard & Node Version Enforcer ---
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    \. "$NVM_DIR/nvm.sh"  # Load NVM into the non-interactive script environment
+    nvm use 24 > /dev/null 2>&1 || {
+        echo "Node 24 not active, installing/switching..."
+        nvm install 24 > /dev/null 2>&1
+        nvm use 24 > /dev/null 2>&1
+    }
+fi
+
 cd './Docker Based/IoT Services/ipls'
 echo "IPLS Packages"
 check_and_update
@@ -79,6 +107,10 @@ cd ../rsrm
 echo "RSRM Packages"
 check_and_update
 echo "==========================================="
+cd ../mrom
+echo "MROM Packages"
+check_and_update
+echo "==========================================="
 cd '../../Data Services/mrfm'
 echo "MRFM Packages"
 check_and_update
@@ -93,6 +125,10 @@ check_and_update
 echo "==========================================="
 cd ../rlds
 echo "RLDS Packages"
+check_and_update
+echo "==========================================="
+cd ../rods
+echo "RODS Packages"
 check_and_update
 echo "==========================================="
 
