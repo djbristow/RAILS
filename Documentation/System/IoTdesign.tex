@@ -36,13 +36,19 @@ Figure \ref{fig:iotdesign} depicts the flow of \gls{mqtt} messages through the \
 \begin{itemize}
 \item example \{``et'':``1590463450'',``mcntrlr'':``RfidRdr01'',``reader'':``1'',``rfid'':``1C0044CF23''\}
 \end{itemize}
+\item \textbf {\gls{t2v}} message format: \{``txt'':``Text to be converted to audio'', ``alarm'': true|false\}
+\begin{itemize}
+\item example \{``txt'':``Dispatcher to Canadian Pacific 5 0 0 0. Clear main track.'', ``alarm'': true\}
+\end{itemize}
 \item \textbf {Turnout Position} message format: \{``et'':``epoch time'',``mcntrlr'':``turnout controller id'',``to'':``turnout number'',``state'':``THROWN|CLOSED|ERROR''\}
 \begin{itemize}
 \item example \{``et'':``1588827073'',``mcntrlr'':``TrnCtlr01'',``to'':``1'',``state'':``THROWN''\}
 \end{itemize}
 \item \textbf {Turnout Panel Button} message format: \{``et'':``epoch time'',``mcntrlr'':``tp controller id'',``pb'':``push button number''\}
+\begin{itemize}
 \item example \{``et'':``1588827073'',``mcntrlr'':``TrnCtlr01'',``pb'':``3''\}
 \item \textbf {Turnout Command} message format: \{``mcntrlr'':``turnout controller id'',``to'':``turnout number'',``cmd'':``THROW|CLOSE|STATUS''\}
+\end{itemize}
 \begin{itemize}
 \item example \{``mcntrlr'':``TrnCtlr01'',``to'':``1'',``cmd'':``CLOSE''\}
 \end{itemize}
