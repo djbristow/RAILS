@@ -1,7 +1,7 @@
 <template>
   <div class="xx">
     <h1>About Model Railroad Operations Manager</h1>
-    <h3>Version 1.1.4</h3>
+    <h3>Version 1.1.5</h3>
     <p>
       The Railway Administration and Information Logical System (RAILS) MROM
       Application is one of several single page applications (SPAs) in the RAILS

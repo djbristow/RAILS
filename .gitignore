@@ -40,3 +40,5 @@ docker-update-rep.sh
 *.gpg
 ToDo.md
 target/
+docker-update.sh
+'Docker Based/gen-table.py'

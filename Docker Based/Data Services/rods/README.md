@@ -5,7 +5,7 @@
 **R**ailroad **O**perations **D**ata **S**ervices is an Express Mongoose aplication that connects to a MongoDB database containing operations collections and provide data services to MROM component. This application uses port 3040.
 
 ## Version
-v1.1.4 2026-10-22
+v1.1.6 2026-10-29
 
 
 ## License

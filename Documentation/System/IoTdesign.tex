@@ -25,7 +25,7 @@ Figure \ref{fig:iotdesign} depicts the flow of \gls{mqtt} messages through the \
 
 \begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.18]{../Images/mqtt-flow.png}
+		\includegraphics[scale=0.8]{../Images/mqtt-flow.png}
 	\caption{MQTT Message Flows}
 	\label{fig:iotdesign}
 \end{figure}
@@ -40,15 +40,15 @@ Figure \ref{fig:iotdesign} depicts the flow of \gls{mqtt} messages through the \
 \begin{itemize}
 \item example \{``txt'':``Dispatcher to Canadian Pacific 5 0 0 0. Clear main track.'', ``alarm'': true\}
 \end{itemize}
-\item \textbf {Turnout Position} message format: \{``et'':``epoch time'',``mcntrlr'':``turnout controller id'',``to'':``turnout number'',``state'':``THROWN|CLOSED|ERROR''\}
+\item \textbf {Turnout Position} message format: \{``et'':``epoch time'',``mcntrlr'':``turnout controller id'',\\``to'':``turnout number'',``state'':``THROWN|CLOSED|ERROR''\}
 \begin{itemize}
 \item example \{``et'':``1588827073'',``mcntrlr'':``TrnCtlr01'',``to'':``1'',``state'':``THROWN''\}
 \end{itemize}
 \item \textbf {Turnout Panel Button} message format: \{``et'':``epoch time'',``mcntrlr'':``tp controller id'',``pb'':``push button number''\}
 \begin{itemize}
 \item example \{``et'':``1588827073'',``mcntrlr'':``TrnCtlr01'',``pb'':``3''\}
-\item \textbf {Turnout Command} message format: \{``mcntrlr'':``turnout controller id'',``to'':``turnout number'',``cmd'':``THROW|CLOSE|STATUS''\}
 \end{itemize}
+\item \textbf {Turnout Command} message format: \{``mcntrlr'':``turnout controller id'',``to'':``turnout number'',\\``cmd'':``THROW|CLOSE|STATUS''\}
 \begin{itemize}
 \item example \{``mcntrlr'':``TrnCtlr01'',``to'':``1'',``cmd'':``CLOSE''\}
 \end{itemize}

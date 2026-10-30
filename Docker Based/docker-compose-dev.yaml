@@ -53,6 +53,8 @@ services:
       - myIpts
       - myIpls
       - myMrlm
+      - myRods
+      - myMrom
 
   myMongo:
     image: 'mongo'
@@ -118,6 +120,22 @@ services:
       - myRailsNet
     ports:
       - '3000:3000'
+    depends_on:
+      - myMongo
+
+  myRods:
+    image: 'dbristow/rods'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
+    container_name: myRods
+    networks:
+      - myRailsNet
+    environment:
+      - PORT=3040
     depends_on:
       - myMongo
 
@@ -324,15 +342,30 @@ services:
     container_name: myMrlm
     networks:
       - myRailsNet
-    # No direct host port exposure needed if only Nginx accesses it
-    # ports:
-    #   - '3004:8080' # Remove this
     depends_on:
       - myRlds
       - myIsts
       - myIsbs
       - myIpts
       - myIpls
+
+  myMrom:
+    image: 'dbristow/mrom'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
+    environment:
+      - MRNAME=KJ&C RR
+    container_name: myMrom
+    networks:
+      - myRailsNet
+    depends_on:
+      - myRods
+      - myRids
+      - myIsrs
 
 networks:
   myRailsNet:

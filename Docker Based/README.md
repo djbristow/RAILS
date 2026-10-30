@@ -4,7 +4,7 @@
 
 # Version
 
-* 2.5.2- 2026-10-21
+* 2.7.0- 2026-10-29
  
 Docker based components are the partial realization of RAILS software model of an automated system to assist the model railroader achieve realism in the operation of a model railroad. These components are the micro-services that are conatinerized and typically run on a PC (Linux, Mac, or Windows) or Single Board Computer running Linux.
 
@@ -15,26 +15,27 @@ The three groups of docker components are: IoT Services, Data Services, Single P
 |Name |Title                                  |Port |Version|Date     |
 |-----|----------------------------------------------------------|-----|-------|---------|
 |SPAs|----------------------------------------------------------|
-|MPPM|**M**odel **P**rojects and **P**urchase **M**anager allows a user to enter information about their projects and purchases|3008|4.1.5|2026-10-22|
-|MRIM|**M**odel **R**ailroad **I**nventory **M**anager allows a user to enter information about their inventoried items|3001|5.6.5|2026-10-22|
-|MRLM|**M**odel **R**ailroad **L**ayout **M**anager allows a user to enter information about their layout and control elements of it|3004|4.2.5|2026-10-22|
-|RSRM|**R**olling**s**tock **R**FID **M**anager allows a user to match a RFID value to a rolling stock road name and number|3002|6.1.5|2026-10-22|
-|MROM|**M**odel **R**ailroad **O**perations **M**anager allows a user to manage operations of a model railroad|3020|1.1.4|2026-10-22|
+|MPPM|**M**odel **P**rojects and **P**urchase **M**anager allows a user to enter information about their projects and purchases|3008|4.1.7|2026-10-29|
+|MRIM|**M**odel **R**ailroad **I**nventory **M**anager allows a user to enter information about their inventoried items|3001|5.6.7|2026-10-29|
+|MRLM|**M**odel **R**ailroad **L**ayout **M**anager allows a user to enter information about their layout and control elements of it|3004|4.2.7|2026-10-29|
+|RSRM|**R**olling**s**tock **R**FID **M**anager allows a user to match a RFID value to a rolling stock road name and number|3002|6.1.7|2026-10-29|
+|MROM|**M**odel **R**ailroad **O**perations **M**anager allows a user to manage operations of a model railroad|3020|1.1.6|2026-10-29|
 |Data Services|----------------------------------------------------------|
-|MRFM|**M**odel **R**ailroad **F**ile **M**anager  allows the user to upload image files for the use by the MRIM component|3030|2.8.2|2026-10-22|
-|PPDS|**P**lans and **P**urchases **D**ata **S**ervices  provides REST access to model railroad projects and purchases documents|3008|3.0.27|2026-10-22|
-|RIDS|**R**ailroad **I**nventory **D**ata **S**ervices provides REST access to railroad inventory documents|3000|3.2.6|2026-10-22|
-|RLDS|**R**ailroad **L**ayout **D**ata **S**ervices provides REST access to model railroad projects and purchases documents|3006|3.1.14|2026-10-22|
-|RODS|**R**ailroad **O**perations **D**ata **S**ervices provides REST access to railroad operations documents|3040|1.1.4|2026-10-22|
+|MRFM|**M**odel **R**ailroad **F**ile **M**anager  allows the user to upload image files for the use by the MRIM component|3030|2.8.4|2026-10-29|
+|PPDS|**P**lans and **P**urchases **D**ata **S**ervices  provides REST access to model railroad projects and purchases documents|3008|3.0.29|2026-10-29|
+|RIDS|**R**ailroad **I**nventory **D**ata **S**ervices provides REST access to railroad inventory documents|3000|3.2.8|2026-10-29|
+|RLDS|**R**ailroad **L**ayout **D**ata **S**ervices provides REST access to model railroad projects and purchases documents|3006|3.1.16|2026-10-29|
+|RODS|**R**ailroad **O**perations **D**ata **S**ervices provides REST access to railroad operations documents|3040|1.1.6|2026-10-29|
 |IoT Services|----------------------------------------------------------|
+|IPAS|**I**oT **P**ublish **A**udio **S**ervices is an Express aplication that publishes mqtt Txt2Voice messages to the MQTT Broker.|3012|1.0.0|2026-12-29|
 |IPLS|**I**oT **P**ublisher Turnout Panel **L**ight **S**ervices publishes light commands to a Turnout Panel Controller|3013|1.1.23|2026-10-21|
 |IPTS|**I**oT **P**ublisher **T**urnout **S**ervices publishes turnout commands to a Turnout Controller|3011|2.1.23|2026-10-21|
-|ISBS|**I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices subscribes to turnout panel push button events and pushes them via a web-socket to the MRLM component|3014|2.0.15|2026-10-21|
-|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices subscribes to micros and adds or updates micros collection in RAILS||3.0.31|2026-10-21|
+|ISBS|**I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices subscribes to turnout panel push button events and pushes them via a web-socket to the MRLM component|3014|2.0.17|2026-10-29|
+|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices subscribes to micros and adds or updates micros collection in RAILS||3.0.33|2026-10-29|
 |ISRS|**I**oT **S**ubscriber **R**FID **S**ervices subscribes to RFID tags and pushes them via a web-socket to the RSRM component|3005|2.1.3|2026-10-21|
-|ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component|3010|2.0.12|2026-10-22|
+ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component|3010|2.0.13|2026-10-29|
 |COTS|----------------------------------------------------------|
-|MongoDB|It is a document-oriented, operational database. MongoDB stores rich JSON-like documents that map naturally to the objects used in the other microservices.|27017|8.2.11|2026-06-12|
+|MongoDB|It is a document-oriented, operational database. MongoDB stores rich JSON-like documents that map naturally to the objects used in the other microservices.|27017|9.0.2|2026-09-28|
 |NGINX|It is an open-source web server known for its high performance, stability, and low resource consumption used as a reverse proxy.|8080|1.29.0|2025-07-14|
 |eclipse-mosquitto|It is is an open-source message broker that implements the MQTT protocol|1883|2.1.2|2026-04-15|
 
