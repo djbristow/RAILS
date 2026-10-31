@@ -349,6 +349,22 @@ services:
       - myIpts
       - myIpls
 
+  myIpas:
+    image: 'dbristow/ipas'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
+    container_name: myIpls
+    networks:
+      - myRailsNet
+    ports:
+      - '3012:3012'
+    depends_on:
+      - myMqttBrkr
+
   myMrom:
     image: 'dbristow/mrom'
     deploy:
@@ -366,6 +382,7 @@ services:
       - myRods
       - myRids
       - myIsrs
+      - myIpas
 
 networks:
   myRailsNet:

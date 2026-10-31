@@ -1,6 +1,6 @@
 # docker-compose.yaml
 # &copy; David Bristow, 2020-2026
-# VERSION 2.2.0
+# VERSION 2.3S.0
 # LICENSE
 # The code in this repository is licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -325,6 +325,20 @@ services:
       - myIpts
       - myIpls
 
+  myIpas:
+    image: 'dbristow/ipas'
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+        reservations:
+          memory: 50M
+    container_name: myIpls
+    networks:
+      - myRailsNet
+    depends_on:
+      - myMqttBrkr
+
   myMrom:
     image: 'dbristow/mrom'
     deploy:
@@ -342,6 +356,7 @@ services:
       - myRods
       - myRids
       - myIsrs
+      - myIpas
 
 networks:
   myRailsNet:

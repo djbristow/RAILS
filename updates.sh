@@ -32,8 +32,8 @@ check_and_update ()
         if [ -f "$master_readme" ]; then
             current_date=$(date +"%Y-%m-%d")
             # Matches the row starting with the service name and replaces its version & date columns
-            sed -i -E "s/\|?($service_name\|[^|]*\|[^|]*\|)[^|]*\|[^|]*\|/\1${new_tag:1}|$current_date|/" "$master_readme"
-            echo "Updated master README.md table for $service_name to ${new_tag:1} on $current_date"
+            sed -i -E "s/(\|$service_name\|[^|]*\|[^|]*\|)[^|]*\|[^|]*\|/\|\1${new_tag:1}|$current_date|/" "$master_readme"
+            # echo "Updated master README.md table for $service_name to ${new_tag:1}"
         fi
         
         # Update version in execution file based on directory path
@@ -46,13 +46,14 @@ check_and_update ()
         elif [[ "$file_dir" == *"IoT Services"* ]]; then
             file_name="./src/app.js"
         fi
-        
-        if [ -n "$file_name" ] && [ -f "$file_name" ]; then
-            sed -i "s/$current_version/${new_tag:1}/" "$file_name"
-            echo "Updated version in $file_name"
-        fi
-        
-        echo "All packages successfully updated for $PWD"
+         # Update version of each changed package
+        updated_packages=$(echo "$outdated_packages" | jq -r '. | keys[]')
+        while IFS= read -r package; do
+            version_number=$(npm show "$package" version)
+            npm install --save-exact "$package@$version_number"  > /dev/null
+            echo "Version number updated for $package to $version_number"
+        done <<< "$updated_packages"
+        echo "All packages successfully updated for ${new_tag:1}"
     fi
 }
 
@@ -67,7 +68,11 @@ if [ -s "$NVM_DIR/nvm.sh" ]; then
     }
 fi
 
-cd './Docker Based/IoT Services/ipls'
+cd './Docker Based/IoT Services/ipas'
+echo "IPAS Packages"
+check_and_update
+echo "==========================================="
+cd ..ipls
 echo "IPLS Packages"
 check_and_update
 echo "==========================================="
