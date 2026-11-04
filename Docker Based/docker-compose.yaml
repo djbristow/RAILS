@@ -51,6 +51,7 @@ services:
       - myIpls
       - myMrlm
       - myRods
+      - myIpas
       - myMrom
 
   myMongo:
@@ -333,7 +334,7 @@ services:
           memory: 75M
         reservations:
           memory: 50M
-    container_name: myIpls
+    container_name: myIpas
     networks:
       - myRailsNet
     depends_on:

@@ -2,7 +2,7 @@
 David Bristow, 2019-2024
 
 # Version
-* 1.0.1 - 6/7/2023
+* 1.1.0 - 2026-11-04
  
 IoT Services provide the mechanisms to move mqtt messages. The custom designed and developed micro-services are shown in the following table.  The IoT services are highlighted with the light green colored background in the following figure.
 
@@ -11,10 +11,11 @@ IoT Services provide the mechanisms to move mqtt messages. The custom designed a
 
 |Name |Title                                  |Port |
 |-----|----------------------------------------------------------|-----|
+|IPAS|**I**oT **P**ublish **A**udio **S**ervices is an Express aplication that publishes mqtt Txt2Voice messages|3014|
 |IPLS|**I**oT **P**ublisher Turnout Panel **L**ight **S**ervices publishes light commands to a Turnout Panel Controller|3013|
 |IPTS|**I**oT **P**ublisher **T**urnout **S**ervices publishes turnout commands to a Turnout Controller|3011|
 |ISBS|**I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices subscribes to turnout panel push button events and pushes them via a web-socket to the MRLM component|3012|
-|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices subscribes to micros and adds or updates micros collection in RAILS||2.1.7|
+|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices subscribes to micros and adds or updates micros collection in RAILS||
 |ISRS|**I**oT **S**ubscriber **R**FID **S**ervices subscribes to RFID tags and pushes them via a web-socket to the RSRM component|3005|
 |ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component|3010|
 

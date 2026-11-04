@@ -2,10 +2,10 @@
 
 &copy; David Bristow, 2020-2026
 
-**I**oT **P**ublish **A**udio **S**ervices is an Express aplication that publishes mqtt Txt2Voice messages to the MQTT Broker. This application uses port 3012.
+**I**oT **P**ublish **A**udio **S**ervices is an Express aplication that publishes mqtt Txt2Voice messages to the MQTT Broker. This application uses port 3013.
 
 ## Version
-v1.0.0 2026-10-29
+v1.0.1 2026-11-04
 
 ## License
 

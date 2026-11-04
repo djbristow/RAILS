@@ -4,7 +4,7 @@
 
 # Version
 
-* 2.7.1- 2026-10-30
+* 2.7.2- 2026-11-04
  
 Docker based components are the partial realization of RAILS software model of an automated system to assist the model railroader achieve realism in the operation of a model railroad. These components are the micro-services that are conatinerized and typically run on a PC (Linux, Mac, or Windows) or Single Board Computer running Linux.
 
@@ -27,11 +27,11 @@ The three groups of docker components are: IoT Services, Data Services, Single P
 |RLDS|**R**ailroad **L**ayout **D**ata **S**ervices provides REST access to model railroad projects and purchases documents|3006|3.1.16|2026-10-29|
 |RODS|**R**ailroad **O**perations **D**ata **S**ervices provides REST access to railroad operations documents|3040|1.1.6|2026-10-29|
 |IoT Services|----------------------------------------------------------|
-|IPAS|**I**oT **P**ublish **A**udio **S**ervices is an Express aplication that publishes mqtt Txt2Voice messages to the MQTT Broker.|3012|1.0.0|2026-12-29|
+|IPAS|**I**oT **P**ublish **A**udio **S**ervices is an Express aplication that publishes mqtt Txt2Voice messages to the MQTT Broker.|3013|1.0.0|2026-12-29|
 |IPLS|**I**oT **P**ublisher Turnout Panel **L**ight **S**ervices publishes light commands to a Turnout Panel Controller|3013|1.1.23|2026-10-21|
 |IPTS|**I**oT **P**ublisher **T**urnout **S**ervices publishes turnout commands to a Turnout Controller|3011|2.1.23|2026-10-21|
 |ISBS|**I**oT **S**ubscriber Turnout Panel **B**utton **S**ervices subscribes to turnout panel push button events and pushes them via a web-socket to the MRLM component|3014|2.0.17|2026-10-29|
-|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices subscribes to micros and adds or updates micros collection in RAILS||3.0.33|2026-10-29|
+|ISMS|**I**oT **S**ubscriber **M**icro-controller **S**ervices subscribes to micros and adds or updates micros collection in RAILS|3012|3.0.33|2026-10-29|
 |ISRS|**I**oT **S**ubscriber **R**FID **S**ervices subscribes to RFID tags and pushes them via a web-socket to the RSRM component|3005|2.1.3|2026-10-21|
 |ISTS|**I**oT **S**ubscriber **T**urnout **S**ervices subscribes to turnout switch closures and pushes them via a web-socket to the MRLM component|3010|2.0.13|2026-10-29|
 |COTS|----------------------------------------------------------|
