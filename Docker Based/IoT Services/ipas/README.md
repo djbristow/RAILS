@@ -5,7 +5,7 @@
 **I**oT **P**ublish **A**udio **S**ervices is an Express aplication that publishes mqtt Txt2Voice messages to the MQTT Broker. This application uses port 3014.
 
 ## Version
-v1.0.2 2026-11-04
+v1.1.0 2026-11-04
 
 ## License
 
