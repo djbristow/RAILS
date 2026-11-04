@@ -28,5 +28,5 @@ app.post('/to', (req, res) => {
 })
 
 app.listen(process.env.PORT || 3014)
-    console.log("IPAS started v1.0.1")
+    console.log("IPAS started v1.0.2")
     console.log("App listening on port 3014")

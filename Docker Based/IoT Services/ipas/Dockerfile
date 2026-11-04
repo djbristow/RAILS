@@ -36,7 +36,7 @@ ENV MQTT_TCP_URI=myMqttBrkr:1883
 ENV NODE_ENV=production
 
 # Expose your internal IoT service communication port
-EXPOSE 3012
+EXPOSE 3014
 
 # Distroless has no shell, so specify the entrypoint array directly
 CMD ["./src/app.js"]
