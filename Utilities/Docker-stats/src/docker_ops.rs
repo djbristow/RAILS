@@ -160,14 +160,14 @@ fn compute_cpu_percent(
 
     let pre_cpu = stats.precpu_stats.cpu_usage.total_usage;
     let pre_sys = stats.precpu_stats.system_cpu_usage.unwrap_or(0);
-    let (prev_cpu, prev_sys) = if pre_cpu != 0 && pre_sys != 0 {
+    let (prev_cpu, _prev_sys) = if pre_cpu != 0 && pre_sys != 0 {
         (pre_cpu, pre_sys)
     } else {
         prev
     };
 
     let cpu_delta = cpu_total as f64 - prev_cpu as f64;
-    let system_delta = system_total as f64 - prev_sys as f64;
+    let system_delta = system_total as f64 - pre_sys as f64;
     let online_cpus = stats
         .cpu_stats
         .online_cpus

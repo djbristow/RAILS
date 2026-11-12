@@ -108,13 +108,13 @@ impl App {
             last_error: None,
             search_filter: String::new(),
             active_nav: "Containers".into(),
+            sidebar_open: false,
             cpu_history: VecDeque::with_capacity(120),
             mem_history: VecDeque::with_capacity(120),
             net_rx_history: VecDeque::with_capacity(120),
             net_tx_history: VecDeque::with_capacity(120),
             start_time: std::time::Instant::now(),
             last_metric_push,
-            sidebar_open: false,
         }
     }
 
@@ -253,7 +253,6 @@ impl App {
             )
             .show(ctx, |ui| {
                 ui.horizontal(|ui| {
-                    // Hamburger button to toggle the sidebar
                     if ui.button("☰").clicked() {
                         self.sidebar_open = !self.sidebar_open;
                     }
@@ -562,12 +561,10 @@ impl eframe::App for App {
 
         let mut actions = Vec::new();
 
-        // 1. Conditionally render the sidebar based on the hamburger toggle (defaults to closed)
         if self.sidebar_open {
             self.render_sidebar(ctx);
         }
         
-        // 2. Render the top header only ONCE
         self.render_header(ctx, &mut actions);
 
         egui::CentralPanel::default().show(ctx, |ui| {
@@ -650,7 +647,6 @@ impl eframe::App for App {
                         });
                 });
             } else if self.active_nav == "Performance" {
-                // Automatically fetch processes for running containers if not loaded yet
                 if let Some(docker) = self.docker.clone() {
                     for c in &mut self.containers {
                         if c.procs.is_none() && c.info.status.to_lowercase().starts_with("up") {
@@ -719,7 +715,6 @@ impl eframe::App for App {
                     ui.heading("System & Container Performance Overview");
                     ui.add_space(12.0);
 
-                    // Top Summary Cards Grid
                     ui.horizontal(|ui| {
                         ui.group(|ui| {
                             ui.set_min_size(egui::vec2(230.0, 75.0));
@@ -748,7 +743,6 @@ impl eframe::App for App {
                     ui.separator();
                     ui.add_space(16.0);
 
-                    // Side-by-Side Leaderboards
                     ui.columns(2, |columns| {
                         columns[0].vertical(|ui| {
                             ui.heading(RichText::new("🔥 Top CPU Consumers").size(15.0));

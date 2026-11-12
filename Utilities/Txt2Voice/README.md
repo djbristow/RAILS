@@ -1,6 +1,6 @@
-# Layout Text-to-Voice (Txt2Voice) MQTT Dispatcher
+# Text-to-Voice (Txt2Voice) MQTT Dispatcher
 
-&copy; David Bristow, 2020-2025
+&copy; David Bristow, 2020-2026
 
 ## Version
 v1.0.0 2026-10-27
