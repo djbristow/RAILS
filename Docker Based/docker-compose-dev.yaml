@@ -210,6 +210,8 @@ services:
       - myRailsNet
     ports:
       - '3006:3006'
+    volumes:
+      - myRailsImages:/app/src/uploads
     depends_on:
       - myMongo
 

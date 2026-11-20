@@ -42,19 +42,89 @@
             </v-btn>
           </v-col>
         </v-row>
+        
+        <!-- SVG Layout Management Section -->
+        <v-divider class="my-4"></v-divider>
+        <h3>Panel Layout Management</h3>
+        
+        <!-- Upload SVG Layout -->
         <v-row class="mt-4">
           <v-col cols="8">
             <v-file-input
               v-model="svgFile"
               accept=".svg"
-              label="Panel input"
+              label="Upload Panel Layout (SVG)"
               @change="onSvgFileChange"
             ></v-file-input>
           </v-col>
           <v-col cols="4">
-            <v-btn @click="importSvgFile" :disabled="!svgFile"> Import </v-btn>
+            <v-btn 
+              @click="importSvgFile" 
+              :disabled="!svgFile || isUploadingLayout"
+              :loading="isUploadingLayout"
+            > 
+              Upload Layout
+            </v-btn>
           </v-col>
         </v-row>
+        
+        <!-- Display available layouts and status messages -->
+        <v-row v-if="svgLayoutError" class="mt-2">
+          <v-col cols="12">
+            <v-alert type="error" dismissible>
+              {{ svgLayoutError }}
+            </v-alert>
+          </v-col>
+        </v-row>
+        
+        <v-row v-if="svgLayoutSuccess" class="mt-2">
+          <v-col cols="12">
+            <v-alert type="success" dismissible>
+              {{ svgLayoutSuccess }}
+            </v-alert>
+          </v-col>
+        </v-row>
+        
+        <!-- Available Layouts List -->
+        <v-row v-if="availableSvgLayouts.length > 0" class="mt-4">
+          <v-col cols="12">
+            <h4>Available Panel Layouts:</h4>
+            <v-list>
+              <v-list-item 
+                v-for="layout in availableSvgLayouts" 
+                :key="layout"
+                class="layout-item"
+              >
+                <v-list-item-title>{{ layout }}</v-list-item-title>
+                <template v-slot:append>
+                  <v-btn
+                    icon
+                    size="small"
+                    @click="deleteLayout(layout)"
+                    :loading="deletingLayout === layout"
+                  >
+                    <v-icon>mdi-delete</v-icon>
+                  </v-btn>
+                </template>
+              </v-list-item>
+            </v-list>
+          </v-col>
+        </v-row>
+        
+        <v-row v-else-if="!isLoadingLayouts && availableSvgLayouts.length === 0" class="mt-4">
+          <v-col cols="12">
+            <p style="color: #666">No panel layouts uploaded yet.</p>
+          </v-col>
+        </v-row>
+        
+        <v-row v-if="isLoadingLayouts" class="mt-4">
+          <v-col cols="12">
+            <v-progress-linear indeterminate></v-progress-linear>
+          </v-col>
+        </v-row>
+        
+        <!-- Turnout Panel Controller Section -->
+        <v-divider class="my-4"></v-divider>
         <v-row>
           <v-col cols="4">
             <v-select
@@ -82,10 +152,11 @@
 import { onMounted, ref } from "vue";
 import exportFromJSON from "export-from-json";
 import FileService from "../services/FileService";
+import SvgLayoutService from "../services/SvgLayoutService";
 import { useMicrosStore } from "@/stores/micros";
 import { useTurnoutsStore } from "@/stores/turnouts";
 import { useTplightsStore } from "@/stores/tplights";
-import { useSvgContentStore, SET_SVG_CONTENT } from "@/stores/svgContent";
+import { useSvgContentStore } from "@/stores/svgContent";
 import RlService from "@/services/RlService";
 
 const microsStore = useMicrosStore();
@@ -104,13 +175,37 @@ const inFilename = ref([]);
 const svgFile = ref(null);
 const selectedLpbCntlr = ref(null);
 
-onMounted(async () => {
-      // Fetch the tplights data first
-      await tplightsStore.GET_TPLIGHTS();
-      // Then, get the unique controllers from the fetched data
-      controllers.value = tplightsStore.GET_TPLIGHTS_CONTROLLERS();
-    });
+// SVG Layout management refs
+const availableSvgLayouts = ref([]);
+const isUploadingLayout = ref(false);
+const isLoadingLayouts = ref(false);
+const svgLayoutError = ref("");
+const svgLayoutSuccess = ref("");
+const deletingLayout = ref(null);
 
+onMounted(async () => {
+  // Fetch the tplights data first
+  await tplightsStore.GET_TPLIGHTS();
+  // Then, get the unique controllers from the fetched data
+  controllers.value = tplightsStore.GET_TPLIGHTS_CONTROLLERS();
+  
+  // Load available SVG layouts
+  await loadAvailableLayouts();
+});
+
+const loadAvailableLayouts = async () => {
+  try {
+    isLoadingLayouts.value = true;
+    svgLayoutError.value = "";
+    await svgContentStore.fetchAvailableLayouts();
+    availableSvgLayouts.value = svgContentStore.availableLayouts;
+  } catch (err) {
+    console.error("Error loading layouts:", err);
+    svgLayoutError.value = "Failed to load available layouts";
+  } finally {
+    isLoadingLayouts.value = false;
+  }
+};
 
 const downloadFile = () => {
   let data = null;
@@ -148,21 +243,53 @@ const onSvgFileChange = (e) => {
   svgFile.value = files[0];
 };
 
-const importSvgFile = (e) => {
+const importSvgFile = async () => {
   if (!svgFile.value) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    try {
-      const content = e.target.result;
-      localStorage.removeItem("svgContent");
-      svgContentStore[SET_SVG_CONTENT](content);
-      localStorage.setItem("svgContent", content);
-      svgFile.value = null; // Clear the file input after successful import
-    } catch (err) {
-      console.error("File processing error:", err);
-    }
-  };
-  reader.readAsText(svgFile.value);
+  
+  try {
+    isUploadingLayout.value = true;
+    svgLayoutError.value = "";
+    svgLayoutSuccess.value = "";
+    
+    const response = await svgContentStore.uploadSvgLayout(svgFile.value);
+    svgLayoutSuccess.value = `Layout '${response.filename}' uploaded successfully`;
+    availableSvgLayouts.value = svgContentStore.availableLayouts;
+    svgFile.value = null;
+    
+    // Clear success message after 3 seconds
+    setTimeout(() => {
+      svgLayoutSuccess.value = "";
+    }, 3000);
+  } catch (err) {
+    console.error("Error uploading SVG:", err);
+    svgLayoutError.value = err.message || "Failed to upload layout";
+  } finally {
+    isUploadingLayout.value = false;
+  }
+};
+
+const deleteLayout = async (filename) => {
+  if (!confirm(`Delete layout '${filename}'?`)) return;
+  
+  try {
+    deletingLayout.value = filename;
+    svgLayoutError.value = "";
+    svgLayoutSuccess.value = "";
+    
+    await svgContentStore.deleteSvgLayout(filename);
+    availableSvgLayouts.value = svgContentStore.availableLayouts;
+    svgLayoutSuccess.value = `Layout '${filename}' deleted successfully`;
+    
+    // Clear success message after 2 seconds
+    setTimeout(() => {
+      svgLayoutSuccess.value = "";
+    }, 2000);
+  } catch (err) {
+    console.error("Error deleting layout:", err);
+    svgLayoutError.value = err.message || "Failed to delete layout";
+  } finally {
+    deletingLayout.value = null;
+  }
 };
 
 const splitWithParser = (input) => {

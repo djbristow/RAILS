@@ -3,9 +3,12 @@
 const express = require("express");
 const rateLimit = require("express-rate-limit");
 const cors = require("cors");
+const fs = require("fs");
+const path = require("path");
+const multer = require("multer");
 
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: '50mb' })); // Increase JSON size limit for SVG uploads
 app.use(cors({
   origin: [
     "http://localhost:3002",    // Your Vite rsrmdev server
@@ -28,12 +31,118 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
+// Setup multer for file uploads
+const uploadsDir = process.env.UPLOADS_DIR || '/app/src/uploads/svg-layouts';
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, uploadsDir);
+  },
+  filename: function (req, file, cb) {
+    // Sanitize filename and preserve .svg extension
+    const name = path.parse(file.originalname).name.replace(/[^a-zA-Z0-9_-]/g, '_');
+    cb(null, `${name}.svg`);
+  }
+});
+
+const upload = multer({ 
+  storage: storage,
+  fileFilter: function (req, file, cb) {
+    // Only accept SVG files
+    if (path.extname(file.originalname).toLowerCase() === '.svg') {
+      cb(null, true);
+    } else {
+      cb(new Error('Only SVG files are allowed'), false);
+    }
+  }
+});
+
 const mongodb_conn_module = require("./mongodbConnModule");
 var db = mongodb_conn_module.connect();
 
 var Turnout = require("../models/Turnout");
 var Micro = require("../models/Micro");
 var TPLight = require("../models/TPLight");
+
+// SVG Layout endpoints
+app.post("/svg-layout", upload.single('file'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).send({ error: "No file uploaded" });
+    }
+    res.send({
+      success: true,
+      filename: req.file.filename,
+      message: `SVG layout '${req.file.filename}' uploaded successfully`
+    });
+  } catch (error) {
+    console.error("Upload error:", error);
+    res.status(500).send({ error: error.message });
+  }
+});
+
+app.get("/svg-layouts", async (req, res) => {
+  try {
+    const files = fs.readdirSync(uploadsDir).filter(file => file.endsWith('.svg'));
+    res.send({
+      success: true,
+      layouts: files
+    });
+  } catch (error) {
+    console.error("Error reading SVG layouts:", error);
+    res.status(500).send({ error: error.message });
+  }
+});
+
+app.get("/svg-layout/:filename", async (req, res) => {
+  try {
+    const filename = path.basename(req.params.filename); // Sanitize filename
+    const filepath = path.join(uploadsDir, filename);
+    
+    // Security check: ensure the file is within the uploads directory
+    if (!filepath.startsWith(uploadsDir)) {
+      return res.status(403).send({ error: "Access denied" });
+    }
+    
+    if (!fs.existsSync(filepath)) {
+      return res.status(404).send({ error: "SVG layout not found" });
+    }
+    
+    res.set('Content-Type', 'image/svg+xml');
+    res.sendFile(filepath);
+  } catch (error) {
+    console.error("Error reading SVG layout:", error);
+    res.status(500).send({ error: error.message });
+  }
+});
+
+app.delete("/svg-layout/:filename", async (req, res) => {
+  try {
+    const filename = path.basename(req.params.filename); // Sanitize filename
+    const filepath = path.join(uploadsDir, filename);
+    
+    // Security check: ensure the file is within the uploads directory
+    if (!filepath.startsWith(uploadsDir)) {
+      return res.status(403).send({ error: "Access denied" });
+    }
+    
+    if (!fs.existsSync(filepath)) {
+      return res.status(404).send({ error: "SVG layout not found" });
+    }
+    
+    fs.unlinkSync(filepath);
+    res.send({
+      success: true,
+      message: `SVG layout '${filename}' deleted successfully`
+    });
+  } catch (error) {
+    console.error("Error deleting SVG layout:", error);
+    res.status(500).send({ error: error.message });
+  }
+});
 
 // The following CRUD functions handle data in the turnouts collection
 app.get("/tolist", async (req, res) => {
