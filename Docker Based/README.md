@@ -4,7 +4,7 @@
 
 # Version
 
-* 2.7.3- 2026-11-04
+* 2.7.4- 2026-11-20
  
 Docker based components are the partial realization of RAILS software model of an automated system to assist the model railroader achieve realism in the operation of a model railroad. These components are the micro-services that are conatinerized and typically run on a PC (Linux, Mac, or Windows) or Single Board Computer running Linux.
 
@@ -17,14 +17,14 @@ The three groups of docker components are: IoT Services, Data Services, Single P
 |SPAs|----------------------------------------------------------|
 |MPPM|**M**odel **P**rojects and **P**urchase **M**anager allows a user to enter information about their projects and purchases|3008|4.1.7|2026-10-29|
 |MRIM|**M**odel **R**ailroad **I**nventory **M**anager allows a user to enter information about their inventoried items|3001|5.6.7|2026-10-29|
-|MRLM|**M**odel **R**ailroad **L**ayout **M**anager allows a user to enter information about their layout and control elements of it|3004|4.2.7|2026-10-29|
+|MRLM|**M**odel **R**ailroad **L**ayout **M**anager allows a user to enter information about their layout and control elements of it|3004|4.3.0|2026-11-19|
 |RSRM|**R**olling**s**tock **R**FID **M**anager allows a user to match a RFID value to a rolling stock road name and number|3002|6.1.7|2026-10-29|
 |MROM|**M**odel **R**ailroad **O**perations **M**anager allows a user to manage operations of a model railroad|3020|1.1.6|2026-10-29|
 |Data Services|----------------------------------------------------------|
 |MRFM|**M**odel **R**ailroad **F**ile **M**anager  allows the user to upload image files for the use by the MRIM component|3030|2.8.4|2026-10-29|
 |PPDS|**P**lans and **P**urchases **D**ata **S**ervices  provides REST access to model railroad projects and purchases documents|3008|3.0.29|2026-10-29|
 |RIDS|**R**ailroad **I**nventory **D**ata **S**ervices provides REST access to railroad inventory documents|3000|3.2.8|2026-10-29|
-|RLDS|**R**ailroad **L**ayout **D**ata **S**ervices provides REST access to model railroad projects and purchases documents|3006|3.1.16|2026-10-29|
+|RLDS|**R**ailroad **L**ayout **D**ata **S**ervices provides REST access to model railroad layout collections|3006|3.2.0|2026-11-19|
 |RODS|**R**ailroad **O**perations **D**ata **S**ervices provides REST access to railroad operations documents|3040|1.1.6|2026-10-29|
 |IoT Services|----------------------------------------------------------|
 |IPAS|**I**oT **P**ublish **A**udio **S**ervices is an Express aplication that publishes mqtt Txt2Voice messages to the MQTT Broker.|3014|1.0.0|2026-12-29|
