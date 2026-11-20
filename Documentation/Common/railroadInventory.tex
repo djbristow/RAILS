@@ -119,18 +119,18 @@ rollingstock refers to the vehicles that move on a railway track. These vehicles
 	numberBlt & Long & The total quantity or count of a particular rollingstock. & No (0)\\ \hline
 	inSvcDate & Date & The specific date on which a peice of rollingstock is officially put into operation or use. It marks the beginning of its active service life, during which it is expected to perform its intended functions. & No \\ \hline
 	insideLength & String & For passenger cars it is measured from one end of the passenger compartment to the other. It defines the available space for seating and other passenger-related amenities. For freight cars it is measured from the inside faces of the end walls, excluding any bulkheads or projections that might reduce the usable length. It provides an indication of the space available for loading and transporting goods. & No \\ \hline
-	insideHeight & String &  & No \\ \hline
-	insideWidth & String &  & No \\ \hline
-	loadTypes & String &  & No \\ \hline
+	insideHeight & String & The inside height of rolling stock is the clear vertical interior dimension of a railcar's cargo compartment, measured from the top surface of the finished floor (deck) to the lowest unobstructed point of the roof structure—typically the underside of the side plate or roof carlines at the eaves—rather than the higher peak along the center ridge. On open-top equipment without a roof, inside height (often listed as inside depth) is measured vertically from the top of the floor to the top edge of the side sheets or top chord. & No \\ \hline
+	insideWidth & String & The inside width of rolling stock is the clear horizontal interior distance across a railcar's load-carrying space, measured perpendicular to the track centerline between the innermost faces of the side walls, linings, or structural side posts—whichever narrows the clearance the most. & No \\ \hline
+	loadTypes & String & Rolling stock load types or lading category classify the physical nature, packaging, and handling requirements of cargo carried by freight railcars, as well as the operational loading state of a car in transit. & No \\ \hline
 	capacity & Long & Capacity refers to the maximum amount of cargo, typically measured in weight or volume, that it can safely and efficiently transport. & No (0)\\ \hline
-	bldr & String &  & No \\ \hline
-	bltDate & Date &  & No \\ \hline
+	bldr & String & A rollingstock builder (also referred to as a carbuilder or locomotive manufacturer) is the \gls{oem}, heavy industrial plant, or specialized fabrication shop that designs, engineers, assembles, and tests rail vehicles—including locomotives, freight cars, passenger coaches, multiple units, and \gls{mow} equipment—prior to initial delivery into railroad service. & No \\ \hline
+	bltDate & Date & The recorded calendar date on which a locomotive, freight car, passenger coach, or maintenance-of-way (MOW) unit was fabricated. & No \\ \hline
 	notes & String & A brief record of events or observations about the rollingstock. & No \\ \hline
 	ltWeight & Long & The weight of the car itself without any cargo or load. & No (0)\\ \hline
 	loadLimit & Long & The maximum weight that a freight car can carry, including both the weight of the car itself (tare weight or lightweight) and the weight of the cargo (payload). & No (0)\\ \hline
-	lastMaintDate & Date &  & No \\ \hline
-	locationNow & String &  & No \\ \hline
-	homeLocation & String &  & No \\ \hline
+	lastMaintDate & Date & The recorded calendar date on which a locomotive, freight car, passenger coach, or \gls{mow} unit most recently completed a mandated mechanical inspection, periodic air-brake test, wheel/truck overhaul, or corrective shop repair, verified by a signed inspection card, electronic work order, or updated car-body stencil. & No \\ \hline
+	locationNow & String & The active physical site, track segment, yard, customer siding, or assigned train consist where a railcar or locomotive is currently positioned, as confirmed by the most recent wayside reader scan, dispatcher occupancy record, or GPS telemetry ping. & No \\ \hline
+	homeLocation & String & The designated base yard, terminal, or maintenance facility to which a railcar, locomotive, or piece of rail equipment is permanently assigned for storage, periodic servicing, and dispatch return when not in active revenue service. & No \\ \hline
 	rsStatus & String & The current condition, availability, or operational state of the rollingstock used on a railway. & No \\ \hline
     numAxles & Long &  The total count of transverse metal rods or central shafts that span beneath the rollingstock to support its weight and connect opposite wheel assemblies. & No (4)\\ \hline
 	imageID & String &  The file name of the image; See paragraph \ref{images} & No \\ \hline
