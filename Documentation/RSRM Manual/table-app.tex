@@ -1,0 +1,12 @@
+\appendix
+\chapter{Railroad Inventory}\label[appendix]{app-tables}
+
+\begingroup
+  % Suppress the initial \subsection{Railroad Inventory} heading
+  \renewcommand{\subsection}[1]{}
+  
+  % Directly map \subsubsection to \section so \label captures the section number natively
+  \let\subsubsection\section
+
+  \input{../Common/railroadInventory}
+\endgroup
